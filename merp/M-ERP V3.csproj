@@ -36,7 +36,6 @@
     <AndroidSigningStorePass>wincom@123</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>com.wincom.merp</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>wincom@123</AndroidSigningKeyPass>
-    <DocumentationFile>bin\Debug\test3.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -157,6 +156,7 @@
     <Compile Include="Interface\IPrintDocument.cs" />
     <Compile Include="Managers\PrintDocManager.cs" />
     <Compile Include="Printing\PrintCreditNote.cs" />
+    <Compile Include="Printing\PrintSalesOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

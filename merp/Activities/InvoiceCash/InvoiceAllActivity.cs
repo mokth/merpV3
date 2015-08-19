@@ -22,11 +22,7 @@ namespace wincom.mobile.erp
 		ListView listView ;
 		List<Invoice> listData = new List<Invoice> ();
 		string pathToDatabase;
-		BluetoothAdapter mBluetoothAdapter;
-		BluetoothSocket mmSocket;
-		BluetoothDevice mmDevice;
-		//Thread workerThread;
-		Stream mmOutputStream;
+
 		AdPara apara=null;
 		CompanyInfo compinfo;
 		DateTime sdate;
@@ -66,14 +62,6 @@ namespace wincom.mobile.erp
 			listView.Adapter = new GenericListAdapter<Invoice> (this, listData, Resource.Layout.ListItemRow, viewdlg);
 
 		}
-
-//		void GetDateRange ()
-//		{
-//			DateTime today = DateTime.Today;
-//			sdate = new DateTime (today.Year, today.Month , 1);
-//			sdate = sdate.AddMonths (-3);
-//			edate = today.AddMonths (1).AddDays (-1);
-//		}
 
 		private void SetViewDelegate(View view,object clsobj)
 		{
@@ -166,19 +154,22 @@ namespace wincom.mobile.erp
 				list = new InvoiceDtls[ls.Count];
 				ls.CopyTo (list);
 			}
-			mmDevice = null;
-			findBTPrinter ();
-			if (mmDevice != null) {
-				StartPrint (inv, list,noofcopy);
-				if (!inv.isPrinted) {
-					updatePrintedStatus (inv);
-					var found =listData.Where (x => x.invno == inv.invno).ToList ();
-					if (found.Count > 0) {
-						found [0].isPrinted = true;
-						SetViewDlg viewdlg = SetViewDelegate;
-						listView.Adapter = new GenericListAdapter<Invoice> (this, listData, Resource.Layout.ListItemRow, viewdlg);
-					}
+
+			IPrintDocument prtInv = PrintDocManager.GetPrintDocument<PrintInvoice>();
+			prtInv.SetDocument (inv);
+			prtInv.SetDocumentDtls(list);
+			prtInv.SetNoOfCopy (noofcopy);
+			prtInv.SetCallingActivity (this);
+			if (prtInv.StartPrint ()) {
+				updatePrintedStatus (inv);
+				var found = listData.Where (x => x.invno == inv.invno).ToList ();
+				if (found.Count > 0) {
+					found [0].isPrinted = true;
+					SetViewDlg viewdlg = SetViewDelegate;
+					listView.Adapter = new GenericListAdapter<Invoice> (this, listData, Resource.Layout.ListItemRow, viewdlg);
 				}
+			} else {
+				Toast.MakeText (this, prtInv.GetErrMsg(), ToastLength.Long).Show ();	
 			}
 		}
 
@@ -195,53 +186,6 @@ namespace wincom.mobile.erp
 						db.Update (list [0]);
 					}
 				}
-			}
-		}
-
-		void StartPrint(Invoice inv,InvoiceDtls[] list,int noofcopy )
-		{
-			string userid = ((GlobalvarsApp)this.Application).USERID_CODE;
-			PrintInvHelper prnHelp = new PrintInvHelper (pathToDatabase, userid);
-			string msg =prnHelp.OpenBTAndPrint (mmSocket, mmDevice, inv, list,noofcopy);
-			Toast.MakeText (this, msg, ToastLength.Long).Show ();	
-		}
-
-		void findBTPrinter(){
-			string printername = apara.PrinterName.Trim ().ToUpper ();
-			try{
-				mBluetoothAdapter = BluetoothAdapter.DefaultAdapter;
-				if (mBluetoothAdapter==null)
-				{
-					Toast.MakeText (this,Resources.GetString(Resource.String.msg_bluetootherror), ToastLength.Long).Show ();
-					return;					
-				}
-				string txt ="";
-				if (!mBluetoothAdapter.Enable()) {
-					Intent enableBluetooth = new Intent(
-						BluetoothAdapter.ActionRequestEnable);
-					StartActivityForResult(enableBluetooth, 0);
-				}
-
-
-				var pair= mBluetoothAdapter.BondedDevices;
-				if (pair.Count > 0) {
-					foreach (BluetoothDevice dev in pair) {
-						Console.WriteLine (dev.Name);
-						txt = txt+","+dev.Name;
-						if (dev.Name.ToUpper()==printername)
-						{
-							mmDevice = dev;
-							break;
-						}
-					}
-				}
-				Toast.MakeText (this, Resources.GetString(Resource.String.msg_bluetoothfound) +mmDevice.Name, ToastLength.Long).Show ();	
-				//txtv.Text ="found device " +mmDevice.Name;
-			}catch(Exception ex) {
-
-				//txtv.Text = ex.Message;
-				mmDevice = null;
-				Toast.MakeText (this, Resources.GetString(Resource.String.msg_bluetootherror), ToastLength.Long).Show ();	
 			}
 		}
 

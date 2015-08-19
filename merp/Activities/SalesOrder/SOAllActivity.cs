@@ -22,11 +22,6 @@ namespace wincom.mobile.erp
 		ListView listView ;
 		List<SaleOrder> listData = new List<SaleOrder> ();
 		string pathToDatabase;
-		BluetoothAdapter mBluetoothAdapter;
-		BluetoothSocket mmSocket;
-		BluetoothDevice mmDevice;
-		//Thread workerThread;
-		Stream mmOutputStream;
 		AdPara apara=null;
 		CompanyInfo compinfo;
 		AccessRights rights;
@@ -137,27 +132,38 @@ namespace wincom.mobile.erp
 				list = new SaleOrderDtls[ls.Count];
 				ls.CopyTo (list);
 			}
-			mmDevice = null;
-			findBTPrinter ();
-			if (mmDevice != null) {
-				StartPrint (so, list,noofcopy);
+			IPrintDocument prtSO = PrintDocManager.GetPrintDocument<PrintSalesOrder>();
+			prtSO.SetDocument (so);
+			prtSO.SetDocumentDtls(list);
+			prtSO.SetNoOfCopy (noofcopy);
+			prtSO.SetCallingActivity (this);
+			if (prtSO.StartPrint ()) {
+				updatePrintedStatus (so);
+				var found = listData.Where (x => x.sono == so.sono).ToList ();
+				if (found.Count > 0) {
+					found [0].isPrinted = true;
+					SetViewDlg viewdlg = SetViewDelegate;
+					listView.Adapter = new GenericListAdapter<SaleOrder> (this, listData, Resource.Layout.ListItemRow, viewdlg);
+				}
+			} else {
+				Toast.MakeText (this, prtSO.GetErrMsg(), ToastLength.Long).Show ();	
 			}
 		}
 
-		void StartPrint(SaleOrder so,SaleOrderDtls[] list,int noofcopy )
+		void updatePrintedStatus(SaleOrder so)
 		{
-			string userid = ((GlobalvarsApp)this.Application).USERID_CODE;
-			PrintInvHelper prnHelp = new PrintInvHelper (pathToDatabase, userid);
-			string msg =prnHelp.OpenBTAndPrintSO (mmSocket, mmDevice,so, list,noofcopy);
-			Toast.MakeText (this, msg, ToastLength.Long).Show ();	
-		}
-
-		void findBTPrinter(){
-			string printername = apara.PrinterName.Trim ().ToUpper ();
-			Utility util = new Utility ();
-			string msg = "";
-			mmDevice = util.FindBTPrinter (printername,ref  msg);
-			Toast.MakeText (this, msg, ToastLength.Long).Show ();	
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list = db.Table<SaleOrder> ().Where (x => x.sono == so.sono).ToList<SaleOrder> ();
+				if (list.Count > 0) {
+					//if only contains items then allow to update the printed status.
+					//this to allow the invoice;s item can be added. if not can not be posted(upload)
+					var list2 = db.Table<SaleOrderDtls> ().Where (x => x.sono == so.sono).ToList<SaleOrderDtls> ();
+					if (list2.Count > 0) {
+						list [0].isPrinted = true;
+						db.Update (list [0]);
+					}
+				}
+			}
 		}
 
 	}

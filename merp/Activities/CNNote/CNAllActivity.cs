@@ -22,11 +22,6 @@ namespace wincom.mobile.erp
 		ListView listView ;
 		List<CNNote> listData = new List<CNNote> ();
 		string pathToDatabase;
-		BluetoothAdapter mBluetoothAdapter;
-		BluetoothSocket mmSocket;
-		BluetoothDevice mmDevice;
-		//Thread workerThread;
-		//Stream mmOutputStream;
 		AdPara apara=null;
 		CompanyInfo compinfo;
 		DateTime sdate;
@@ -158,18 +153,18 @@ namespace wincom.mobile.erp
 				list = new CNNoteDtls[ls.Count];
 				ls.CopyTo (list);
 			}
-			mmDevice = null;
-			findBTPrinter ();
-			if (mmDevice != null) {
-				StartPrint (inv, list,noofcopy);
-				if (!inv.isPrinted) {
-					updatePrintedStatus (inv);
-					var found =listData.Where (x => x.cnno == inv.cnno).ToList ();
-					if (found.Count > 0) {
-						found [0].isPrinted = true;
-						SetViewDlg viewdlg = SetViewDelegate;
-						listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRow, viewdlg);
-					}
+			IPrintDocument prtInv = PrintDocManager.GetPrintDocument<PrintCreditNote>();
+			prtInv.SetDocument (inv);
+			prtInv.SetDocumentDtls(list);
+			prtInv.SetNoOfCopy (noofcopy);
+			prtInv.SetCallingActivity (this);
+			if (prtInv.StartPrint ()) {
+				updatePrintedStatus (inv);
+				var found =listData.Where (x => x.cnno == inv.cnno).ToList ();
+				if (found.Count > 0) {
+					found [0].isPrinted = true;
+					SetViewDlg viewdlg = SetViewDelegate;
+					listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRow, viewdlg);
 				}
 			}
 		}
@@ -185,54 +180,6 @@ namespace wincom.mobile.erp
 						db.Update (list [0]);
 					}
 				}
-			}
-		}
-
-
-		void StartPrint(CNNote inv,CNNoteDtls[] list,int noofcopy )
-		{
-			string userid = ((GlobalvarsApp)this.Application).USERID_CODE;
-			PrintInvHelper prnHelp = new PrintInvHelper (pathToDatabase, userid);
-			string msg =prnHelp.OpenBTAndPrintCN (mmSocket, mmDevice, inv, list,noofcopy);
-			Toast.MakeText (this, msg, ToastLength.Long).Show ();	
-		}
-
-		void findBTPrinter(){
-			string printername = apara.PrinterName.Trim ().ToUpper ();
-			try{
-				mBluetoothAdapter = BluetoothAdapter.DefaultAdapter;
-				if (mBluetoothAdapter==null)
-				{
-					Toast.MakeText (this,Resources.GetString(Resource.String.msg_bluetootherror), ToastLength.Long).Show ();
-					return;					
-				}
-				string txt ="";
-				if (!mBluetoothAdapter.Enable()) {
-					Intent enableBluetooth = new Intent(
-						BluetoothAdapter.ActionRequestEnable);
-					StartActivityForResult(enableBluetooth, 0);
-				}
-
-
-				var pair= mBluetoothAdapter.BondedDevices;
-				if (pair.Count > 0) {
-					foreach (BluetoothDevice dev in pair) {
-						Console.WriteLine (dev.Name);
-						txt = txt+","+dev.Name;
-						if (dev.Name.ToUpper()==printername)
-						{
-							mmDevice = dev;
-							break;
-						}
-					}
-				}
-				Toast.MakeText (this, Resources.GetString(Resource.String.msg_bluetoothfound) +mmDevice.Name, ToastLength.Long).Show ();	
-				//txtv.Text ="found device " +mmDevice.Name;
-			}catch(Exception ex) {
-
-				//txtv.Text = ex.Message;
-				mmDevice = null;
-				Toast.MakeText (this, Resources.GetString(Resource.String.msg_bluetootherror), ToastLength.Long).Show ();	
 			}
 		}
 

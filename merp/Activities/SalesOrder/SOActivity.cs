@@ -23,11 +23,6 @@ namespace wincom.mobile.erp
 		ListView listView ;
 		List<SaleOrder> listData = new List<SaleOrder> ();
 		string pathToDatabase;
-		BluetoothAdapter mBluetoothAdapter;
-		BluetoothSocket mmSocket;
-		BluetoothDevice mmDevice;
-		//Thread workerThread;
-		Stream mmOutputStream;
 		AdPara apara=null;
 		CompanyInfo compinfo;
 		AccessRights rights;
@@ -209,87 +204,49 @@ namespace wincom.mobile.erp
 		}
 
 
-		void PrintInv(SaleOrder inv,int noofcopy)
+		void PrintInv(SaleOrder so,int noofcopy)
 		{
 			//Toast.MakeText (this, "print....", ToastLength.Long).Show ();	
 			SaleOrderDtls[] list;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)){
-				var ls= db.Table<SaleOrderDtls> ().Where (x => x.sono==inv.sono).ToList<SaleOrderDtls>();
+				var ls= db.Table<SaleOrderDtls> ().Where (x => x.sono==so.sono).ToList<SaleOrderDtls>();
 				list = new SaleOrderDtls[ls.Count];
 				ls.CopyTo (list);
 			}
-			mmDevice = null;
-			findBTPrinter ();
-
-			if (mmDevice != null) {
-				StartPrint (inv, list,noofcopy);
-				updatePrintedStatus (inv);
+			IPrintDocument prtSO = PrintDocManager.GetPrintDocument<PrintSalesOrder>();
+			prtSO.SetDocument (so);
+			prtSO.SetDocumentDtls(list);
+			prtSO.SetNoOfCopy (noofcopy);
+			prtSO.SetCallingActivity (this);
+			if (prtSO.StartPrint ()) {
+				updatePrintedStatus (so);
+				var found = listData.Where (x => x.sono == so.sono).ToList ();
+				if (found.Count > 0) {
+					found [0].isPrinted = true;
+					SetViewDlg viewdlg = SetViewDelegate;
+					listView.Adapter = new GenericListAdapter<SaleOrder> (this, listData, Resource.Layout.ListItemRow, viewdlg);
+				}
+			} else {
+				Toast.MakeText (this, prtSO.GetErrMsg(), ToastLength.Long).Show ();	
 			}
-		
 		}
 
-		void updatePrintedStatus(SaleOrder inv)
+		void updatePrintedStatus(SaleOrder so)
 		{
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				var list = db.Table<SaleOrder> ().Where (x => x.sono == inv.sono).ToList<SaleOrder> ();
+				var list = db.Table<SaleOrder> ().Where (x => x.sono == so.sono).ToList<SaleOrder> ();
 				if (list.Count > 0) {
-					list [0].isPrinted = true;
-					db.Update (list [0]);
+					//if only contains items then allow to update the printed status.
+					//this to allow the invoice;s item can be added. if not can not be posted(upload)
+					var list2 = db.Table<SaleOrderDtls> ().Where (x => x.sono == so.sono).ToList<SaleOrderDtls> ();
+					if (list2.Count > 0) {
+						list [0].isPrinted = true;
+						db.Update (list [0]);
+					}
 				}
 			}
 		}
 
-		void StartPrint(SaleOrder so,SaleOrderDtls[] list,int noofcopy )
-		{
-			string userid = ((GlobalvarsApp)this.Application).USERID_CODE;
-			PrintInvHelper prnHelp = new PrintInvHelper (pathToDatabase, userid);
-			string msg =prnHelp.OpenBTAndPrintSO (mmSocket, mmDevice, so, list,noofcopy);
-			Toast.MakeText (this, msg, ToastLength.Long).Show ();	
-			//AlertShow (msg);
-		}
-
-		string getBTAddrFile(string printername)
-		{
-			var documents = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
-			string filename = Path.Combine (documents, printername+".baddr");
-			return filename;
-		}
-
-		bool tryConnectBtAddr(string btAddrfile)
-		{
-			bool found = false;
-			if (!File.Exists (btAddrfile))
-				return false;
-			try{
-			mBluetoothAdapter = BluetoothAdapter.DefaultAdapter;
-			mmDevice = mBluetoothAdapter.GetRemoteDevice (File.ReadAllBytes (btAddrfile));
-			if (mmDevice != null) {
-				found = true;
-			}
-			
-			}catch(Exception ex) {
-			
-			}
-			return found;
-	     }
-
-		void AlertShow(string text)
-		{
-			AlertDialog.Builder alert = new AlertDialog.Builder (this);
-
-			alert.SetMessage (text);
-			RunOnUiThread (() => {
-				alert.Show();
-			} );
-			
-		}
-		void findBTPrinter(){
-			string printername = apara.PrinterName.Trim ().ToUpper ();
-			Utility util = new Utility ();
-			string msg = "";
-			mmDevice = util.FindBTPrinter (printername,ref  msg);
-			Toast.MakeText (this, msg, ToastLength.Long).Show ();	
-		}
 	}
 }
 
