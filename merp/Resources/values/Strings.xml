@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">MOBILE BILLING SYSTEM</string>
+	<string name="app_descrip">WINCOM as a Solution Provider to cater system needs for manufacturer in whole Peninsular Malaysia and Singapore. With more than 10 years of experience in system development and our Professional Advisors and Software, Hardware and Network Engineers.\nVisit us at http://www.erpsystemmalaysia.com</string>
+	<string name="app_credits">Choose a planet</string>
+	 <string-array name="trxtype">
+        <item>CASH</item>
+        <item>INVOICE</item>
+    </string-array>
+     <string-array name="papersize_array">
+        <item>58mm</item>
+        <item>80mm</item>
+    </string-array>
+    <string name="mainmenu_trx">TRANSACTION</string>
+    <string name="mainmenu_trxlist">TRANSACTION LIST</string>
+    <string name="mainmenu_master">MASTER ITEM</string>
+    <string name="mainmenu_downupload">DOWNLOAD/UPLOAD</string>
+    <string name="mainmenu_settings">SETTINGS</string>
+    <string name="mainmenu_about">ABOUT</string>
+    <string name="mainmenu_exit">EXIT</string>
+    <string name="submenu_inv">INVOICE/CASH BILL</string>
+    <string name="submenu_cn">CREDIT NOTE</string>
+    <string name="submenu_do">DELIVERY ORDER</string>
+    <string name="submenu_so">SALES ORDER</string>
+    <string name="submenu_back">HOME</string>
+    <string name="submenu_invlist">INVOICE LIST</string>
+    <string name="submenu_cnlist">CREDIT NOTE LIST</string>
+    <string name="submenu_dolist">DELIVERY ORDER LIST</string>
+    <string name="submenu_solist">SALES ORDER LIST</string>
+    <string name="submenu_summary">INVOICE SUMMARY</string>
+
+    <string name="submenu_item">MASTER ITEM</string>
+    <string name="submenu_cust">CUSTOMER PROFILE</string>
+
+    <string name="submenu_downitem">DOWNLOAD MASTER ITEM</string>
+    <string name="submenu_downcust">DOWNLOAD CUSTOMERS</string>
+    <string name="submenu_downsettings">DOWNLOAD SETTINGS</string>
+    <string name="submenu_upinv">UPLOAD INVOICE/CASH BILL</string>
+    <string name="submenu_upcn">UPLOAD CREDIT NOTE</string>
+    <string name="submenu_updo">UPLOAD DELIVERY ORDER</string>
+    <string name="submenu_upso">UPLOAD SALES ORDER</string>
+    <string name="invform_trxdate">TRANSACTION DATE</string>
+    <string name="invform_invno">INVOICE NO</string>
+    <string name="invform_cnno">CREDIT NOTE NO</string>
+    <string name="invform_type">TYPE</string>
+    <string name="invform_cust">CUSTOMER</string>
+    <string name="invform_item">ITEM CODE</string>
+    <string name="invform_qty">QUANTITY</string>
+    <string name="invform_uprice">UNIT PRICE</string>
+    <string name="invform_tax">TAX</string>
+    <string name="invform_amount">AMOUNT</string>
+    <string name="button_add">ADD</string>
+    <string name="button_ok">OK</string>
+    <string name="button_back">BACK</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="button_new">NEW</string>
+    <string name="button_newitem">NEW</string>
+    <string name="button_print">PRINT</string>
+    <string name="login_userid">USER ID</string>
+    <string name="login_pass">PASSWORD</string>
+    <string name="login_code">SECURITY CODE</string>
+    <string name="but_login">LOGIN</string>
+    <string name="but_save">SAVE</string>
+
+    <string name="title_invoice">INVOICE</string>
+    <string name="title_invoiceedit">EDIT INVOICE</string>
+    <string name="title_invoiceitems">INVOICE ITEMS</string>
+    <string name="title_invoicenew">NEW INVOICE</string>
+    <string name="title_invitementry">INVOICE ITEM ENTRY</string>
+    <string name="title_creditnote">CREDIT NOTE</string>
+    <string name="title_creditnoteedit">CREDIT NOTE</string>
+    <string name="title_creditnoteitems">CREDIT NOTE ITEMS</string>
+    <string name="title_creditnotenew">NEW CREDIT NOTE</string>
+    <string name="title_cnitementry">CREDIT NOE ITEM ENTRY</string>
+    <string name="title_payment">PAYMENT</string>
+    <string name="title_so">SALES ORDER</string>
+    <string name="title_soedit">EDIT SALES ORDER</string>
+    <string name="title_soitems">SALES ORDER ITEMS</string>
+    <string name="title_sonew">NEW SALES ORDER</string>
+    <string name="title_soitementry">SALES ORDER ITEM ENTRY</string>
+
+    <string name="msg_plswait">Please wait...</string>
+    <string name="msg_faillogin">Failed to login...</string>
+    <string name="msg_uploading">Uploading, please wait...</string>
+    <string name="msg_downitem">Total xx Items downloaded.</string>
+    <string name="msg_downcust">Total xx customers download.</string>
+    <string name="msg_uploadinv">Total xx invoices uploaded.</string>
+    <string name="msg_downsettings">Settings downloaded.</string>
+    <string name="msg_noitem">Please download Master Item before proceed...</string>
+    <string name="msg_reqcancel">Request was cancelled...</string>
+    <string name="msg_successdownitems">Successfully downloaded nn items.</string>
+    <string name="msg_successdowncusts">Successfully downloaded nn customers.</string>
+    <string name="msg_successdownrunno">Successfully downloaded running no.</string>
+    <string name="msg_successdownprofile">Successfully Download Company Profile.</string>
+    <string name="msg_successdowndb">Successfully download db file from server!</string>
+    <string name="msg_faildowndb">Error downloading db file from server!</string>
+    <string name="msg_accessdenied">"Access denied..."</string>
+    <string name="msg_trxclear">"Transaction clear..."</string>
+    <string name="msg_invaliddate">Invalid Transaction Date format...</string>
+    <string name="msg_invalidcust">No Customer code selected....</string>
+    <string name="msg_invaliditem">No Item code selected....</string>  
+    <string name="msg_invalidqty">Invalid quantity....</string>  
+    <string name="msg_invalidprice">Unit Price is blank...</string>  
+    <string name="msg_itemadded">Item successfully added...</string>  
+     <string name="msg_confirmdelete">Confimr to Delete</string> 
+    <string name="msg_confirmcleer">Confirm to CLEAR ? All transaction will be deleted. Deleted records are not recoverable.</string> 
+     <string name="msg_confirmoverwrite">Confirm to download database from server ? All local data will be overwritten by the downloaded data.</string> 
+      <string name="msg_bluetoothnofound">Can not Find Bluetooth device,try again.</string> 
+    <string name="msg_bluetoothfound">found device </string> 
+     <string name="msg_bluetootherror">Error in Bluetooth device. Try again.</string> 
+
+
+       <string name="form_sono">SALES ORDER NO</string>
+       <string name="form_custpono">CUSTOMER PO NO</string>
+       <string name="form_billto">BILL TO</string>
+       <string name="form_remark">REMARK</string>
+   </resources>

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">MOBILE BILLING SYSTEM</string>
+	<string name="app_descrip">WINCOM as a Solution Provider to cater system needs for manufacturer in whole Peninsular Malaysia and Singapore. With more than 10 years of experience in system development and our Professional Advisors and Software, Hardware and Network Engineers.\nVisit us at http://www.erpsystemmalaysia.com</string>
+	<string name="app_credits">Choose a planet</string>
+	 <string-array name="trxtype">
+        <item>CASH</item>
+        <item>INVOICE</item>
+    </string-array>
+     <string-array name="papersize_array">
+        <item>58mm</item>
+        <item>80mm</item>
+    </string-array>
+    <string name="mainmenu_trx">交易</string>
+   <string name="mainmenu_trxlist">交易记录</string>
+    <string name="mainmenu_master">主要项目</string>
+    <string name="mainmenu_downupload">下载/上传</string>
+    <string name="mainmenu_settings">设置</string>
+    <string name="mainmenu_about">关于</string>
+    <string name="mainmenu_exit">退出</string>
+    <string name="submenu_inv">发票/现金票据</string>
+    <string name="submenu_cn">退货单/退款单</string>
+    <string name="submenu_do">发货单据</string>
+    <string name="submenu_so">销售订单</string>
+    <string name="submenu_back">返回</string>
+    <string name="submenu_invlist">发票/现金票据目录</string>
+    <string name="submenu_cnlist">退货单/退款单目录</string>
+    <string name="submenu_dolist">发货单据目录</string>
+    <string name="submenu_solist">发货单据目录</string>
+    <string name="submenu_summary">发票/现金票据简报</string>
+
+    <string name="submenu_item">产品目录</string>
+    <string name="submenu_cust">客户目录</string>
+
+    <string name="submenu_downitem">下载产品</string>
+    <string name="submenu_downcust">下载客户</string>
+    <string name="submenu_downsettings">下载设置</string>
+    <string name="submenu_upinv">上传发票/现金票据</string>
+    <string name="submenu_upcn">上传退货单/退款单</string>
+    <string name="submenu_updo">上传发货单据</string>
+    <string name="submenu_upso">上传发货单据</string>
+     <string name="invform_trxdate">交易日期</string>
+    <string name="invform_invno">发票/现金票据编号</string>
+    <string name="invform_cnno">退货单/退款单编号</string>
+    <string name="invform_type">交易型式</string>
+    <string name="invform_cust">客户资料</string>
+    <string name="invform_item">产品资料</string>
+    <string name="invform_qty">数量</string>
+    <string name="invform_uprice">单价</string>
+    <string name="invform_tax">征税</string>
+    <string name="invform_amount">总额</string>
+       <string name="form_sono">销售订单编号</string>
+       <string name="form_custpono">采购订单编号</string>
+       <string name="form_billto">记账到</string>
+       <string name="form_remark">备注</string>
+
+     <string name="button_add">保存</string>
+    <string name="button_ok">确定</string>
+    <string name="button_cancel">取消</string>
+    <string name="button_back">返回</string>
+    <string name="button_new">新票</string>
+    <string name="button_newitem">添加</string>
+    <string name="button_print">打印</string>
+    <string name="but_login">登录</string>
+    <string name="but_save">保存</string>
+
+    <string name="login_userid">用户名字</string>
+    <string name="login_pass">密码</string>
+    <string name="login_code">安全密码</string>
+
+   <string name="title_invoice">发票/现金票据</string>
+    <string name="title_invoiceedit">编辑发票/现金票据</string>
+    <string name="title_invoiceitems">发票/现金票据货单</string>
+    <string name="title_invoicenew">新发票现金票据</string>
+    <string name="title_invitementry">发票/现金票据货单输入</string>
+    <string name="title_creditnote">退货单/退款单</string>
+    <string name="title_creditnoteedit">编辑退货单/退款单</string>
+    <string name="title_creditnoteitems">退货单/退款单货单</string>
+    <string name="title_creditnotenew">新退货单/退款单</string>
+    <string name="title_cnitementry">退货单/退款单输入</string>
+    <string name="title_payment">付款</string>
+      <string name="title_so">销售订单</string>
+    <string name="title_soedit">编辑销售订单</string>
+    <string name="title_soitems">销售订单货单</string>
+    <string name="title_sonew">新销售订单</string>
+    <string name="title_soitementry">销售订单货单输入</string>
+
+    <string name="msg_plswait">请稍候...</string>
+    <string name="msg_faillogin">无法登录...</string>
+    <string name="msg_uploading">上传, 请稍候...</string>
+    <string name="msg_downitem">总下载了xx产品资料.</string>
+    <string name="msg_downcust">总下载了xx客户资料.</string>
+    <string name="msg_uploadinv">总上传了xx发票/现金票据.</string>
+    <string name="msg_downsettings">下载了设置资料</string>
+    <string name="msg_noitem">进行前,请下载产品资料...</string>
+    <string name="msg_reqcancel">请求已被取消...</string>
+    <string name="msg_successdownitems">成功下载nn产品资料.</string>
+    <string name="msg_successdowncusts">成功下载nn客户资料.</string>
+    <string name="msg_successdownrunno">成功下载号码.</string>
+    <string name="msg_successdownprofile">成功下载公司简介.</string>
+    <string name="msg_successdowndb">成功下载数据库!</string>
+    <string name="msg_faildowndb">无法下载数据库!</string>
+    <string name="msg_accessdenied">接入被禁止</string>
+    <string name="msg_trxclear">清除完毕</string>
+    <string name="msg_invaliddate">输入日期不合法..</string>
+    <string name="msg_invalidcust">输入客户不合法..</string>
+    <string name="msg_invaliditem">输入产品不合法..</string>  
+    <string name="msg_invalidqty">输入数量不合法..</string>  
+    <string name="msg_invalidprice">输入价格不合法..</string>  
+    <string name="msg_itemadded">成功增加货单...</string>  
+     <string name="msg_confirmdelete">确认要删除</string> 
+    <string name="msg_confirmcleer">确认要删除? 所有交易都将被删除. 删除的记录是不可恢复！</string> 
+     <string name="msg_confirmoverwrite">确认从服务器下载数据库? 所有本地数据将被下载的数据被覆盖.</string> 
+      <string name="msg_bluetoothnofound">无法找到蓝牙设备,请再试一次.</string> 
+    <string name="msg_bluetoothfound">成功发现设备 </string> 
+     <string name="msg_bluetootherror">蓝牙设备时出错. 请再试一次..</string> 
+   </resources>

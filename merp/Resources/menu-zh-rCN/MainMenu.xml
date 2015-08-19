@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mmenu_downcompinfo"
+           android:title="下载设置" />    
+   <item android:id="@+id/mmenu_downdb"
+           android:title="下载资料库" />    
+   <item android:id="@+id/mmenu_back"
+          android:title="备份数据库" />    
+   <item android:id="@+id/mmenu_clear"
+          android:title="清除事务" />     
+   <item android:id="@+id/mmenu_setting"
+          android:title="设置" /> 
+   <item android:id="@+id/mmenu_logoff"
+          android:title="登出" />
+</menu>
+
