@@ -28,7 +28,18 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/bill"
             android:background="@drawable/bluethem_btn_default_holo_light"
+            style="@style/ButtonBlueThem"
             android:id="@+id/butcnnote" />
+        <Button
+            android:text="@string/submenu_do"
+            android:height="53dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:drawableLeft="@drawable/delivery"
+            android:background="@drawable/bluethem_btn_default_holo_light"
+            style="@style/ButtonBlueThem"
+            android:id="@+id/butdo" />
         <Button
             android:text="@string/submenu_so"
             android:height="53dp"
@@ -37,6 +48,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/sales"
             android:background="@drawable/bluethem_btn_default_holo_light"
+            style="@style/ButtonBlueThem"
             android:id="@+id/butso" />
         <Button
             android:height="53dp"
@@ -46,6 +58,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/shoplist"
             android:background="@drawable/bluethem_btn_default_holo_light"
+            style="@style/ButtonBlueThem"
             android:id="@+id/butInvlist" />
         <Button
             android:height="53dp"
@@ -54,6 +67,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/item"
+            style="@style/ButtonBlueThem"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:id="@+id/butMaster" />
         <Button
@@ -63,6 +77,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/download"
+            style="@style/ButtonBlueThem"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:id="@+id/butDown" />
         <Button
@@ -72,6 +87,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/settings"
+            style="@style/ButtonBlueThem"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:id="@+id/butsetting" />
         <Button
@@ -81,6 +97,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/about"
+            style="@style/ButtonBlueThem"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:id="@+id/butAbout" />
         <Button
@@ -90,6 +107,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/exit"
+            style="@style/ButtonBlueThem"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:id="@+id/butOut" />
     </LinearLayout>

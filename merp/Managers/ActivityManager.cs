@@ -9,9 +9,9 @@ namespace wincom.mobile.erp
 		
 		public static Intent GetActivity<T>(Context context)
 		{
-			string COMPCODE = ((GlobalvarsApp)Application.Context).COMPANY_CODE;
+			string USERDEFINE = ((GlobalvarsApp)Application.Context).USERFUNCTION;
 			Intent intent = null;
-			string classname = "wincom.mobile.erp" + "." + typeof(T).Name+"_"+COMPCODE ;
+			string classname = "wincom.mobile.erp" + "." + typeof(T).Name+"_"+USERDEFINE ;
 			try {
 				Type cType = Type.GetType (classname, false, true);
 				if (cType != null) {

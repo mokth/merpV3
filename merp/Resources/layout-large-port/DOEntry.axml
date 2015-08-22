@@ -2,104 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@android:drawable/editbox_dropdown_light_frame">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/alert_light_frame">
         <TextView
-            android:text="@string/invform_trxdate"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lbinvno"
-            android:textColor="#ff1131f0"
-            android:textSize="24sp"
-            android:paddingLeft="5dp" />
-        <EditText
-            android:inputType="date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:background="@drawable/bluethem_edit_text_holo_light"
-            android:id="@+id/newinv_date"
-            android:textSize="24sp"
-            android:drawableRight="@android:drawable/ic_menu_today"
-            android:textColor="@android:color/black" />
-        <TextView
-            android:text="@string/invform_cnno"
+            android:text="@string/invform_dono"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lbinvno"
             android:textSize="24sp"
-            android:textColor="#ff1131f0"
+            android:textColor="@android:color/black"
             android:paddingLeft="5dp" />
         <TextView
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/newinv_no"
+            android:id="@+id/txtInvnp"
             android:editable="false"
-            android:paddingLeft="5dp"
-            android:textSize="24sp"
             android:textColor="#ff140000"
+            android:paddingLeft="5dp"
             android:background="@drawable/bluethem_edit_text_holo_light" />
-        <TextView
-            android:text="@string/invform_invno"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lbinvno"
-            android:textSize="24sp"
-            android:textColor="#ff1131f0"
-            android:paddingLeft="5dp" />
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:weightSum="3">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2.5"
-                android:padding="2dip">
-                <EditText
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/newcninv_no"
-                    android:paddingLeft="5dp"
-                    android:textSize="24sp"
-                    android:textColor="#ff140000"
-                    android:background="@drawable/bluethem_edit_text_holo_light"
-                    android:inputType="textCapCharacters" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:paddingLeft="5dip">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:id="@+id/newinv_bfindinv"
-                    android:background="@android:drawable/ic_search_category_default" />
-            </LinearLayout>
-        </LinearLayout>
         <TextView
             android:text="@string/invform_cust"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lbinvno"
+            android:paddingLeft="5dp"
             android:textSize="24sp"
-            android:textColor="#ff1131f0"
-            android:paddingLeft="5dp" />
+            android:textColor="@android:color/black" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtInvcust"
+            android:editable="false"
+            android:paddingLeft="5dp"
+            android:textColor="#ff140000"
+            android:background="@drawable/bluethem_edit_text_holo_light" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/alert_light_frame">
+        <TextView
+            android:text="@string/invform_item"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ff093bf6"
+            android:paddingLeft="5dp"
+            android:textSize="24sp"
+            android:id="@+id/textView1" />
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -115,11 +75,11 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/newinv_custcode"
+                    android:id="@+id/txtcode"
                     android:paddingLeft="5dp"
                     android:textSize="24sp"
                     android:background="@drawable/bluethem_spinner_background_holo_light"
-                    android:fitsSystemWindows="true" />
+                    android:fitsSystemWindows="false" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -132,19 +92,44 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:id="@+id/newinv_bfind"
-                    android:background="@android:drawable/ic_search_category_default" />
+                    android:background="@android:drawable/ic_search_category_default"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp" />
             </LinearLayout>
         </LinearLayout>
-        <EditText
-            android:textAppearance="?android:attr/textAppearanceMedium"
+        <TableLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/newinv_custname"
-            android:paddingLeft="5dp"
-            android:textSize="24sp"
-            android:textColor="#ff140000"
-            android:inputType="textMultiLine|textCapCharacters|textCapSentences"
-            android:background="@drawable/bluethem_edit_text_holo_light" />
+            android:id="@+id/tableLayout1">
+            <TableRow
+                android:id="@+id/tableRow1">
+                <TextView
+                    android:text="@string/invform_qty"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#fff60935"
+                    android:paddingLeft="5dp"
+                    android:textSize="24sp"
+                    android:id="@+id/textView4"
+                    android:width="120dp" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow1">
+                <EditText
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtqty"
+                    android:textSize="24sp"
+                    android:paddingLeft="5dp"
+                    android:textColor="#ff140000"
+                    android:background="@drawable/bluethem_edit_text_holo_light" />
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
     <TableLayout
         android:minWidth="25px"
@@ -159,19 +144,19 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:typeface="sans"
-                android:id="@+id/newinv_bsave"
+                android:id="@+id/Save"
                 android:drawableLeft="@drawable/add"
-                android:width="120dp"
-                android:text="@string/button_add" />
+                android:width="140dp"
+                android:text="ADD" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:typeface="sans"
-                android:id="@+id/newinv_cancel"
+                android:id="@+id/Cancel"
                 android:drawableLeft="@drawable/left"
-                android:width="120dp"
-                android:text="@string/button_back" />
+                android:width="140dp"
+                android:text="CANCEL" />
         </TableRow>
         <TableRow
             android:id="@+id/tableRow2">

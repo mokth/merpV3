@@ -7,6 +7,15 @@
         <item>CASH</item>
         <item>INVOICE</item>
     </string-array>
+      <string-array name="term">
+        <item>COD</item>
+        <item>5 Days</item>
+        <item>10 Days</item>
+        <item>30 Days</item>
+        <item>60 Days</item>
+        <item>90 Days</item>
+        <item>Other</item>
+    </string-array>
      <string-array name="papersize_array">
         <item>58mm</item>
         <item>80mm</item>
@@ -38,11 +47,14 @@
     <string name="submenu_upinv">上传发票/现金票据</string>
     <string name="submenu_upcn">上传退货单/退款单</string>
     <string name="submenu_updo">上传发货单据</string>
-    <string name="submenu_upso">上传发货单据</string>
+    <string name="submenu_upso">上传销售订单</string>
      <string name="invform_trxdate">交易日期</string>
     <string name="invform_invno">发票/现金票据编号</string>
     <string name="invform_cnno">退货单/退款单编号</string>
+     <string name="invform_sono">销售订单编号</string>
+    <string name="invform_dono">发货单据编号</string>
     <string name="invform_type">交易型式</string>
+    <string name="invform_term">付款期限</string>
     <string name="invform_cust">客户资料</string>
     <string name="invform_item">产品资料</string>
     <string name="invform_qty">数量</string>
@@ -84,7 +96,12 @@
     <string name="title_soitems">销售订单货单</string>
     <string name="title_sonew">新销售订单</string>
     <string name="title_soitementry">销售订单货单输入</string>
-     
+     <string name="title_do">发货单据</string>
+    <string name="title_doedit">编辑发货单据</string>
+    <string name="title_doitems">发货单据货单</string>
+    <string name="title_donew">新发货单据</string>
+    <string name="title_doitementry">发货单据货单输入Y</string>
+
 
 
     <string name="msg_plswait">请稍候...</string>

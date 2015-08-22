@@ -167,6 +167,8 @@ namespace wincom.mobile.erp
 				conn.CreateTable<CNNoteDtls>();
 				conn.CreateTable<SaleOrder>();
 				conn.CreateTable<SaleOrderDtls>();
+				conn.CreateTable<DelOrder>();
+				conn.CreateTable<DelOrderDtls>();
 
 			}
 		}
@@ -256,6 +258,8 @@ namespace wincom.mobile.erp
 			((GlobalvarsApp)this.Application).COMPANY_CODE = comp;
 			((GlobalvarsApp)this.Application).BRANCH_CODE = bran;
 			((GlobalvarsApp)this.Application).ISLOGON = true;
+			((GlobalvarsApp)this.Application).USERFUNCTION = DataHelper.GetUserFunctionName (pathToDatabase);
+
 			StartActivity (intent);
 		}
 

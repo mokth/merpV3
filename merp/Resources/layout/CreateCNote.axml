@@ -126,15 +126,16 @@
                     android:background="@android:drawable/ic_search_category_default" />
             </LinearLayout>
         </LinearLayout>
-        <TextView
+        <EditText
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/newinv_custname"
-            android:editable="false"
             android:paddingLeft="5dp"
             android:textColor="#ff140000"
-            android:background="@drawable/bluethem_edit_text_holo_light" />
+            android:inputType="textMultiLine|textCapCharacters|textCapSentences"
+            android:background="@drawable/bluethem_edit_text_holo_light"
+            android:hint="@string/form_remark" />
     </LinearLayout>
     <TableLayout
         android:minWidth="25px"

@@ -4,11 +4,11 @@ namespace wincom.mobile.erp
 {
 	public class PrintCustomerHeader:PrintHelperBase
 	{
-		public void PrintCustomer (ref string test,string custcode)
+		public void PrintCustomer (ref string test,string custcode,string title ="CUSTOMER")
 		{
 			Trader comp = DataHelper.GetTrader (pathToDatabase, custcode);
 			test += "------------------------------------------\n";
-			test += "CUSTOMER\n";
+			test += title+"\n";
 			string tel = string.IsNullOrEmpty (comp.Tel) ? " " : comp.Tel.Trim ();
 			string fax = string.IsNullOrEmpty (comp.Fax) ? " " : comp.Fax.Trim ();
 			string addr1 =string.IsNullOrEmpty (comp.Addr1) ? "" : comp.Addr1.Trim ();

@@ -60,6 +60,38 @@ namespace wincom.mobile.erp
 
 			return test;
 		}
+
+		public string PrintDODetail(DelOrderDtls itm,int count)
+		{
+			string test = "";
+			string desc = itm.description;
+			string pline2 = desc.ToUpper ().Trim ();
+			string scount = count.ToString ().PadRight (4, ' ');
+			if (pline2.Length > 33) {
+
+				string[] strs = pline2.Split (new char[]{ ' ' });
+				string tmp = "";
+
+				string sqty = itm.qty.ToString ("n").PadLeft (5, ' ');
+				foreach (string s in strs) {
+					if ((tmp + s + " ").Length > 33) {
+						test  = test + scount + tmp.PadRight (33, ' ') + sqty+"\n"; 
+						scount = "".PadRight (4, ' ');
+						sqty = "".PadRight (5, ' ');
+						tmp = s+" ";
+					} else {
+						tmp = tmp + s+" ";
+					}
+				}
+				test = test + "".PadRight (4, ' ') + tmp + "\n";
+
+			} else {
+				test = count.ToString ().PadRight (4, ' ') + pline2.PadRight (33, ' ')+scount+ "\n";
+
+			}
+
+			return test;
+		}
 	}
 }
 

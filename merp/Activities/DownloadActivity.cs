@@ -38,6 +38,9 @@ namespace wincom.mobile.erp
 			Button butuploadcn = FindViewById<Button> (Resource.Id.butuploadcn);
 			butuploadcn.Click += butUploadCN;
 
+			Button butuploaddo = FindViewById<Button> (Resource.Id.butuploaddo);
+			butuploaddo.Click += butUploadDO;
+
 			Button butdownSetting = FindViewById<Button> (Resource.Id.butDownSetting);
 			butdownSetting.Click+= ButdownSetting_Click;
 
@@ -88,6 +91,19 @@ namespace wincom.mobile.erp
 			butupload.Text = Resources.GetString(Resource.String.msg_uploading);// "Uploading, please wait...";
 			//UploadBillsToServer();
 			IUploadHelper upload =UploadManager.GetUploadHepler< UploadCNHelper>();
+			upload.SetUploadHandel(OnUploadDoneDlg); 
+			upload.SetCallingActivity(this);
+			upload.startUpload ();	
+		}
+
+
+		void butUploadDO(object sender,EventArgs e)
+		{
+			Button butupload =  FindViewById<Button> (Resource.Id.butuploaddo);
+			butupload.Enabled = false;
+			butupload.Text = Resources.GetString(Resource.String.msg_uploading);// "Uploading, please wait...";
+			//UploadBillsToServer();
+			IUploadHelper upload =UploadManager.GetUploadHepler< UploadDOHelper>();
 			upload.SetUploadHandel(OnUploadDoneDlg); 
 			upload.SetCallingActivity(this);
 			upload.startUpload ();	

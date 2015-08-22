@@ -123,8 +123,8 @@ namespace wincom.mobile.erp
 			
 			Trader item =items.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
 			if (item != null) {
-				TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
-				name.Text = item.CustName;
+				//TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
+				//name.Text = item.CustName;
 				Spinner spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
 				int pos = -1;
 				string paycode = item.PayCode.ToUpper ().Trim ();
@@ -186,11 +186,15 @@ namespace wincom.mobile.erp
 			}
 			DateTime invdate = Utility.ConvertToDate (trxdate.Text);
 			DateTime tmr = invdate.AddDays (1);
-			AdNumDate adNum= DataHelper.GetNumDate (pathToDatabase, invdate);
+			AdNumDate adNum;// = DataHelper.GetNumDate (pathToDatabase, invdate);
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
 			Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
 			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
-			TextView custname = FindViewById<TextView> (Resource.Id.newinv_custname);
+			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
+			string trxtype = spinner2.SelectedItem.ToString ();
+			if (trxtype =="CASH")
+				  adNum= DataHelper.GetNumDate (pathToDatabase, invdate,"CS");
+			else  adNum= DataHelper.GetNumDate (pathToDatabase, invdate,"INV");
 			string prefix = apara.Prefix.Trim ().ToUpper ();
 			if (spinner.SelectedItem == null) {
 				Toast.MakeText (this, Resources.GetString(Resource.String.msg_invalidcust), ToastLength.Long).Show ();			
@@ -226,10 +230,11 @@ namespace wincom.mobile.erp
 				inv.trxtype = spinner2.SelectedItem.ToString ();
 				inv.created = DateTime.Now;
 				inv.invno = invno;
-				inv.description = custname.Text;
+				inv.description = codes [1].Trim ();//custname.Text;
 				inv.amount = 0;
 				inv.custcode = codes [0].Trim ();
 				inv.isUploaded = false;
+				inv.remark = remark.Text.ToUpper();
 
 				txtinvno.Text = invno;
 				db.Insert (inv);

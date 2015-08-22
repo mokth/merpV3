@@ -51,15 +51,46 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/alert_light_frame">
-        <TextView
-            android:text="@string/invform_item"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#ff093bf6"
-            android:paddingLeft="5dp"
-            android:textSize="24sp"
-            android:id="@+id/textView1" />
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="3">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:padding="2dip">
+                <TextView
+                    android:text="@string/invform_item"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ff093bf6"
+                    android:paddingLeft="5dp"
+                    android:textSize="24sp"
+                    android:id="@+id/textView1"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="7dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:paddingLeft="5dip">
+                <EditText
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtbarcode"
+                    android:paddingLeft="5dp"
+                    android:textColor="#ff140000"
+                    android:background="@drawable/bluethem_edit_text_holo_light" />
+            </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

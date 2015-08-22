@@ -23,6 +23,14 @@ namespace wincom.mobile.erp
 			test += "  TOTAL COLLECT AMOUNT : "+Math.Round(ttlCollect,2).ToString("n2").PadLeft (12, ' ')+"\n";
 			test += "------------------------------------------\n";
 		}
+
+		public void PrintDOTotal (ref string test,double ttlQty)
+		{
+
+			test += "------------------------------------------\n";
+			test += "                   TOTAL QTY  "+ttlQty.ToString("n").PadLeft (12, ' ')+"\n";
+			test += "------------------------------------------\n";
+		}
 	}
 }
 

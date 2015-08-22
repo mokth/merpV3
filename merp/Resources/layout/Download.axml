@@ -14,7 +14,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/download"
             android:height="53dp"
-            android:id="@+id/butDown" />
+            android:id="@+id/butDown"
+            android:drawableRight="@drawable/item" />
         <Button
             android:text="@string/submenu_downcust"
             android:layout_width="match_parent"
@@ -22,7 +23,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/download"
             android:height="53dp"
-            android:id="@+id/butDownCust" />
+            android:id="@+id/butDownCust"
+            android:drawableRight="@drawable/trader" />
         <Button
             android:text="@string/submenu_downsettings"
             android:layout_width="match_parent"
@@ -30,7 +32,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/download"
             android:height="53dp"
-            android:id="@+id/butDownSetting" />
+            android:id="@+id/butDownSetting"
+            android:drawableRight="@drawable/settings" />
         <Button
             android:text="@string/submenu_upinv"
             android:layout_width="match_parent"
@@ -38,7 +41,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/upload"
             android:height="53dp"
-            android:id="@+id/butupload" />
+            android:id="@+id/butupload"
+            android:drawableRight="@drawable/shop" />
         <Button
             android:text="@string/submenu_upcn"
             android:layout_width="match_parent"
@@ -46,7 +50,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/upload"
             android:height="53dp"
-            android:id="@+id/butuploadcn" />
+            android:id="@+id/butuploadcn"
+            android:drawableRight="@drawable/bill" />
         <Button
             android:text="@string/submenu_upso"
             android:layout_width="match_parent"
@@ -54,7 +59,17 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/upload"
             android:height="53dp"
-            android:id="@+id/butuploadso" />
+            android:id="@+id/butuploadso"
+            android:drawableRight="@drawable/sales" />
+        <Button
+            android:text="@string/submenu_updo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:drawableLeft="@drawable/upload"
+            android:height="53dp"
+            android:id="@+id/butuploaddo"
+            android:drawableRight="@drawable/delivery" />
         <Button
             android:text="@string/submenu_back"
             android:layout_width="match_parent"

@@ -7,6 +7,15 @@
         <item>CASH</item>
         <item>INVOICE</item>
     </string-array>
+     <string-array name="term">
+        <item>COD</item>
+        <item>5 Days</item>
+        <item>10 Days</item>
+        <item>30 Days</item>
+        <item>60 Days</item>
+        <item>90 Days</item>
+        <item>Other</item>
+    </string-array>
      <string-array name="papersize_array">
         <item>58mm</item>
         <item>80mm</item>
@@ -41,8 +50,11 @@
     <string name="submenu_upso">UPLOAD SALES ORDER</string>
     <string name="invform_trxdate">TRANSACTION DATE</string>
     <string name="invform_invno">INVOICE NO</string>
+    <string name="invform_sono">SALES ORDER NO</string>
+    <string name="invform_dono">DELIVERY ORDER NO</string>
     <string name="invform_cnno">CREDIT NOTE NO</string>
     <string name="invform_type">TYPE</string>
+    <string name="invform_term">TERM</string>
     <string name="invform_cust">CUSTOMER</string>
     <string name="invform_item">ITEM CODE</string>
     <string name="invform_qty">QUANTITY</string>
@@ -78,6 +90,12 @@
     <string name="title_soitems">SALES ORDER ITEMS</string>
     <string name="title_sonew">NEW SALES ORDER</string>
     <string name="title_soitementry">SALES ORDER ITEM ENTRY</string>
+
+    <string name="title_do">DELIVERY ORDER</string>
+    <string name="title_doedit">EDIT DELIVERY ORDER</string>
+    <string name="title_doitems">DELIVERY ORDER ITEMS</string>
+    <string name="title_donew">NEW DELIVERY ORDER</string>
+    <string name="title_doitementry">DELIVERY ORDER ITEM ENTRY</string>
 
     <string name="msg_plswait">Please wait...</string>
     <string name="msg_faillogin">Failed to login...</string>

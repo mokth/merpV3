@@ -1,7 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -12,21 +14,16 @@ using System.IO;
 
 namespace wincom.mobile.erp
 {
-	[Activity (Label = "EDIT INVOICE",Icon="@drawable/shop")]			
-	public class EditInvoice : Activity,IEventListener
+	[Activity (Label = "NEW DELIVERY ORDER",Icon="@drawable/delivery")]			
+	public class CreateDelOrder : Activity,IEventListener
 	{
 		string pathToDatabase;
-		List<Trader> custs = null;
+		List<Trader> items = null;
 		ArrayAdapter<String> dataAdapter;
 		ArrayAdapter dataAdapter2;
 		DateTime _date ;
 		AdPara apara = null;
 		Spinner spinner;
-		string INVOICENO="";
-		Invoice invInfo;
-		EditText ccType ;
-		EditText ccNo;
-		AccessRights rights;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -34,31 +31,25 @@ namespace wincom.mobile.erp
 			if (!((GlobalvarsApp)this.Application).ISLOGON) {
 				Finish ();
 			}
-			SetTitle (Resource.String.title_invoiceedit);
-			SetContentView (Resource.Layout.CreateInvoice);
+			SetTitle (Resource.String.title_donew);
+			SetContentView (Resource.Layout.CreateDO);
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
-			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
-			rights = Utility.GetAccessRights (pathToDatabase);
 
-			INVOICENO = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
-			invInfo =DataHelper.GetInvoice (pathToDatabase, INVOICENO);
-			if (invInfo == null) {
-				base.OnBackPressed ();
-			}
 			// Create your application here
-
+			_date = DateTime.Today;
 			spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
 			Spinner spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
 			Button butSave = FindViewById<Button> (Resource.Id.newinv_bsave);
-			butSave.Text = Resources.GetString(Resource.String.but_save);// "SAVE";
-			Button butCancel = FindViewById<Button> (Resource.Id.newinv_cancel);
+			Button butNew = FindViewById<Button> (Resource.Id.newinv_cancel);
 			Button butFind = FindViewById<Button> (Resource.Id.newinv_bfind);
+			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
 			spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
-
 			butSave.Click += butSaveClick;
-			butCancel.Click += butCancelClick;
-
+			butNew.Click += butCancelClick;
+			TextView invno =  FindViewById<TextView> (Resource.Id.newinv_no);
+			invno.Text = "AUTO";
 			EditText trxdate =  FindViewById<EditText> (Resource.Id.newinv_date);
+ 			trxdate.Text = _date.ToString ("dd-MM-yyyy");
 			trxdate.Click += delegate(object sender, EventArgs e) {
 				ShowDialog (0);
 			};
@@ -66,66 +57,47 @@ namespace wincom.mobile.erp
 				ShowCustLookUp();
 			};
 
-		
+			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			apara =  DataHelper.GetAdPara (pathToDatabase);
-			LoadTrader ();
+			//SqliteConnection.CreateFile(pathToDatabase);
+			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
+			{
+				items = db.Table<Trader> ().ToList<Trader> ();
+			}
 
 			List<string> icodes = new List<string> ();
-			foreach (Trader item in custs) {
+			foreach (Trader item in items) {
 				icodes.Add (item.CustCode+" | "+item.CustName);
 			}
 
-			dataAdapter = new ArrayAdapter<String> (this, Resource.Layout.spinner_item, icodes);
 			dataAdapter2 =ArrayAdapter.CreateFromResource (
-				this, Resource.Array.trxtype, Resource.Layout.spinner_item);
-		
-			//dataAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+				this, Resource.Array.term, Resource.Layout.spinner_item);
+			
+
+			dataAdapter = new ArrayAdapter<String> (this, Resource.Layout.spinner_item, icodes);
 			dataAdapter.SetDropDownViewResource(Resource.Layout.SimpleSpinnerDropDownItemEx);
 			dataAdapter2.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-
-			// attaching data adapter to spinner
 			spinner.Adapter =dataAdapter;
 			spinnerType.Adapter =dataAdapter2;
-			LoadData ();
-		}
 
-		void LoadTrader ()
-		{
-			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				custs = db.Table<Trader> ().ToList();
-			}
+			remark.RequestFocus ();
+
 		}
 
 		public override void OnBackPressed() {
 			// do nothing.
 		}
 
-		private void LoadData()
-		{
-			EditText trxdate =  FindViewById<EditText> (Resource.Id.newinv_date);
-			DateTime invdate = Utility.ConvertToDate (trxdate.Text);
-			DateTime tmr = invdate.AddDays (1);
-			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
-			Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
-			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
-			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
-
-			trxdate.Text = invInfo.invdate.ToString ("dd-MM-yyyy");
-			int pos1= dataAdapter.GetPosition (invInfo.custcode+" | "+invInfo.description);
-			int pos2= dataAdapter2.GetPosition (invInfo.trxtype);
-			spinner.SetSelection (pos1);
-			spinner2.SetSelection (pos2);
-			remark.Text = invInfo.remark;
-			txtinvno.Text = invInfo.invno;
-
-
-		}
-
 		private void butSaveClick(object sender,EventArgs e)
 		{
-
-			if (SaveInvoice()){
-				base.OnBackPressed();	
+			int count1 = 0;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				count1 = db.Table<Item>().Count ();
+			}
+			if (count1 > 0)
+				CreateNewDO ();
+			else {
+				Toast.MakeText (this,"Please download Master Item before proceed... ", ToastLength.Long).Show ();	
 			}
 		}
 
@@ -142,29 +114,12 @@ namespace wincom.mobile.erp
 			string[] codes = txt.Split (new char[]{ '|' });
 			if (codes.Length == 0)
 				return;
-
-			Trader item =custs.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
+			
+			Trader item =items.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
 			if (item != null) {
 				//TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
 				//name.Text = item.CustName;
-				Spinner spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
-				int pos = -1;
-				string paycode = item.PayCode.ToUpper().Trim();
-				if (!string.IsNullOrEmpty (paycode)) {
-					if (paycode.Contains ("CASH")|| paycode.Contains ("COD")) {
-						pos = dataAdapter2.GetPosition ("CASH");
-					} else {
-						pos = dataAdapter2.GetPosition ("INVOICE");
-					}
-				}else
-					pos = dataAdapter2.GetPosition ("CASH");
 
-				if (pos > -1) {
-					spinnerType.SetSelection (pos);
-					if (!rights.InvEditTrxType) {
-						spinnerType.Enabled = false;
-					}
-				}//else spinnerType.Enabled = true;
 			}
 
 		}
@@ -183,47 +138,77 @@ namespace wincom.mobile.erp
 		}
 
 
-		private bool SaveInvoice()
+		void ShowItemEntry (DelOrder so, string[] codes)
 		{
-			bool lSave = false;
-			Invoice inv = new Invoice ();
+			//var intent = new Intent (this, typeof(DOEntryActivity));
+			var intent =ActivityManager.GetActivity<DOEntryActivity>(this.ApplicationContext);
+			intent.PutExtra ("invoiceno", so.dono);
+			intent.PutExtra ("customer", codes [1].Trim ());
+			intent.PutExtra ("itemuid", "-1");
+			intent.PutExtra ("editmode", "NEW");
+			StartActivity (intent);
+		}
+
+		private void CreateNewDO()
+		{
+			DelOrder dorder = new DelOrder ();
 			EditText trxdate =  FindViewById<EditText> (Resource.Id.newinv_date);
 			if (!Utility.IsValidDateString (trxdate.Text)) {
 				Toast.MakeText (this,Resources.GetString(Resource.String.msg_invaliddate), ToastLength.Long).Show ();	
-				return lSave;
+				return;
 			}
-			DateTime invdate = Utility.ConvertToDate (trxdate.Text);
+			DateTime dodate = Utility.ConvertToDate (trxdate.Text);
+			DateTime tmr = dodate.AddDays (1);
+			AdNumDate adNum= DataHelper.GetNumDate(pathToDatabase, dodate,"DO");
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
 			Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
 			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
 			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
-
+			//EditText custpo =  FindViewById<EditText> (Resource.Id.newinv_po);
+			//EditText remark =  FindViewById<EditText> (Resource.Id.newinv_remark);
+			string prefix = apara.DOPrefix.Trim ().ToUpper ();
 			if (spinner.SelectedItem == null) {
 				Toast.MakeText (this, Resources.GetString(Resource.String.msg_invalidcust), ToastLength.Long).Show ();			
 				spinner.RequestFocus ();
-				return lSave;			
+				return;			
 			}
+
 
 			string[] codes = spinner.SelectedItem.ToString().Split (new char[]{ '|' });
 			if (codes.Length == 0)
-				return lSave;
-
-			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-
-				invInfo.invdate = invdate;
-				invInfo.trxtype = spinner2.SelectedItem.ToString ();
-				invInfo.created = DateTime.Now;
-				invInfo.description = codes [1].Trim ();
-				invInfo.remark = remark.Text.ToUpper ();
-				//inv.amount = 0;
-				invInfo.custcode = codes [0].Trim ();
-				invInfo.isUploaded = false;
+				return;
 			
-				db.Update (invInfo);
-				lSave = true;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				string dono = "";
+				int runno = adNum.RunNo + 1;
+				int currentRunNo =DataHelper.GetLastDORunNo(pathToDatabase, dodate);
+				if (currentRunNo >= runno)
+					runno = currentRunNo + 1;
+				
+				dono =prefix + dodate.ToString("yyMM") + runno.ToString().PadLeft (4, '0');
+
+				txtinvno.Text= dono;
+				dorder.dodate = dodate;
+				dorder.trxtype ="DO" ;
+				dorder.created = DateTime.Now;
+				dorder.dono = dono;
+				dorder.description =  codes [1].Trim ();
+				dorder.remark = remark.Text;
+				dorder.term =  spinner2.SelectedItem.ToString ();
+				dorder.amount = 0;
+				dorder.custcode = codes [0].Trim ();
+				dorder.isUploaded = false;
+
+				txtinvno.Text = dono;
+				db.Insert (dorder);
+				adNum.RunNo = runno;
+				if (adNum.ID >= 0)
+					db.Update (adNum);
+				else
+					db.Insert (adNum);
 			}
 
-			return lSave;
+			ShowItemEntry (dorder, codes);
 		}
 
 		void ShowCustLookUp()

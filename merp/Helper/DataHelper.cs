@@ -64,6 +64,28 @@ namespace wincom.mobile.erp
 			return runno;
 		}
 
+		public static int GetLastDORunNo(string pathToDatabase, DateTime dodate )
+		{
+			DateTime Sdate = dodate.AddDays (1 - dodate.Day);
+			DateTime Edate = new DateTime (dodate.Year, dodate.Month, DateTime.DaysInMonth (dodate.Year, dodate.Month));
+			int runno = -1;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list2 = db.Table<DelOrder> ().Where(x=>x.dodate>=Sdate && x.dodate<=Edate)
+					.OrderByDescending(x=>x.dono)
+					.ToList<DelOrder> ();
+				if (list2.Count > 0) {
+					string dono =list2[0].dono;
+					if (dono.Length > 5)
+					{
+						string srunno = dono.Substring(dono.Length - 4);
+						runno = Convert.ToInt32(srunno);
+					}
+				}
+			}
+
+			return runno;
+		}
+
 		public static int GetLastCNRunNo(string pathToDatabase, DateTime invdate )
 		{
 			DateTime Sdate = invdate.AddDays (1 - invdate.Day);
@@ -94,6 +116,21 @@ namespace wincom.mobile.erp
 				
 				if (rights.InvNotEditAftPrint) {
 					var list = db.Table<Invoice> ().Where (x => x.invno == invno).ToList ();
+					if (list.Count > 0) {
+						iSPrinted = list [0].isPrinted; 				
+					}
+				}
+			}
+			return iSPrinted;
+		}
+
+		public static bool GetDelOderPrintStatus(string pathToDatabase,string dono,AccessRights rights)
+		{
+			bool iSPrinted = false;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+
+				if (rights.DONotEditAftPrint) {
+					var list = db.Table<DelOrder> ().Where (x => x.dono == dono).ToList ();
 					if (list.Count > 0) {
 						iSPrinted = list [0].isPrinted; 				
 					}
@@ -323,6 +360,42 @@ namespace wincom.mobile.erp
 				}
 			}
 			return inv;
+		}
+
+		public static DelOrder GetDO(string pathToDatabase,string dono)
+		{
+			DelOrder inv=null;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list2 = db.Table<DelOrder> ().ToList<DelOrder>().Where(x=>x.dono==dono).ToList();
+				if (list2.Count > 0) {
+					inv = list2 [0];
+				}
+			}
+			return inv;
+		}
+
+		public static string GetUserFunctionName(string pathToDatabase)
+		{
+			string userfunction = "";
+			CompanyInfo compInfo = GetCompany(pathToDatabase);
+			if (compInfo== null) {
+				return userfunction;
+			}
+
+			string sPattern = "USERFUNC:";
+			string[] ss = compInfo.WCFUrl.Split(new char[] { ',' });
+			foreach (string s1 in ss)
+			{
+				if (System.Text.RegularExpressions.Regex.IsMatch(s1, sPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+				{
+					string[] para= s1.Split(new char[] { ':' });
+					if (para.Length > 1)
+						userfunction = para [1];
+				}
+
+			}
+
+			return userfunction;
 		}
 
 	}

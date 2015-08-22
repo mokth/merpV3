@@ -2,14 +2,13 @@
 using SQLite;
 
 namespace wincom.mobile.erp
-{//Version 2 added
-	public class CNNote
+{
+	public class DelOrder
 	{
 		[PrimaryKey] 
-		public string cnno  { get; set; }
-		public string invno  { get; set; }
+		public string dono  { get; set; }
 		public string trxtype  { get; set; }
-		public DateTime invdate  { get; set; }
+		public DateTime dodate  { get; set; }
 		public DateTime created  { get; set; }
 		public double amount { get; set; }
 		public double taxamt { get; set; }
@@ -19,13 +18,14 @@ namespace wincom.mobile.erp
 		public bool isUploaded  { get; set; }
 		public bool isPrinted  { get; set; }
 		public string remark { get; set; }
+		public string term { get; set; }
 	}
-	//Version 2 added
-	public class CNNoteDtls
+
+	public class DelOrderDtls
 	{
 		[PrimaryKey, AutoIncrement]
 		public int ID { get; set; }
-		public string cnno  { get; set; }
+		public string dono  { get; set; }
 		public double amount { get; set; }
 		public double netamount { get; set; }
 		public string icode { get; set; }
@@ -35,6 +35,7 @@ namespace wincom.mobile.erp
 		public string taxgrp { get; set; }
 		public double tax { get; set; }
 		public bool isincludesive { get; set; }
+		public string remark { get; set; }
 	}
 }
 

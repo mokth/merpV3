@@ -4,6 +4,14 @@ namespace wincom.mobile.erp
 {
 	public class PrintReportHeader:PrintHelperBase
 	{
+		static void printCaption (ref string test)
+		{
+			test += "------------------------------------------\n";
+			test += "DESCRIPTION                               \n";
+			test += "NO       QTY  U/PRICE    TAX AMT    AMOUNT\n";
+			test += "------------------------------------------\n";
+		}
+
 		public void PrintHeader (ref string test,Invoice inv)
 		{
 			string userid = USERID;
@@ -36,18 +44,8 @@ namespace wincom.mobile.erp
 			string term = "("+((inv.trxtype.IndexOf("CASH")>-1)?"COD":"TERM")+")"; 
 			issueline = issueline + term.PadLeft (templen, ' ')+"\n";
 			test += issueline;// "ISSUED BY: " + userid.ToUpper()+"\n";
-			test += "------------------------------------------\n";
-			test += "DESCRIPTION                               \n";
-			test += "NO       QTY  U/PRICE    TAX AMT    AMOUNT\n";
-			test += "------------------------------------------\n";
-			/*
-            DESCRIPTION       QTY    U/PRICE    AMOUNT
-			                  TAXGR  TAX AMT  
-			------------------------------------------
-			xxxxxxxxxxxxxxxxx xxxxx xxxxxxxx xxxxxxxxx
-			xxxxxxxxxxxxxxxxx xxxxx xxxxxxxx xxxxxxxxx
-			12345678901234567 12345 12345678 123456789
-		  */
+			printCaption (ref test);
+		
 		}
 
 		public void PrintCNHeader (ref string test,CNNote inv)
@@ -74,20 +72,9 @@ namespace wincom.mobile.erp
 			string term = "("+((inv.trxtype.IndexOf("CASH")>-1)?"COD":"TERM")+")"; 
 			issueline = issueline + term.PadLeft (templen, ' ')+"\n";
 			test += issueline;// "ISSUED BY: " + userid.ToUpper()+"\n";
-			test += "------------------------------------------\n";
-			test += "DESCRIPTION                               \n";
-			test += "NO       QTY  U/PRICE    TAX AMT    AMOUNT\n";
-			test += "------------------------------------------\n";
-			/*
-            DESCRIPTION       QTY    U/PRICE    AMOUNT
-			                  TAXGR  TAX AMT  
-			------------------------------------------
-			xxxxxxxxxxxxxxxxx xxxxx xxxxxxxx xxxxxxxxx
-			xxxxxxxxxxxxxxxxx xxxxx xxxxxxxx xxxxxxxxx
-			12345678901234567 12345 12345678 123456789
-		  */
+			printCaption (ref test);
 		}
-
+		//众人皆醉我独醒，与code共舞
 		public void PrintSOHeader (ref string test,SaleOrder so)
 		{
 			string userid = USERID;
@@ -109,10 +96,61 @@ namespace wincom.mobile.erp
 				test += "REMARK:\n";
 				test += so.remark+"\n";
 			}
+			printCaption (ref test);
+		}
+
+		public void PrintDOHeader (ref string test,DelOrder doOrder)
+		{
+			string userid = USERID;
+			string title1 = "DELIVERY ORDER";
+			string date = DateTime.Now.ToString ("dd-MM-yyyy");
+			string datetime = DateTime.Now.ToString ("dd-MM-yyyy hh:mm tt");
+			if (compinfo.ShowTime) {
+				test += datetime+title1.PadLeft(41-datetime.Length,' ')+"\n";
+			} else {
+				test += date+title1.PadLeft(41-date.Length,' ')+"\n";
+			}
+			string recno = "DELIVERY ORDER NO : " + doOrder.dono.Trim();
+			test += recno+"\n";
+			string issueline = "ISSUED BY: " + userid.ToUpper ();
+			string term = "TERM     : " + doOrder.term.ToUpper();
+			issueline = issueline +"\n";
+			test += issueline;// "ISSUED BY: " + userid.ToUpper()+"\n";
+			test += term +"\n";
+			if (doOrder.remark.Length > 1) {
+				test += "REMARK:\n";
+				test += doOrder.remark+"\n";
+			}
 			test += "------------------------------------------\n";
-			test += "DESCRIPTION                               \n";
-			test += "NO       QTY  U/PRICE    TAX AMT    AMOUNT\n";
+			test += "NO  DESCRIPTION                       QTY \n";
 			test += "------------------------------------------\n";
+			//  1234
+			//	  	 12345678901234567890123456789012312345
+			//
+		}
+
+		public void PrintPaymentHeader (ref string test,SaleOrder so)
+		{
+			string userid = USERID;
+			string title1 = "PAYMENT VOUCHER";
+			string date = DateTime.Now.ToString ("dd-MM-yyyy");
+			string datetime = DateTime.Now.ToString ("dd-MM-yyyy hh:mm tt");
+			if (compinfo.ShowTime) {
+				test += datetime+title1.PadLeft(41-datetime.Length,' ')+"\n";
+			} else {
+				test += date+title1.PadLeft(41-date.Length,' ')+"\n";
+			}
+			string recno = "REFERENCE NO : " + so.sono.Trim();
+			test += recno+"\n";
+			test += "CUST PO NO : " + so.custpono+"\n";
+			string issueline = "ISSUED BY: " + userid.ToUpper ();
+			issueline = issueline +"\n";
+			test += issueline;// "ISSUED BY: " + userid.ToUpper()+"\n";
+			if (so.remark.Length > 1) {
+				test += "REMARK:\n";
+				test += so.remark+"\n";
+			}
+			printCaption (ref test);
 
 		}
 	}

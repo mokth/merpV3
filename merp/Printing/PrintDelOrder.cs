@@ -3,11 +3,10 @@ using Android.App;
 
 namespace wincom.mobile.erp
 {
-	
-	public class PrintSalesOrder:PrintDocumentBase,IPrintDocument
+	public class PrintDelOrder:PrintDocumentBase,IPrintDocument
 	{
-		SaleOrder so;
-		SaleOrderDtls[] list;
+		DelOrder delOrder;
+		DelOrderDtls[] list;
 		int noOfCopy=1;
 		Activity callingActivity;
 
@@ -23,12 +22,12 @@ namespace wincom.mobile.erp
 
 		public void SetDocument (object doc)
 		{
-			so = (SaleOrder)doc;
+			delOrder = (DelOrder)doc;
 		}
 
 		public void SetDocumentDtls (object docdtls)
 		{
-			list = (SaleOrderDtls[])docdtls;
+			list = (DelOrderDtls[])docdtls;
 		}
 
 		public void SetNoOfCopy (int noofcopy)
@@ -36,7 +35,7 @@ namespace wincom.mobile.erp
 			noOfCopy = noofcopy;
 		}
 
-		
+
 		public void SetExtraPara (System.Collections.Hashtable para)
 		{
 			extrapara = para;
@@ -52,7 +51,7 @@ namespace wincom.mobile.erp
 			text = "";
 			errMsg = "";
 			bool isPrinted = false;
-			GetSaleOrderText (so, list);
+			GetDelOrderText (delOrder, list);
 			IPrintToDevice device = PrintDeviceManager.GetPrintingDevice<BlueToothDeviceHelper> ();
 			device.SetCallingActivity (callingActivity);
 			isPrinted = device.StartPrint (text, noOfCopy, ref errMsg);
@@ -60,27 +59,22 @@ namespace wincom.mobile.erp
 			return isPrinted;
 		}
 
-		private void GetSaleOrderText (SaleOrder so, SaleOrderDtls[] list)
+		private void GetDelOrderText (DelOrder delOrder, DelOrderDtls[] list)
 		{
-			if (string.IsNullOrEmpty(so.billTo))
-				 prtcompHeader.PrintCompHeader (ref text);
-			else prtcompHeader.PrintCustomerHeader(ref text,so.billTo);
-
-			prtCustHeader.PrintCustomer (ref text, so.custcode);
-			prtHeader.PrintPaymentHeader (ref text, so);
+			prtcompHeader.PrintCompHeader (ref text);
+			prtCustHeader.PrintCustomer (ref text, delOrder.custcode,"DELIVER TO");
+			prtHeader.PrintDOHeader (ref text, delOrder);
 			string dline = "";
 			double ttlAmt = 0;
 			double ttltax = 0;
 			int count = 0;
-			foreach (SaleOrderDtls itm in list) {
+			foreach (DelOrderDtls itm in list) {
 				count += 1;
-				dline = dline + prtDetail.PrintSODetail (itm, count);
-				ttlAmt = ttlAmt + itm.netamount;
-				ttltax = ttltax + itm.tax;
+				dline = dline + prtDetail.PrintDODetail (itm, count);
+				ttlAmt = ttlAmt + itm.qty;
 			}
 			text += dline;
-			prtTotal.PrintTotal (ref text, ttlAmt, ttltax);
-			prtTaxSummary.PrintSOTaxSumm (ref text, list);
+			prtTotal.PrintDOTotal(ref text, ttlAmt);
 			prtFooter.PrintFooter (ref text);
 			text += "\nTHANK YOU\n\n\n\n\n\n\n\n";
 		}

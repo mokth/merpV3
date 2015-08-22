@@ -59,6 +59,8 @@ namespace wincom.mobile.erp
 			butCNNote.Click+= ButCNNote_Click;
 			Button butSO = FindViewById<Button> (Resource.Id.butso);
 			butSO.Click+= ButSO_Click;
+			Button butDO = FindViewById<Button> (Resource.Id.butdo);
+			butDO.Click+= ButDO_Click;
 		}
 
 		private void butClick(object sender,EventArgs e)
@@ -74,6 +76,14 @@ namespace wincom.mobile.erp
 			var intent =ActivityManager.GetActivity<SalesOrderActivity>(this.ApplicationContext);
 			StartActivity(intent);
 			
+		}
+
+		void ButDO_Click (object sender, EventArgs e)
+		{
+			//var intent2 = new Intent(this, typeof(SalesOrderActivity));
+			var intent =ActivityManager.GetActivity<DelOrderActivity>(this.ApplicationContext);
+			StartActivity(intent);
+
 		}
 
 		void ButCNNote_Click (object sender, EventArgs e)

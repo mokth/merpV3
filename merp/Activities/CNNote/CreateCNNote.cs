@@ -110,12 +110,12 @@ namespace wincom.mobile.erp
 			string[] codes = txt.Split (new char[]{ '|' });
 			if (codes.Length == 0)
 				return;
-			
-			Trader item =items.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
-			if (item != null) {
-				TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
-				name.Text = item.CustName;
-			}
+//			
+//			Trader item =items.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
+//			if (item != null) {
+//				TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
+//				name.Text = item.CustName;
+//			}
 
 		}
 		[Obsolete]
@@ -157,7 +157,7 @@ namespace wincom.mobile.erp
 			AdNumDate adNum= DataHelper.GetNumDate (pathToDatabase, invdate,"CN");
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
 			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
-			TextView custname = FindViewById<TextView> (Resource.Id.newinv_custname);
+			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
 			TextView cninvno =  FindViewById<TextView> (Resource.Id.newcninv_no);
 			string prefix = apara.CNPrefix.Trim ().ToUpper ();
 			if (spinner.SelectedItem == null) {
@@ -183,10 +183,11 @@ namespace wincom.mobile.erp
 				inv.trxtype = "";
 				inv.created = DateTime.Now;
 				inv.cnno = invno;
-				inv.description = custname.Text;
+				inv.description = codes [1].Trim ();
 				inv.amount = 0;
 				inv.custcode = codes [0].Trim ();
 				inv.isUploaded = false;
+				inv.remark = remark.Text.ToUpper();
 				inv.invno = cninvno.Text;
 				if (!string.IsNullOrEmpty (inv.invno)) {
 					Invoice invInfo = DataHelper.GetInvoice (pathToDatabase,inv.invno);

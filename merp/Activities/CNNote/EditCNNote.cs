@@ -92,14 +92,14 @@ namespace wincom.mobile.erp
 			EditText trxdate =  FindViewById<EditText> (Resource.Id.newinv_date);
 			DateTime invdate = Utility.ConvertToDate (trxdate.Text);
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
-			TextView custname = FindViewById<TextView> (Resource.Id.newinv_custname);
+			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
 			TextView cninvno =  FindViewById<TextView> (Resource.Id.newcninv_no);
 			TextView cnno =  FindViewById<TextView> (Resource.Id.newinv_no);
 
 			trxdate.Text = cnInfo.invdate.ToString ("dd-MM-yyyy");
 			int pos1= dataAdapter.GetPosition (cnInfo.custcode+" | "+cnInfo.description);
 			spinner.SetSelection (pos1);
-			custname.Text = cnInfo.description;
+			remark.Text = cnInfo.remark;
 			cninvno.Text = cnInfo.invno;
 			cnno.Text = cnInfo.cnno;
 		}
@@ -132,11 +132,11 @@ namespace wincom.mobile.erp
 			if (codes.Length == 0)
 				return;
 
-			Trader item =items.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
-			if (item != null) {
-				TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
-				name.Text = item.CustName;
-			}
+//			Trader item =items.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
+//			if (item != null) {
+//				TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
+//				name.Text = item.CustName;
+//			}
 
 		}
 		[Obsolete]
@@ -165,7 +165,7 @@ namespace wincom.mobile.erp
 			}
 			DateTime invdate = Utility.ConvertToDate (trxdate.Text);
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
-			TextView custname = FindViewById<TextView> (Resource.Id.newinv_custname);
+			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
 			TextView cninvno =  FindViewById<TextView> (Resource.Id.newcninv_no);
 			if (spinner.SelectedItem == null) {
 				Toast.MakeText (this, Resources.GetString(Resource.String.msg_invalidcust), ToastLength.Long).Show ();				
@@ -180,9 +180,10 @@ namespace wincom.mobile.erp
 
 				cnInfo.invdate = invdate;
 				cnInfo.created = DateTime.Now;
-				cnInfo.description = custname.Text;
+				cnInfo.description =  codes [1].Trim ();
 				cnInfo.custcode = codes [0].Trim ();
 				cnInfo.invno = cninvno.Text;
+				cnInfo.remark = remark.Text.ToUpper ();
 				cnInfo.trxtype = "";
 				if (!string.IsNullOrEmpty (cnInfo.invno)) {
 					Invoice invInfo = DataHelper.GetInvoice (pathToDatabase,cnInfo.invno);

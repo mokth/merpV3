@@ -157,6 +157,16 @@
     <Compile Include="Managers\PrintDocManager.cs" />
     <Compile Include="Printing\PrintCreditNote.cs" />
     <Compile Include="Printing\PrintSalesOrder.cs" />
+    <Compile Include="Activities\DeliveyOrder\CreateDelOrder.cs" />
+    <Compile Include="Activities\DeliveyOrder\DOActivity.cs" />
+    <Compile Include="Activities\DeliveyOrder\DOAllActivity.cs" />
+    <Compile Include="Activities\DeliveyOrder\DOEntryActivity.cs" />
+    <Compile Include="Activities\DeliveyOrder\DOItemActivity.cs" />
+    <Compile Include="Activities\DeliveyOrder\DOItemHisActivity.cs" />
+    <Compile Include="Entity\DeliveryOrder.cs" />
+    <Compile Include="Printing\PrintDelOrder.cs" />
+    <Compile Include="Activities\DeliveyOrder\EditDelOrder.cs" />
+    <Compile Include="Helper\Upload\UploadDOHelper .cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -444,6 +454,15 @@
     <AndroidResource Include="Resources\drawable-xhdpi\Sales.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Sales.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Sales.png" />
+    <AndroidResource Include="Resources\layout\CreateDO.axml" />
+    <AndroidResource Include="Resources\layout\DOEntry.axml" />
+    <AndroidResource Include="Resources\layout-large-port\CreateDO.axml" />
+    <AndroidResource Include="Resources\layout-large-port\DOEntry.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\delivery.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\delivery.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\delivery.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\delivery.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\delivery.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup />
@@ -458,5 +477,6 @@
     <Folder Include="Helper\Upload\" />
     <Folder Include="Printing\" />
     <Folder Include="Printing\PrintingHelper\" />
+    <Folder Include="Activities\DeliveyOrder\" />
   </ItemGroup>
 </Project>
