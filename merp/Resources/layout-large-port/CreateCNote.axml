@@ -144,7 +144,8 @@
             android:textSize="24sp"
             android:textColor="#ff140000"
             android:inputType="textMultiLine|textCapCharacters|textCapSentences"
-            android:background="@drawable/bluethem_edit_text_holo_light" />
+            android:background="@drawable/bluethem_edit_text_holo_light"
+            android:textColorHint="@color/xam_gray" />
     </LinearLayout>
     <TableLayout
         android:minWidth="25px"

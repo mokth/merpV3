@@ -4,10 +4,8 @@ using Android.App;
 namespace wincom.mobile.erp
 {
 	
-	public class PrintSalesOrder:PrintDocumentBase,IPrintDocument
+	public class PrintTest:PrintDocumentBase,IPrintDocument
 	{
-		SaleOrder so;
-		SaleOrderDtls[] list;
 		int noOfCopy=1;
 		Activity callingActivity;
 
@@ -23,12 +21,12 @@ namespace wincom.mobile.erp
 
 		public void SetDocument (object doc)
 		{
-			so = (SaleOrder)doc;
+			
 		}
 
 		public void SetDocumentDtls (object docdtls)
 		{
-			list = (SaleOrderDtls[])docdtls;
+			
 		}
 
 		public void SetNoOfCopy (int noofcopy)
@@ -52,7 +50,7 @@ namespace wincom.mobile.erp
 			text = "";
 			errMsg = "";
 			bool isPrinted = false;
-			GetSaleOrderText (so, list);
+			GetText ();
 			IPrintToDevice device = PrintDeviceManager.GetPrintingDevice<BlueToothDeviceHelper> ();
 			device.SetCallingActivity (callingActivity);
 			isPrinted = device.StartPrint (text, noOfCopy, ref errMsg);
@@ -60,28 +58,9 @@ namespace wincom.mobile.erp
 			return isPrinted;
 		}
 
-		private void GetSaleOrderText (SaleOrder so, SaleOrderDtls[] list)
+		private void GetText ()
 		{
-			if (string.IsNullOrEmpty(so.billTo))
-				 prtcompHeader.PrintCompHeader (ref text);
-			else prtcompHeader.PrintCustomerHeader(ref text,so.billTo);
-
-			prtCustHeader.PrintCustomer (ref text, so.custcode);
-			prtHeader.PrintSOHeader (ref text, so);
-			string dline = "";
-			double ttlAmt = 0;
-			double ttltax = 0;
-			int count = 0;
-			foreach (SaleOrderDtls itm in list) {
-				count += 1;
-				dline = dline + prtDetail.PrintSODetail (itm, count);
-				ttlAmt = ttlAmt + itm.netamount;
-				ttltax = ttltax + itm.tax;
-			}
-			text += dline;
-			prtTotal.PrintTotal (ref text, ttlAmt, ttltax);
-			prtTaxSummary.PrintSOTaxSumm (ref text, list);
-			prtFooter.PrintFooter (ref text);
+			prtcompHeader.PrintCompHeader (ref text);
 			text += "\nTHANK YOU\n\n\n\n\n\n\n\n";
 		}
 

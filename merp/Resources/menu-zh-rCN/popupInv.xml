@@ -6,8 +6,6 @@
           android:title="编辑" />    
     <item android:id="@+id/popInvdelete"
           android:title="删除" />  
-    <item android:id="@+id/popInvtestprint"
-          android:title="打印测试" />   
     <item android:id="@+id/popInvprint"
           android:title="打印" />   
     <item android:id="@+id/popInvprint2"

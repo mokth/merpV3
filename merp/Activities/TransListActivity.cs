@@ -16,6 +16,9 @@ namespace wincom.mobile.erp
 	[Activity (Label = "TRANSACTION",Icon="@drawable/shoplist")]			
 	public class TransListActivity : Activity
 	{
+		string pathToDatabase;
+		AccessRights rights;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -24,6 +27,9 @@ namespace wincom.mobile.erp
 			}
 			SetTitle (Resource.String.mainmenu_trxlist);
 			SetContentView (Resource.Layout.Translist);
+			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
+			rights = Utility.GetAccessRights (pathToDatabase);
+
 			Button butInvlist = FindViewById<Button> (Resource.Id.butInvlist);
 			butInvlist.Click+= ButInvlist_Click;
 
@@ -32,6 +38,9 @@ namespace wincom.mobile.erp
 
 			Button butSOList = FindViewById<Button> (Resource.Id.butSOlist);
 			butSOList.Click+= ButSOList_Click;
+
+			Button butDOList = FindViewById<Button> (Resource.Id.butDOlist);
+			butDOList.Click+= ButDOList_Click;
 
 			Button butsumm = FindViewById<Button> (Resource.Id.butInvsumm);
 			butsumm.Click+= (object sender, EventArgs e) => {
@@ -42,6 +51,16 @@ namespace wincom.mobile.erp
 			butback.Click+= (object sender, EventArgs e) => {
 				StartActivity(typeof(MainActivity));
 			};
+
+			if (!rights.IsSOModule) {
+				butSOList.Visibility = ViewStates.Gone;
+			}
+			if (!rights.IsCNModule) {
+				butCNNoteList.Visibility = ViewStates.Gone;
+			}
+			if (!rights.IsDOModule) {
+				butDOList.Visibility = ViewStates.Gone;
+			}
 		}
 
 		void ButInvlist_Click (object sender, EventArgs e)
@@ -62,6 +81,13 @@ namespace wincom.mobile.erp
 		{
 			//var intent = new Intent(this, typeof(CNAllActivity));
 			var intent =ActivityManager.GetActivity<SOAllActivity>(this.ApplicationContext);
+			StartActivity(intent);
+		}
+
+		void ButDOList_Click (object sender, EventArgs e)
+		{
+			//var intent = new Intent(this, typeof(CNAllActivity));
+			var intent =ActivityManager.GetActivity<DOAllActivity>(this.ApplicationContext);
 			StartActivity(intent);
 		}
 	}

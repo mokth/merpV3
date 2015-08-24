@@ -23,7 +23,8 @@
     <string name="mainmenu_trx">TRANSACTION</string>
     <string name="mainmenu_trxlist">TRANSACTION LIST</string>
     <string name="mainmenu_master">MASTER ITEM</string>
-    <string name="mainmenu_downupload">DOWNLOAD/UPLOAD</string>
+    <string name="mainmenu_downupload">DOWNLOAD</string>
+    <string name="mainmenu_upload">UPLOAD</string>
     <string name="mainmenu_settings">SETTINGS</string>
     <string name="mainmenu_about">ABOUT</string>
     <string name="mainmenu_exit">EXIT</string>
@@ -102,7 +103,10 @@
     <string name="msg_uploading">Uploading, please wait...</string>
     <string name="msg_downitem">Total xx Items downloaded.</string>
     <string name="msg_downcust">Total xx customers download.</string>
-    <string name="msg_uploadinv">Total xx invoices uploaded.</string>
+    <string name="msg_uploadinv">Total xx Invoices uploaded.</string>
+    <string name="msg_uploadcn">Total xx Credit Note(s) uploaded.</string>
+    <string name="msg_uploaddo">Total xx Delivery Order(s) uploaded.</string>
+    <string name="msg_uploadso">Total xx Sales Order(s) uploaded.</string>
     <string name="msg_downsettings">Settings downloaded.</string>
     <string name="msg_noitem">Please download Master Item before proceed...</string>
     <string name="msg_reqcancel">Request was cancelled...</string>

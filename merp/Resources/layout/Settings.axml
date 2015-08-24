@@ -8,32 +8,31 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <Button
-            android:text="@string/submenu_downitem"
+            android:text="@string/mainmenu_settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:drawableLeft="@drawable/download"
+            android:drawableLeft="@drawable/settings"
             android:height="53dp"
-            android:id="@+id/butDown"
-            android:drawableRight="@drawable/item" />
+            android:id="@+id/butsetting" />
         <Button
-            android:text="@string/submenu_downcust"
+            android:text="@string/button_print"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:drawableLeft="@drawable/download"
+            android:drawableLeft="@drawable/print"
             android:height="53dp"
-            android:id="@+id/butDownCust"
-            android:drawableRight="@drawable/trader" />
+            android:id="@+id/buttestprint" />
         <Button
-            android:text="@string/submenu_downsettings"
+            android:height="53dp"
+            android:text="@string/mainmenu_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:drawableLeft="@drawable/download"
-            android:height="53dp"
-            android:id="@+id/butDownSetting"
-            android:drawableRight="@drawable/settings" />
+            android:drawableLeft="@drawable/about"
+            style="@style/ButtonBlueThem"
+            android:background="@drawable/bluethem_btn_default_holo_light"
+            android:id="@+id/butAbout" />
         <Button
             android:text="@string/submenu_back"
             android:layout_width="match_parent"

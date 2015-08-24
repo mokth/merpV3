@@ -88,7 +88,9 @@
                         android:id="@+id/txtbarcode"
                         android:paddingLeft="5dp"
                         android:textColor="#ff140000"
-                        android:background="@drawable/bluethem_edit_text_holo_light" />
+                        android:background="@drawable/bluethem_edit_text_holo_light"
+                        android:hint="BARCODE"
+                        android:textColorHint="@color/xam_gray" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -162,7 +164,9 @@
                         android:id="@+id/txtqty"
                         android:paddingLeft="5dp"
                         android:textColor="#ff140000"
-                        android:background="@drawable/bluethem_edit_text_holo_light" />
+                        android:background="@drawable/bluethem_edit_text_holo_light"
+                        android:hint="@string/invform_qty"
+                        android:textColorHint="@color/xam_gray" />
                     <EditText
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:inputType="numberDecimal|numberSigned"
@@ -262,8 +266,7 @@
                     android:width="120dp" />
             </TableRow>
             <TableRow
-                android:id="@+id/tableRow2">
-            </TableRow>
+                android:id="@+id/tableRow2" />
         </TableLayout>
     </LinearLayout>
 </ScrollView>

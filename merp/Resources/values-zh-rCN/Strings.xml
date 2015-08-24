@@ -108,6 +108,9 @@
     <string name="msg_downitem">总下载了xx产品资料.</string>
     <string name="msg_downcust">总下载了xx客户资料.</string>
     <string name="msg_uploadinv">总上传了xx发票/现金票据.</string>
+    <string name="msg_uploadcn">总上传了xx退货单/退款单.</string>
+    <string name="msg_uploadso">总上传了xx销售订单.</string>
+    <string name="msg_uploaddo">总上传了xx发货单据.</string>
     <string name="msg_downsettings">下载了设置资料</string>
     <string name="msg_noitem">进行前,请下载产品资料...</string>
     <string name="msg_reqcancel">请求已被取消...</string>

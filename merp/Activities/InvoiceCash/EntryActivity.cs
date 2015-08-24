@@ -15,8 +15,10 @@ using Android.Views.InputMethods;
 
 namespace wincom.mobile.erp
 {
+	
+	
 	[Activity (Label = "INVOICE ITEM ENTRY",Icon="@drawable/shop")]			
-	public class EntryActivity : Activity,IEventListener
+	public class EntryActivity : Activity,IEventListener,Android.Views.View.IOnKeyListener
 	{
 		string pathToDatabase;
 		List<Item> items = null;
@@ -54,6 +56,7 @@ namespace wincom.mobile.erp
 			TextView txtInvNo =  FindViewById<TextView> (Resource.Id.txtInvnp);
 			TextView txtcust =  FindViewById<TextView> (Resource.Id.txtInvcust);
 			Button butFind = FindViewById<Button> (Resource.Id.newinv_bfind);
+			EditText txtbarcode = FindViewById<EditText> (Resource.Id.txtbarcode);
 			txtInvNo.Text = INVOICENO;
 			txtcust.Text = CUSTOMER;
 			Button but = FindViewById<Button> (Resource.Id.Save);
@@ -69,6 +72,8 @@ namespace wincom.mobile.erp
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			rights = Utility.GetAccessRights (pathToDatabase);
 			price.Enabled = rights.InvEditUPrice;
+
+			txtbarcode.SetOnKeyListener (this);
 
 			//SqliteConnection.CreateFile(pathToDatabase);
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
@@ -97,6 +102,49 @@ namespace wincom.mobile.erp
 				FIRSTLOAD="1";
 				LoadData (INVOICENO, ITEMUID);
 			}
+		}
+		
+				#region IOnKeyListener implementation
+		public bool OnKey (View v, Keycode keyCode, KeyEvent e)
+		{
+			EditText barcode = (EditText)v;
+			if (keyCode == Keycode.Enter||e.KeyCode== Keycode.NumpadEnter) {
+				Txtbarcode_AfterTextChanged (barcode);
+				return true;
+			}
+
+			//barcode.Text = barcode.Text + keyCode;
+			return false;
+		}
+		#endregion
+//		#region IDisposable implementation
+//		public void Dispose ()
+//		{
+//
+//		}
+//		#endregion
+//		#region IJavaObject implementation
+//		public IntPtr Handle {
+//			get {
+//				
+//			}
+//		}
+//		#endregion
+
+
+		void Txtbarcode_AfterTextChanged (EditText txtbarcode)
+		{			
+			//EditText txtbarcode = FindViewById<EditText> (Resource.Id.txtbarcode);
+
+			var found= items.Where(x=>x.Barcode == txtbarcode.Text).ToList();
+			if (found.Count == 0) {
+				txtbarcode.Text = "";
+				return;
+			}
+			var item = found [1];
+			AddBarCodeItem (item);
+			txtbarcode.Text = "";
+			txtbarcode.RequestFocus ();
 		}
 
 		void Qty_AfterTextChanged (object sender, Android.Text.AfterTextChangedEventArgs e)
@@ -363,6 +411,45 @@ namespace wincom.mobile.erp
 				RunOnUiThread (() => SetSelectedItem(e.Param["SELECTED"].ToString()));
 				break;
 			}
+		}
+
+		private void AddBarCodeItem(Item prd )
+		{
+			TextView txtInvNo =  FindViewById<TextView> (Resource.Id.txtInvnp);
+			double stqQty = 1;
+			double uprice = prd.Price;
+			double taxval = prd.tax;
+			double amount = Math.Round((stqQty * uprice),2);
+			double netamount = amount;
+			bool taxinclusice = prd.isincludesive;
+			double taxamt = 0;
+			if (taxinclusice) {
+				double percent = (taxval/100) + 1;
+				double amt2 =Math.Round( amount / percent,2,MidpointRounding.AwayFromZero);
+				taxamt = amount - amt2;
+				netamount = amount - taxamt;
+
+			} else {
+				taxamt = Math.Round(amount * (taxval / 100),2,MidpointRounding.AwayFromZero);
+			}
+
+			InvoiceDtls inv = new InvoiceDtls ();
+			inv.invno = txtInvNo.Text;
+			inv.amount = amount;
+			inv.icode = prd.ICode;
+			inv.price = uprice;
+			inv.qty = stqQty;
+			inv.tax = taxamt;
+			inv.taxgrp = prd.taxgrp;
+			inv.netamount = netamount;
+			inv.description = prd.IDesc;
+			//int id = Convert.ToInt32 (ITEMUID);				
+			//inv..title = spinner.SelectedItem.ToString ();
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				 db.Insert (inv);
+			}
+			spinner.SetSelection (-1);
+			Toast.MakeText (this, Resources.GetString(Resource.String.msg_itemadded), ToastLength.Long).Show ();
 		}
 	}
 }

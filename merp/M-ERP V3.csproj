@@ -167,6 +167,12 @@
     <Compile Include="Printing\PrintDelOrder.cs" />
     <Compile Include="Activities\DeliveyOrder\EditDelOrder.cs" />
     <Compile Include="Helper\Upload\UploadDOHelper .cs" />
+    <Compile Include="Activities\UploadActivity.cs" />
+    <Compile Include="Activities\SalesOrder\CreateSaleOrder _WT.cs" />
+    <Compile Include="Activities\SalesOrder\EditSaleOrder_WT.cs" />
+    <Compile Include="Printing\PrintSalesOrder _WT.cs" />
+    <Compile Include="Activities\UtilityActivity.cs" />
+    <Compile Include="Printing\PrintTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -463,6 +469,10 @@
     <AndroidResource Include="Resources\drawable-xhdpi\delivery.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\delivery.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\delivery.png" />
+    <AndroidResource Include="Resources\layout\Upload.axml" />
+    <AndroidResource Include="Resources\layout-large-port\Upload.axml" />
+    <AndroidResource Include="Resources\layout\Settings.axml" />
+    <AndroidResource Include="Resources\layout-large-port\Settings.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup />

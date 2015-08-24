@@ -85,6 +85,17 @@
             android:drawableLeft="@drawable/download"
             android:id="@+id/butDown" />
         <Button
+            android:text="@string/mainmenu_upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:drawableLeft="@drawable/upload"
+            android:height="80dp"
+            android:textSize="24sp"
+            style="@style/ButtonBlueThem"
+            android:background="@drawable/bluethem_btn_default_holo_light"
+            android:id="@+id/butupload" />
+        <Button
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:text="@string/mainmenu_settings"
             android:layout_width="match_parent"
@@ -95,17 +106,6 @@
             android:textSize="24sp"
             android:drawableLeft="@drawable/settings"
             android:id="@+id/butsetting" />
-        <Button
-            android:background="@drawable/bluethem_btn_default_holo_light"
-            android:text="@string/mainmenu_about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/ButtonBlueThem"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:height="80dp"
-            android:textSize="24sp"
-            android:drawableLeft="@drawable/about"
-            android:id="@+id/butAbout" />
         <Button
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:text="@string/mainmenu_exit"

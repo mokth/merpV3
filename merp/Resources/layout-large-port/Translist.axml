@@ -26,6 +26,15 @@
             android:drawableLeft="@drawable/bill"
             android:id="@+id/butCNlist" />
         <Button
+            android:text="@string/submenu_dolist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:drawableLeft="@drawable/delivery"
+            android:height="80dp"
+            android:textSize="24sp"
+            android:id="@+id/butSOlist" />
+        <Button
             android:text="@string/submenu_solist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

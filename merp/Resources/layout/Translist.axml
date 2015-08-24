@@ -24,6 +24,14 @@
             android:height="53dp"
             android:id="@+id/butCNlist" />
         <Button
+            android:text="@string/submenu_dolist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:drawableLeft="@drawable/delivery"
+            android:height="53dp"
+            android:id="@+id/butDOlist" />
+        <Button
             android:text="@string/submenu_solist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

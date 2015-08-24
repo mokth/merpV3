@@ -8,32 +8,41 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <Button
-            android:text="@string/submenu_downitem"
+            android:text="@string/submenu_upinv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:drawableLeft="@drawable/download"
+            android:drawableLeft="@drawable/upload"
             android:height="53dp"
-            android:id="@+id/butDown"
-            android:drawableRight="@drawable/item" />
+            android:id="@+id/butupload"
+            android:drawableRight="@drawable/shop" />
         <Button
-            android:text="@string/submenu_downcust"
+            android:text="@string/submenu_upcn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:drawableLeft="@drawable/download"
+            android:drawableLeft="@drawable/upload"
             android:height="53dp"
-            android:id="@+id/butDownCust"
-            android:drawableRight="@drawable/trader" />
+            android:id="@+id/butuploadcn"
+            android:drawableRight="@drawable/bill" />
         <Button
-            android:text="@string/submenu_downsettings"
+            android:text="@string/submenu_upso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:drawableLeft="@drawable/download"
+            android:drawableLeft="@drawable/upload"
             android:height="53dp"
-            android:id="@+id/butDownSetting"
-            android:drawableRight="@drawable/settings" />
+            android:id="@+id/butuploadso"
+            android:drawableRight="@drawable/sales" />
+        <Button
+            android:text="@string/submenu_updo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:drawableLeft="@drawable/upload"
+            android:height="53dp"
+            android:id="@+id/butuploaddo"
+            android:drawableRight="@drawable/delivery" />
         <Button
             android:text="@string/submenu_back"
             android:layout_width="match_parent"

@@ -23,6 +23,19 @@ namespace wincom.mobile.erp
 		ArrayAdapter adapterBT;
 		BluetoothAdapter mBluetoothAdapter;
 		List<string> btdevices = new List<string>();
+		AccessRights rights;
+		TextView lbInvPrefix;
+		TextView lbCashPrefix;
+		TextView lbCNPrefix;
+		TextView lbSOPrefix;
+		TextView lbDOPrefix;
+		EditText txtInvPrefix;
+		EditText txtCashPrefix;
+		EditText txtCNPrefix;
+		EditText txtSOPrefix;
+		EditText txtDOPrefix;
+
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -31,10 +44,15 @@ namespace wincom.mobile.erp
 			}
 			SetTitle (Resource.String.mainmenu_settings);
 			SetContentView (Resource.Layout.AdPara);
+			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
+			rights = Utility.GetAccessRights (pathToDatabase);
+
 			spinner = FindViewById<Spinner> (Resource.Id.txtSize);
 			spinBt= FindViewById<Spinner> (Resource.Id.txtprinters);
 			Button butSave = FindViewById<Button> (Resource.Id.ad_bSave);
 			Button butCancel = FindViewById<Button> (Resource.Id.ad_Cancel);
+			FindControls ();
+
 			butSave.Click += butSaveClick;
 			butCancel.Click += butCancelClick;
 			findBTPrinter ();
@@ -47,6 +65,34 @@ namespace wincom.mobile.erp
 			spinBt.ItemSelected+= Spinner_ItemSelected;
 			LoadData ();
 			// Create your application here
+		}
+
+		void FindControls ()
+		{
+			lbInvPrefix = FindViewById<TextView> (Resource.Id.lbInvPrefix);
+			lbCashPrefix = FindViewById<TextView> (Resource.Id.lbCashPrefix);
+			lbCNPrefix = FindViewById<TextView> (Resource.Id.lbCNPrefix);
+			lbSOPrefix = FindViewById<TextView> (Resource.Id.lbSOPrefix);
+			lbDOPrefix = FindViewById<TextView> (Resource.Id.lbDOPrefix);
+			txtInvPrefix = FindViewById<EditText> (Resource.Id.txtInvPrefix);
+			txtCashPrefix = FindViewById<EditText> (Resource.Id.txtCashPrefix);
+			txtCNPrefix = FindViewById<EditText> (Resource.Id.txtCNPrefix);
+			txtSOPrefix = FindViewById<EditText> (Resource.Id.txtSOPrefix);
+			txtDOPrefix = FindViewById<EditText> (Resource.Id.txtDOPrefix);
+
+			if (!rights.IsSOModule) {
+				lbSOPrefix.Visibility = ViewStates.Gone;
+				txtSOPrefix.Visibility = ViewStates.Gone;
+
+			}
+			if (!rights.IsCNModule) {
+				lbCNPrefix.Visibility = ViewStates.Gone;
+				txtCNPrefix.Visibility = ViewStates.Gone;
+			}
+			if (!rights.IsDOModule) {
+				lbDOPrefix.Visibility = ViewStates.Gone;
+				txtDOPrefix.Visibility = ViewStates.Gone;
+			}
 		}
 
 		void SpinBt_ItemClick (object sender,  AdapterView.ItemSelectedEventArgs e)
@@ -65,9 +111,6 @@ namespace wincom.mobile.erp
 		private void LoadData()
 		{
 			TextView txtprinter =FindViewById<TextView> (Resource.Id.txtad_printer);
-			TextView txtprefix =FindViewById<TextView> (Resource.Id.txtad_prefix);
-			TextView txtcnprefix =FindViewById<TextView> (Resource.Id.txtad_cnprefix);
-			TextView txttitle =FindViewById<TextView> (Resource.Id.txtad_title);
 
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			AdPara apra = new AdPara ();
@@ -76,10 +119,21 @@ namespace wincom.mobile.erp
 				var list  = db.Table<AdPara> ().ToList<AdPara> ();
 				if (list.Count > 0) {
 					apra = list [0];
-					txtprefix.Text = apra.Prefix;
+					string[] prefixs = apra.Prefix.Split (new char[]{ '|' });
+					txtInvPrefix.Text = prefixs[0];
+					if (prefixs.Length>1)
+						txtCashPrefix.Text = prefixs [1];
+					else txtCashPrefix.Text = prefixs [0];
+					if (rights.IsSOModule) {
+						txtSOPrefix.Text = apra.SOPrefix;
+					}
+					if (rights.IsCNModule) {
+						txtCNPrefix.Text = apra.CNPrefix;
+					}
+					if (rights.IsDOModule) {
+						txtDOPrefix.Text = apra.DOPrefix;
+					}
 					txtprinter.Text = apra.PrinterName;
-					txttitle.Text = apra.ReceiptTitle;
-					txtcnprefix.Text = apra.CNPrefix;
 					int prnpos = adapterBT.GetPosition (apra.PrinterName);
 					if (prnpos>0)
 						spinBt.SetSelection (prnpos);
@@ -88,20 +142,19 @@ namespace wincom.mobile.erp
 						spinner.SetSelection (position);
 					else spinner.SetSelection (0);
 				} else {
-					txtprefix.Text = "CS";
+					
 					txtprinter.Text = "PT-II";
-					txttitle.Text = "TAX INVOICE";
+
 				}
 			}
 		}
 		private void butSaveClick(object sender,EventArgs e)
 		{
 			TextView txtprinter =FindViewById<TextView> (Resource.Id.txtad_printer);
-			TextView txtprefix =FindViewById<TextView> (Resource.Id.txtad_prefix);
-			TextView txttitle =FindViewById<TextView> (Resource.Id.txtad_title);
+
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			AdPara apra = new AdPara ();
-			apra.Prefix = txtprefix.Text.ToUpper();
+
 			apra.PrinterName = txtprinter.Text.ToUpper();
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{
@@ -110,10 +163,8 @@ namespace wincom.mobile.erp
 					db.Insert (apra);		
 				} else {
 					apra = list [0];
-					apra.Prefix = txtprefix.Text.ToUpper();
 					apra.PrinterName = txtprinter.Text.ToUpper();
 					apra.PaperSize = spinner.SelectedItem.ToString ();
-					apra.ReceiptTitle =txttitle.Text.ToUpper();
 					db.Update (apra);
 				}
 			}

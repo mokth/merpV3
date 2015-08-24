@@ -82,6 +82,16 @@
             android:id="@+id/butDown" />
         <Button
             android:height="53dp"
+            android:text="@string/mainmenu_upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:drawableLeft="@drawable/upload"
+            style="@style/ButtonBlueThem"
+            android:background="@drawable/bluethem_btn_default_holo_light"
+            android:id="@+id/butupload" />
+        <Button
+            android:height="53dp"
             android:text="@string/mainmenu_settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,16 +100,6 @@
             style="@style/ButtonBlueThem"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:id="@+id/butsetting" />
-        <Button
-            android:height="53dp"
-            android:text="@string/mainmenu_about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:drawableLeft="@drawable/about"
-            style="@style/ButtonBlueThem"
-            android:background="@drawable/bluethem_btn_default_holo_light"
-            android:id="@+id/butAbout" />
         <Button
             android:height="53dp"
             android:text="@string/mainmenu_exit"

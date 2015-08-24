@@ -29,6 +29,8 @@ namespace wincom.mobile.erp
 		string COMPCODE;
 		string BRANCODE;
 		string USERID;
+		AccessRights rights;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -39,7 +41,7 @@ namespace wincom.mobile.erp
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 			GetDBPath ();
-
+			rights = Utility.GetAccessRights (pathToDatabase);
 			AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
 			Button but = FindViewById<Button> (Resource.Id.butSecond);
 			but.Click += butClick;
@@ -47,20 +49,31 @@ namespace wincom.mobile.erp
 			butTrxList.Click+= ButInvlist_Click;
 			Button butdown = FindViewById<Button> (Resource.Id.butDown);
 			butdown.Click += butDownloadItems;
+			Button butup = FindViewById<Button> (Resource.Id.butupload);
+			butup.Click += butUploadItems;
 			Button butMItem = FindViewById<Button> (Resource.Id.butMaster);
 			butMItem.Click += butMasterClick;
 			Button butSett = FindViewById<Button> (Resource.Id.butsetting);
 			butSett.Click += butSetting;
 			Button butlogOff = FindViewById<Button> (Resource.Id.butOut);
 			butlogOff.Click += ButlogOff_Click;
-			Button butAbt = FindViewById<Button> (Resource.Id.butAbout);
-			butAbt.Click+= ButAbt_Click;
+			//Button butAbt = FindViewById<Button> (Resource.Id.butAbout);
+			//butAbt.Click+= ButAbt_Click;
 			Button butCNNote = FindViewById<Button> (Resource.Id.butcnnote);
 			butCNNote.Click+= ButCNNote_Click;
 			Button butSO = FindViewById<Button> (Resource.Id.butso);
 			butSO.Click+= ButSO_Click;
 			Button butDO = FindViewById<Button> (Resource.Id.butdo);
 			butDO.Click+= ButDO_Click;
+			if (!rights.IsSOModule) {
+				butSO.Visibility = ViewStates.Gone;
+			}
+			if (!rights.IsCNModule) {
+				butCNNote.Visibility = ViewStates.Gone;
+			}
+			if (!rights.IsDOModule) {
+				butDO.Visibility = ViewStates.Gone;
+			}
 		}
 
 		private void butClick(object sender,EventArgs e)
@@ -106,6 +119,12 @@ namespace wincom.mobile.erp
 
 		}
 
+		void butUploadItems(object sender,EventArgs e)
+		{
+			StartActivity (typeof(UploadActivity));
+
+		}
+
 		private void butMasterClick(object sender,EventArgs e)
 		{
 			var intent = new Intent(this, typeof(MasterRefActivity));
@@ -116,7 +135,7 @@ namespace wincom.mobile.erp
 		void butSetting(object sender,EventArgs e)
 		{
 			//StartActivity (typeof(SettingActivity));
-			var intent =ActivityManager.GetActivity<SettingActivity>(this.ApplicationContext);
+			var intent =ActivityManager.GetActivity<UtilityActivity>(this.ApplicationContext);
 			StartActivity(intent);
 		}
 

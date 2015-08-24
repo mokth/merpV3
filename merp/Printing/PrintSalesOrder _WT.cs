@@ -4,7 +4,7 @@ using Android.App;
 namespace wincom.mobile.erp
 {
 	
-	public class PrintSalesOrder:PrintDocumentBase,IPrintDocument
+	public class PrintSalesOrder_WT:PrintDocumentBase,IPrintDocument
 	{
 		SaleOrder so;
 		SaleOrderDtls[] list;
@@ -67,7 +67,7 @@ namespace wincom.mobile.erp
 			else prtcompHeader.PrintCustomerHeader(ref text,so.billTo);
 
 			prtCustHeader.PrintCustomer (ref text, so.custcode);
-			prtHeader.PrintSOHeader (ref text, so);
+			prtHeader.PrintPaymentHeader (ref text, so);
 			string dline = "";
 			double ttlAmt = 0;
 			double ttltax = 0;

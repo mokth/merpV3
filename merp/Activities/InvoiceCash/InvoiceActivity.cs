@@ -149,10 +149,7 @@ namespace wincom.mobile.erp
 				}else if (arg1.Item.ItemId==Resource.Id.popInvedit)
 				{
 					Edit(item);
-				}else if (arg1.Item.ItemId==Resource.Id.popInvtestprint)
-				{
-					PrintTest();	
-				} 
+				}
 				else if (arg1.Item.ItemId==Resource.Id.poppay)
 				{
 					payment(item);

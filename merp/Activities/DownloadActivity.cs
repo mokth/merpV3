@@ -29,18 +29,6 @@ namespace wincom.mobile.erp
 			Button butdownCust = FindViewById<Button> (Resource.Id.butDownCust);
 			butdownCust.Click += butDownloadCusts;
 
-			Button butupload = FindViewById<Button> (Resource.Id.butupload);
-			butupload.Click += butUploadBills;
-
-			Button butuploadso = FindViewById<Button> (Resource.Id.butuploadso);
-			butuploadso.Click += butUploadSO;
-
-			Button butuploadcn = FindViewById<Button> (Resource.Id.butuploadcn);
-			butuploadcn.Click += butUploadCN;
-
-			Button butuploaddo = FindViewById<Button> (Resource.Id.butuploaddo);
-			butuploaddo.Click += butUploadDO;
-
 			Button butdownSetting = FindViewById<Button> (Resource.Id.butDownSetting);
 			butdownSetting.Click+= ButdownSetting_Click;
 
@@ -59,56 +47,6 @@ namespace wincom.mobile.erp
 			download.CallingActivity = this;
 			download.startDownloadCompInfo();
 		}
-
-		void butUploadBills(object sender,EventArgs e)
-		{
-			Button butupload =  FindViewById<Button> (Resource.Id.butupload);
-			butupload.Enabled = false;
-			butupload.Text = Resources.GetString(Resource.String.msg_uploading);// "Uploading, please wait...";
-			//UploadBillsToServer();
-			IUploadHelper upload =UploadManager.GetUploadHepler< UploadInvHelper>();
-			upload.SetUploadHandel(OnUploadDoneDlg); 
-			upload.SetCallingActivity(this);
-			upload.startUpload ();		
-		}
-
-		void butUploadSO(object sender,EventArgs e)
-		{
-			Button butupload =  FindViewById<Button> (Resource.Id.butuploadso);
-			butupload.Enabled = false;
-			butupload.Text = Resources.GetString(Resource.String.msg_uploading);// "Uploading, please wait...";
-			//UploadBillsToServer();
-			IUploadHelper upload =UploadManager.GetUploadHepler< UploadSOHelper>();
-			upload.SetUploadHandel(OnUploadDoneDlg); 
-			upload.SetCallingActivity(this);
-			upload.startUpload ();	
-		}
-
-		void butUploadCN(object sender,EventArgs e)
-		{
-			Button butupload =  FindViewById<Button> (Resource.Id.butuploadcn);
-			butupload.Enabled = false;
-			butupload.Text = Resources.GetString(Resource.String.msg_uploading);// "Uploading, please wait...";
-			//UploadBillsToServer();
-			IUploadHelper upload =UploadManager.GetUploadHepler< UploadCNHelper>();
-			upload.SetUploadHandel(OnUploadDoneDlg); 
-			upload.SetCallingActivity(this);
-			upload.startUpload ();	
-		}
-
-
-		void butUploadDO(object sender,EventArgs e)
-		{
-			Button butupload =  FindViewById<Button> (Resource.Id.butuploaddo);
-			butupload.Enabled = false;
-			butupload.Text = Resources.GetString(Resource.String.msg_uploading);// "Uploading, please wait...";
-			//UploadBillsToServer();
-			IUploadHelper upload =UploadManager.GetUploadHepler< UploadDOHelper>();
-			upload.SetUploadHandel(OnUploadDoneDlg); 
-			upload.SetCallingActivity(this);
-			upload.startUpload ();	
-		}
-
 
 		void butDownloadItems(object sender,EventArgs e)
 		{

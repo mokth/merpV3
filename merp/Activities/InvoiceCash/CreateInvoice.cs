@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -191,11 +190,20 @@ namespace wincom.mobile.erp
 			Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
 			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
 			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
+			string[] prefixs = apara.Prefix.Trim ().ToUpper ().Split(new char[]{'|'});
+			string prefix = "";
 			string trxtype = spinner2.SelectedItem.ToString ();
-			if (trxtype =="CASH")
-				  adNum= DataHelper.GetNumDate (pathToDatabase, invdate,"CS");
-			else  adNum= DataHelper.GetNumDate (pathToDatabase, invdate,"INV");
-			string prefix = apara.Prefix.Trim ().ToUpper ();
+			if (trxtype == "CASH") {
+				adNum = DataHelper.GetNumDate (pathToDatabase, invdate, "CS");
+				if (prefixs.Length > 1) {
+					prefix = prefixs [1];
+				}else prefix = prefixs [0];
+			} else {
+				adNum = DataHelper.GetNumDate (pathToDatabase, invdate, "INV");
+				prefix = prefixs [0];
+			}
+
+
 			if (spinner.SelectedItem == null) {
 				Toast.MakeText (this, Resources.GetString(Resource.String.msg_invalidcust), ToastLength.Long).Show ();			
 				spinner.RequestFocus ();
@@ -207,16 +215,7 @@ namespace wincom.mobile.erp
 				return;
 			
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-//				var invrec =db.Table<Invoice> ().Where (x => x.invdate>= invdate && x.invdate < tmr).OrderByDescending(x=>x.invno).ToList();
-//				string invno = "";
-//				if (invrec.Count == 0) {
-//					invno = prefix + invdate.ToString("yyMMdd") + "1".PadLeft (4, '0');
-//				} else {
-//					string tmp = invrec [0].invno;
-//					string runno= tmp.Substring (tmp.Length - 4, 4);
-//					int no = Convert.ToInt32 (runno)+1;
-//					invno =prefix + invdate.ToString("yyMMdd") + no.ToString().PadLeft (4, '0');
-//				}
+
 				string invno = "";
 				int runno = adNum.RunNo + 1;
 				int currentRunNo =DataHelper.GetLastInvRunNo (pathToDatabase, invdate);
