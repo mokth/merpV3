@@ -31,6 +31,8 @@ namespace wincom.mobile.erp
 		double taxper;
 		bool isInclusive;
 		AccessRights rights;
+		Trader trd;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -47,6 +49,7 @@ namespace wincom.mobile.erp
 			EDITMODE = Intent.GetStringExtra ("editmode") ?? "AUTO";
 			CUSTOMER= Intent.GetStringExtra ("customer") ?? "AUTO";
 			CUSTCODE= Intent.GetStringExtra ("custcode") ?? "AUTO";
+			trd = DataHelper.GetTrader (pathToDatabase, CUSTCODE);
 			// Create your application here
 			SetContentView (Resource.Layout.SOEntry);
 			spinner = FindViewById<Spinner> (Resource.Id.txtcode);
@@ -287,6 +290,7 @@ namespace wincom.mobile.erp
 			var intent = new Intent(this, typeof(SOItemActivity));
 			intent.PutExtra ("invoiceno",SALEORDERNO );
 			intent.PutExtra ("custcode",CUSTCODE );
+			intent.PutExtra ("editmode",EDITMODE );
 			StartActivity(intent);
 		}
 		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
@@ -300,8 +304,10 @@ namespace wincom.mobile.erp
 			EditText price = FindViewById<EditText> (Resource.Id.txtprice);
 			EditText qty = FindViewById<EditText> (Resource.Id.txtqty);
 		
-			if (FIRSTLOAD=="")
-				price.Text = item.Price.ToString ();
+			if (FIRSTLOAD == "") {
+				double uprice= Utility.GetUnitPrice (trd, item);
+				price.Text = uprice.ToString ();
+			}
 			else FIRSTLOAD="";
 			tax.Text = item.taxgrp;
 			taxper = item.tax;

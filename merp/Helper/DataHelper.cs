@@ -20,13 +20,13 @@ namespace wincom.mobile.erp
 			return user;
 		}
 
-		public static int GetLastInvRunNo(string pathToDatabase, DateTime invdate )
+		public static int GetLastInvRunNo(string pathToDatabase, DateTime invdate,string trxtype )
 		{
 			DateTime Sdate = invdate.AddDays (1 - invdate.Day);
 			DateTime Edate = new DateTime (invdate.Year, invdate.Month, DateTime.DaysInMonth (invdate.Year, invdate.Month));
 			int runno = -1;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				var list2 = db.Table<Invoice> ().Where(x=>x.invdate>=Sdate && x.invdate<=Edate)
+				var list2 = db.Table<Invoice> ().Where(x=>x.invdate>=Sdate && x.invdate<=Edate && x.trxtype==trxtype)
 						    .OrderByDescending<string>(x=>x.invno)
 					        .ToList<Invoice> ();
 				if (list2.Count > 0) {
@@ -186,6 +186,7 @@ namespace wincom.mobile.erp
 			}
 			return info;
 		}
+
 
 		public static AdPara GetAdPara(string pathToDatabase)
 		{

@@ -52,8 +52,6 @@ namespace wincom.mobile.erp
 			Button butNew = FindViewById<Button> (Resource.Id.newinv_cancel);
 			Button butFind = FindViewById<Button> (Resource.Id.newinv_bfind);
 			Button butBillFind = FindViewById<Button> (Resource.Id.newinv_billfind);
-			//spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
-			//spinnerBill.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
 			butSave.Click += butSaveClick;
 			butNew.Click += butCancelClick;
 			TextView invno =  FindViewById<TextView> (Resource.Id.newinv_no);
@@ -124,23 +122,7 @@ namespace wincom.mobile.erp
 			base.OnBackPressed();
 		}
 
-//		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
-//		{
-//			Spinner spinner = (Spinner)sender;
-//
-//			string txt = spinner.GetItemAtPosition (e.Position).ToString();
-//			string[] codes = txt.Split (new char[]{ '|' });
-//			if (codes.Length == 0)
-//				return;
-//			
-//			Trader item =items.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
-//			if (item != null) {
-//				TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
-//				name.Text = item.CustName;
-//
-//			}
-//
-//		}
+
 		[Obsolete]
 		protected override Dialog OnCreateDialog (int id)
 		{
@@ -162,6 +144,7 @@ namespace wincom.mobile.erp
 			var intent =ActivityManager.GetActivity<SOEntryActivity>(this.ApplicationContext);
 			intent.PutExtra ("invoiceno", so.sono);
 			intent.PutExtra ("customer", codes [1].Trim ());
+			intent.PutExtra ("custcode",codes [0].Trim ());
 			intent.PutExtra ("itemuid", "-1");
 			intent.PutExtra ("editmode", "NEW");
 			StartActivity (intent);

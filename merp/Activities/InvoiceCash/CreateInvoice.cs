@@ -170,6 +170,7 @@ namespace wincom.mobile.erp
 
 			intent.PutExtra ("invoiceno", inv.invno);
 			intent.PutExtra ("customer", codes [1].Trim ());
+			intent.PutExtra ("custcode",codes [0].Trim ());
 			intent.PutExtra ("itemuid", "-1");
 			intent.PutExtra ("editmode", "NEW");
 			StartActivity (intent);
@@ -218,7 +219,7 @@ namespace wincom.mobile.erp
 
 				string invno = "";
 				int runno = adNum.RunNo + 1;
-				int currentRunNo =DataHelper.GetLastInvRunNo (pathToDatabase, invdate);
+				int currentRunNo =DataHelper.GetLastInvRunNo (pathToDatabase, invdate,spinner2.SelectedItem.ToString ());
 				if (currentRunNo >= runno)
 					runno = currentRunNo + 1;
 				

@@ -23,6 +23,7 @@ namespace wincom.mobile.erp
 		string sono ="";
 		string CUSTCODE ="";
 		string CUSTNAME ="";
+		string EDITMODE="";
 		CompanyInfo comp;
 		bool isNotAllowEditAfterPrinted  ;
 		AccessRights rights;
@@ -41,6 +42,8 @@ namespace wincom.mobile.erp
 			SetContentView (Resource.Layout.InvDtlView);
 			sono = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
 			CUSTCODE = Intent.GetStringExtra ("custcode") ?? "AUTO";
+			EDITMODE = Intent.GetStringExtra ("editmode") ?? "AUTO";
+
 			isNotAllowEditAfterPrinted  = DataHelper.GetSaleOrderPrintStatus (pathToDatabase,sono,rights);
 			Button butNew= FindViewById<Button> (Resource.Id.butnewItem); 
 			butNew.Click += (object sender, EventArgs e) => {
@@ -51,6 +54,11 @@ namespace wincom.mobile.erp
 		   
 			Button butInvBack= FindViewById<Button> (Resource.Id.butInvItmBack); 
 			butInvBack.Click += (object sender, EventArgs e) => {
+				if (EDITMODE.ToLower()=="new")
+				{
+					DeleteSoWithEmptySoItem();
+				}
+
 				StartActivity(typeof(SalesOrderActivity));
 			};
 
@@ -66,6 +74,33 @@ namespace wincom.mobile.erp
 			// do nothing.
 		}
 
+		private void DeleteSoWithEmptySoItem()
+		{
+			try{
+				using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+					var list = db.Table<SaleOrderDtls>().Where(x=>x.sono==sono).ToList<SaleOrderDtls>();
+					if (list.Count == 0) {
+						var list2 = db.Table<SaleOrder>().Where(x=>x.sono==sono).ToList<SaleOrder>();
+						if (list2.Count > 0) {
+							AdNumDate adNum= DataHelper.GetNumDate (pathToDatabase, list2[0].sodate,"SO");
+							if (sono.Length > 5) {
+								string snum= sono.Substring (sono.Length - 4);					
+								int num;
+								if (int.TryParse (snum, out num)) {
+									if (adNum.RunNo == num) {
+										adNum.RunNo = num - 1;
+										db.Delete (list2[0]);
+										db.Delete (adNum);
+									}
+								}
+							}
+						}
+						//db.Table<Invoice> ().Delete (x => x.invno == invno);
+					}
+				}
+			}catch{
+			}
+		}
 
 		private void SetViewDelegate(View view,object clsobj)
 		{

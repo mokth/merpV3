@@ -33,6 +33,7 @@ namespace wincom.mobile.erp
 		double taxper;
 		bool isInclusive;
 		AccessRights rights;
+		Trader  trd;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -42,12 +43,15 @@ namespace wincom.mobile.erp
 			}
 			SetTitle (Resource.String.title_invitementry);
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
+			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
+			rights = Utility.GetAccessRights (pathToDatabase);
 
 			INVOICENO = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
 			ITEMUID = Intent.GetStringExtra ("itemuid") ?? "AUTO";
 			EDITMODE = Intent.GetStringExtra ("editmode") ?? "AUTO";
 			CUSTOMER= Intent.GetStringExtra ("customer") ?? "AUTO";
 			CUSTCODE= Intent.GetStringExtra ("custcode") ?? "AUTO";
+			trd = DataHelper.GetTrader (pathToDatabase, CUSTCODE);
 			// Create your application here
 			SetContentView (Resource.Layout.Entry);
 			spinner = FindViewById<Spinner> (Resource.Id.txtcode);
@@ -69,11 +73,11 @@ namespace wincom.mobile.erp
 			};
 			qty.EditorAction += HandleEditorAction;
 			qty.AfterTextChanged+= Qty_AfterTextChanged;
-			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
-			rights = Utility.GetAccessRights (pathToDatabase);
+
 			price.Enabled = rights.InvEditUPrice;
 
 			txtbarcode.SetOnKeyListener (this);
+
 
 			//SqliteConnection.CreateFile(pathToDatabase);
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
@@ -104,7 +108,7 @@ namespace wincom.mobile.erp
 			}
 		}
 		
-				#region IOnKeyListener implementation
+		#region IOnKeyListener implementation
 		public bool OnKey (View v, Keycode keyCode, KeyEvent e)
 		{
 			EditText barcode = (EditText)v;
@@ -135,13 +139,17 @@ namespace wincom.mobile.erp
 		void Txtbarcode_AfterTextChanged (EditText txtbarcode)
 		{			
 			//EditText txtbarcode = FindViewById<EditText> (Resource.Id.txtbarcode);
-
+			if (string.IsNullOrEmpty (txtbarcode.Text)) {
+				txtbarcode.RequestFocus ();
+				return;
+			}
+			
 			var found= items.Where(x=>x.Barcode == txtbarcode.Text).ToList();
 			if (found.Count == 0) {
 				txtbarcode.Text = "";
 				return;
 			}
-			var item = found [1];
+			var item = found [0];
 			AddBarCodeItem (item);
 			txtbarcode.Text = "";
 			txtbarcode.RequestFocus ();
@@ -243,13 +251,11 @@ namespace wincom.mobile.erp
 			TextView txtInvNo =  FindViewById<TextView> (Resource.Id.txtInvnp);
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.txtcode);
 			EditText qty = FindViewById<EditText> (Resource.Id.txtqty);
-		//	TextView desc =  FindViewById<TextView> (Resource.Id.txtdesc);
 			EditText price = FindViewById<EditText> (Resource.Id.txtprice);
-			//EditText taxper = FindViewById<EditText> (Resource.Id.txtinvtaxper);
-			//CheckBox isincl = FindViewById<CheckBox> (Resource.Id.txtinvisincl);
 			TextView txttax =  FindViewById<TextView> (Resource.Id.txttax);
 			EditText ttlamt = FindViewById<EditText> (Resource.Id.txtamount);
 			EditText ttltax = FindViewById<EditText> (Resource.Id.txttaxamt);
+		
 			if (spinner.SelectedItem == null) {
 				Toast.MakeText (this, Resources.GetString(Resource.String.msg_invaliditem), ToastLength.Long).Show ();			
 				spinner.RequestFocus ();
@@ -266,8 +272,19 @@ namespace wincom.mobile.erp
 				price.RequestFocus ();
 				return;
 			}
+
+			string[] codedesc = spinner.SelectedItem.ToString ().Split (new char[]{ '|' });
+			var itemlist = items.Where (x => x.ICode == codedesc [0].Trim()).ToList<Item> ();
+			if (itemlist.Count == 0) {
+				Toast.MakeText (this, Resources.GetString(Resource.String.msg_invaliditem), ToastLength.Long).Show ();
+				return;
+			}
+			Item ItemCode = itemlist [0];
+
+
 			double stqQty = Convert.ToDouble(qty.Text);
 			double uprice = Convert.ToDouble(price.Text);
+			//double uprice= Utility.GetUnitPrice (trd,ItemCode);
 			double taxval = taxper;//Convert.ToDouble(taxper.Text);
 			double amount = Math.Round((stqQty * uprice),2);
 			double netamount = amount;
@@ -284,23 +301,14 @@ namespace wincom.mobile.erp
 			}
 
 			InvoiceDtls inv = new InvoiceDtls ();
-			string[] codedesc = spinner.SelectedItem.ToString ().Split (new char[]{ '|' });
 			inv.invno = txtInvNo.Text;
 			inv.amount = amount;
-			//inv.description = codedesc [1].Trim();
 			inv.icode = codedesc [0].Trim();// spinner.SelectedItem.ToString ();
 			inv.price = uprice;
 			inv.qty = stqQty;
 			inv.tax = taxamt;
 			inv.taxgrp = txttax.Text;
 			inv.netamount = netamount;
-
-			var itemlist = items.Where (x => x.ICode == inv.icode).ToList<Item> ();
-			if (itemlist.Count == 0) {
-				Toast.MakeText (this, Resources.GetString(Resource.String.msg_invaliditem), ToastLength.Long).Show ();
-				return;
-			}
-			Item ItemCode = itemlist [0];
 			inv.description = ItemCode.IDesc;
 
 			int id = Convert.ToInt32 (ITEMUID);				
@@ -364,18 +372,16 @@ namespace wincom.mobile.erp
 			string []codedesc = spinner.GetItemAtPosition (e.Position).ToString().Split (new char[]{ '|' });
 			string icode = codedesc[0].Trim();
 			Item item =items.Where (x => x.ICode == icode).FirstOrDefault ();
-
-			//string toast = string.Format ("The planet is {0}", spinner.GetItemAtPosition (e.Position));
-			//Toast.MakeText (this, toast, ToastLength.Long).Show ();
-			//TextView desc =  FindViewById<TextView> (Resource.Id.txtdesc);
 			TextView tax =  FindViewById<TextView> (Resource.Id.txttax);
 			EditText price = FindViewById<EditText> (Resource.Id.txtprice);
 			//EditText taxper = FindViewById<EditText> (Resource.Id.txtinvtaxper);
 			//CheckBox isincl = FindViewById<CheckBox> (Resource.Id.txtinvisincl);
 			EditText qty = FindViewById<EditText> (Resource.Id.txtqty);
 		//	desc.Text = item.IDesc;
-			if (FIRSTLOAD=="")
-				price.Text = item.Price.ToString ();
+			if (FIRSTLOAD == "") {
+				double uprice= Utility.GetUnitPrice (trd, item);
+				price.Text = uprice.ToString ();
+			}
 			else FIRSTLOAD="";
 			tax.Text = item.taxgrp;
 			taxper = item.tax;
@@ -417,7 +423,7 @@ namespace wincom.mobile.erp
 		{
 			TextView txtInvNo =  FindViewById<TextView> (Resource.Id.txtInvnp);
 			double stqQty = 1;
-			double uprice = prd.Price;
+			double uprice= Utility.GetUnitPrice (trd, prd);
 			double taxval = prd.tax;
 			double amount = Math.Round((stqQty * uprice),2);
 			double netamount = amount;

@@ -139,6 +139,7 @@ namespace wincom.mobile.erp
 			var intent =ActivityManager.GetActivity<CNEntryActivity>(this.ApplicationContext);
 			intent.PutExtra ("invoiceno", inv.cnno);
 			intent.PutExtra ("customer", codes [1].Trim ());
+			intent.PutExtra ("custcode",codes [0].Trim ());
 			intent.PutExtra ("itemuid", "-1");
 			intent.PutExtra ("editmode", "NEW");
 			StartActivity (intent);

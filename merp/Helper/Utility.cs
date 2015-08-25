@@ -177,6 +177,33 @@ namespace wincom.mobile.erp
 
 			return mmDevice;
 		}
+
+		public static double GetUnitPrice (Trader trd,Item prd)
+		{
+			double unitprice = 0;
+			if (trd == null) {
+				unitprice = prd.Price;
+				return unitprice;
+			}
+
+			if (trd.CustType.ToUpper () == "OTHER") {
+				unitprice = prd.Price;
+			} else if (trd.CustType.ToUpper () == "RETAIL") {
+				unitprice = prd.RetailPrice;
+			} else if (trd.CustType.ToUpper () == "VIP") {
+				unitprice = prd.VIPPrice;
+			} else if (trd.CustType.ToUpper () == "WHOLESALE") {
+				unitprice = prd.WholeSalePrice;
+			} else {
+				unitprice = prd.Price;
+			}
+
+			//if only SellingPirce is set, take selling price.
+			if (unitprice==0)
+				unitprice = prd.Price;
+
+			return unitprice;
+		}
 	}
 }
 

@@ -3,34 +3,66 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <TableLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tableLayout1">
-        <TableRow
-            android:id="@+id/tableRow1">
-            <Button
-                android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:typeface="sans"
-                android:id="@+id/butInvItmBack"
-                android:drawableLeft="@drawable/left"
-                android:width="120dp"
-                android:text="@string/button_back" />
-            <Button
-                android:text="@string/button_newitem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:typeface="sans"
-                android:drawableLeft="@drawable/add"
-                android:width="120dp"
-                android:id="@+id/butnewItem" />
-        </TableRow>
-    </TableLayout>
+                android:layout_weight="1"
+                android:padding="2dip">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:typeface="sans"
+                    android:id="@+id/butInvItmBack"
+                    android:drawableLeft="@drawable/left"
+                    android:text="@string/button_back" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="5dip">
+                <Button
+                    android:text="@string/button_newitem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:typeface="sans"
+                    android:drawableLeft="@drawable/add"
+                    android:id="@+id/butnewItem" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingLeft="5dip">
+                <EditText
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtbarcode"
+                    android:paddingLeft="5dp"
+                    android:textColor="#ff140000"
+                    android:background="@drawable/bluethem_edit_text_holo_light"
+                    android:hint="BARCODE"
+                    android:textColorHint="@color/xam_gray"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"

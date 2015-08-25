@@ -31,6 +31,7 @@ namespace wincom.mobile.erp
 		double taxper;
 		bool isInclusive;
 		AccessRights rights;
+		Trader trd;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -41,11 +42,15 @@ namespace wincom.mobile.erp
 			SetTitle (Resource.String.title_cnitementry);
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
 
+			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
+			rights = Utility.GetAccessRights (pathToDatabase);
+
 			INVOICENO = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
 			ITEMUID = Intent.GetStringExtra ("itemuid") ?? "AUTO";
 			EDITMODE = Intent.GetStringExtra ("editmode") ?? "AUTO";
 			CUSTOMER= Intent.GetStringExtra ("customer") ?? "AUTO";
 			CUSTCODE= Intent.GetStringExtra ("custcode") ?? "AUTO";
+			trd = DataHelper.GetTrader (pathToDatabase, CUSTCODE);
 			// Create your application here
 			SetContentView (Resource.Layout.Entry);
 			spinner = FindViewById<Spinner> (Resource.Id.txtcode);
@@ -67,8 +72,7 @@ namespace wincom.mobile.erp
 			qty.EditorAction += HandleEditorAction;
 			qty.AfterTextChanged+= Qty_AfterTextChanged;
 			price.EditorAction += HandleEditorAction; 
-			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
-			rights = Utility.GetAccessRights (pathToDatabase);
+
 			price.Enabled = rights.CNNotEditAftPrint;
 
 			//SqliteConnection.CreateFile(pathToDatabase);
@@ -313,18 +317,14 @@ namespace wincom.mobile.erp
 			string []codedesc = spinner.GetItemAtPosition (e.Position).ToString().Split (new char[]{ '|' });
 			string icode = codedesc[0].Trim();
 			Item item =items.Where (x => x.ICode == icode).FirstOrDefault ();
-
-			//string toast = string.Format ("The planet is {0}", spinner.GetItemAtPosition (e.Position));
-			//Toast.MakeText (this, toast, ToastLength.Long).Show ();
-			//TextView desc =  FindViewById<TextView> (Resource.Id.txtdesc);
 			TextView tax =  FindViewById<TextView> (Resource.Id.txttax);
 			EditText price = FindViewById<EditText> (Resource.Id.txtprice);
-			//EditText taxper = FindViewById<EditText> (Resource.Id.txtinvtaxper);
-			//CheckBox isincl = FindViewById<CheckBox> (Resource.Id.txtinvisincl);
+
 			EditText qty = FindViewById<EditText> (Resource.Id.txtqty);
-		//	desc.Text = item.IDesc;
-			if (FIRSTLOAD=="")
-				price.Text = item.Price.ToString ();
+			if (FIRSTLOAD == "") {
+				double uprice= Utility.GetUnitPrice (trd, item);
+				price.Text = uprice.ToString ();
+			}
 			else FIRSTLOAD="";
 			tax.Text = item.taxgrp;
 			taxper = item.tax;

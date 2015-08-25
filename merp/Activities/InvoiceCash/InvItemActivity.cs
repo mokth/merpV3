@@ -15,36 +15,45 @@ using System.IO;
 namespace wincom.mobile.erp
 {
 	[Activity (Label = "INVOICE ITEM(S)",Icon="@drawable/shop")]			
-	public class InvItemActivity : Activity
+	public class InvItemActivity : Activity,Android.Views.View.IOnKeyListener
 	{
 		ListView listView ;
 		List<InvoiceDtls> listData = new List<InvoiceDtls> ();
+		Invoice invoice ;
+		Trader  trd;
 		string pathToDatabase;
 		string invno ="";
 		string CUSTCODE ="";
 		string CUSTNAME ="";
 		string EDITMODE="";
+		EditText txtbarcode;
 		CompanyInfo comp;
 		bool isNotAllowEditAfterPrinted  ;
 		AccessRights rights;
 		string COMPCODE;
+		List<Item> items = null;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			if (!((GlobalvarsApp)this.Application).ISLOGON) {
 				Finish ();
 			}
+			SetContentView (Resource.Layout.InvDtlView);
+
 			SetTitle (Resource.String.title_invoiceitems);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			COMPCODE = ((GlobalvarsApp)this.Application).COMPANY_CODE;
 			rights = Utility.GetAccessRights (pathToDatabase);
 
-			SetContentView (Resource.Layout.InvDtlView);
+
 			invno = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
 			CUSTCODE = Intent.GetStringExtra ("custcode") ?? "AUTO";
 			EDITMODE = Intent.GetStringExtra ("editmode") ?? "AUTO";
 
 			isNotAllowEditAfterPrinted  = DataHelper.GetInvoicePrintStatus (pathToDatabase,invno,rights);
+			txtbarcode = FindViewById<EditText> (Resource.Id.txtbarcode);
+			txtbarcode.Visibility = ViewStates.Visible;
 			Button butNew= FindViewById<Button> (Resource.Id.butnewItem); 
 			butNew.Click += (object sender, EventArgs e) => {
 				NewItem(invno);
@@ -66,7 +75,8 @@ namespace wincom.mobile.erp
 				//StartActivity(typeof(InvoiceActivity));
 			};
 
-
+			txtbarcode.SetOnKeyListener (this);
+			GetData ();
 			populate (listData);
 			listView = FindViewById<ListView> (Resource.Id.invitemList);
 			listView.ItemClick += OnListItemClick;
@@ -78,6 +88,40 @@ namespace wincom.mobile.erp
 			// do nothing.
 		}
 
+		#region IOnKeyListener implementation
+		public bool OnKey (View v, Keycode keyCode, KeyEvent e)
+		{
+			EditText barcode = (EditText)v;
+			if (keyCode == Keycode.Enter||e.KeyCode== Keycode.NumpadEnter) {
+				Txtbarcode_AfterTextChanged (barcode);
+				return true;
+			}
+
+			//barcode.Text = barcode.Text + keyCode;
+			return false;
+		}
+		#endregion
+
+		void Txtbarcode_AfterTextChanged (EditText txtbarcode)
+		{			
+			//EditText txtbarcode = FindViewById<EditText> (Resource.Id.txtbarcode);
+			if (string.IsNullOrEmpty (txtbarcode.Text)) {
+				txtbarcode.RequestFocus ();
+				return;
+			}
+
+			var found= items.Where(x=>x.Barcode == txtbarcode.Text).ToList();
+			if (found.Count == 0) {
+				txtbarcode.Text = "";
+				return;
+			}
+			var item = found [0];
+			AddBarCodeItem (item);
+			txtbarcode.Text = "";
+			txtbarcode.RequestFocus ();
+		}
+
+
 		private void DeleteInvWithEmptyInovItem()
 		{
 			try{
@@ -86,7 +130,8 @@ namespace wincom.mobile.erp
 				if (list.Count == 0) {
 				    var list2 = db.Table<Invoice>().Where(x=>x.invno==invno).ToList<Invoice>();
 					if (list2.Count > 0) {
-						AdNumDate adNum= DataHelper.GetNumDate (pathToDatabase, list2[0].invdate);
+							string trxtype = list2[0].trxtype=="CASH"?"CS":"INV";
+							AdNumDate adNum= DataHelper.GetNumDate (pathToDatabase, list2[0].invdate,trxtype);
 						if (invno.Length > 5) {
 							string snum= invno.Substring (invno.Length - 4);					
 							int num;
@@ -139,6 +184,7 @@ namespace wincom.mobile.erp
 				butNew.Enabled = false;
 			
 			listData = new List<InvoiceDtls> ();
+			GetData ();
 			populate (listData);
 			listView = FindViewById<ListView> (Resource.Id.invitemList);
 			SetViewDlg viewdlg = SetViewDelegate;
@@ -237,23 +283,28 @@ namespace wincom.mobile.erp
 			StartActivity(intent);
 		}
 
+		void GetData()
+		{
+			trd = DataHelper.GetTrader (pathToDatabase, CUSTCODE);
+			invoice = DataHelper.GetInvoice(pathToDatabase, invno);
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				items = db.Table<Item> ().ToList<Item> ();
+			}
+		}
 		void populate(List<InvoiceDtls> list)
 		{
 
-//			var documents = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-//			pathToDatabase = Path.Combine(documents, "db_adonet.db");
 			comp = DataHelper.GetCompany (pathToDatabase);
-			//SqliteConnection.CreateFile(pathToDatabase);
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{
-				var list1 = db.Table<Invoice>().Where(x=>x.invno==invno).ToList<Invoice>();
+				//var list1 = db.Table<Invoice>().Where(x=>x.invno==invno).ToList<Invoice>();
 				var list2 = db.Table<InvoiceDtls>().Where(x=>x.invno==invno).ToList<InvoiceDtls>();
-				var list3 = db.Table<Trader>().Where(x=>x.CustCode==CUSTCODE).ToList<Trader>();
+				//var list3 = db.Table<Trader>().Where(x=>x.CustCode==CUSTCODE).ToList<Trader>();
 
 				double ttlamt = 0;
 				double ttltax = 0;
-				if (list3.Count > 0) {
-					CUSTNAME = list3 [0].CustName;
+				if (trd!=null) {
+					CUSTNAME = trd.CustName;
 				}
 				foreach(var item in list2)
 				{
@@ -261,9 +312,9 @@ namespace wincom.mobile.erp
 					ttltax = ttltax + item.tax;
 					list.Add(item);
 				}
-				if (list1.Count > 0) {
-					list1 [0].amount = ttlamt;
-					db.Update (list1 [0]);
+				if (invoice!=null) {
+					invoice.amount = ttlamt;
+					db.Update (invoice);
 				}
 				InvoiceDtls inv1 = new InvoiceDtls ();
 				inv1.icode = "TAX";
@@ -275,6 +326,50 @@ namespace wincom.mobile.erp
 				list.Add (inv1);
 				list.Add (inv2);
 			}
+		}
+
+
+		private void AddBarCodeItem(Item prd )
+		{
+			double stqQty = 1;
+			double uprice= Utility.GetUnitPrice (trd, prd);
+			double taxval = prd.tax;
+			double amount = Math.Round((stqQty * uprice),2);
+			double netamount = amount;
+			bool taxinclusice = prd.isincludesive;
+			double taxamt = 0;
+			if (taxinclusice) {
+				double percent = (taxval/100) + 1;
+				double amt2 =Math.Round( amount / percent,2,MidpointRounding.AwayFromZero);
+				taxamt = amount - amt2;
+				netamount = amount - taxamt;
+
+			} else {
+				taxamt = Math.Round(amount * (taxval / 100),2,MidpointRounding.AwayFromZero);
+			}
+
+			InvoiceDtls inv = new InvoiceDtls ();
+			inv.invno = invno;
+			inv.amount = amount;
+			inv.icode = prd.ICode;
+			inv.price = uprice;
+			inv.qty = stqQty;
+			inv.tax = taxamt;
+			inv.taxgrp = prd.taxgrp;
+			inv.netamount = netamount;
+			inv.description = prd.IDesc;
+			//int id = Convert.ToInt32 (ITEMUID);				
+			//inv..title = spinner.SelectedItem.ToString ();
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				db.Insert (inv);
+			}
+
+			listData = new List<InvoiceDtls> ();
+			populate (listData);
+			listView = FindViewById<ListView> (Resource.Id.invitemList);
+			SetViewDlg viewdlg = SetViewDelegate;
+			listView.Adapter = new GenericListAdapter<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemView, viewdlg);
+			listView.SetSelection (listView.Count - 1);
 		}
 	}
 }
