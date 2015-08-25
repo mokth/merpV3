@@ -48,7 +48,7 @@ namespace wincom.mobile.erp
 			spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
 			spinnerBill = FindViewById<Spinner> (Resource.Id.newinv_billto);
 			TextView lbBillto = FindViewById<TextView> (Resource.Id.lbbillto);
-			lbBillto.Text = "PAY FOR";
+			lbBillto.Text = "PAY FROM";
 
 			Button butSave = FindViewById<Button> (Resource.Id.newinv_bsave);
 			Button butNew = FindViewById<Button> (Resource.Id.newinv_cancel);

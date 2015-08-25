@@ -9,7 +9,7 @@ using Android.Widget;
 namespace wincom.mobile.erp
 {
 	
-	public class UploadDOHelper:Activity
+	public class UploadDOHelper:Activity,IUploadHelper
 	{
 		Service1Client _client;
 		WCFHelper _wfc = new WCFHelper();
@@ -26,6 +26,16 @@ namespace wincom.mobile.erp
 			_client = _wfc.GetServiceClient ();	
 			_client.UploadOutletBillsCompleted+= ClientOnUploadOutletBillsCompleted;
 			UploadBillsToServer ();
+		}
+
+		public void SetUploadHandel(OnUploadDoneDlg uploadhandle)
+		{
+			Uploadhandle = uploadhandle;
+		}
+
+		public void SetCallingActivity(Activity callingActivity)
+		{
+			CallingActivity = callingActivity;
 		}
 
 		private void UploadBillsToServer()
@@ -123,6 +133,7 @@ namespace wincom.mobile.erp
 
 		public void ClientOnUploadOutletBillsCompleted(object sender, UploadOutletBillsCompletedEventArgs e)
 		{
+			bool success = false;
 			if ( e.Error != null)
 			{
 				_errmsg =  e.Error.Message;
@@ -135,9 +146,13 @@ namespace wincom.mobile.erp
 			{
 				_errmsg = e.Result.ToString ();
 				if (_errmsg== "OK") {
+					success = true;
 					UpdateUploadStat();
 				}
 			}
+
+			if (!success)
+				RunOnUiThread (() => Uploadhandle.Invoke(CallingActivity,0,_errmsg));
 
 		}
 

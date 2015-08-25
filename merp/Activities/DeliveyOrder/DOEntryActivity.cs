@@ -203,9 +203,11 @@ namespace wincom.mobile.erp
 				}
 			}
 			//base.OnBackPressed();
-			var intent = new Intent(this, typeof(DOItemActivity));
+			//var intent = new Intent(this, typeof(DOItemActivity));
+			var intent =ActivityManager.GetActivity<DOItemActivity>(this.ApplicationContext);
 			intent.PutExtra ("invoiceno",DELIVERYNO );
 			intent.PutExtra ("custcode",CUSTCODE );
+			intent.PutExtra ("editmode",EDITMODE );
 			StartActivity(intent);
 		}
 		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)

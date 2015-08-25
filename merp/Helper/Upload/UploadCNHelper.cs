@@ -130,11 +130,10 @@ namespace wincom.mobile.erp
 
 		public void ClientOnUploadOutletBillsCompleted(object sender, UploadOutletBillsCompletedEventArgs e)
 		{
-			
+			bool success = false;
 			if ( e.Error != null)
 			{
 				_errmsg =  e.Error.Message;
-			
 			}
 			else if ( e.Cancelled)
 			{
@@ -144,11 +143,13 @@ namespace wincom.mobile.erp
 			{
 				_errmsg = e.Result.ToString ();
 				if (_errmsg== "OK") {
+					success = true;
 					UpdateUploadStat();
 				}
 			}
 
-			//RunOnUiThread (() => DownloadCOmpleted (msg));
+			if (!success)
+				RunOnUiThread (() => Uploadhandle.Invoke(CallingActivity,0,_errmsg));
 
 		}
 

@@ -88,7 +88,7 @@ namespace wincom.mobile.erp
 			butupload.Text = Resources.GetString(Resource.String.msg_uploading);// "Uploading, please wait...";
 			//UploadBillsToServer();
 			IUploadHelper upload =UploadManager.GetUploadHepler< UploadCNHelper>();
-			upload.SetUploadHandel(OnUploadDoneDlg); 
+			upload.SetUploadHandel(OnUploadCNDoneDlg); 
 			upload.SetCallingActivity(this);
 			upload.startUpload ();	
 		}
