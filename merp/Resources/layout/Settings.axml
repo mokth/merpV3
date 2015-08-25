@@ -16,7 +16,7 @@
             android:height="53dp"
             android:id="@+id/butsetting" />
         <Button
-            android:text="@string/button_print"
+            android:text="TEST PRINT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -30,8 +30,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:drawableLeft="@drawable/about"
-            style="@style/ButtonBlueThem"
-            android:background="@drawable/bluethem_btn_default_holo_light"
             android:id="@+id/butAbout" />
         <Button
             android:text="@string/submenu_back"

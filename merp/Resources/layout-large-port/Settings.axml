@@ -17,7 +17,7 @@
             android:drawableLeft="@drawable/settings"
             android:id="@+id/butsetting" />
         <Button
-            android:text="@string/button_print"
+            android:text="TEST PRINT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -26,11 +26,9 @@
             android:drawableLeft="@drawable/print"
             android:id="@+id/buttestprint" />
         <Button
-            android:background="@drawable/bluethem_btn_default_holo_light"
             android:text="@string/mainmenu_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/ButtonBlueThem"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:height="80dp"
             android:textSize="24sp"
