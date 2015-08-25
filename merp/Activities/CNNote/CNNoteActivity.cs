@@ -105,7 +105,8 @@ namespace wincom.mobile.erp
 			menu.Inflate (Resource.Menu.popupInv);
 
 			//if (!compinfo.AllowDelete) {
-				menu.Menu.RemoveItem (Resource.Id.popInvdelete);
+			menu.Menu.RemoveItem (Resource.Id.poppay);
+			menu.Menu.RemoveItem (Resource.Id.popInvdelete);
 			//}
 			if (!rights.CNAllowAdd) {
 				menu.Menu.RemoveItem (Resource.Id.popInvadd);

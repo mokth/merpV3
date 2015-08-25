@@ -99,8 +99,7 @@ namespace wincom.mobile.erp
 			DelOrder item = listData.ElementAt (e.Position);
 			PopupMenu menu = new PopupMenu (e.Parent.Context, e.View);
 			menu.Inflate (Resource.Menu.popupInv);
-			var mitem =menu.Menu.FindItem(Resource.Id.poppay);
-			mitem.SetVisible (false);
+			menu.Menu.RemoveItem (Resource.Id.poppay);
 
 			menu.Menu.RemoveItem (Resource.Id.popInvdelete);
 			if (!rights.DOAllowAdd) {

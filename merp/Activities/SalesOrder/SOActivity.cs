@@ -102,7 +102,7 @@ namespace wincom.mobile.erp
 			SaleOrder item = listData.ElementAt (e.Position);
 			PopupMenu menu = new PopupMenu (e.Parent.Context, e.View);
 			menu.Inflate (Resource.Menu.popupInv);
-
+			menu.Menu.RemoveItem (Resource.Id.poppay);
 			menu.Menu.RemoveItem (Resource.Id.popInvdelete);
 			if (!rights.SOAllowAdd) {
 				menu.Menu.RemoveItem (Resource.Id.popInvadd);
