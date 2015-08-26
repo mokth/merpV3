@@ -261,7 +261,7 @@ namespace wincom.mobile.erp
 				}else db.Insert (so);
 			}
 
-			spinner.SetSelection (-1);
+			//spinner.SetSelection (-1);
 			qty.Text = "";
 			//price.Text = "";
 			ttltax.Text = "";

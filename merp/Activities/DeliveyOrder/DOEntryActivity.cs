@@ -180,7 +180,7 @@ namespace wincom.mobile.erp
 				}else db.Insert (doorder);
 			}
 
-			spinner.SetSelection (-1);
+			//spinner.SetSelection (-1);
 			qty.Text = "";
 			Toast.MakeText (this, "Item successfully added...", ToastLength.Long).Show ();
 		}
