@@ -69,7 +69,7 @@ namespace wincom.mobile.erp
 				{
 					DeleteInvWithEmptyInovItem();
 				}
-
+				UpdateInvoiceAmount(invno);
 				var intent =ActivityManager.GetActivity<InvoiceActivity>(this.ApplicationContext);
 				StartActivity(intent);
 				//StartActivity(typeof(InvoiceActivity));
@@ -370,6 +370,21 @@ namespace wincom.mobile.erp
 			SetViewDlg viewdlg = SetViewDelegate;
 			listView.Adapter = new GenericListAdapter<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemView, viewdlg);
 			listView.SetSelection (listView.Count - 1);
+		}
+
+		public void UpdateInvoiceAmount(string invno)
+		{
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var itemlist = db.Table<InvoiceDtls> ().Where (x => x.invno == invno);	
+				double ttlamt= itemlist.Sum (x => x.netamount);
+				double ttltax= itemlist.Sum (x => x.tax);
+				var invlist =db.Table<Invoice> ().Where (x => x.invno == invno).ToList<Invoice> ();
+				if (invlist.Count > 0) {
+					invlist [0].amount = ttlamt;
+					invlist [0].taxamt = ttltax;
+					db.Update (invlist [0]);
+				}
+			}
 		}
 	}
 }
