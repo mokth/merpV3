@@ -5,12 +5,26 @@
 
   <style name="BlueThem" parent="@style/_BlueThem"/>
 
-  <style name="_BlueThem" parent="android:Theme.Holo" >
+  <style name="_BlueThem" parent="android:Theme.Holo.Light">
 
-   
-    <item name="android:editTextStyle">@style/EditTextBlueThem</item>
+    <item name="android:editTextBackground">@drawable/bluethem_edit_text_holo_light</item>
+      
+
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewBlueThem</item>
+
+
     <item name="android:buttonStyle">@style/ButtonBlueThem</item>
-    <item name="android:spinnerItemStyle">@style/SpinnerItemBlueThem</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonBlueThem</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerBlueThem</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/bluethem_list_selector_holo_light</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/bluethem_activated_background_holo_light</item>
+
+
 
   </style>
 

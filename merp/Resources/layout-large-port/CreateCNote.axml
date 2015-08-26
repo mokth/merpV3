@@ -156,22 +156,21 @@
         <TableRow
             android:id="@+id/tableRow1">
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                 android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/newinv_bsave"
                 android:drawableLeft="@drawable/add"
-                android:width="120dp"
                 android:text="@string/button_add" />
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                  android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/newinv_cancel"
                 android:drawableLeft="@drawable/left"
-                android:width="120dp"
+               
                 android:text="@string/button_back" />
         </TableRow>
         <TableRow

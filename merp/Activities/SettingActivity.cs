@@ -60,6 +60,7 @@ namespace wincom.mobile.erp
 
 			adapter = ArrayAdapter.CreateFromResource (this, Resource.Array.papersize_array, Android.Resource.Layout.SimpleSpinnerItem);
 			adapter.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
+
 			spinner.Adapter = adapter;
 			spinner.ItemSelected+= Spinner_ItemSelected;
 			spinBt.ItemSelected+= Spinner_ItemSelected;

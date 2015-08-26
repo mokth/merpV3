@@ -248,6 +248,22 @@ namespace wincom.mobile.erp
 					}
 				}
 			}
+			if (!string.IsNullOrEmpty (inv.invno))
+				updateInvPrintedStatus (inv.invno);
+		}
+
+		void updateInvPrintedStatus(string invno)
+		{
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list = db.Table<Invoice> ().Where (x => x.invno == invno).ToList<Invoice> ();
+				if (list.Count > 0) {
+					var list2 = db.Table<InvoiceDtls> ().Where (x => x.invno == invno).ToList<InvoiceDtls> ();
+					if (list2.Count > 0) {
+						list [0].isPrinted = true;
+						db.Update (list [0]);
+					}
+				}
+			}
 		}
 
 	}

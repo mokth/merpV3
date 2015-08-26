@@ -154,8 +154,7 @@
                     android:width="120dp" />
             </TableRow>
             <TableRow
-                android:id="@+id/tableRow2">
-            </TableRow>
+                android:id="@+id/tableRow2" />
         </TableLayout>
     </LinearLayout>
 </ScrollView>

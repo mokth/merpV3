@@ -38,14 +38,14 @@
             android:id="@+id/butuploadso"
             android:drawableRight="@drawable/sales" />
         <Button
-            android:text="@string/submenu_upso"
+            android:text="@string/submenu_updo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:height="80dp"
             android:textSize="24sp"
             android:drawableLeft="@drawable/upload"
-            android:id="@+id/butuploadso"
+            android:id="@+id/butuploaddo"
             android:drawableRight="@drawable/delivery" />
         <Button
             android:text="@string/submenu_back"

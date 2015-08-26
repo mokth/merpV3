@@ -12,22 +12,22 @@
         <TableRow
             android:id="@+id/tableRow1">
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/butInvBack"
                 android:drawableLeft="@drawable/left"
-                android:width="120dp"
+              
                 android:text="@string/button_back" />
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+              android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/butnewInv"
                 android:drawableLeft="@drawable/add"
-                android:width="120dp"
+                
                 android:text="@string/button_new" />
         </TableRow>
     </TableLayout>

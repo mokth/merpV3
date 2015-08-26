@@ -12,13 +12,12 @@
         <TableRow
             android:id="@+id/tableRow1c">
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+               android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/butCustBack"
                 android:drawableLeft="@drawable/left"
-                android:width="120dp"
                 android:text="@string/button_back" />
             <EditText
                 android:textAppearance="?android:attr/textAppearanceMedium"

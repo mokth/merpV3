@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtInvnp"
             android:editable="false"
+            android:textSize="24sp"
             android:textColor="#ff140000"
             android:paddingLeft="5dp"
             android:background="@drawable/bluethem_edit_text_holo_light" />
@@ -43,6 +44,7 @@
             android:id="@+id/txtInvcust"
             android:editable="false"
             android:paddingLeft="5dp"
+            android:textSize="24sp"
             android:textColor="#ff140000"
             android:background="@drawable/bluethem_edit_text_holo_light" />
     </LinearLayout>
@@ -139,23 +141,65 @@
                 <TextView
                     android:text="@string/invform_qty"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#fff60935"
+                    android:textColor="#fff6092b"
                     android:paddingLeft="5dp"
-                    android:textSize="24sp"
                     android:id="@+id/textView4"
-                    android:width="120dp" />
+                    android:textSize="24sp"
+                    android:width="100dp" />
                 <TextView
                     android:text="@string/invform_uprice"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:textColor="#ff093bf6"
                     android:paddingLeft="5dp"
-                    android:textSize="24sp"
                     android:id="@+id/textView5"
-                    android:width="140dp" />
+                    android:textSize="24sp"
+                    android:width="120dp" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow1">
+                <EditText
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtqty"
+                    android:paddingLeft="5dp"
+                    android:textSize="24sp"
+                    android:textColor="#ff140000"
+                    android:background="@drawable/bluethem_edit_text_holo_light"
+                    android:hint="@string/invform_qty"
+                    android:textColorHint="@color/xam_gray" />
+                <EditText
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtprice"
+                    android:textColor="#ff140000"
+                    android:textSize="24sp"
+                    android:paddingLeft="5dp"
+                    android:background="@drawable/bluethem_edit_text_holo_light"
+                    android:editable="false"
+                    android:enabled="true" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txttax"
+                    android:textColor="#ff140000"
+                    android:textSize="24sp"
+                    android:paddingLeft="5dp"
+                    android:background="@drawable/bluethem_textfield_disabled_holo_light"
+                    android:selectAllOnFocus="false"
+                    android:editable="false"
+                    android:width="70dp" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow1">
                 <TextView
                     android:text="@string/invform_tax"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -165,7 +209,7 @@
                     android:paddingLeft="5dp"
                     android:textSize="24sp"
                     android:id="@+id/textView5"
-                    android:width="100dp" />
+                    android:width="80dp" />
                 <TextView
                     android:text="@string/invform_amount"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -180,62 +224,29 @@
             <TableRow
                 android:id="@+id/tableRow1">
                 <EditText
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:inputType="numberDecimal|numberSigned"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txtqty"
-                    android:textSize="24sp"
-                    android:paddingLeft="5dp"
-                    android:textColor="#ff140000"
-                    android:background="@drawable/bluethem_edit_text_holo_light"
-                    android:hint="@string/invform_qty"
-                    android:textColorHint="@color/xam_gray" />
-                <EditText
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:inputType="numberDecimal|numberSigned"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txtprice"
-                    android:textSize="24sp"
-                    android:textColor="#ff140000"
-                    android:paddingLeft="5dp"
-                    android:background="@drawable/bluethem_edit_text_holo_light"
-                    android:editable="false" />
-                <EditText
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:inputType="numberDecimal|numberSigned"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txttaxamt"
                     android:textColor="#ff140000"
-                    android:textSize="24sp"
                     android:paddingLeft="5dp"
-                    android:background="@drawable/bluethem_edit_text_holo_light"
-                    android:editable="false" />
+                    android:textSize="24sp"
+                    android:background="@drawable/bluethem_textfield_disabled_holo_light"
+                    android:editable="false"
+                    android:enabled="false" />
                 <EditText
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:inputType="numberDecimal|numberSigned"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtamount"
-                    android:textSize="24sp"
                     android:textColor="#ff140000"
                     android:paddingLeft="5dp"
-                    android:background="@drawable/bluethem_edit_text_holo_light"
-                    android:editable="false" />
-                <TextView
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txttax"
-                    android:textColor="#ff140000"
-                    android:paddingLeft="5dp"
-                    android:textSize="24sp"
-                    android:background="@android:drawable/edit_text"
-                    android:selectAllOnFocus="false"
+                    android:background="@drawable/bluethem_textfield_disabled_holo_light"
                     android:editable="false"
-                    android:width="60dp" />
+                    android:textSize="24sp"
+                    android:enabled="false" />
             </TableRow>
         </TableLayout>
     </LinearLayout>
@@ -248,8 +259,8 @@
         <TableRow
             android:id="@+id/tableRow1">
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/Save"
@@ -257,13 +268,12 @@
                 android:width="140dp"
                 android:text="@string/button_add" />
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/Cancel"
                 android:drawableLeft="@drawable/left"
-                android:width="140dp"
                 android:text="@string/button_cancel" />
         </TableRow>
         <TableRow

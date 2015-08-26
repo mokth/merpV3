@@ -19,8 +19,8 @@
                 android:layout_weight="1"
                 android:padding="2dip">
                 <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_width="140dp"
                     android:textColor="#ffffff"
                     android:typeface="sans"
                     android:id="@+id/butInvItmBack"
@@ -35,8 +35,8 @@
                 android:paddingLeft="5dip">
                 <Button
                     android:text="@string/button_newitem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_width="140dp"
                     android:textColor="#ffffff"
                     android:typeface="sans"
                     android:drawableLeft="@drawable/add"

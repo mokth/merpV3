@@ -33,7 +33,7 @@
             android:drawableLeft="@drawable/delivery"
             android:height="80dp"
             android:textSize="24sp"
-            android:id="@+id/butSOlist" />
+            android:id="@+id/butDOlist" />
         <Button
             android:text="@string/submenu_solist"
             android:layout_width="match_parent"

@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtInvnp"
             android:editable="false"
+            android:textSize="24sp"
             android:textColor="#ff140000"
             android:paddingLeft="5dp"
             android:background="@drawable/bluethem_edit_text_holo_light" />
@@ -42,6 +43,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtInvcust"
             android:editable="false"
+            android:textSize="24sp"
             android:paddingLeft="5dp"
             android:textColor="#ff140000"
             android:background="@drawable/bluethem_edit_text_holo_light" />
@@ -108,7 +110,7 @@
                 <TextView
                     android:text="@string/invform_qty"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:textColor="#fff60935"
                     android:paddingLeft="5dp"
@@ -140,22 +142,20 @@
         <TableRow
             android:id="@+id/tableRow1">
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/Save"
                 android:drawableLeft="@drawable/add"
-                android:width="140dp"
                 android:text="ADD" />
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/Cancel"
                 android:drawableLeft="@drawable/left"
-                android:width="140dp"
                 android:text="CANCEL" />
         </TableRow>
         <TableRow

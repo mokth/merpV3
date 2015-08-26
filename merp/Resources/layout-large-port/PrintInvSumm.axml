@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lbinvno"
+            android:textSize="24sp"
             android:textColor="#ff1131f0"
             android:paddingLeft="5dp" />
         <EditText
@@ -23,6 +24,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:background="@android:drawable/edit_text"
             android:id="@+id/trxdatefr"
+            android:textSize="24sp"
             android:drawableRight="@android:drawable/ic_menu_today"
             android:textColor="@android:color/black" />
         <TextView
@@ -31,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lbinvno"
+            android:textSize="24sp"
             android:textColor="#ff1131f0"
             android:paddingLeft="5dp" />
         <EditText
@@ -40,6 +43,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:background="@android:drawable/edit_text"
             android:id="@+id/trxdateto"
+            android:textSize="24sp"
             android:drawableRight="@android:drawable/ic_menu_today"
             android:textColor="@android:color/black" />
     </LinearLayout>
@@ -52,22 +56,20 @@
         <TableRow
             android:id="@+id/tableRow1">
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:layout_column="0"
                 android:id="@+id/printsumm"
-                android:width="145dp"
                 android:text="@string/button_print"
                 android:drawableLeft="@drawable/print" />
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:layout_column="1"
                 android:id="@+id/printsumm_cancel"
                 android:drawableLeft="@drawable/left"
-                android:width="145dp"
                 android:text="@string/button_cancel" />
         </TableRow>
         <TableRow
