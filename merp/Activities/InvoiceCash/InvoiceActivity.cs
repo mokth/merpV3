@@ -29,6 +29,7 @@ namespace wincom.mobile.erp
 		CompanyInfo compinfo;
 		AccessRights rights;
 
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
