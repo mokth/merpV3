@@ -1,25 +1,20 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Bluetooth;
+using System.Collections;
 
 namespace wincom.mobile.erp
 {
 	[Activity (Label = "PRINT SUMMARY",Icon="@drawable/summary")]			
 	public class PrintSumm : Activity
 	{
-		BluetoothAdapter mBluetoothAdapter;
-		BluetoothSocket mmSocket;
-		BluetoothDevice mmDevice;
 		string pathToDatabase;
 		AdPara apara;
 		const int DATE_DIALOG_ID1 = 0;
@@ -100,57 +95,19 @@ namespace wincom.mobile.erp
 
 		void PrintInvSumm(DateTime printdate1,DateTime printdate2)
 		{
-			mmDevice = null;
-			findBTPrinter ();
-
-			if (mmDevice == null)
-				return;
-
-			string userid = ((GlobalvarsApp)this.Application).USERID_CODE;
-			PrintInvHelper prnHelp = new PrintInvHelper (pathToDatabase, userid);
-			string msg = prnHelp.PrintInvSumm(mmSocket, mmDevice,printdate1,printdate2);
-			Toast.MakeText (this, msg, ToastLength.Long).Show ();	
+			IPrintDocument prtInv = PrintDocManager.GetPrintDocument<PrintSummary>();
+			prtInv.SetNoOfCopy (1);
+			Hashtable para = new Hashtable ();
+			para.Add ("DateStart", printdate1);
+			para.Add ("DateEnd", printdate2);
+			prtInv.SetExtraPara (para);
+			prtInv.SetCallingActivity (this);
+			prtInv.StartPrint ();
+			Toast.MakeText (this, prtInv.GetErrMsg(), ToastLength.Long).Show ();	
 
 		}
 
-		void findBTPrinter(){
-			string printername = apara.PrinterName.Trim ().ToUpper ();
-		
-			try{
-				mBluetoothAdapter = BluetoothAdapter.DefaultAdapter;
-				if (mBluetoothAdapter==null)
-				{
-					Toast.MakeText (this, "Error initialize bluetooth Adapter. Try again", ToastLength.Long).Show ();
-					return;					
-				}
-				string txt ="";
-				if (!mBluetoothAdapter.Enable()) {
-					Intent enableBluetooth = new Intent(
-						BluetoothAdapter.ActionRequestEnable);
-					StartActivityForResult(enableBluetooth, 0);
-				}
-
-
-				var pair= mBluetoothAdapter.BondedDevices;
-				if (pair.Count > 0) {
-					foreach (BluetoothDevice dev in pair) {
-						Console.WriteLine (dev.Name);
-						txt = txt+","+dev.Name;
-						if (dev.Name.ToUpper()==printername)
-						{
-							mmDevice = dev;
-							//							File.WriteAllText(addrfile,dev.Address);
-							break;
-						}
-					}
-				}
-				Toast.MakeText (this, "found device " +mmDevice.Name, ToastLength.Long).Show ();	
-				//txtv.Text ="found device " +mmDevice.Name;
-			}catch(Exception ex) {
-
-				Toast.MakeText (this, "Error initialize bluetooth Adapter. Try again", ToastLength.Long).Show ();
-			}
-		}
+	
 	}
 }
 

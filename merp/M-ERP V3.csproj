@@ -173,6 +173,7 @@
     <Compile Include="Printing\PrintSalesOrder _WT.cs" />
     <Compile Include="Activities\UtilityActivity.cs" />
     <Compile Include="Printing\PrintTest.cs" />
+    <Compile Include="Printing\PrintSummary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -2,6 +2,7 @@
 using System.Linq;
 using Android.Runtime;
 using WcfServiceItem;
+using Android.App;
 
 namespace wincom.mobile.erp
 {
@@ -399,6 +400,29 @@ namespace wincom.mobile.erp
 			return userfunction;
 		}
 
+		public static Invoice[] GetInvoices (DateTime printdate1, DateTime printdate2)
+		{
+			string pathToDatabase = ((GlobalvarsApp)Application.Context).DATABASE_PATH;
+			Invoice[] invs =  {};
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list = db.Table<Invoice> ().Where (x => x.invdate >= printdate1 && x.invdate <= printdate2).OrderBy (x => x.invdate).ToList<Invoice> ();
+				invs = new Invoice[list.Count];
+				list.CopyTo (invs);
+			}
+			return invs;
+		}
+
+		public static CNNote[] GetCNNote (DateTime printdate1, DateTime printdate2)
+		{
+			string pathToDatabase = ((GlobalvarsApp)Application.Context).DATABASE_PATH;
+			CNNote[] invs =  {};
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list = db.Table<CNNote> ().Where (x => x.invdate >= printdate1 && x.invdate <= printdate2).OrderBy (x => x.invdate).ToList<CNNote> ();
+				invs = new CNNote[list.Count];
+				list.CopyTo (invs);
+			}
+			return invs;
+		}
 	}
 }
 
