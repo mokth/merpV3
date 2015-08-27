@@ -112,6 +112,14 @@
             android:gravity="center"
             android:textColor="#fff3f3f3"
             android:marqueeRepeatLimit="marquee_forever" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textVer"
+            android:gravity="center"
+            android:textColor="#fff3f3f3"
+            android:marqueeRepeatLimit="marquee_forever" />
         <Button xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/logimport"
             android:layout_width="fill_parent"

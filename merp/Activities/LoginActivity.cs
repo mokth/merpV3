@@ -12,6 +12,7 @@ using System.ServiceModel;
 using System.IO;
 using WcfServiceItem;
 using Android.Util;
+using Android.Content.PM;
 
 namespace wincom.mobile.erp
 {
@@ -30,7 +31,7 @@ namespace wincom.mobile.erp
 			// Create your application here
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
-
+			PackageInfo pInfo = PackageManager.GetPackageInfo (PackageName, 0);
 //			Button import = FindViewById<Button>(Resource.Id.logimport);
 //
 //			import.Click+= (object sender, EventArgs e) => {
@@ -38,13 +39,14 @@ namespace wincom.mobile.erp
 //			};	
 			Button login = FindViewById<Button>(Resource.Id.login);
 			Button bexit = FindViewById<Button>(Resource.Id.exit);
+			TextView txtver = FindViewById<TextView> (Resource.Id.textVer);
 			EditText txtcode = FindViewById<EditText> (Resource.Id.login_code);
 			bexit.Click += (object sender, EventArgs e) => {
 				Finish();
 				Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
 			};
 			//InitializeServiceClient();
-
+			txtver.Text = "VERSION "+pInfo.VersionName;
 
 			AdUser user=null;
 			//SQLiteConnection...CreateFile(pathToDatabase);
