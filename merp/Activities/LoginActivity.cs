@@ -19,7 +19,6 @@ namespace wincom.mobile.erp
 	[Activity (Label = "M-ERP V3", MainLauncher = true,NoHistory=true, Theme="@style/android:Theme.Holo.Light.NoActionBar" )]			
 	public class LoginActivity : Activity,IEventListener
 	{
-
 		private Service1Client _client;
 		string pathToDatabase;
 		static volatile bool _donwloadPro = false;
