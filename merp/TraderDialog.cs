@@ -40,6 +40,7 @@ namespace wincom.mobile.erp
 			return dialogFragment;
 		}
 
+
 		public static TraderDialog NewInstance(IsValidTraderFilter filter,int selectdEventid)
 		{
 			var dialogFragment = new TraderDialog();
