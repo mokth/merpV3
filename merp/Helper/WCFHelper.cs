@@ -10,15 +10,17 @@ namespace wincom.mobile.erp
 
 		public WCFHelper()
 		{
-		  //EndPoint = new EndpointAddress("http://www.wincomcloud.com/Wfc/Service1.svc");
-			//EndPoint = new EndpointAddress("http://www.wincomcloud.com/erpwfcdemo/Service1.svc");
+			//Demo/testing -test version
 			EndPoint = new EndpointAddress("http://www.wincomcloud.com/WfcV3/Service1.svc");
+
+			//production -live version
+			//EndPoint = new EndpointAddress("http://www.wincomcloud.com/WfcV3Live/Service1.svc");
 
 		}
 
 		public static string GetDownloadDBUrl()
 		{
-			return "http://www.wincomcloud.com/wfcv3/dbfiles/";
+			return "http://www.wincomcloud.com/wfcv3Live/dbfiles/";
 		}
 
 		public static string GeUploadDBUrl()

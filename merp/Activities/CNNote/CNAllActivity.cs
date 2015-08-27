@@ -65,9 +65,15 @@ namespace wincom.mobile.erp
 		private void SetViewDelegate(View view,object clsobj)
 		{
 			CNNote item = (CNNote)clsobj;
+			string trxtype = "";
+			if (item.trxtype=="CASH") 
+				trxtype = "CS";
+			else if (item.trxtype=="INVOICE") 
+				trxtype = "INV";
+			else trxtype = "CN";
 			view.FindViewById<TextView> (Resource.Id.invdate).Text = item.invdate.ToString ("dd-MM-yy");
 			view.FindViewById<TextView> (Resource.Id.invno).Text = item.cnno;
-			view.FindViewById<TextView> (Resource.Id.trxtype).Text = item.trxtype;
+			view.FindViewById<TextView> (Resource.Id.trxtype).Text = trxtype;//item.trxtype;
 			view.FindViewById<TextView>(Resource.Id.invcust).Text = item.description;
 			//view.FindViewById<TextView> (Resource.Id.Amount).Text = item.amount.ToString("n2");
 			view.FindViewById<TextView> (Resource.Id.TaxAmount).Text = item.taxamt.ToString("n2");

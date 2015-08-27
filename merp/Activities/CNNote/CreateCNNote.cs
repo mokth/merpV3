@@ -170,15 +170,19 @@ namespace wincom.mobile.erp
 			string[] codes = spinner.SelectedItem.ToString().Split (new char[]{ '|' });
 			if (codes.Length == 0)
 				return;
-			
+			Invoice invInfo = DataHelper.GetInvoice (pathToDatabase, cninvno.Text);
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 				string invno = "";
 				int runno = adNum.RunNo + 1;
 				int currentRunNo =DataHelper.GetLastCNRunNo (pathToDatabase, invdate);
 				if (currentRunNo >= runno)
 					runno = currentRunNo + 1;
-				
-				invno =prefix + invdate.ToString("yyMM") + runno.ToString().PadLeft (4, '0');
+				if (invInfo != null) {
+					string[] prefixs = apara.Prefix.Trim ().ToUpper ().Split(new char[]{'|'});
+					if (invInfo.trxtype == "CASH") {
+						 invno ="CN"+prefixs[1]+ invdate.ToString ("yyMM") + runno.ToString ().PadLeft (4, '0');
+					}else  invno ="CN"+prefixs[0]+ invdate.ToString ("yyMM") + runno.ToString ().PadLeft (4, '0');
+				}else	invno =prefix + invdate.ToString("yyMM") + runno.ToString().PadLeft (4, '0');
 				txtinvno.Text= invno;
 				inv.invdate = invdate;
 				inv.trxtype = "";
@@ -190,12 +194,10 @@ namespace wincom.mobile.erp
 				inv.isUploaded = false;
 				inv.remark = remark.Text.ToUpper();
 				inv.invno = cninvno.Text;
-				if (!string.IsNullOrEmpty (inv.invno)) {
-					Invoice invInfo = DataHelper.GetInvoice (pathToDatabase,inv.invno);
-					if (invInfo != null) {
-						inv.trxtype = invInfo.trxtype;	   		
-					}
+				if (invInfo != null) {
+					inv.trxtype = invInfo.trxtype;	   		
 				}
+
 				db.Insert (inv);
 				adNum.RunNo = runno;
 				if (adNum.ID >= 0)

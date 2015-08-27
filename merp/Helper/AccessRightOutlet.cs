@@ -41,7 +41,8 @@ namespace wincom.mobile.erp
 		public string CND = "C/NOTE Allow Delete";
 		public string CNP = "C/NOTE Allow Print";
 		public string CNEP = "C/NOTE No Edit After Print";
-		public string CNUP = "Upload C/NOTE";
+		public string CNUP = "C/NOTE Allow Edit Unit Price";
+		public string CNUU = "Upload C/NOTE";
 
 		//DO
 		public string DOA = "Delivery Order Allow Add";
@@ -87,7 +88,8 @@ namespace wincom.mobile.erp
 		public string CND = "CNAllowDelete";
 		public string CNP = "CNAllowPrint";
 		public string CNEP = "CNNotEditAftPrint";
-		public string CNUP = "CNUpload";
+		public string CNUP = "CNEditUPrice";
+		public string CNUU = "CNUpload";
 
 		public string DOA = "DOAllowAdd";
 		public string DOE = "DOAllowEdit";
@@ -131,6 +133,7 @@ namespace wincom.mobile.erp
 		public bool CNAllowPrint { get; set; }
 		public bool CNNotEditAftPrint { get; set; }
 		public bool CNUpload { get; set; }
+		public bool CNEditUPrice { get; set; }
 		//DO
 		public bool DOAllowAdd { get; set; }
 		public bool DOAllowEdit { get; set; }

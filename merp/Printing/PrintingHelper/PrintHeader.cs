@@ -64,7 +64,12 @@ namespace wincom.mobile.erp
 				test += date+title1.PadLeft(41-date.Length,' ')+"\n";
 			}
 			//test += DateTime.Now.ToString ("dd-MM-yyyy")+"TAX INVOICE".PadLeft(31,' ')+"\n";
+			if (!string.IsNullOrEmpty (inv.invno)) {
+				test += "INVOICE NO     : " + inv.invno.Trim ()+"\n";
+			}
+
 			string recno = "CREDIT NOTE NO : " + inv.cnno.Trim();
+
 			//test += "RECPT NO : " + inv.invno+"\n";
 			test += recno+title2.PadLeft(41-recno.Length,' ')+"\n";
 			string issueline = "ISSUED BY: " + userid.ToUpper ();
@@ -72,6 +77,10 @@ namespace wincom.mobile.erp
 			string term = "("+((inv.trxtype.IndexOf("CASH")>-1)?"COD":"TERM")+")"; 
 			issueline = issueline + term.PadLeft (templen, ' ')+"\n";
 			test += issueline;// "ISSUED BY: " + userid.ToUpper()+"\n";
+			if (!string.IsNullOrEmpty (inv.remark)) {
+				string reason = "REASON: " + inv.remark;
+				PrintLongText (ref test, reason);
+			}
 			printCaption (ref test);
 		}
 		//众人皆醉我独醒，与code共舞

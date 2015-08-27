@@ -252,7 +252,7 @@ namespace wincom.mobile.erp
 				File.Copy (localfilename, pathToDatabase, true);
 
 				//delete the file after downloaded
-				string urldel = WCFHelper.GeUploadDBUrl()+"/afterdownload.aspx?ID="+filename;
+				string urldel = WCFHelper.GeUploadDBUrl()+"/afterdownload.aspx?ver=3&ID="+filename;
 				WebRequest request = HttpWebRequest.Create(urldel);
 				request.GetResponse();
 

@@ -73,7 +73,7 @@ namespace wincom.mobile.erp
 			qty.AfterTextChanged+= Qty_AfterTextChanged;
 			price.EditorAction += HandleEditorAction; 
 
-			price.Enabled = rights.CNNotEditAftPrint;
+			price.Enabled = rights.CNEditUPrice;
 
 			//SqliteConnection.CreateFile(pathToDatabase);
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))

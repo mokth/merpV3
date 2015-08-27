@@ -32,16 +32,17 @@ namespace wincom.mobile.erp
 			if (!((GlobalvarsApp)this.Application).ISLOGON) {
 				Finish ();
 			}
+			this.Window.SetSoftInputMode (SoftInput.StateAlwaysHidden);
+
 			SetTitle (Resource.String.title_invoicenew);
 			SetContentView (Resource.Layout.CreateInvoice);
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
 
-			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
-			compcode = ((GlobalvarsApp)this.Application).COMPANY_CODE;
-			apara =  DataHelper.GetAdPara (pathToDatabase);
-			rights = Utility.GetAccessRights (pathToDatabase);
-			// Create your application here
 			_date = DateTime.Today;
+		
+
+			// Create your application here
+
 			spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
 			Spinner spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
 			Button butSave = FindViewById<Button> (Resource.Id.newinv_bsave);
@@ -57,11 +58,15 @@ namespace wincom.mobile.erp
 			trxdate.Click += delegate(object sender, EventArgs e) {
 				ShowDialog (0);
 			};
+		
 			butFind.Click+= (object sender, EventArgs e) => {
 				ShowCustLookUp();
 			};
 
-
+			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
+			compcode = ((GlobalvarsApp)this.Application).COMPANY_CODE;
+			apara =  DataHelper.GetAdPara (pathToDatabase);
+			rights = Utility.GetAccessRights (pathToDatabase);
 			//SqliteConnection.CreateFile(pathToDatabase);
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{
@@ -87,6 +92,8 @@ namespace wincom.mobile.erp
 			// attaching data adapter to spinner
 			spinner.Adapter =dataAdapter;
 			spinnerType.Adapter =dataAdapter2;
+			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
+			remark.RequestFocus ();
 		}
 
 		public override void OnBackPressed() {
