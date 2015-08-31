@@ -506,6 +506,11 @@
     <AndroidResource Include="Resources\drawable\bluethem_activated_background_holo_light.xml" />
     <AndroidResource Include="Resources\layout-large-port\SimpleSpinnerDropDownItemEx.axml" />
     <AndroidResource Include="Resources\layout-large-port\AdPara.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\star.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup />

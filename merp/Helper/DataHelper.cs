@@ -98,6 +98,8 @@ namespace wincom.mobile.erp
 					.ToList<CNNote> ();
 				if (list2.Count > 0) {
 					string invno =list2[0].cnno;
+					invno = invno.Replace ("(INV)", "");
+					invno = invno.Replace ("(CS)", "");
 					if (invno.Length > 5)
 					{
 						string srunno = invno.Substring(invno.Length - 4);

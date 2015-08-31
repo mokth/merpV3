@@ -75,7 +75,7 @@ namespace wincom.mobile.erp
 				  trxtype = "INV";
 			else trxtype = "CN";
 			
-			view.FindViewById<TextView> (Resource.Id.trxtype).Text = trxtype;// item.trxtype;
+			view.FindViewById<TextView> (Resource.Id.trxtype).Visibility = ViewStates.Gone;
 			view.FindViewById<TextView>(Resource.Id.invcust).Text = item.description;
 			//view.FindViewById<TextView> (Resource.Id.Amount).Text = item.amount.ToString("n2");
 			view.FindViewById<TextView> (Resource.Id.TaxAmount).Text = item.taxamt.ToString("n2");

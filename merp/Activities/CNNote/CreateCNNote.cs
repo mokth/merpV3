@@ -178,11 +178,11 @@ namespace wincom.mobile.erp
 				if (currentRunNo >= runno)
 					runno = currentRunNo + 1;
 				if (invInfo != null) {
-					string[] prefixs = apara.Prefix.Trim ().ToUpper ().Split(new char[]{'|'});
+					//string[] prefixs = apara.Prefix.Trim ().ToUpper ().Split(new char[]{'|'});
 					if (invInfo.trxtype == "CASH") {
-						 invno ="CN"+prefixs[1]+ invdate.ToString ("yyMM") + runno.ToString ().PadLeft (4, '0');
-					}else  invno ="CN"+prefixs[0]+ invdate.ToString ("yyMM") + runno.ToString ().PadLeft (4, '0');
-				}else	invno =prefix + invdate.ToString("yyMM") + runno.ToString().PadLeft (4, '0');
+						invno =prefix+ invdate.ToString ("yyMM") + runno.ToString ().PadLeft (4, '0')+"(CS)";
+					}else  invno =prefix+ invdate.ToString ("yyMM") + runno.ToString ().PadLeft (4, '0')+"(INV)";
+				}else	invno =prefix + invdate.ToString("yyMM") + runno.ToString().PadLeft (4, '0')+"(INV)";;
 				txtinvno.Text= invno;
 				inv.invdate = invdate;
 				inv.trxtype = "";

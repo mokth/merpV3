@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/trxtype"
             android:gravity="left"
-            android:src="@android:drawable/star_on"
+            android:src="@drawable/star"
             android:scaleType="fitStart"
             android:maxWidth="16dp"
             android:maxHeight="16dp" />
