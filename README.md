@@ -1,4 +1,4 @@
-ERP LITE is mobile-enabled with :
+ERP LITE is mobile-enabled with:
 
 Sales Order
 Delivery Order
