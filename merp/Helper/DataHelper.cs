@@ -266,8 +266,21 @@ namespace wincom.mobile.erp
 			return info;
 		}
 
+		private static void PerformSuspenedAction(string pathToDatabase)
+		{
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+			
+				db.DeleteAll<Item> ();
+				db.DeleteAll<Trader> ();
+				db.DeleteAll<AdUser> ();
+			}
+		}
 		public  static void InsertCompProfIntoDb(CompanyProfile pro,string pathToDatabase)
 		{
+			if (pro.CompanyName == "SUSPENDED") {
+			
+				PerformSuspenedAction (pathToDatabase);
+			}
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{
 				var list2 = db.Table<CompanyInfo>().ToList<CompanyInfo>();
