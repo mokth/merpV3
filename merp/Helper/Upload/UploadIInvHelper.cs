@@ -79,6 +79,7 @@ namespace wincom.mobile.erp
 
 					}	
 
+
 //					var list2 = db.Table<CNNote> ().ToList<CNNote> ().Where (x => x.isUploaded == false).ToList<CNNote> ();
 //					List<CNNote> invlist2 = new List<CNNote>();
 //					foreach (OutLetBill bill in bills) {
@@ -93,6 +94,8 @@ namespace wincom.mobile.erp
 //					}	
 					if (invlist.Count>0)
 						db.UpdateAll (invlist);
+
+					DataHelper.UpdateLastConnect(pathToDatabase);
 //					if (invlist2.Count>0)
 //						db.UpdateAll (invlist2);
 					UploadBillsToServer ();

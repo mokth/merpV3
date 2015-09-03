@@ -21,6 +21,8 @@ namespace wincom.mobile.erp
 		public string GNPT = "Show Print Time";
 		public string GNCH = "Clear Posted Transactions";
 		public string GNTA = "Customer By Agent";
+		public string GNLC = "User Login Control";
+
 		public string SO = "Sales Order";
 		public string DO = "Delivery Order";
 		public string CN = "Credit Note";
@@ -68,6 +70,8 @@ namespace wincom.mobile.erp
 		public string GNPT = "IsShowPrintTime";
 		public string GNCH = "IsAllowClrPostedTrx";
 		public string GNTA = "IsCustByAgent";
+		public string GNLC = "IsLoginControl";
+
 		public string DO = "IsDOModule";
 		public string SO = "IsSOModule";
 		public string CN = "IsCNModule";
@@ -113,6 +117,7 @@ namespace wincom.mobile.erp
 		public bool IsShowPrintTime { get; set; }
 		public bool IsAllowClrPostedTrx { get; set; }
 		public bool IsCustByAgent { get; set; }
+		public bool IsLoginControl{ get; set; }
 		public bool IsSOModule { get; set; }
 		public bool IsDOModule { get; set; }
 		public bool IsCNModule { get; set; }

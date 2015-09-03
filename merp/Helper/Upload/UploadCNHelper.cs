@@ -76,6 +76,8 @@ namespace wincom.mobile.erp
 
 					if (invlist2.Count>0)
 						db.UpdateAll (invlist2);
+					
+					DataHelper.UpdateLastConnect(pathToDatabase);
 					UploadBillsToServer ();
 				}
 			} catch (Exception ex) {

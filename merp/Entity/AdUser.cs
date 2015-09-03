@@ -11,6 +11,8 @@ namespace wincom.mobile.erp
 		public string BranchCode{ get; set;}
 		public string Password { get; set;}
 		public bool Islogon { get; set;}
+		public DateTime LastConnect { get; set;}
+		public int DayLen { get; set;}
 
 	}
 }

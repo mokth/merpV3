@@ -10,7 +10,7 @@ namespace wincom.mobile.erp
 	{
 		public static AdUser GetUser(string pathToDatabase)
 		{
-		AdUser user=null;
+	  	AdUser user=null;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 				var list2 = db.Table<AdUser> ().ToList<AdUser> ();
 				if (list2.Count > 0) {
@@ -20,6 +20,22 @@ namespace wincom.mobile.erp
 		
 			return user;
 		}
+
+		public static void UpdateLastConnect(string pathToDatabase)
+		{
+			AdUser user=null;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list2 = db.Table<AdUser> ().ToList<AdUser> ();
+				if (list2.Count > 0) {
+					user = list2 [0];
+					user.LastConnect = DateTime.Now;
+				   db.Update(user);	
+				}
+			}
+
+
+		}
+
 
 		public static int GetLastInvRunNo(string pathToDatabase, DateTime invdate,string trxtype )
 		{
@@ -400,6 +416,30 @@ namespace wincom.mobile.erp
 			}
 
 			return userfunction;
+		}
+
+		public static int GetExpiryDay(string pathToDatabase)
+		{
+			int expiry = 3;
+			CompanyInfo compInfo = GetCompany(pathToDatabase);
+			if (compInfo== null) {
+				return expiry;
+			}
+
+			string sPattern = "EXPD:";
+			string[] ss = compInfo.WCFUrl.Split(new char[] { ',' });
+			foreach (string s1 in ss)
+			{
+				if (System.Text.RegularExpressions.Regex.IsMatch(s1, sPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+				{
+					string[] para= s1.Split(new char[] { ':' });
+					if (para.Length > 1)
+						expiry = Convert.ToInt32(para [1]);
+				}
+
+			}
+
+			return expiry;
 		}
 
 		public static Invoice[] GetInvoices (DateTime printdate1, DateTime printdate2)

@@ -22,6 +22,7 @@ namespace wincom.mobile.erp
 		private Service1Client _client;
 		string pathToDatabase;
 		static volatile bool _donwloadPro = false;
+		AccessRights rights;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -47,11 +48,18 @@ namespace wincom.mobile.erp
 			//InitializeServiceClient();
 			txtver.Text = "VERSION "+pInfo.VersionName;
 
+
 			AdUser user=null;
 			//SQLiteConnection...CreateFile(pathToDatabase);
 			if (!File.Exists (pathToDatabase)) {
 				createTable (pathToDatabase);
-			} 
+			} else
+			{
+				if (pInfo.VersionCode > 2) {
+					if (!CheckIfColumnExists())
+						UpdateDatbase ();
+				}
+			}
 			//else {
 //				user = DataHelper.GetUser (pathToDatabase);
 //				UpdateDatbase ();
@@ -100,33 +108,28 @@ namespace wincom.mobile.erp
 			} );
 
 		}
+
+		private bool CheckIfColumnExists()
+		{
+			bool isfound = true;
+			try{
+				 AdUser myuser =  DataHelper.GetUser(pathToDatabase);				
+				 DateTime temp = myuser.LastConnect;
+			}catch {
+				isfound = false;
+			}
+			return isfound;
+		}
+
 		private void UpdateDatbase()
 		{
 			try {
 				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
-			
-					var num = conn.ExecuteScalar<Int32> ("SELECT count(name) FROM sqlite_master WHERE type='table' and name='CNNote'", new object[]{ });
-					int count = Convert.ToInt32 (num);
-					if (count > 0)
-						return;
 
-					conn.CreateTable<CNNote> ();
-					conn.CreateTable<CNNoteDtls> ();
-					conn.DropTable<AdPara> ();
-					conn.CreateTable<AdPara> ();
-					conn.DropTable<AdNumDate> ();
-					conn.CreateTable<AdNumDate> ();
-					conn.DropTable<CompanyInfo> ();
-					conn.CreateTable<CompanyInfo> ();
-					conn.DropTable<Trader> ();
-					conn.CreateTable<Trader> ();
-					conn.DropTable<AdUser> ();
-					conn.CreateTable<AdUser> ();
-
-					string sql = @"ALTER TABLE Invoice RENAME TO sqlitestudio_temp_table;
-									CREATE TABLE Invoice (invno varchar PRIMARY KEY NOT NULL, trxtype varchar, invdate bigint, created bigint, amount float, taxamt float, custcode varchar, description varchar, uploaded bigint, isUploaded integer, isPrinted integer);
-									INSERT INTO Invoice (invno, trxtype, invdate, created, amount, taxamt, custcode, description, uploaded, isUploaded,isPrinted) SELECT invno, trxtype, invdate, created, amount, taxamt, custcode, description, uploaded, isUploaded,0 FROM sqlitestudio_temp_table;
-									DROP TABLE sqlitestudio_temp_table";
+					string sql = @"ALTER TABLE AdUser RENAME TO sqlitestudio_temp_table;
+								   CREATE TABLE AdUser (UserID varchar PRIMARY KEY NOT NULL, CompCode varchar, BranchCode varchar, Password varchar, Islogon integer, LastConnect bigint, DayLen INTEGER);
+								   INSERT INTO AdUser (UserID, CompCode, BranchCode, Password, Islogon) SELECT UserID, CompCode, BranchCode, Password, Islogon FROM sqlitestudio_temp_table;
+								  DROP TABLE sqlitestudio_temp_table;";
 					string[] sqls = sql.Split (new char[]{ ';' });
 					foreach (string ssql in sqls) {
 						conn.Execute (ssql, new object[]{ });
@@ -226,14 +229,32 @@ namespace wincom.mobile.erp
 
 			if (user.UserID.ToUpper () == userid.Text.ToUpper ()) {
 				if (user.Password == passw.Text) {
-					user.Islogon = true;
-					UpdateLogin (user);
-					ShowMainActivity (user.CompCode, user.BranchCode);	
+					if (isLastConnectExpire (user)) {
+						user.Islogon = false;
+						RemoveUser (user);
+						DownloadCOmpleted (Resources.GetString (Resource.String.msg_faillogin));
+					} else {
+						user.Islogon = true;
+						UpdateLogin (user);
+						ShowMainActivity (user.CompCode, user.BranchCode);	
+					}
 				} else {
 					DownloadCOmpleted (Resources.GetString (Resource.String.msg_faillogin));
 				}
 			}else DownloadCOmpleted (Resources.GetString (Resource.String.msg_faillogin));
 
+		}
+
+		private bool isLastConnectExpire(AdUser user)
+		{
+			bool isExpiry = false;
+			rights = Utility.GetAccessRights (pathToDatabase);
+			if (rights.IsLoginControl) {
+				double day = (DateTime.Now - user.LastConnect).TotalDays;
+				isExpiry = (day > 3);
+			}
+
+			return isExpiry;
 		}
 
 		void DownloadCOmpleted (string msg)
@@ -248,6 +269,13 @@ namespace wincom.mobile.erp
 		{
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 				db.Update (user);
+			}
+		}
+
+		void RemoveUser(AdUser user)
+		{
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				db.Delete (user);
 			}
 		}
 
