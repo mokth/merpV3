@@ -114,6 +114,25 @@ namespace wincom.mobile.erp
 				//string dispmsg = "Total " + count.ToString () + " invoices uploaded.";
 				string dispmsg =Resources.GetString(Resource.String.msg_uploadinv);
 				dispmsg = dispmsg.Replace ("xx", count.ToString ());
+				AutoDownloadSettings ();
+				Toast.MakeText (this, dispmsg, ToastLength.Long).Show ();	
+			} else {
+				Toast.MakeText (this, msg, ToastLength.Long).Show ();	
+			}
+		}
+
+		void AutoDownloadSettings ()
+		{
+			DownloadHelper download= new DownloadHelper();
+			download.Downloadhandle = DownSettingDoneDlg; 
+			download.CallingActivity = this;
+			download.startDownloadCompInfo();
+		}
+
+		private void DownSettingDoneDlg(Activity callingAct,int count,string msg)
+		{
+			if (count > 0) {
+				string dispmsg =  Resources.GetString(Resource.String.msg_downsettings);
 				Toast.MakeText (this, dispmsg, ToastLength.Long).Show ();	
 			} else {
 				Toast.MakeText (this, msg, ToastLength.Long).Show ();	

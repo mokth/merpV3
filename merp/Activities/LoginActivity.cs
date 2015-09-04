@@ -249,9 +249,10 @@ namespace wincom.mobile.erp
 		{
 			bool isExpiry = false;
 			rights = Utility.GetAccessRights (pathToDatabase);
+			int Expiry = DataHelper.GetExpiryDay (pathToDatabase);
 			if (rights.IsLoginControl) {
 				double day = (DateTime.Now - user.LastConnect).TotalDays;
-				isExpiry = (day > 3);
+				isExpiry = (day > Expiry);
 			}
 
 			return isExpiry;
