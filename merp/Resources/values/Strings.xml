@@ -41,6 +41,7 @@
 
     <string name="submenu_item">MASTER ITEM</string>
     <string name="submenu_cust">CUSTOMER PROFILE</string>
+    <string name="submenu_testprint">TEST PRINT</string>
 
     <string name="submenu_downitem">DOWNLOAD MASTER ITEM</string>
     <string name="submenu_downcust">DOWNLOAD CUSTOMERS</string>

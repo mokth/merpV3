@@ -23,7 +23,8 @@
    <string name="mainmenu_trx">交易</string>
     <string name="mainmenu_trxlist">交易记录</string>
     <string name="mainmenu_master">主要项目</string>
-    <string name="mainmenu_downupload">下载/上传</string>
+    <string name="mainmenu_downupload">下载</string>
+      <string name="mainmenu_upload">上传</string>
     <string name="mainmenu_settings">设置</string>
     <string name="mainmenu_about">关于</string>
     <string name="mainmenu_exit">退出</string>
@@ -40,6 +41,7 @@
 
     <string name="submenu_item">产品目录</string>
     <string name="submenu_cust">客户目录</string>
+    <string name="submenu_testprint">测试打印</string>
 
     <string name="submenu_downitem">下载产品</string>
     <string name="submenu_downcust">下载客户</string>
