@@ -16,7 +16,7 @@
             android:height="53dp"
             android:id="@+id/butsetting" />
         <Button
-            android:text="TEST PRINT"
+            android:text="@string/submenu_testprint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
