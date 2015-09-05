@@ -433,7 +433,7 @@ namespace wincom.mobile.erp
 
 		public static int GetExpiryDay(string pathToDatabase)
 		{
-			int expiry = 3;
+			int expiry = 5;
 			CompanyInfo compInfo = GetCompany(pathToDatabase);
 			if (compInfo== null) {
 				return expiry;
