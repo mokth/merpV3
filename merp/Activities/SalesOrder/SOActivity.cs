@@ -182,7 +182,11 @@ namespace wincom.mobile.erp
 		{
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{
-				var list2 = db.Table<SaleOrder>().ToList<SaleOrder>().Where(x=>x.isUploaded==false);
+				var list2 = db.Table<SaleOrder>()
+					.Where(x=>x.isUploaded==false)
+					.OrderByDescending (x => x.sodate)
+					.ThenByDescending (x => x.created)
+					.ToList<SaleOrder>();
 				foreach(var item in list2)
 				{
 					list.Add(item);

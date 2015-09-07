@@ -139,7 +139,8 @@ namespace wincom.mobile.erp
 			{
 				var list2 = db.Table<Invoice>()
 					.Where(x=>x.isUploaded==true&&x.invdate>=sdate&&x.invdate<=edate)
-					.OrderByDescending (x => x.invno)
+					.OrderByDescending (x => x.invdate)
+					.ThenByDescending (x => x.created)
 					.ToList<Invoice>();
 				foreach(var item in list2)
 				{

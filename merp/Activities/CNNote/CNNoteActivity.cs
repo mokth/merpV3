@@ -192,7 +192,8 @@ namespace wincom.mobile.erp
 			{
 				var list2 = db.Table<CNNote>()
 					.Where(x=>x.isUploaded==false)
-					.OrderByDescending (x => x.cnno)
+					.OrderByDescending (x => x.invdate)
+					.ThenByDescending (x => x.created)
 					.ToList<CNNote>();
 				foreach(var item in list2)
 				{

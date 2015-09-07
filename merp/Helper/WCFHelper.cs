@@ -24,7 +24,7 @@ namespace wincom.mobile.erp
 			return "http://www.wincomcloud.com/wfcv3Live/dbfiles/";
 
 			//Demo/testing -test version
-			////return "http://www.wincomcloud.com/wfcv3/dbfiles/";
+			//return "http://www.wincomcloud.com/wfcv3/dbfiles/";
 		}
 
 		public static string GeUploadDBUrl()
