@@ -55,6 +55,12 @@ namespace wincom.mobile.erp
 
 			return valid;
 		}
+		public static AccessRights GetAccessRights()
+		{
+			string pathToDatabase = ((GlobalvarsApp)Application.Context).DATABASE_PATH;
+			return  GetAccessRights (pathToDatabase);
+		}
+
 		/// <summary>
 		/// Gets the access rights.
 		/// </summary>

@@ -8,6 +8,7 @@ namespace wincom.mobile.erp
 	{
 		bool StartPrint (string text, int noofcopy, ref string errmsg);
 		void SetCallingActivity(Activity activity);
+		void  SetIsPrintCompLogo (bool  iSPrintCompLogo);
 	}
 
 

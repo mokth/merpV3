@@ -195,9 +195,9 @@ namespace wincom.mobile.erp
 				builderd.SetNegativeButton("Cancel", (s, e) => { /* do something on Cancel click */ });
 				builderd.Create().Show();
 				return true;
-//			case Resource.Id.mmenu_Reset:
-//				//do something
-//				return true;
+			case Resource.Id.mmenu_downlogo:
+				RunOnUiThread(() =>DownlooadLogo()) ;
+				return true;
 			case Resource.Id.mmenu_setting:
 				StartActivity (typeof(SettingActivity));
 				return true;
@@ -260,6 +260,30 @@ namespace wincom.mobile.erp
 			} catch (Exception ex)
 			{
 				Toast.MakeText (this, Resources.GetString(Resource.String.msg_faildowndb), ToastLength.Long).Show ();	
+			}
+		}
+
+		void DownlooadLogo()
+		{
+			try {
+				//backup db first before upload
+
+				WebClient myWebClient = new WebClient ();
+				string document = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
+				string logopath = Path.Combine (document, "logo.png");
+				var sdcard = Path.Combine (Android.OS.Environment.ExternalStorageDirectory.Path, "erpdata");
+				string filename = COMPCODE + "_" + BRANCODE + "_logo.png";
+				string url = WCFHelper.GetDownloadDBUrl () + filename;
+				string localfilename = Path.Combine (sdcard, "logo.png");
+				if (File.Exists (localfilename))
+					File.Delete (localfilename);
+
+				myWebClient.DownloadFile (url, localfilename);  
+				File.Copy (localfilename, logopath, true);
+
+				Toast.MakeText (this, Resources.GetString (Resource.String.msg_successdowndb), ToastLength.Long).Show ();	
+			} catch (Exception ex) {
+				Toast.MakeText (this, Resources.GetString (Resource.String.msg_faildowndb), ToastLength.Long).Show ();	
 			}
 		}
 

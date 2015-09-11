@@ -15,6 +15,7 @@ namespace wincom.mobile.erp
 		internal PrintReportFooter prtFooter;
 		internal PrintTaxSummary prtTaxSummary;
 		internal PrintTotalAmount prtTotal;
+		internal  AccessRights rights;
 
 		public PrintDocumentBase()
 		{
@@ -25,7 +26,13 @@ namespace wincom.mobile.erp
 			prtFooter = new PrintReportFooter();
 			prtTaxSummary= new PrintTaxSummary();
 			prtTotal =new PrintTotalAmount ();
+			rights =Utility.GetAccessRights ();
 
+		}
+
+		internal bool iSPrintCompLogo()
+		{
+			return rights.IsPrintCompLogo;		
 		}
 
 		internal void PrintLongText(ref string test,string text)

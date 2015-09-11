@@ -12,7 +12,7 @@
         <TableRow
             android:id="@+id/tableRow1c">
             <Button
-               android:layout_height="60dp"
+                android:layout_height="60dp"
                 android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"

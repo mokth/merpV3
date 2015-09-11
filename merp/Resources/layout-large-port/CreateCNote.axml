@@ -156,7 +156,7 @@
         <TableRow
             android:id="@+id/tableRow1">
             <Button
-                 android:layout_height="60dp"
+                android:layout_height="60dp"
                 android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
@@ -164,13 +164,12 @@
                 android:drawableLeft="@drawable/add"
                 android:text="@string/button_add" />
             <Button
-                  android:layout_height="60dp"
+                android:layout_height="60dp"
                 android:layout_width="140dp"
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/newinv_cancel"
                 android:drawableLeft="@drawable/left"
-               
                 android:text="@string/button_back" />
         </TableRow>
         <TableRow

@@ -140,21 +140,24 @@
                     android:textColor="#ffffff"
                     android:typeface="sans"
                     android:id="@+id/Save"
-                    android:text="ADD"
+                    android:text="@string/button_add"
                     android:drawableLeft="@drawable/add"
-                    android:width="120dp" />
+                    android:width="130dp"
+                    android:height="50dp" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:text="BACK"
+                    android:text="@string/button_cancel"
                     android:id="@+id/Cancel"
                     android:drawableLeft="@drawable/left"
-                    android:width="120dp" />
+                    android:width="130dp"
+                    android:height="50dp" />
             </TableRow>
             <TableRow
-                android:id="@+id/tableRow2" />
+                android:id="@+id/tableRow2">
+            </TableRow>
         </TableLayout>
     </LinearLayout>
 </ScrollView>

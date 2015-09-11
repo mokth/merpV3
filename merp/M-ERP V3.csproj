@@ -511,6 +511,18 @@
     <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\star.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\star.png" />
+    <AndroidResource Include="Resources\values-ms\Colors.xml" />
+    <AndroidResource Include="Resources\values-ms\colors_bluethem.xml" />
+    <AndroidResource Include="Resources\values-ms\dimens_bluethem.xml" />
+    <AndroidResource Include="Resources\values-ms\Strings.xml" />
+    <AndroidResource Include="Resources\values-ms\styles_bluethem.xml" />
+    <AndroidResource Include="Resources\values-ms\themes.xml" />
+    <AndroidResource Include="Resources\values-ms\themes_bluethem.xml" />
+    <AndroidResource Include="Resources\menu-ms\MainMenu.xml" />
+    <AndroidResource Include="Resources\menu-ms\menu.xml" />
+    <AndroidResource Include="Resources\menu-ms\popupHis.xml" />
+    <AndroidResource Include="Resources\menu-ms\popupInv.xml" />
+    <AndroidResource Include="Resources\menu-ms\popupItem.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup />
@@ -526,5 +538,7 @@
     <Folder Include="Printing\" />
     <Folder Include="Printing\PrintingHelper\" />
     <Folder Include="Activities\DeliveyOrder\" />
+    <Folder Include="Resources\values-ms\" />
+    <Folder Include="Resources\menu-ms\" />
   </ItemGroup>
 </Project>

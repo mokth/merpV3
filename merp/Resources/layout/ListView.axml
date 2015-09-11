@@ -17,7 +17,7 @@
                 android:textColor="#ffffff"
                 android:id="@+id/butInvBack"
                 android:drawableLeft="@drawable/left"
-                android:width="120dp"
+                android:width="130dp"
                 android:text="@string/button_back" />
             <Button
                 android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
                 android:textColor="#ffffff"
                 android:id="@+id/butnewInv"
                 android:drawableLeft="@drawable/add"
-                android:width="120dp"
+                android:width="130dp"
                 android:text="@string/button_new" />
         </TableRow>
     </TableLayout>

@@ -19,7 +19,7 @@
                 android:typeface="sans"
                 android:id="@+id/butICodeBack"
                 android:drawableLeft="@drawable/left"
-                android:width="120dp"
+                android:width="130dp"
                 android:text="@string/button_back" />
             <EditText
                 android:textAppearance="?android:attr/textAppearanceMedium"

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+   <item android:id="@+id/popInvadd"
+          android:title="TAMBAH" />   
+ 	<item android:id="@+id/popInvedit"
+          android:title="EDIT" />    
+    <item android:id="@+id/popInvdelete"
+          android:title="PADAM" />  
+    <item android:id="@+id/popInvprint"
+          android:title="CETAK" />   
+    <item android:id="@+id/popInvprint2"
+          android:title="CETAK 2 SALINAN" />   
+    <item android:id="@+id/poppay"
+          android:visibility="gone" 
+          android:title="BAYAR" />  
+     
+</menu>
+

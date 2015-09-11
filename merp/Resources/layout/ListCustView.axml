@@ -18,7 +18,7 @@
                 android:typeface="sans"
                 android:id="@+id/butCustBack"
                 android:drawableLeft="@drawable/left"
-                android:width="120dp"
+                android:width="130dp"
                 android:text="BACK" />
             <EditText
                 android:textAppearance="?android:attr/textAppearanceMedium"

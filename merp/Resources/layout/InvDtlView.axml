@@ -16,7 +16,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.1"
+                android:layout_weight="1.2"
                 android:padding="2dip">
                 <Button
                     android:layout_width="match_parent"
@@ -25,12 +25,13 @@
                     android:typeface="sans"
                     android:id="@+id/butInvItmBack"
                     android:drawableLeft="@drawable/left"
-                    android:text="@string/button_back" />
+                    android:text="@string/button_back"
+                    android:width="130dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1.1"
+                android:layout_weight="1.2"
                 android:gravity="center"
                 android:paddingLeft="5dip">
                 <Button
@@ -40,12 +41,13 @@
                     android:textColor="#ffffff"
                     android:typeface="sans"
                     android:drawableLeft="@drawable/add"
-                    android:id="@+id/butnewItem" />
+                    android:id="@+id/butnewItem"
+                    android:width="130dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1.8"
+                android:layout_weight="1.6"
                 android:gravity="center"
                 android:paddingLeft="5dip">
                 <EditText

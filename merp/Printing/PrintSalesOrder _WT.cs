@@ -55,6 +55,7 @@ namespace wincom.mobile.erp
 			GetSaleOrderText (so, list);
 			IPrintToDevice device = PrintDeviceManager.GetPrintingDevice<BlueToothDeviceHelper> ();
 			device.SetCallingActivity (callingActivity);
+			device.SetIsPrintCompLogo (iSPrintCompLogo ());
 			isPrinted = device.StartPrint (text, noOfCopy, ref errMsg);
 
 			return isPrinted;
