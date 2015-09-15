@@ -4,8 +4,10 @@ using Android.App;
 namespace wincom.mobile.erp
 {
 	
-	public class PrintTest:PrintDocumentBase,IPrintDocument
+	public class PrintInvoice_NTAX:PrintDocumentBase,IPrintDocument
 	{
+		Invoice inv;
+		InvoiceDtls[] list;
 		int noOfCopy=1;
 		Activity callingActivity;
 
@@ -21,12 +23,12 @@ namespace wincom.mobile.erp
 
 		public void SetDocument (object doc)
 		{
-			
+			inv = (Invoice)doc;
 		}
 
 		public void SetDocumentDtls (object docdtls)
 		{
-			
+			list = (InvoiceDtls[])docdtls;
 		}
 
 		public void SetNoOfCopy (int noofcopy)
@@ -50,7 +52,7 @@ namespace wincom.mobile.erp
 			text = "";
 			errMsg = "";
 			bool isPrinted = false;
-			GetText ();
+			GetInvoiceText (inv, list);
 			IPrintToDevice device = PrintDeviceManager.GetPrintingDevice<BlueToothDeviceHelper> ();
 			device.SetCallingActivity (callingActivity);
 			device.SetIsPrintCompLogo (iSPrintCompLogo ());
@@ -59,10 +61,25 @@ namespace wincom.mobile.erp
 			return isPrinted;
 		}
 
-		private void GetText ()
+		private void GetInvoiceText (Invoice inv, InvoiceDtls[] list)
 		{
 			prtcompHeader.PrintCompHeader (ref text);
-			//text += "\nTHANK YOU\n\n\n\n\n\n\n\n";
+			prtCustHeader.PrintCustomer (ref text, inv.custcode);
+			prtHeader.PrintHeader_NTax (ref text, inv);
+			string dline = "";
+			double ttlAmt = 0;
+			double ttltax = 0;
+			int count = 0;
+			foreach (InvoiceDtls itm in list) {
+				count += 1;
+				dline = dline + prtDetail.PrintDetail_NTax (itm, count);
+				ttlAmt = ttlAmt + itm.netamount;
+				ttltax = ttltax + itm.tax;
+			}
+			text += dline;
+			prtTotal.PrintTotal_NTax (ref text, ttlAmt, ttltax);
+			prtFooter.PrintFooter (ref text);
+			text += "\nTHANK YOU\n\n\n\n\n\n\n\n";
 		}
 
 	}

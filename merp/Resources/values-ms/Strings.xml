@@ -116,7 +116,9 @@
     <string name="msg_successdownrunno">Berjaya dimuat turun nombor giliran.</string>
     <string name="msg_successdownprofile">Berjaya dimuat turun profil company.</string>
     <string name="msg_successdowndb">Berjaya dimuat turun pangkalan data dari server.</string>
+      <string name="msg_successdownlogo">Berjaya dimuat turun logo dari server.</string>
     <string name="msg_faildowndb">Gagal dimuat turun pangkalan data dari server!</string>
+    <string name="msg_faildownlogo">Gagal dimuat turun logo dari server!</string>
     <string name="msg_accessdenied">"Permintaan ditolak..."</string>
     <string name="msg_trxclear">"Transaksi telah dihapuskan..."</string>
     <string name="msg_invaliddate">Tarikh tidak sah ...</string>

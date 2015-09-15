@@ -12,7 +12,49 @@ namespace wincom.mobile.erp
 			test += "------------------------------------------\n";
 		}
 
+		static void printCaption_NTax (ref string test)
+		{
+			test += "------------------------------------------\n";
+			test += "DESCRIPTION                               \n";
+			test += "NO        QTY      U/PRICE         AMOUNT \n";
+			test += "------------------------------------------\n";
+				   //123456789012345678901234567890123456789012
+			      // 123 123456789 12345678912 1234567890124 
+		}
+
+		public void PrintHeader_NTax (ref string test,Invoice inv)
+		{
+			string userid = USERID;
+		//	string[] titles = apara.ReceiptTitle.Split (new char[]{ ',', '|'});
+			string title1 = "INVOICE";
+			string title2 = "";
+
+			string date = DateTime.Now.ToString ("dd-MM-yyyy");
+			string datetime = DateTime.Now.ToString ("dd-MM-yyyy hh:mm tt");
+			if (compinfo.ShowTime) {
+				test += datetime+title1.PadLeft(41-datetime.Length,' ')+"\n";
+			} else {
+				test += date+title1.PadLeft(41-date.Length,' ')+"\n";
+			}
+			//test += DateTime.Now.ToString ("dd-MM-yyyy")+"TAX INVOICE".PadLeft(31,' ')+"\n";
+			string recno = "RECPT NO : " + inv.invno.Trim();
+			//test += "RECPT NO : " + inv.invno+"\n";
+			test += recno+title2.PadLeft(41-recno.Length,' ')+"\n";
+			string issueline = "ISSUED BY: " + userid.ToUpper ();
+			int templen = 41 - issueline.Length;
+			string term = "("+((inv.trxtype.IndexOf("CASH")>-1)?"COD":"TERM")+")"; 
+			issueline = issueline + term.PadLeft (templen, ' ')+"\n";
+			test += issueline;// "ISSUED BY: " + userid.ToUpper()+"\n";
+			printCaption_NTax (ref test);
+		}
+
 		public void PrintHeader (ref string test,Invoice inv)
+		{
+			PrintInvHeader (ref test,inv);
+			printCaption (ref test);
+		}
+
+		void PrintInvHeader (ref string test,Invoice inv)
 		{
 			string userid = USERID;
 			string[] titles = apara.ReceiptTitle.Split (new char[]{ ',', '|'});
@@ -44,11 +86,22 @@ namespace wincom.mobile.erp
 			string term = "("+((inv.trxtype.IndexOf("CASH")>-1)?"COD":"TERM")+")"; 
 			issueline = issueline + term.PadLeft (templen, ' ')+"\n";
 			test += issueline;// "ISSUED BY: " + userid.ToUpper()+"\n";
-			printCaption (ref test);
-		
+
 		}
 
-		public void PrintCNHeader (ref string test,CNNote inv)
+		public void PrintCNHeader (ref string test,CNNote cn)
+		{
+			PrintHeaderCN (ref test, cn);
+			printCaption (ref test);
+		}
+
+		public void PrintCNHeader_NTax (ref string test,CNNote cn)
+		{
+			PrintHeaderCN (ref test, cn);
+			printCaption_NTax (ref test);
+		}
+
+		public void PrintHeaderCN (ref string test,CNNote inv)
 		{
 			string userid = USERID;
 			string[] titles = apara.ReceiptTitle.Split (new char[]{ ',', '|'});
@@ -81,10 +134,23 @@ namespace wincom.mobile.erp
 				string reason = "REASON: " + inv.remark;
 				PrintLongText (ref test, reason);
 			}
-			printCaption (ref test);
+
 		}
+
 		//众人皆醉我独醒，与code共舞
 		public void PrintSOHeader (ref string test,SaleOrder so)
+		{
+			PrintHeaderSO (ref test, so);
+			printCaption (ref test);
+		}
+
+		public void PrintSOHeader_NTax (ref string test,SaleOrder so)
+		{
+			PrintHeaderSO (ref test, so);
+			printCaption_NTax (ref test);
+		}
+
+		public void PrintHeaderSO (ref string test,SaleOrder so)
 		{
 			string userid = USERID;
 			string title1 = "SALES ORDER";
@@ -105,8 +171,9 @@ namespace wincom.mobile.erp
 				test += "REMARK:\n";
 				test += so.remark+"\n";
 			}
-			printCaption (ref test);
+
 		}
+
 
 		public void PrintDOHeader (ref string test,DelOrder doOrder)
 		{

@@ -30,6 +30,7 @@ namespace wincom.mobile.erp
 		private  static byte[] INIT_PRINTER = new byte[]{ESC_CHAR, 0x40};
 		private static byte[] SELECT_BIT_IMAGE_MODE = {0x1B, 0x2A, 33};
 		private  static byte[] SET_LINE_SPACE_24 = new byte[]{ESC_CHAR, 0x33, 24};
+		private  static byte[] SET_LINE_SPACE_1 = new byte[]{ESC_CHAR, 0x33, 1};
 
 		public BlueToothDeviceHelper ()
 		{
@@ -246,13 +247,15 @@ namespace wincom.mobile.erp
 		private void PrintLogo(Stream mmOutputStream)
 		{
 			string document = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
-			string logopath = System.IO.Path.Combine (document, "logo.png");
-
+			string logopath = "";
+			if (apara.PaperSize=="58mm")
+			     logopath = System.IO.Path.Combine (document, "logo58.png");
+			else  logopath = System.IO.Path.Combine (document, "logo80.png");
 			if (!File.Exists (logopath))
 				return;
-
+			Stream fg =null;
 			try {
-				Stream fg = File.Open (logopath, FileMode.Open);
+				fg = File.Open (logopath, FileMode.Open);
 
 				var bitmap = BitmapFactory.DecodeStream (fg);
 
@@ -261,6 +264,11 @@ namespace wincom.mobile.erp
 
 			} catch (Exception ex) {
 
+			}finally{
+				if (fg != null) {
+					fg.Close ();
+					fg = null;
+				}
 			}
 		}
 
@@ -284,7 +292,14 @@ namespace wincom.mobile.erp
 
 		private void printImage(Stream mmOutputStream,int[][] pixels) {
 			// Set the line spacing at 24 (we'll print 24 dots high)
-			mmOutputStream.Write(SET_LINE_SPACE_24,0,SET_LINE_SPACE_24.Length);
+			byte[] charfont = new Byte[] { 27, 64 }; //Char font 9x17
+			mmOutputStream.Write(charfont, 0, charfont.Length);
+			if (apara.PaperSize == "80mm") {
+				charfont = new Byte[] { 27, 33, 0 }; //Char font 12x24
+				mmOutputStream.Write (charfont, 0, charfont.Length);
+				mmOutputStream.Write (SET_LINE_SPACE_1, 0, SET_LINE_SPACE_1.Length);
+			}else mmOutputStream.Write (SET_LINE_SPACE_24, 0, SET_LINE_SPACE_24.Length);
+
 			for (int y = 0; y < pixels.Length; y += 24) {
 				// Like I said before, when done sending data, 
 				// the printer will resume to normal text printing

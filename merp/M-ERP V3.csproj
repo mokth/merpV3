@@ -20,6 +20,7 @@
     <AssemblyOriginatorKeyFile>key.txt</AssemblyOriginatorKeyFile>
     <ReleaseVersion>0.2</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +37,7 @@
     <AndroidSigningStorePass>wincom@123</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>com.wincom.merp</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>wincom@123</AndroidSigningKeyPass>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -52,7 +54,6 @@
     <AndroidSigningKeyAlias>com.wincom.merp</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>wincom@123</AndroidSigningKeyPass>
     <DebugType>full</DebugType>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -174,6 +175,9 @@
     <Compile Include="Activities\UtilityActivity.cs" />
     <Compile Include="Printing\PrintTest.cs" />
     <Compile Include="Printing\PrintSummary.cs" />
+    <Compile Include="Printing\NonTax\PrintInvoice_NTAX.cs" />
+    <Compile Include="Printing\NonTax\PrintCreditNote_NTAX.cs" />
+    <Compile Include="Printing\NonTax\PrintSalesOrder_NTAX.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -540,5 +544,6 @@
     <Folder Include="Activities\DeliveyOrder\" />
     <Folder Include="Resources\values-ms\" />
     <Folder Include="Resources\menu-ms\" />
+    <Folder Include="Printing\NonTax\" />
   </ItemGroup>
 </Project>

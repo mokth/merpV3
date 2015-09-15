@@ -1056,17 +1056,17 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f060032
 			public const int button_print = 2131099698;
 			
-			// aapt resource value: 0x7f06006f
-			public const int form_billto = 2131099759;
-			
-			// aapt resource value: 0x7f06006e
-			public const int form_custpono = 2131099758;
+			// aapt resource value: 0x7f060071
+			public const int form_billto = 2131099761;
 			
 			// aapt resource value: 0x7f060070
-			public const int form_remark = 2131099760;
+			public const int form_custpono = 2131099760;
 			
-			// aapt resource value: 0x7f06006d
-			public const int form_sono = 2131099757;
+			// aapt resource value: 0x7f060072
+			public const int form_remark = 2131099762;
+			
+			// aapt resource value: 0x7f06006f
+			public const int form_sono = 2131099759;
 			
 			// aapt resource value: 0x7f06002b
 			public const int invform_amount = 2131099691;
@@ -1140,26 +1140,26 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f060007
 			public const int mainmenu_upload = 2131099655;
 			
-			// aapt resource value: 0x7f06005f
-			public const int msg_accessdenied = 2131099743;
+			// aapt resource value: 0x7f060061
+			public const int msg_accessdenied = 2131099745;
+			
+			// aapt resource value: 0x7f06006e
+			public const int msg_bluetootherror = 2131099758;
+			
+			// aapt resource value: 0x7f06006d
+			public const int msg_bluetoothfound = 2131099757;
 			
 			// aapt resource value: 0x7f06006c
-			public const int msg_bluetootherror = 2131099756;
-			
-			// aapt resource value: 0x7f06006b
-			public const int msg_bluetoothfound = 2131099755;
+			public const int msg_bluetoothnofound = 2131099756;
 			
 			// aapt resource value: 0x7f06006a
-			public const int msg_bluetoothnofound = 2131099754;
-			
-			// aapt resource value: 0x7f060068
-			public const int msg_confirmcleer = 2131099752;
-			
-			// aapt resource value: 0x7f060067
-			public const int msg_confirmdelete = 2131099751;
+			public const int msg_confirmcleer = 2131099754;
 			
 			// aapt resource value: 0x7f060069
-			public const int msg_confirmoverwrite = 2131099753;
+			public const int msg_confirmdelete = 2131099753;
+			
+			// aapt resource value: 0x7f06006b
+			public const int msg_confirmoverwrite = 2131099755;
 			
 			// aapt resource value: 0x7f060051
 			public const int msg_downcust = 2131099729;
@@ -1170,29 +1170,32 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f060056
 			public const int msg_downsettings = 2131099734;
 			
-			// aapt resource value: 0x7f06005e
-			public const int msg_faildowndb = 2131099742;
+			// aapt resource value: 0x7f06005f
+			public const int msg_faildowndb = 2131099743;
+			
+			// aapt resource value: 0x7f060060
+			public const int msg_faildownlogo = 2131099744;
 			
 			// aapt resource value: 0x7f06004e
 			public const int msg_faillogin = 2131099726;
 			
-			// aapt resource value: 0x7f060062
-			public const int msg_invalidcust = 2131099746;
-			
-			// aapt resource value: 0x7f060061
-			public const int msg_invaliddate = 2131099745;
+			// aapt resource value: 0x7f060064
+			public const int msg_invalidcust = 2131099748;
 			
 			// aapt resource value: 0x7f060063
-			public const int msg_invaliditem = 2131099747;
+			public const int msg_invaliddate = 2131099747;
 			
 			// aapt resource value: 0x7f060065
-			public const int msg_invalidprice = 2131099749;
+			public const int msg_invaliditem = 2131099749;
 			
-			// aapt resource value: 0x7f060064
-			public const int msg_invalidqty = 2131099748;
+			// aapt resource value: 0x7f060067
+			public const int msg_invalidprice = 2131099751;
 			
 			// aapt resource value: 0x7f060066
-			public const int msg_itemadded = 2131099750;
+			public const int msg_invalidqty = 2131099750;
+			
+			// aapt resource value: 0x7f060068
+			public const int msg_itemadded = 2131099752;
 			
 			// aapt resource value: 0x7f060057
 			public const int msg_noitem = 2131099735;
@@ -1212,14 +1215,17 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f060059
 			public const int msg_successdownitems = 2131099737;
 			
+			// aapt resource value: 0x7f06005e
+			public const int msg_successdownlogo = 2131099742;
+			
 			// aapt resource value: 0x7f06005c
 			public const int msg_successdownprofile = 2131099740;
 			
 			// aapt resource value: 0x7f06005b
 			public const int msg_successdownrunno = 2131099739;
 			
-			// aapt resource value: 0x7f060060
-			public const int msg_trxclear = 2131099744;
+			// aapt resource value: 0x7f060062
+			public const int msg_trxclear = 2131099746;
 			
 			// aapt resource value: 0x7f060053
 			public const int msg_uploadcn = 2131099731;

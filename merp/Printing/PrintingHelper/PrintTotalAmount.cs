@@ -14,6 +14,13 @@ namespace wincom.mobile.erp
 			test += "------------------------------------------\n";
 		}
 
+		public void PrintTotal_NTax (ref string test,double ttlAmt,double ttlTax)
+		{
+			test += "------------------------------------------\n";
+			test += "          TOTAL AMOUNT     "+Math.Round(ttlAmt,2).ToString("n2").PadLeft (14, ' ')+"\n";
+			test += "------------------------------------------\n";
+		}
+
 		public void PrintTotal (ref string test,double cnttlAmt,double cnttlTax,double InvttlAmt,double invttlTax)
 		{
 			double ttlCollect = (InvttlAmt + invttlTax) - (cnttlAmt + cnttlTax);

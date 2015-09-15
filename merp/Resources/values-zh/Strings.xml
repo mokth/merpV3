@@ -124,7 +124,9 @@
     <string name="msg_successdownrunno">成功下载号码.</string>
     <string name="msg_successdownprofile">成功下载公司简介.</string>
     <string name="msg_successdowndb">成功下载数据库!</string>
+    <string name="msg_successdownlogo">成功下载标志图片!</string>
     <string name="msg_faildowndb">无法下载数据库!</string>
+    <string name="msg_faildownlogo">无法下载标志图片!</string>
     <string name="msg_accessdenied">接入被禁止</string>
     <string name="msg_trxclear">清除完毕</string>
     <string name="msg_invaliddate">输入日期不合法..</string>

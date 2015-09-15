@@ -267,21 +267,28 @@ namespace wincom.mobile.erp
 		{
 			try {
 				//backup db first before upload
-
+				AdPara apara =  DataHelper.GetAdPara (pathToDatabase);
 				WebClient myWebClient = new WebClient ();
 				string document = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
-				string logopath = Path.Combine (document, "logo.png");
-				var sdcard = Path.Combine (Android.OS.Environment.ExternalStorageDirectory.Path, "erpdata");
-				string filename = COMPCODE + "_" + BRANCODE + "_logo.png";
+				string logopath = "";
+				string filename ="";
+				if (apara.PaperSize=="58mm"){
+					logopath = Path.Combine (document, "logo58.png");
+				    filename = COMPCODE + "_" + BRANCODE + "_58_logo.png";
+				}
+				else {
+					logopath = Path.Combine (document, "logo80.png");
+					filename = COMPCODE + "_" + BRANCODE + "_80_logo.png";
+				}
 				string url = WCFHelper.GetDownloadDBUrl () + filename;
-				string localfilename = Path.Combine (sdcard, "logo.png");
-				if (File.Exists (localfilename))
-					File.Delete (localfilename);
+//				string localfilename = Path.Combine (sdcard, "logo.png");
+				if (File.Exists (logopath))
+					File.Delete (logopath);
 
-				myWebClient.DownloadFile (url, localfilename);  
-				File.Copy (localfilename, logopath, true);
+				myWebClient.DownloadFile (url, logopath);  
+				//File.Copy (localfilename, logopath, true);
 
-				Toast.MakeText (this, Resources.GetString (Resource.String.msg_successdowndb), ToastLength.Long).Show ();	
+				Toast.MakeText (this, Resources.GetString (Resource.String.msg_successdownlogo), ToastLength.Long).Show ();	
 			} catch (Exception ex) {
 				Toast.MakeText (this, Resources.GetString (Resource.String.msg_faildowndb), ToastLength.Long).Show ();	
 			}

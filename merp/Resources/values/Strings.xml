@@ -116,7 +116,9 @@
     <string name="msg_successdownrunno">Successfully downloaded running no.</string>
     <string name="msg_successdownprofile">Successfully Download Company Profile.</string>
     <string name="msg_successdowndb">Successfully download db file from server!</string>
+    <string name="msg_successdownlogo">Successfully download company logo from server!</string>
     <string name="msg_faildowndb">Error downloading db file from server!</string>
+    <string name="msg_faildownlogo">Error downloading logo from server!</string>
     <string name="msg_accessdenied">"Access denied..."</string>
     <string name="msg_trxclear">"Transaction clear..."</string>
     <string name="msg_invaliddate">Invalid Transaction Date format...</string>
