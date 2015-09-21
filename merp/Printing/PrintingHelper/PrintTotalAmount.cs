@@ -6,11 +6,15 @@ namespace wincom.mobile.erp
 	{
 		public void PrintTotal (ref string test,double ttlAmt,double ttlTax)
 		{
+			double roundVal=0;
+			double ttlRounAmt = Utility.AdjustToNear (ttlAmt+ttlTax, ref roundVal);
 
 			test += "------------------------------------------\n";
 			test += "               TOTAL EXCL GST "+Math.Round(ttlAmt,2).ToString("n2").PadLeft (12, ' ')+"\n";
 			test += "               TOTAL TAX      "+Math.Round(ttlTax,2).ToString("n2").PadLeft (12, ' ')+"\n";
 			test += "               TOTAL INCL GST "+Math.Round(ttlAmt+ttlTax,2).ToString("n2").PadLeft (12, ' ')+"\n";
+			test += "               ROUNDING ADJ   "+Math.Round(roundVal,2).ToString("n2").PadLeft (12, ' ')+"\n";
+			test += "               TOTAL AMOUNT   "+Math.Round(ttlRounAmt ,2).ToString("n2").PadLeft (12, ' ')+"\n";
 			test += "------------------------------------------\n";
 		}
 

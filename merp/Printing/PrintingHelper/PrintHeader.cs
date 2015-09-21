@@ -87,6 +87,10 @@ namespace wincom.mobile.erp
 			issueline = issueline + term.PadLeft (templen, ' ')+"\n";
 			test += issueline;// "ISSUED BY: " + userid.ToUpper()+"\n";
 
+			if (!string.IsNullOrEmpty (inv.remark)) {
+				string reason = "REMARK: " + inv.remark;
+				PrintLongText (ref test, reason);
+			}
 		}
 
 		public void PrintCNHeader (ref string test,CNNote cn)
@@ -167,9 +171,9 @@ namespace wincom.mobile.erp
 			string issueline = "ISSUED BY: " + userid.ToUpper ();
 			issueline = issueline +"\n";
 			test += issueline;// "ISSUED BY: " + userid.ToUpper()+"\n";
-			if (so.remark.Length > 1) {
-				test += "REMARK:\n";
-				test += so.remark+"\n";
+			if (!string.IsNullOrEmpty (so.remark)) {
+				string reason = "REMARK: " + so.remark;
+				PrintLongText (ref test, reason);
 			}
 
 		}
@@ -193,9 +197,9 @@ namespace wincom.mobile.erp
 			issueline = issueline +"\n";
 			test += issueline;// "ISSUED BY: " + userid.ToUpper()+"\n";
 			test += term +"\n";
-			if (doOrder.remark.Length > 1) {
-				test += "REMARK:\n";
-				test += doOrder.remark+"\n";
+			if (!string.IsNullOrEmpty (doOrder.remark)) {
+				string reason = "REMARK: " + doOrder.remark;
+				PrintLongText (ref test, reason);
 			}
 			test += "------------------------------------------\n";
 			test += "NO  DESCRIPTION                       QTY \n";
