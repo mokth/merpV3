@@ -75,7 +75,7 @@ namespace wincom.mobile.erp
 
 			List<string> icodes = new List<string> ();
 			foreach (Trader item in items) {
-				icodes.Add (item.CustCode+" | "+item.CustName);
+				icodes.Add (item.CustCode+" | "+item.CustName.Trim());
 			}
 			dataAdapter = new ArrayAdapter<String>(this,Resource.Layout.spinner_item, icodes);
 			// Drop down layout style - list view with radio button

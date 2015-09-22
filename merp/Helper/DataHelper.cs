@@ -44,7 +44,8 @@ namespace wincom.mobile.erp
 			int runno = -1;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 				var list2 = db.Table<Invoice> ().Where(x=>x.invdate>=Sdate && x.invdate<=Edate && x.trxtype==trxtype)
-						    .OrderByDescending<string>(x=>x.invno)
+						    .OrderByDescending(x=>x.invdate)
+						    .ThenByDescending (x => x.created)
 					        .ToList<Invoice> ();
 				if (list2.Count > 0) {
 					string invno =list2[0].invno;

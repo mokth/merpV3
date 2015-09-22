@@ -72,7 +72,7 @@ namespace wincom.mobile.erp
 
 			List<string> icodes = new List<string> ();
 			foreach (Trader item in items) {
-				icodes.Add (item.CustCode+" | "+item.CustName);
+				icodes.Add (item.CustCode+" | "+item.CustName.Trim());
 			}
 
 			dataAdapter2 =ArrayAdapter.CreateFromResource (

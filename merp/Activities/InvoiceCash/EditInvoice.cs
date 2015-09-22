@@ -22,6 +22,7 @@ namespace wincom.mobile.erp
 		DateTime _date ;
 		AdPara apara = null;
 		Spinner spinner;
+		Spinner spinnerType ;
 		string INVOICENO="";
 		Invoice invInfo;
 		EditText ccType ;
@@ -48,15 +49,16 @@ namespace wincom.mobile.erp
 			// Create your application here
 
 			spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
-			Spinner spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
+			spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
 			Button butSave = FindViewById<Button> (Resource.Id.newinv_bsave);
 			butSave.Text = Resources.GetString(Resource.String.but_save);// "SAVE";
 			Button butCancel = FindViewById<Button> (Resource.Id.newinv_cancel);
 			Button butFind = FindViewById<Button> (Resource.Id.newinv_bfind);
-			spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
+			//spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
 
 			butSave.Click += butSaveClick;
 			butCancel.Click += butCancelClick;
+			spinnerType.Enabled = false;
 
 			EditText trxdate =  FindViewById<EditText> (Resource.Id.newinv_date);
 			trxdate.Click += delegate(object sender, EventArgs e) {
@@ -72,7 +74,7 @@ namespace wincom.mobile.erp
 
 			List<string> icodes = new List<string> ();
 			foreach (Trader item in custs) {
-				icodes.Add (item.CustCode+" | "+item.CustName);
+				icodes.Add (item.CustCode+" | "+item.CustName.Trim());
 			}
 
 			dataAdapter = new ArrayAdapter<String> (this, Resource.Layout.spinner_item, icodes);
@@ -106,15 +108,16 @@ namespace wincom.mobile.erp
 			DateTime invdate = Utility.ConvertToDate (trxdate.Text);
 			DateTime tmr = invdate.AddDays (1);
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
-			Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
+			//Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
 			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
 			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
 
 			trxdate.Text = invInfo.invdate.ToString ("dd-MM-yyyy");
 			int pos1= dataAdapter.GetPosition (invInfo.custcode+" | "+invInfo.description);
-			int pos2= dataAdapter2.GetPosition (invInfo.trxtype);
+			int pos2 = invInfo.trxtype == "CASH" ? 0 : 1;
+			//int pos2= dataAdapter2.GetPosition (invInfo.trxtype);
 			spinner.SetSelection (pos1);
-			spinner2.SetSelection (pos2);
+			spinnerType.SetSelection(pos2);
 			remark.Text = invInfo.remark;
 			txtinvno.Text = invInfo.invno;
 

@@ -135,7 +135,7 @@ namespace wincom.mobile.erp
 			List<string> icodes = new List<string> ();
 			foreach (Trader item in items) {
 				if (filter.Invoke (item)) {
-					icodes.Add (item.CustCode + " | " + item.CustName);
+					icodes.Add (item.CustCode + " | " + item.CustName.Trim());
 				}
 			}
 			return icodes;
