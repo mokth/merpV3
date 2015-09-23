@@ -295,6 +295,7 @@ namespace wincom.mobile.erp
 					cprof = new CompanyInfo ();
 				}
 
+				AccessRights rights = Utility.GetAccessRightsByString (pro.WCFUrl);
 				cprof.Addr1 = pro.Addr1;
 				cprof.Addr2= pro.Addr2;
 				cprof.Addr3 = pro.Addr3;
@@ -310,7 +311,7 @@ namespace wincom.mobile.erp
 				cprof.AllowEdit = pro.AllowEdit;
 				cprof.WCFUrl = pro.WCFUrl;
 				cprof.SupportContat = pro.SupportContat;
-				cprof.ShowTime = pro.ShowPrintTime;
+				cprof.ShowTime = rights.IsShowPrintTime;
 				cprof.AllowClrTrxHis = pro.AllowClrTrxHis;
 				cprof.NotEditAfterPrint = pro.NoEditAfterPrint;
 

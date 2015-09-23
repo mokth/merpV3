@@ -73,7 +73,34 @@ namespace wincom.mobile.erp
 				info = db.Table<CompanyInfo> ().FirstOrDefault ();
 			}
 
-			string rights = info.WCFUrl;
+//			string rights = info.WCFUrl;
+//			AccessRights right = new AccessRights();
+//			Type rtype = right.GetType();
+//
+//			AccessRightField rightdesc = new AccessRightField();
+//			Type ftype = rightdesc.GetType();
+//			string[] keys = rights.Split(new char[] { ',' });
+//			foreach (string key in keys)
+//			{
+//				FieldInfo finfo = ftype.GetField(key);
+//				if (finfo != null)
+//				{
+//					string fname=  finfo.GetValue(rightdesc).ToString();
+//					PropertyInfo pinfo = rtype.GetProperty(fname);
+//					if (pinfo != null)
+//					{
+//						pinfo.SetValue(right, true);
+//					}
+//				}
+//			}
+
+			return GetAccessRightsByString (info.WCFUrl);
+			//return right;
+
+		}
+
+		public static AccessRights GetAccessRightsByString(string rights)
+		{
 			AccessRights right = new AccessRights();
 			Type rtype = right.GetType();
 
