@@ -84,7 +84,9 @@ namespace wincom.mobile.erp
 						if (list2.Count > 0) {
 							AdNumDate adNum= DataHelper.GetNumDate(pathToDatabase, list2[0].invdate,"CN");
 							if (invno.Length > 5) {
-								string snum= invno.Substring (invno.Length - 4);					
+								//string snum= invno.Substring (invno.Length - 4);	
+								string cnNo=invno.Replace("(INV)","").Replace("(CS)","");
+								string snum= cnNo.Substring (cnNo.Length - 4);			
 								int num;
 								if (int.TryParse (snum, out num)) {
 									if (adNum.RunNo == num) {

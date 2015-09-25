@@ -118,16 +118,17 @@ namespace wincom.mobile.erp
 							ttlcash = ttlcash + inv.amount + inv.taxamt;
 						}else ttlInv = ttlInv + inv.amount + inv.taxamt;
 						line = (cont.ToString () + ".").PadRight (4, ' ') +
-							inv.invno.PadRight (13, ' ') +
-							inv.trxtype.PadRight (8, ' ') +
-							inv.taxamt.ToString ("n2").PadLeft (9, ' ') +
-							inv.amount.ToString ("n2").PadLeft (8, ' ') + "\n";
+							inv.invno.PadRight (16, ' ') +
+							//inv.trxtype.PadRight (8, ' ') +
+							inv.taxamt.ToString ("n2").PadLeft (10, ' ') +
+							inv.amount.ToString ("n2").PadLeft (12, ' ') + "\n";
 						text = text + line;
 					}
 					//if (multiType) {
 					if (typgrp.Count()>1)
 						text = text + PrintSubTotal (subttltax, subttlamt);
 					//	}
+					text =text+"\n";
 				}
 			}
 
@@ -167,8 +168,8 @@ namespace wincom.mobile.erp
 			text += "SUMMARY\n";
 			text += "TOTAL CASH    :" + ttlcash.ToString ("n2").PadLeft (13, ' ') + "\n";
 			text += "TOTAL INVOICE :" + ttlInv.ToString ("n2").PadLeft (13, ' ') + "\n\n";
-			text += "TOTAL CN CASH :" + ttlCNCOD.ToString ("n2").PadLeft (13, ' ') + "\n";
-			text += "TOTAL CN INV  :" + ttlCN.ToString ("n2").PadLeft (13, ' ') + "\n";
+			text += "TOTAL CN CASH      :" + ttlCNCOD.ToString ("n2").PadLeft (13, ' ') + "\n";
+			text += "TOTAL CN INV       :" + ttlCN.ToString ("n2").PadLeft (13, ' ') + "\n";
 			text += "TOTAL CASH COLLECT :" + cashCollect.ToString ("n2").PadLeft (13, ' ') + "\n";
 			text += "------------------------------------------\n";
 			text += "CASH COLLECTION   :\n\n\n";
@@ -220,8 +221,9 @@ namespace wincom.mobile.erp
 				text += "DAILTY SUMMARY ON " + printdate1.ToString ("yy-MM-yyyy") + " - " + printdate2.ToString ("yy-MM-yyyy") + "\n";
 			}
 			text += "------------------------------------------\n";
-			text += "NO  INVOICE NO   TYPE     TAX AMT   AMOUNT\n";
+			text += "NO  INVOICE NO         TAX AMT      AMOUNT\n";
 			text += "------------------------------------------\n";
+			     //  123 123456789012345 1234567890 123456789012  
 		}
 
 		internal virtual string PrintSubTotal(double ttltax,double ttlamt)

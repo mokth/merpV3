@@ -64,7 +64,7 @@ namespace wincom.mobile.erp
 					var list2 = db.Table<CNNote> ().ToList<CNNote> ().Where (x => x.isUploaded == false).ToList<CNNote> ();
 					List<CNNote> invlist2 = new List<CNNote>();
 					foreach (OutLetBill bill in bills) {
-						var found = list2.Where(x=>x.cnno==bill.InvNo && bill.TrxType==x.trxtype).ToList<CNNote>();
+						var found = list2.Where(x=>x.cnno==bill.InvNo).ToList<CNNote>();
 						if (found.Count>0)
 						{  
 							found[0].isUploaded = true;

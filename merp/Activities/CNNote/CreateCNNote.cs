@@ -69,7 +69,7 @@ namespace wincom.mobile.erp
 
 			List<string> icodes = new List<string> ();
 			foreach (Trader item in items) {
-				icodes.Add (item.CustCode+" | "+item.CustName);
+				icodes.Add (item.CustCode+" | "+item.CustName.Trim());
 			}
 			dataAdapter = new ArrayAdapter<String>(this,Resource.Layout.spinner_item, icodes);
 			// Drop down layout style - list view with radio button
@@ -231,6 +231,9 @@ namespace wincom.mobile.erp
 		{
 			TextView invno =  FindViewById<TextView> (Resource.Id.newcninv_no);
 			invno.Text = text;
+			Invoice inv =DataHelper.GetInvoice (pathToDatabase, text);
+			int pos = dataAdapter.GetPosition (inv.custcode+" | "+inv.description);
+			spinner.SetSelection (pos);
 		}
 
 		public event nsEventHandler eventHandler;

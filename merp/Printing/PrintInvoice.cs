@@ -77,7 +77,9 @@ namespace wincom.mobile.erp
 				ttltax = ttltax + itm.tax;
 			}
 			text += dline;
-			prtTotal.PrintTotal (ref text, ttlAmt, ttltax);
+			if (inv.trxtype=="CASH")
+			 	 prtTotal.PrintTotalAjust (ref text, ttlAmt, ttltax);
+			else prtTotal.PrintTotal (ref text, ttlAmt, ttltax);
 			prtTaxSummary.PrintTaxSumm (ref text, list);
 			prtFooter.PrintFooter (ref text);
 			text += "\nTHANK YOU\n\n\n\n\n\n\n\n";
