@@ -154,6 +154,31 @@ namespace wincom.mobile.erp
 						results.Add (itm);
 						continue;
 					}
+
+					if (itm.Addr1.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
+					if (itm.Addr2.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
+					if (itm.Addr3.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
+					if (itm.Addr4.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
+					if (itm.Tel.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
+					if (itm.Fax.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
 				}
 			}
 			return results;
