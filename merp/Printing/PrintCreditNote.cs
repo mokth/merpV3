@@ -70,11 +70,13 @@ namespace wincom.mobile.erp
 			double invTtlAmt =0;
 			double invTtlTax =0;
 			bool IsfoundInvoice = false;
+			string pathToDatabase = ((GlobalvarsApp)Application.Context).DATABASE_PATH;
+			Invoice inv = null;
 			IsfoundInvoice = PrintCNInvoice (cn,ref invTtlAmt, ref invTtlTax);
 			if (!IsfoundInvoice) {
 				prtcompHeader.PrintCompHeader (ref text);
 				prtCustHeader.PrintCustomer (ref text, cn.custcode);
-			}
+			}else 	inv = DataHelper.GetInvoice (pathToDatabase, cn.invno);
 
 			prtHeader.PrintCNHeader (ref text, cn);
 
@@ -86,14 +88,23 @@ namespace wincom.mobile.erp
 				ttltax = ttltax+itm.tax;
 			}
 			text += dline;
-		 	prtTotal.PrintTotal (ref text,ttlAmt,ttltax);
+			if (!IsfoundInvoice) {
+				prtTotal.PrintTotal (ref text, ttlAmt, ttltax);
+			} else {
+				if (inv.trxtype=="CASH")
+					prtTotal.PrintTotalAjust (ref text, ttlAmt, ttltax);
+				else prtTotal.PrintTotal (ref text, ttlAmt, ttltax);
+			}
 
 			prtTaxSummary.PrintCNTaxSumm(ref text,list );
+
 			prtFooter.PrintFooter (ref text);
 			if (IsfoundInvoice)
 			{
 				text += "\nTHANK YOU\n\n";
-				prtTotal.PrintTotal (ref text,ttlAmt, ttltax, invTtlAmt,invTtlTax);	
+				if (inv.trxtype=="CASH")
+				 	  prtTotal.PrintTotalAjust (ref text,ttlAmt, ttltax, invTtlAmt,invTtlTax);	
+				else prtTotal.PrintTotal (ref text,ttlAmt, ttltax, invTtlAmt,invTtlTax);	
 				text += "\n\n\n\n\n\n\n\n";
 			}else text += "\nTHANK YOUn\n\n\n\n\n\n\n";
 		}
@@ -144,7 +155,9 @@ namespace wincom.mobile.erp
 				ttltax = ttltax + itm.tax;
 			}
 			text += dline;
-			prtTotal.PrintTotal (ref text, ttlAmt, ttltax);
+			if (inv.trxtype=="CASH")
+				prtTotal.PrintTotalAjust (ref text, ttlAmt, ttltax);
+			else prtTotal.PrintTotal (ref text, ttlAmt, ttltax);
 			prtTaxSummary.PrintTaxSumm (ref text, list);
 			text += "\n\n\n";
 		}

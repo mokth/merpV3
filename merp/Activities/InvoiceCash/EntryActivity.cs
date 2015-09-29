@@ -452,7 +452,11 @@ namespace wincom.mobile.erp
 			//int id = Convert.ToInt32 (ITEMUID);				
 			//inv..title = spinner.SelectedItem.ToString ();
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				 db.Insert (inv);
+				var list =db.Table<InvoiceDtls> ().Where (x => x.invno == txtInvNo.Text && x.icode == prd.ICode).ToList ();
+				if (list.Count > 0) {
+					list [0].qty = list [0].qty + 1;
+					db.Update (list [0]);
+				}else db.Insert (inv);
 			}
 			spinner.SetSelection (-1);
 			Toast.MakeText (this, Resources.GetString(Resource.String.msg_itemadded), ToastLength.Long).Show ();

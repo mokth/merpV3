@@ -40,6 +40,20 @@ namespace wincom.mobile.erp
 		{
 			double roundVal = 0;
 			//double ttlCollect = (InvttlAmt + invttlTax) - (cnttlAmt + cnttlTax);
+			double ttlInv = InvttlAmt+invttlTax;
+			double ttlCN = cnttlAmt+cnttlTax;
+			double ttlCollect = ttlInv - ttlCN;
+			test += "------------------------------------------\n";
+			test += "  TOTAL INVOICE AMOUNT : "+Math.Round(ttlInv,2).ToString("n2").PadLeft (12, ' ')+"\n";
+			test += "  TOTAL C/NOTE AMOUNT  : "+Math.Round(ttlCN,2).ToString("n2").PadLeft (12, ' ')+"\n";
+			test += "  TOTAL COLLECT AMOUNT : "+Math.Round(ttlCollect,2).ToString("n2").PadLeft (12, ' ')+"\n";
+			test += "------------------------------------------\n";
+		}
+
+		public void PrintTotalAjust (ref string test,double cnttlAmt,double cnttlTax,double InvttlAmt,double invttlTax)
+		{
+			double roundVal = 0;
+			//double ttlCollect = (InvttlAmt + invttlTax) - (cnttlAmt + cnttlTax);
 			double ttlInv = Utility.AdjustToNear (InvttlAmt+invttlTax, ref roundVal);
 			double ttlCN = Utility.AdjustToNear (cnttlAmt+cnttlTax, ref roundVal);
 			double ttlCollect = ttlInv - ttlCN;

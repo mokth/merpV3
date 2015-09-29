@@ -63,9 +63,9 @@ namespace wincom.mobile.erp
 
 		private void GetSaleOrderText (SaleOrder so, SaleOrderDtls[] list)
 		{
-			if (string.IsNullOrEmpty(so.billTo))
+			//if (string.IsNullOrEmpty(so.billTo))
 				 prtcompHeader.PrintCompHeader (ref text);
-			else prtcompHeader.PrintCustomerHeader(ref text,so.billTo);
+			//else prtcompHeader.PrintCustomerHeader(ref text,so.billTo);
 
 			prtCustHeader.PrintCustomer (ref text, so.custcode);
 			prtHeader.PrintSOHeader (ref text, so);
