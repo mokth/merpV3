@@ -3,6 +3,7 @@ using System.Linq;
 using Android.Runtime;
 using WcfServiceItem;
 using Android.App;
+using System.Collections.Generic;
 
 namespace wincom.mobile.erp
 {
@@ -43,17 +44,26 @@ namespace wincom.mobile.erp
 			DateTime Edate = new DateTime (invdate.Year, invdate.Month, DateTime.DaysInMonth (invdate.Year, invdate.Month));
 			int runno = -1;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				var list2 = db.Table<Invoice> ().Where(x=>x.invdate>=Sdate && x.invdate<=Edate && x.trxtype==trxtype)
-						    .OrderByDescending(x=>x.invdate)
-						    .ThenByDescending (x => x.created)
+				var list = db.Table<Invoice> ().Where(x=>x.invdate>=Sdate && x.invdate<=Edate && x.trxtype==trxtype)
+						    //.OrderByDescending(x=>x.invdate)
+						    //.ThenByDescending (x => x.created)
 					        .ToList<Invoice> ();
-				if (list2.Count > 0) {
-					string invno =list2[0].invno;
-					if (invno.Length > 5)
-					{
-						string srunno = invno.Substring(invno.Length - 4);
-						runno = Convert.ToInt32(srunno);
+				List<string> list2 = new List<string> ();
+				foreach (var inv in list) {
+					if (inv.invno.Length > 5) {
+						list2.Add (inv.invno);
 					}
+				}
+
+				if (list2.Count > 0) {
+					//string invno =list2[0].invno;
+					string invno = list2.Max (x => x.Substring(x.Length - 4));
+					runno = Convert.ToInt32(invno);
+					//if (invno.Length > 5)
+				//	{
+				//		string srunno = invno.Substring(invno.Length - 4);
+				
+				//	}
 				}
 			}
 
@@ -66,16 +76,26 @@ namespace wincom.mobile.erp
 			DateTime Edate = new DateTime (sodate.Year, sodate.Month, DateTime.DaysInMonth (sodate.Year, sodate.Month));
 			int runno = -1;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				var list2 = db.Table<SaleOrder> ().Where(x=>x.sodate>=Sdate && x.sodate<=Edate)
+				var list = db.Table<SaleOrder> ().Where(x=>x.sodate>=Sdate && x.sodate<=Edate)
 					.OrderByDescending(x=>x.sono)
 					.ToList<SaleOrder> ();
-				if (list2.Count > 0) {
-					string sono =list2[0].sono;
-					if (sono.Length > 5)
-					{
-						string srunno = sono.Substring(sono.Length - 4);
-						runno = Convert.ToInt32(srunno);
+
+				List<string> list2 = new List<string> ();
+				foreach (var so in list) {
+					if (so.sono.Length > 5) {
+						list2.Add (so.sono);
 					}
+				}
+
+				if (list2.Count > 0) {
+					string sono = list2.Max (x => x.Substring(x.Length - 4));
+					runno = Convert.ToInt32(sono);
+					//string sono =list2[0].sono;
+					//if (sono.Length > 5)
+					//{
+					//	string srunno = sono.Substring(sono.Length - 4);
+					//	runno = Convert.ToInt32(srunno);
+					//}
 				}
 			}
 
@@ -88,16 +108,26 @@ namespace wincom.mobile.erp
 			DateTime Edate = new DateTime (dodate.Year, dodate.Month, DateTime.DaysInMonth (dodate.Year, dodate.Month));
 			int runno = -1;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				var list2 = db.Table<DelOrder> ().Where(x=>x.dodate>=Sdate && x.dodate<=Edate)
+				var list = db.Table<DelOrder> ().Where(x=>x.dodate>=Sdate && x.dodate<=Edate)
 					.OrderByDescending(x=>x.dono)
 					.ToList<DelOrder> ();
-				if (list2.Count > 0) {
-					string dono =list2[0].dono;
-					if (dono.Length > 5)
-					{
-						string srunno = dono.Substring(dono.Length - 4);
-						runno = Convert.ToInt32(srunno);
+
+				List<string> list2 = new List<string> ();
+				foreach (var doord in list) {
+					if (doord.dono.Length > 5) {
+						list2.Add (doord.dono);
 					}
+				}
+
+				if (list2.Count > 0) {
+					string dono = list2.Max (x => x.Substring(x.Length - 4));
+					runno = Convert.ToInt32(dono);
+//					string dono =list2[0].dono;
+//					if (dono.Length > 5)
+//					{
+//						string srunno = dono.Substring(dono.Length - 4);
+//						runno = Convert.ToInt32(srunno);
+//					}
 				}
 			}
 
@@ -110,18 +140,30 @@ namespace wincom.mobile.erp
 			DateTime Edate = new DateTime (invdate.Year, invdate.Month, DateTime.DaysInMonth (invdate.Year, invdate.Month));
 			int runno = -1;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				var list2 = db.Table<CNNote> ().Where(x=>x.invdate>=Sdate && x.invdate<=Edate)
+				var list= db.Table<CNNote> ().Where(x=>x.invdate>=Sdate && x.invdate<=Edate)
 					.OrderByDescending(x=>x.cnno)
 					.ToList<CNNote> ();
-				if (list2.Count > 0) {
-					string invno =list2[0].cnno;
-					invno = invno.Replace ("(INV)", "");
-					invno = invno.Replace ("(CS)", "");
-					if (invno.Length > 5)
-					{
-						string srunno = invno.Substring(invno.Length - 4);
-						runno = Convert.ToInt32(srunno);
+
+				List<string> list2 = new List<string> ();
+				string cnno = "";
+				foreach (var cn in list) {
+					cnno = cn.cnno.Replace ("(INV)", "").Replace ("(CS)", "");
+					if (cnno.Length > 5) {
+						list2.Add (cnno);
 					}
+				}
+
+				if (list2.Count > 0) {
+					string sno = list2.Max (x => x.Substring(x.Length - 4));
+					runno = Convert.ToInt32(sno);
+					//string invno =list2[0].cnno;
+					//invno = invno.Replace ("(INV)", "");
+					//invno = invno.Replace ("(CS)", "");
+//					if (invno.Length > 5)
+//					{
+//						string srunno = invno.Substring(invno.Length - 4);
+//						runno = Convert.ToInt32(srunno);
+//					}
 				}
 			}
 
