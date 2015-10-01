@@ -55,10 +55,10 @@ namespace wincom.mobile.erp
 				createTable (pathToDatabase);
 			} else
 			{
-				if (pInfo.VersionCode > 2) {
-					if (!CheckIfColumnExists())
-						UpdateDatbase ();
-				}
+//				if (pInfo.VersionCode > 2) {
+//					if (!CheckIfColumnExists())
+//						UpdateDatbase ();
+//				}
 			}
 			//else {
 //				user = DataHelper.GetUser (pathToDatabase);
@@ -251,6 +251,8 @@ namespace wincom.mobile.erp
 			rights = Utility.GetAccessRights (pathToDatabase);
 			int Expiry = DataHelper.GetExpiryDay (pathToDatabase);
 			if (rights.IsLoginControl) {
+				if (user.LastConnect.Year < 2000)
+					user.LastConnect = DateTime.Now;
 				double day = (DateTime.Now - user.LastConnect).TotalDays;
 				isExpiry = (day > Expiry);
 			}

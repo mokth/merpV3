@@ -39,6 +39,9 @@ namespace wincom.mobile.erp
 			Button butuploaddo = FindViewById<Button> (Resource.Id.butuploaddo);
 			butuploaddo.Click += butUploadDO;
 
+			Button butuploadall = FindViewById<Button> (Resource.Id.butuploadAll);
+			butuploadall.Click += butUploadAll;
+
 			Button butback = FindViewById<Button> (Resource.Id.butMain);
 			butback.Click+= (object sender, EventArgs e) => {
 				base.OnBackPressed();
@@ -55,6 +58,18 @@ namespace wincom.mobile.erp
 			}
 		}
 
+		void butUploadAll(object sender,EventArgs e)
+		{
+			Button butupload =  FindViewById<Button> (Resource.Id.butuploadAll);
+			butupload.Enabled = false;
+			butupload.Text = Resources.GetString(Resource.String.msg_uploading);// "Uploading, please wait...";
+			//UploadBillsToServer();
+			//IUploadHelper upload =UploadManager.GetUploadHepler< UploadDOHelper>();
+			IUploadHelper upload =UploadManager.GetUploadHepler<UploadAllTrxHelper>();
+			upload.SetUploadHandel(OnUploadAllDoneDlg); 
+			upload.SetCallingActivity(this);
+			upload.startUpload ();	
+		}
 	
 		void butUploadBills(object sender,EventArgs e)
 		{
@@ -103,6 +118,21 @@ namespace wincom.mobile.erp
 			upload.SetUploadHandel(OnUploadDODoneDlg); 
 			upload.SetCallingActivity(this);
 			upload.startUpload ();	
+		}
+
+		private void OnUploadAllDoneDlg(Activity callingAct,int count,string msg)
+		{
+			Button butupload = callingAct.FindViewById<Button> (Resource.Id.butuploadAll);
+			butupload.Text =  Resources.GetString(Resource.String.submenu_upall);// "UPLOAD INVOICE";
+			butupload.Enabled = true;
+			if (count > 0) {
+				//string dispmsg = "Total " + count.ToString () + " invoices uploaded.";
+				string dispmsg =Resources.GetString(Resource.String.msg_upload);
+				dispmsg = dispmsg.Replace ("xx", count.ToString ());
+				Toast.MakeText (this, dispmsg, ToastLength.Long).Show ();	
+			} else {
+				Toast.MakeText (this, msg, ToastLength.Long).Show ();	
+			}
 		}
 
 		private void OnUploadDoneDlg(Activity callingAct,int count,string msg)

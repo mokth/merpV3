@@ -44,6 +44,15 @@
             android:id="@+id/butuploaddo"
             android:drawableRight="@drawable/delivery" />
         <Button
+            android:text="@string/submenu_upall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:drawableLeft="@drawable/upload"
+            android:height="53dp"
+            android:id="@+id/butuploadAll"
+            android:drawableRight="@drawable/upload" />
+        <Button
             android:text="@string/submenu_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

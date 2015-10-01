@@ -50,6 +50,7 @@
     <string name="submenu_upcn">上传退货单/退款单</string>
     <string name="submenu_updo">上传发货单据</string>
     <string name="submenu_upso">上传销售订单</string>
+      <string name="submenu_upall">全部上传</string>
      <string name="invform_trxdate">交易日期</string>
     <string name="invform_invno">发票/现金票据编号</string>
     <string name="invform_cnno">退货单/退款单编号</string>
@@ -113,6 +114,7 @@
     <string name="msg_uploadcn">总上传了xx退货单/退款单.</string>
     <string name="msg_uploadso">总上传了xx销售订单.</string>
     <string name="msg_uploaddo">总上传了xx发货单据.</string>
+     <string name="msg_upload">总上传了xx 单据.</string>
     <string name="msg_downsettings">下载了设置资料</string>
     <string name="msg_noitem">进行前,请下载产品资料...</string>
     <string name="msg_reqcancel">请求已被取消...</string>

@@ -33,9 +33,7 @@
                 android:hint="@string/login_userid"
                 android:inputType="textCapCharacters"
                 android:singleLine="true"
-                android:textAllCaps="true"
                 style="@drawable/bluethem_edit_text_holo_light"
-                android:autoText="true"
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:fitsSystemWindows="false"
                 android:layout_marginLeft="10dp" />
@@ -66,7 +64,6 @@
                 android:inputType="textPassword|textCapSentences"
                 android:hint="@string/login_code"
                 android:singleLine="true"
-                android:textAllCaps="true"
                 android:layout_marginLeft="10dp" />
         </LinearLayout>
         <Button

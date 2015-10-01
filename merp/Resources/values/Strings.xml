@@ -50,6 +50,7 @@
     <string name="submenu_upcn">UPLOAD CREDIT NOTE</string>
     <string name="submenu_updo">UPLOAD DELIVERY ORDER</string>
     <string name="submenu_upso">UPLOAD SALES ORDER</string>
+     <string name="submenu_upall">UPLOAD ALL</string>
     <string name="invform_trxdate">TRANSACTION DATE</string>
     <string name="invform_invno">INVOICE NO</string>
     <string name="invform_sono">SALES ORDER NO</string>
@@ -108,6 +109,7 @@
     <string name="msg_uploadcn">Total xx Credit Note(s) uploaded.</string>
     <string name="msg_uploaddo">Total xx Delivery Order(s) uploaded.</string>
     <string name="msg_uploadso">Total xx Sales Order(s) uploaded.</string>
+     <string name="msg_upload">Total xx transaction(s) uploaded.</string>
     <string name="msg_downsettings">Settings downloaded.</string>
     <string name="msg_noitem">Please download Master Item before proceed...</string>
     <string name="msg_reqcancel">Request was cancelled...</string>

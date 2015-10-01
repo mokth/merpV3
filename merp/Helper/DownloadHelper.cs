@@ -437,6 +437,7 @@ namespace wincom.mobile.erp
 				user.Islogon = true;
 				user.Password = passw.Text;
 				user.UserID = para [1];
+				user.LastConnect = DateTime.Now;
 				db.Insert (user);
 			}
 			((GlobalvarsApp)CallingActivity.Application).USERID_CODE = para [1];

@@ -179,6 +179,7 @@
     <Compile Include="Printing\NonTax\PrintInvoice_NTAX.cs" />
     <Compile Include="Printing\NonTax\PrintCreditNote_NTAX.cs" />
     <Compile Include="Printing\NonTax\PrintSalesOrder_NTAX.cs" />
+    <Compile Include="Helper\Upload\UploadAllTrxHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

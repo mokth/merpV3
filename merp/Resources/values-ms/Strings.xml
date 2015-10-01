@@ -50,6 +50,7 @@
     <string name="submenu_upcn">MUAT NAIK NOTA KREDIT</string>
     <string name="submenu_updo">MUAT NAIK P/PENGHANTARAN</string>
     <string name="submenu_upso">MUAT NAIK P/JUALAN</string>
+     <string name="submenu_upall">MUAT NAIK SEMUA</string>
     <string name="invform_trxdate">TARIKH URUS NIAGA</string>
     <string name="invform_invno">NO INVOIS</string>
     <string name="invform_sono">NO PESANAN JUALAN</string>
@@ -108,6 +109,7 @@
     <string name="msg_uploadcn">Sebanyak xx Nota Kredit telah dimuat naik.</string>
     <string name="msg_uploaddo">Sebanyak xx Tempahan Penghantaran telah dimuat naik.</string>
     <string name="msg_uploadso">Sebanyak xx Tempahan Jualan telah dimuat naik.</string>
+      <string name="msg_upload">Sebanyak xx transaksi telah dimuat naik.</string>
     <string name="msg_downsettings">Tetapan telah dimuat turun</string>
     <string name="msg_noitem">Sila muat turun Master Item sebelum meneruskan...</string>
     <string name="msg_reqcancel">Permintaan telah dibatalkan...</string>
