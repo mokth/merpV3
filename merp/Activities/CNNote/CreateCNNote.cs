@@ -233,7 +233,12 @@ namespace wincom.mobile.erp
 			invno.Text = text;
 			Invoice inv =DataHelper.GetInvoice (pathToDatabase, text);
 			int pos = dataAdapter.GetPosition (inv.custcode+" | "+inv.description);
-			spinner.SetSelection (pos);
+			if (pos > -1) {
+				spinner.SetSelection (pos);
+				spinner.Enabled = false;
+				Button butFind = FindViewById<Button> (Resource.Id.newinv_bfind);
+				butFind.Enabled = false;
+			}
 		}
 
 		public event nsEventHandler eventHandler;

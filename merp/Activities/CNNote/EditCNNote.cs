@@ -102,6 +102,12 @@ namespace wincom.mobile.erp
 			remark.Text = cnInfo.remark;
 			cninvno.Text = cnInfo.invno;
 			cnno.Text = cnInfo.cnno;
+			if (!string.IsNullOrEmpty (cnInfo.invno)) {
+				spinner.Enabled = false;
+				Button butFind = FindViewById<Button> (Resource.Id.newinv_bfind);
+				butFind.Enabled = false;
+			}
+				
 		}
 
 
@@ -220,6 +226,14 @@ namespace wincom.mobile.erp
 		{
 			TextView invno =  FindViewById<TextView> (Resource.Id.newcninv_no);
 			invno.Text = text;
+			Invoice inv =DataHelper.GetInvoice (pathToDatabase, text);
+			int pos = dataAdapter.GetPosition (inv.custcode+" | "+inv.description);
+			if (pos > -1) {
+				spinner.SetSelection (pos);
+				spinner.Enabled = false;
+				Button butFind = FindViewById<Button> (Resource.Id.newinv_bfind);
+				butFind.Enabled = false;
+			}
 		}
 
 		public event nsEventHandler eventHandler;

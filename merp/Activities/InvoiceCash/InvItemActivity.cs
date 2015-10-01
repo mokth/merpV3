@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.IO;
+using Android.Views.InputMethods;
 
 namespace wincom.mobile.erp
 {
@@ -76,6 +77,7 @@ namespace wincom.mobile.erp
 			};
 
 			txtbarcode.SetOnKeyListener (this);
+			txtbarcode.InputType = 0;
 			GetData ();
 			populate (listData);
 			listView = FindViewById<ListView> (Resource.Id.invitemList);
@@ -83,6 +85,8 @@ namespace wincom.mobile.erp
 			//listView.Adapter = new CusotmItemListAdapter(this, listData);
 			SetViewDlg viewdlg = SetViewDelegate;
 			listView.Adapter = new GenericListAdapter<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemView, viewdlg);
+
+
 		}
 		public override void OnBackPressed() {
 			// do nothing.
@@ -364,6 +368,22 @@ namespace wincom.mobile.erp
 				var list =db.Table<InvoiceDtls> ().Where (x => x.invno == invno && x.icode == prd.ICode).ToList ();
 				if (list.Count > 0) {
 					list [0].qty = list [0].qty + 1;
+					stqQty = list [0].qty;
+					amount = Math.Round((stqQty * uprice),2);
+					netamount = amount;
+					if (taxinclusice) {
+						double percent = (taxval/100) + 1;
+						double amt2 =Math.Round( amount / percent,2,MidpointRounding.AwayFromZero);
+						taxamt = amount - amt2;
+						netamount = amount - taxamt;
+
+					} else {
+						taxamt = Math.Round(amount * (taxval / 100),2,MidpointRounding.AwayFromZero);
+					}
+					list [0].tax = taxamt;
+					list [0].amount =amount;
+					list [0].netamount = netamount;
+
 					db.Update (list [0]);
 				}else db.Insert (inv);
 			}

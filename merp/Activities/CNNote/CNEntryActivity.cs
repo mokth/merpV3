@@ -59,6 +59,10 @@ namespace wincom.mobile.erp
 			TextView txtInvNo =  FindViewById<TextView> (Resource.Id.txtInvnp);
 			TextView txtcust =  FindViewById<TextView> (Resource.Id.txtInvcust);
 			Button butFind = FindViewById<Button> (Resource.Id.newinv_bfind);
+			EditText txtbarcode = FindViewById<EditText> (Resource.Id.txtbarcode);
+			TextView lbInvNo =  FindViewById<TextView> (Resource.Id.lbinvno);
+			lbInvNo.Text = Resources.GetString( Resource.String.invform_cnno);
+			txtbarcode.Visibility = ViewStates.Invisible;
 			txtInvNo.Text = INVOICENO;
 			txtcust.Text = CUSTOMER;
 			Button but = FindViewById<Button> (Resource.Id.Save);
