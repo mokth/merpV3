@@ -48,12 +48,14 @@ namespace wincom.mobile.erp
 			string serial =ptool.DeviceIdIMEI();
 			string comp =((GlobalvarsApp)CallingActivity.Application).COMPANY_CODE;
 			string brn =((GlobalvarsApp)CallingActivity.Application).BRANCH_CODE;
+			string ver =((GlobalvarsApp)CallingActivity.Application).VERSION;
+
 			bills = GetBills();
 //			if (bills.Count == 0)
 //				bills = GetCNs();	
 			invcount += bills.Count;
 			if (bills.Count > 0) {
-				_client.UploadOutletBillsAsync (bills.ToArray (), comp, brn, serial, phone);
+				_client.UploadOutletBillsAsync (bills.ToArray (), comp, brn, serial, ver);
 			} else {
 				RunOnUiThread (() => Uploadhandle.Invoke(CallingActivity,invcount,_errmsg));
 			}

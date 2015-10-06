@@ -180,6 +180,26 @@
     <Compile Include="Printing\NonTax\PrintCreditNote_NTAX.cs" />
     <Compile Include="Printing\NonTax\PrintSalesOrder_NTAX.cs" />
     <Compile Include="Helper\Upload\UploadAllTrxHelper.cs" />
+    <Compile Include="Printing\EPSONHelper\ESCPSBase.cs" />
+    <Compile Include="Printing\EPSONHelper\PrintDMInvoice.cs" />
+    <Compile Include="Printing\EPSONHelper\PrintESCDetails.cs" />
+    <Compile Include="Printing\EPSONHelper\PrintESCPDocumentBase.cs" />
+    <Compile Include="Printing\EPSONHelper\PrintESCPFooter.cs" />
+    <Compile Include="Printing\EPSONHelper\PrintESCPHeader.cs" />
+    <Compile Include="Printing\EPSONHelper\PrintESCPTaxSummary.cs" />
+    <Compile Include="Printing\EPSONHelper\TCPDeviceHelper.cs" />
+    <Compile Include="Printing\EPSONHelper\TCPDotMatrixHelper.cs" />
+    <Compile Include="Printing\HPPCLHelper\HPPCLBase.cs" />
+    <Compile Include="Printing\HPPCLHelper\PrintPCLDetails.cs" />
+    <Compile Include="Printing\HPPCLHelper\PrintPCLDocumentBase.cs" />
+    <Compile Include="Printing\HPPCLHelper\PrintPCLFooter.cs" />
+    <Compile Include="Printing\HPPCLHelper\PrintPCLHeader.cs" />
+    <Compile Include="Printing\HPPCLHelper\PrintPCLnvoice.cs" />
+    <Compile Include="Printing\HPPCLHelper\PrintPCLTaxSummary.cs" />
+    <Compile Include="Printing\HPPCLHelper\TCPHPPCLHelper.cs" />
+    <Compile Include="Helper\NumberToWordHelper.cs" />
+    <Compile Include="Printing\EPSONHelper\PrintDMCNote.cs" />
+    <Compile Include="Printing\HPPCLHelper\PrintPCLCNote.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -547,5 +567,7 @@
     <Folder Include="Resources\values-ms\" />
     <Folder Include="Resources\menu-ms\" />
     <Folder Include="Printing\NonTax\" />
+    <Folder Include="Printing\EPSONHelper\" />
+    <Folder Include="Printing\HPPCLHelper\" />
   </ItemGroup>
 </Project>

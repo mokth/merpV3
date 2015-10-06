@@ -5,7 +5,25 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <TextView
-        android:text="PRINTER NAME"
+        android:text="PRINTER TYPE"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbprinter"
+        android:textSize="17sp"
+        android:textColor="#ff093bf6"
+        android:paddingLeft="5dp" />
+    <Spinner
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtprintertype"
+        android:textSize="17sp"
+        android:paddingLeft="5dp"
+        android:background="@drawable/bluethem_spinner_background_holo_light"
+        android:fitsSystemWindows="false" />
+    <TextView
+        android:text="BLIETOOTH PRINTER NAME"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,6 +68,25 @@
         android:paddingLeft="5dp"
         android:background="@drawable/bluethem_spinner_background_holo_light"
         android:fitsSystemWindows="false" />
+    <TextView
+        android:text="PRINTER NETWORK IP"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbPaper"
+        android:textSize="17sp"
+        android:textColor="#ff093bf6"
+        android:paddingLeft="5dp" />
+    <EditText
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtprinterip"
+        android:textColor="#ff140000"
+        android:textSize="17sp"
+        android:paddingLeft="5dp"
+        android:background="@drawable/bluethem_textfield_disabled_holo_light"
+        android:hint="Printer IP" />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

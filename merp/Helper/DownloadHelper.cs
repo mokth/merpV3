@@ -43,11 +43,12 @@ namespace wincom.mobile.erp
 		{
 			string comp =((GlobalvarsApp)CallingActivity.Application).COMPANY_CODE;
 			string brn =((GlobalvarsApp)CallingActivity.Application).BRANCH_CODE;
+			string userid = ((GlobalvarsApp)CallingActivity.Application).USERID_CODE;
 
 			_client = _wfc.GetServiceClient ();	
 			if (_client != null) {
-				_client.GetItemCodesCompleted += ClientOnGetItemCompleted;
-				_client.GetItemCodesAsync (comp, brn);
+				_client.GetItemCodesExCompleted += ClientOnGetItemCompleted;
+				_client.GetItemCodesExAsync (comp, brn,userid );
 			}
 		}
 
@@ -117,7 +118,7 @@ namespace wincom.mobile.erp
 			}
 		}
 
-		private void ClientOnGetItemCompleted(object sender, GetItemCodesCompletedEventArgs e)
+		private void ClientOnGetItemCompleted(object sender, GetItemCodesExCompletedEventArgs e)
 		{
 			List<ItemCode> list = new List<ItemCode> ();
 			string msg = null;
@@ -328,6 +329,9 @@ namespace wincom.mobile.erp
 		private void InsertCompProfIntoDb(CompanyProfile pro)
 		{
 			string pathToDatabase = ((GlobalvarsApp)CallingActivity.Application).DATABASE_PATH;
+			if (pro.CompanyName == "SUSPENDED")
+				return;
+			
 			try{
 				DataHelper.InsertCompProfIntoDb (pro, pathToDatabase);
 			}

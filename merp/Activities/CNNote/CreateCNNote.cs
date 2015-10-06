@@ -196,6 +196,15 @@ namespace wincom.mobile.erp
 				inv.invno = cninvno.Text;
 				if (invInfo != null) {
 					inv.trxtype = invInfo.trxtype;	   		
+				} else {
+					Trader trd=	DataHelper.GetTrader (pathToDatabase, inv.custcode);
+					if (trd != null) {
+						string paycode =trd.PayCode.ToUpper ().Trim ();
+						inv.trxtype = paycode;
+						if (paycode.Contains ("CASH") || paycode.Contains ("COD")) {
+							inv.trxtype = "CASH";	   		
+						}
+					}						
 				}
 
 				db.Insert (inv);

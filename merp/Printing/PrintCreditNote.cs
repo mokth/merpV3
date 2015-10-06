@@ -89,7 +89,9 @@ namespace wincom.mobile.erp
 			}
 			text += dline;
 			if (!IsfoundInvoice) {
-				prtTotal.PrintTotal (ref text, ttlAmt, ttltax);
+				if (cn.trxtype=="CASH")
+					prtTotal.PrintTotalAjust (ref text, ttlAmt, ttltax);
+				else prtTotal.PrintTotal (ref text, ttlAmt, ttltax);
 			} else {
 				if (inv.trxtype=="CASH")
 					prtTotal.PrintTotalAjust (ref text, ttlAmt, ttltax);

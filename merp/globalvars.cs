@@ -13,6 +13,7 @@ namespace wincom.mobile.erp
 		public string USERID_CODE;
 		public string DATABASE_PATH;
 		public string USERFUNCTION;
+		public string VERSION;
 		public bool ISLOGON;
 
 		public GlobalvarsApp(IntPtr handle, JniHandleOwnership transfer)

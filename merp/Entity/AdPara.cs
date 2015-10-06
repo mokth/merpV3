@@ -20,6 +20,9 @@ namespace wincom.mobile.erp
 		public string CNPrefix{ get; set;}
 		public string DOPrefix{ get; set;}
 		public string SOPrefix{ get; set;}
+		//Print Server printing added
+		public string PrinterIP{ get; set;}
+		public string PrinterType{ get; set;}
 	}
 
 	public class AdNumDate

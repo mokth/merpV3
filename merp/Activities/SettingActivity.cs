@@ -19,8 +19,10 @@ namespace wincom.mobile.erp
 		string pathToDatabase;
 		Spinner spinner;
 		Spinner spinBt;
+		Spinner spinPrType;
 		ArrayAdapter adapter;
 		ArrayAdapter adapterBT;
+		ArrayAdapter adapterPT;
 		BluetoothAdapter mBluetoothAdapter;
 		List<string> btdevices = new List<string>();
 		AccessRights rights;
@@ -34,7 +36,7 @@ namespace wincom.mobile.erp
 		EditText txtCNPrefix;
 		EditText txtSOPrefix;
 		EditText txtDOPrefix;
-
+		EditText txtPrinterIP;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -47,6 +49,7 @@ namespace wincom.mobile.erp
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			rights = Utility.GetAccessRights (pathToDatabase);
 
+			spinPrType= FindViewById<Spinner> (Resource.Id.txtprintertype);
 			spinner = FindViewById<Spinner> (Resource.Id.txtSize);
 			spinBt= FindViewById<Spinner> (Resource.Id.txtprinters);
 			Button butSave = FindViewById<Button> (Resource.Id.ad_bSave);
@@ -57,10 +60,13 @@ namespace wincom.mobile.erp
 			butCancel.Click += butCancelClick;
 			findBTPrinter ();
 			//RunOnUiThread(()=>{ findBTPrinter ();});
+			adapterPT = ArrayAdapter.CreateFromResource (this, Resource.Array.printer_array, Android.Resource.Layout.SimpleSpinnerItem);
+			adapterPT.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
 
 			adapter = ArrayAdapter.CreateFromResource (this, Resource.Array.papersize_array, Android.Resource.Layout.SimpleSpinnerItem);
 			adapter.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
 
+			spinPrType.Adapter = adapterPT;
 			spinner.Adapter = adapter;
 			spinner.ItemSelected+= Spinner_ItemSelected;
 			spinBt.ItemSelected+= Spinner_ItemSelected;
@@ -80,7 +86,7 @@ namespace wincom.mobile.erp
 			txtCNPrefix = FindViewById<EditText> (Resource.Id.txtCNPrefix);
 			txtSOPrefix = FindViewById<EditText> (Resource.Id.txtSOPrefix);
 			txtDOPrefix = FindViewById<EditText> (Resource.Id.txtDOPrefix);
-
+			txtPrinterIP = FindViewById<EditText> (Resource.Id.txtprinterip);
 			if (!rights.IsSOModule) {
 				lbSOPrefix.Visibility = ViewStates.Gone;
 				txtSOPrefix.Visibility = ViewStates.Gone;
@@ -135,6 +141,10 @@ namespace wincom.mobile.erp
 						txtDOPrefix.Text = apra.DOPrefix;
 					}
 					txtprinter.Text = apra.PrinterName;
+					int ptypepos =  adapterPT.GetPosition (apra.PrinterType); //to store printer type
+					spinPrType.SetSelection(ptypepos);
+					txtPrinterIP.Text = (string.IsNullOrEmpty(apra.PrinterIP))?"192.168.1.244":apra.PrinterIP;
+
 					int prnpos = adapterBT.GetPosition (apra.PrinterName);
 					if (prnpos>0)
 						spinBt.SetSelection (prnpos);
@@ -143,9 +153,9 @@ namespace wincom.mobile.erp
 						spinner.SetSelection (position);
 					else spinner.SetSelection (0);
 				} else {
-					
-					txtprinter.Text = "PT-II";
 
+					txtprinter.Text = "PT-II";
+					txtPrinterIP.Text = "192.168.1.244";
 				}
 			}
 		}
@@ -157,6 +167,8 @@ namespace wincom.mobile.erp
 			AdPara apra = new AdPara ();
 
 			apra.PrinterName = txtprinter.Text.ToUpper();
+			apra.PrinterType = spinPrType.SelectedItem.ToString ();
+			apra.PrinterIP = txtPrinterIP.Text;
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{
 				var list  = db.Table<AdPara> ().ToList<AdPara> ();
@@ -164,8 +176,10 @@ namespace wincom.mobile.erp
 					db.Insert (apra);		
 				} else {
 					apra = list [0];
+					apra.PrinterType = spinPrType.SelectedItem.ToString ();
 					apra.PrinterName = txtprinter.Text.ToUpper();
 					apra.PaperSize = spinner.SelectedItem.ToString ();
+					apra.PrinterIP = txtPrinterIP.Text;
 					db.Update (apra);
 				}
 			}
@@ -179,7 +193,7 @@ namespace wincom.mobile.erp
 
 		private void findBTPrinter(){
 			btdevices.Clear ();
-		 try{
+			try{
 				mBluetoothAdapter = BluetoothAdapter.DefaultAdapter;
 				if (mBluetoothAdapter==null)
 				{
@@ -206,7 +220,7 @@ namespace wincom.mobile.erp
 				spinBt.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> ( SpinBt_ItemClick );
 				//txtv.Text ="found device " +mmDevice.Name;
 			}catch(Exception ex) {
-				
+
 				Toast.MakeText (this, "Error initialize bluetooth Adapter. Try again", ToastLength.Long).Show ();
 			}
 

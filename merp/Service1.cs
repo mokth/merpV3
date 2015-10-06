@@ -1717,6 +1717,11 @@ public interface IService1
     
     WcfServiceItem.ItemCode[] EndGetItemCodes(System.IAsyncResult result);
     
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/GetItemCodesEx", ReplyAction="http://tempuri.org/IService1/GetItemCodesExResponse")]
+    System.IAsyncResult BeginGetItemCodesEx(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState);
+    
+    WcfServiceItem.ItemCode[] EndGetItemCodesEx(System.IAsyncResult result);
+    
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/GetCustomers", ReplyAction="http://tempuri.org/IService1/GetCustomersResponse")]
     System.IAsyncResult BeginGetCustomers(string comp, string brn, System.AsyncCallback callback, object asyncState);
     
@@ -1741,6 +1746,11 @@ public interface IService1
     System.IAsyncResult BeginLoginEx(string userid, string hashpass, string seccode, string deviceid, System.AsyncCallback callback, object asyncState);
     
     string EndLoginEx(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/UploadVer", ReplyAction="http://tempuri.org/IService1/UploadVerResponse")]
+    System.IAsyncResult BeginUploadVer(string comp, string brn, string userid, string ver, System.AsyncCallback callback, object asyncState);
+    
+    string EndUploadVer(System.IAsyncResult result);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/UploadOutletBills", ReplyAction="http://tempuri.org/IService1/UploadOutletBillsResponse")]
     System.IAsyncResult BeginUploadOutletBills(WcfServiceItem.OutLetBill[] list, string comp, string brn, string serail, string phoneno, System.AsyncCallback callback, object asyncState);
@@ -1794,6 +1804,29 @@ public partial class GetItemCodesCompletedEventArgs : System.ComponentModel.Asyn
     private object[] results;
     
     public GetItemCodesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public WcfServiceItem.ItemCode[] Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((WcfServiceItem.ItemCode[])(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class GetItemCodesExCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public GetItemCodesExCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
             base(exception, cancelled, userState)
     {
         this.results = results;
@@ -1926,6 +1959,29 @@ public partial class LoginExCompletedEventArgs : System.ComponentModel.AsyncComp
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class UploadVerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public UploadVerCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public string Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((string)(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 public partial class UploadOutletBillsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
 {
     
@@ -2010,6 +2066,12 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     
     private System.Threading.SendOrPostCallback onGetItemCodesCompletedDelegate;
     
+    private BeginOperationDelegate onBeginGetItemCodesExDelegate;
+    
+    private EndOperationDelegate onEndGetItemCodesExDelegate;
+    
+    private System.Threading.SendOrPostCallback onGetItemCodesExCompletedDelegate;
+    
     private BeginOperationDelegate onBeginGetCustomersDelegate;
     
     private EndOperationDelegate onEndGetCustomersDelegate;
@@ -2039,6 +2101,12 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     private EndOperationDelegate onEndLoginExDelegate;
     
     private System.Threading.SendOrPostCallback onLoginExCompletedDelegate;
+    
+    private BeginOperationDelegate onBeginUploadVerDelegate;
+    
+    private EndOperationDelegate onEndUploadVerDelegate;
+    
+    private System.Threading.SendOrPostCallback onUploadVerCompletedDelegate;
     
     private BeginOperationDelegate onBeginUploadOutletBillsDelegate;
     
@@ -2127,6 +2195,8 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     
     public event System.EventHandler<GetItemCodesCompletedEventArgs> GetItemCodesCompleted;
     
+    public event System.EventHandler<GetItemCodesExCompletedEventArgs> GetItemCodesExCompleted;
+    
     public event System.EventHandler<GetCustomersCompletedEventArgs> GetCustomersCompleted;
     
     public event System.EventHandler<GetCustomersExCompletedEventArgs> GetCustomersExCompleted;
@@ -2136,6 +2206,8 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     public event System.EventHandler<LoginCompletedEventArgs> LoginCompleted;
     
     public event System.EventHandler<LoginExCompletedEventArgs> LoginExCompleted;
+    
+    public event System.EventHandler<UploadVerCompletedEventArgs> UploadVerCompleted;
     
     public event System.EventHandler<UploadOutletBillsCompletedEventArgs> UploadOutletBillsCompleted;
     
@@ -2263,6 +2335,67 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
         base.InvokeAsync(this.onBeginGetItemCodesDelegate, new object[] {
                     comp,
                     brn}, this.onEndGetItemCodesDelegate, this.onGetItemCodesCompletedDelegate, userState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult IService1.BeginGetItemCodesEx(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginGetItemCodesEx(comp, brn, userid, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    WcfServiceItem.ItemCode[] IService1.EndGetItemCodesEx(System.IAsyncResult result)
+    {
+        return base.Channel.EndGetItemCodesEx(result);
+    }
+    
+    private System.IAsyncResult OnBeginGetItemCodesEx(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        string comp = ((string)(inValues[0]));
+        string brn = ((string)(inValues[1]));
+        string userid = ((string)(inValues[2]));
+        return ((IService1)(this)).BeginGetItemCodesEx(comp, brn, userid, callback, asyncState);
+    }
+    
+    private object[] OnEndGetItemCodesEx(System.IAsyncResult result)
+    {
+        WcfServiceItem.ItemCode[] retVal = ((IService1)(this)).EndGetItemCodesEx(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnGetItemCodesExCompleted(object state)
+    {
+        if ((this.GetItemCodesExCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.GetItemCodesExCompleted(this, new GetItemCodesExCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void GetItemCodesExAsync(string comp, string brn, string userid)
+    {
+        this.GetItemCodesExAsync(comp, brn, userid, null);
+    }
+    
+    public void GetItemCodesExAsync(string comp, string brn, string userid, object userState)
+    {
+        if ((this.onBeginGetItemCodesExDelegate == null))
+        {
+            this.onBeginGetItemCodesExDelegate = new BeginOperationDelegate(this.OnBeginGetItemCodesEx);
+        }
+        if ((this.onEndGetItemCodesExDelegate == null))
+        {
+            this.onEndGetItemCodesExDelegate = new EndOperationDelegate(this.OnEndGetItemCodesEx);
+        }
+        if ((this.onGetItemCodesExCompletedDelegate == null))
+        {
+            this.onGetItemCodesExCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetItemCodesExCompleted);
+        }
+        base.InvokeAsync(this.onBeginGetItemCodesExDelegate, new object[] {
+                    comp,
+                    brn,
+                    userid}, this.onEndGetItemCodesExDelegate, this.onGetItemCodesExCompletedDelegate, userState);
     }
     
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2568,6 +2701,69 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
                     hashpass,
                     seccode,
                     deviceid}, this.onEndLoginExDelegate, this.onLoginExCompletedDelegate, userState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult IService1.BeginUploadVer(string comp, string brn, string userid, string ver, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginUploadVer(comp, brn, userid, ver, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    string IService1.EndUploadVer(System.IAsyncResult result)
+    {
+        return base.Channel.EndUploadVer(result);
+    }
+    
+    private System.IAsyncResult OnBeginUploadVer(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        string comp = ((string)(inValues[0]));
+        string brn = ((string)(inValues[1]));
+        string userid = ((string)(inValues[2]));
+        string ver = ((string)(inValues[3]));
+        return ((IService1)(this)).BeginUploadVer(comp, brn, userid, ver, callback, asyncState);
+    }
+    
+    private object[] OnEndUploadVer(System.IAsyncResult result)
+    {
+        string retVal = ((IService1)(this)).EndUploadVer(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnUploadVerCompleted(object state)
+    {
+        if ((this.UploadVerCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.UploadVerCompleted(this, new UploadVerCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void UploadVerAsync(string comp, string brn, string userid, string ver)
+    {
+        this.UploadVerAsync(comp, brn, userid, ver, null);
+    }
+    
+    public void UploadVerAsync(string comp, string brn, string userid, string ver, object userState)
+    {
+        if ((this.onBeginUploadVerDelegate == null))
+        {
+            this.onBeginUploadVerDelegate = new BeginOperationDelegate(this.OnBeginUploadVer);
+        }
+        if ((this.onEndUploadVerDelegate == null))
+        {
+            this.onEndUploadVerDelegate = new EndOperationDelegate(this.OnEndUploadVer);
+        }
+        if ((this.onUploadVerCompletedDelegate == null))
+        {
+            this.onUploadVerCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUploadVerCompleted);
+        }
+        base.InvokeAsync(this.onBeginUploadVerDelegate, new object[] {
+                    comp,
+                    brn,
+                    userid,
+                    ver}, this.onEndUploadVerDelegate, this.onUploadVerCompletedDelegate, userState);
     }
     
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2890,6 +3086,23 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
             return _result;
         }
         
+        public System.IAsyncResult BeginGetItemCodesEx(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState)
+        {
+            object[] _args = new object[3];
+            _args[0] = comp;
+            _args[1] = brn;
+            _args[2] = userid;
+            System.IAsyncResult _result = base.BeginInvoke("GetItemCodesEx", _args, callback, asyncState);
+            return _result;
+        }
+        
+        public WcfServiceItem.ItemCode[] EndGetItemCodesEx(System.IAsyncResult result)
+        {
+            object[] _args = new object[0];
+            WcfServiceItem.ItemCode[] _result = ((WcfServiceItem.ItemCode[])(base.EndInvoke("GetItemCodesEx", _args, result)));
+            return _result;
+        }
+        
         public System.IAsyncResult BeginGetCustomers(string comp, string brn, System.AsyncCallback callback, object asyncState)
         {
             object[] _args = new object[2];
@@ -2972,6 +3185,24 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
         {
             object[] _args = new object[0];
             string _result = ((string)(base.EndInvoke("LoginEx", _args, result)));
+            return _result;
+        }
+        
+        public System.IAsyncResult BeginUploadVer(string comp, string brn, string userid, string ver, System.AsyncCallback callback, object asyncState)
+        {
+            object[] _args = new object[4];
+            _args[0] = comp;
+            _args[1] = brn;
+            _args[2] = userid;
+            _args[3] = ver;
+            System.IAsyncResult _result = base.BeginInvoke("UploadVer", _args, callback, asyncState);
+            return _result;
+        }
+        
+        public string EndUploadVer(System.IAsyncResult result)
+        {
+            object[] _args = new object[0];
+            string _result = ((string)(base.EndInvoke("UploadVer", _args, result)));
             return _result;
         }
         

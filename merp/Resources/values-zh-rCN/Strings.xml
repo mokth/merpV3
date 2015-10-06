@@ -19,6 +19,13 @@
      <string-array name="papersize_array">
         <item>58mm</item>
         <item>80mm</item>
+        <item>8.5Inch</item>
+    </string-array>
+    <string-array name="printer_array">
+        <item>Bluetooth Printer</item>
+        <item>Network POS Printer</item>
+        <item>Network Dot Matrix Printer</item>
+        <item>Network Laserjet Printer</item>
     </string-array>
     <string name="mainmenu_trx">交易</string>
    <string name="mainmenu_trxlist">交易记录</string>

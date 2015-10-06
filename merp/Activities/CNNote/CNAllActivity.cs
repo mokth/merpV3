@@ -160,7 +160,7 @@ namespace wincom.mobile.erp
 				list = new CNNoteDtls[ls.Count];
 				ls.CopyTo (list);
 			}
-			IPrintDocument prtInv = PrintDocManager.GetPrintDocument<PrintCreditNote>();
+			IPrintDocument prtInv = PrintDocManager.GetPrintCNDocument<PrintCreditNote>();
 			prtInv.SetDocument (inv);
 			prtInv.SetDocumentDtls(list);
 			prtInv.SetNoOfCopy (noofcopy);

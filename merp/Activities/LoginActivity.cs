@@ -13,6 +13,7 @@ using System.IO;
 using WcfServiceItem;
 using Android.Util;
 using Android.Content.PM;
+using SQLite;
 
 namespace wincom.mobile.erp
 {
@@ -47,7 +48,7 @@ namespace wincom.mobile.erp
 			};
 			//InitializeServiceClient();
 			txtver.Text = "VERSION "+pInfo.VersionName;
-
+			((GlobalvarsApp)this.Application).VERSION = pInfo.VersionName;
 
 			AdUser user=null;
 			//SQLiteConnection...CreateFile(pathToDatabase);
@@ -55,10 +56,10 @@ namespace wincom.mobile.erp
 				createTable (pathToDatabase);
 			} else
 			{
-//				if (pInfo.VersionCode > 2) {
-//					if (!CheckIfColumnExists())
-//						UpdateDatbase ();
-//				}
+				if (pInfo.VersionCode > 14) {
+					if (!CheckIfColumnExists())
+						UpdateDatbase ();
+				}
 			}
 			//else {
 //				user = DataHelper.GetUser (pathToDatabase);
@@ -113,8 +114,12 @@ namespace wincom.mobile.erp
 		{
 			bool isfound = true;
 			try{
-				 AdUser myuser =  DataHelper.GetUser(pathToDatabase);				
-				 DateTime temp = myuser.LastConnect;
+				using (SQLite.SQLiteConnection Conn = new SQLiteConnection(pathToDatabase))
+				{
+					var col =Conn.GetTableInfo("AdPara");
+					isfound=(col.Count >13);
+				
+				}
 			}catch {
 				isfound = false;
 			}
@@ -126,19 +131,20 @@ namespace wincom.mobile.erp
 			try {
 				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
 
-					string sql = @"ALTER TABLE AdUser RENAME TO sqlitestudio_temp_table;
-								   CREATE TABLE AdUser (UserID varchar PRIMARY KEY NOT NULL, CompCode varchar, BranchCode varchar, Password varchar, Islogon integer, LastConnect bigint, DayLen INTEGER);
-								   INSERT INTO AdUser (UserID, CompCode, BranchCode, Password, Islogon) SELECT UserID, CompCode, BranchCode, Password, Islogon FROM sqlitestudio_temp_table;
-								  DROP TABLE sqlitestudio_temp_table;";
+					string sql = @"ALTER TABLE AdPara RENAME TO sqlitestudio_temp_table;
+								   CREATE TABLE AdPara (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, PrinterName varchar, Prefix varchar, PaperSize varchar, Warehouse varchar, ReceiptTitle varchar, RunNo integer, CNRunNo integer, SORunNo integer, DORunNo integer, CNPrefix varchar, DOPrefix varchar, SOPrefix varchar, PrinterIP varchar, PrinterType varchar);
+								   INSERT INTO AdPara (ID, PrinterName, Prefix, PaperSize, Warehouse, ReceiptTitle, RunNo, CNRunNo, SORunNo, DORunNo, CNPrefix, DOPrefix, SOPrefix) SELECT ID, PrinterName, Prefix, PaperSize, Warehouse, ReceiptTitle, RunNo, CNRunNo, SORunNo, DORunNo, CNPrefix, DOPrefix, SOPrefix FROM sqlitestudio_temp_table;
+								   DROP TABLE sqlitestudio_temp_table;";
 					string[] sqls = sql.Split (new char[]{ ';' });
 					foreach (string ssql in sqls) {
 						conn.Execute (ssql, new object[]{ });
 					}
 				}
 			} catch (Exception ex) {
-				AlertShow (ex.Message);
+				Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
 			}
 		}
+
 
 		void ImportDatabase ()
 		{

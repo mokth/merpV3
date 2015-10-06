@@ -17,7 +17,7 @@ namespace wincom.mobile.erp
 		string comp;
 		string brn ;
 		string userid ;		
-
+		string ver;
 		volatile List<OutLetBillTemp> allbills = new List<OutLetBillTemp> ();
 		volatile List<OutLetBill> bills = new List<OutLetBill> ();
 		volatile string _errmsg;
@@ -31,6 +31,7 @@ namespace wincom.mobile.erp
 			comp =((GlobalvarsApp)CallingActivity.Application).COMPANY_CODE;
 			brn =((GlobalvarsApp)CallingActivity.Application).BRANCH_CODE;
 			userid =((GlobalvarsApp)CallingActivity.Application).USERID_CODE;		
+			ver =((GlobalvarsApp)CallingActivity.Application).VERSION;
 		}
 
 		public void startUpload()
@@ -61,11 +62,12 @@ namespace wincom.mobile.erp
 			PhoneTool ptool = new PhoneTool ();
 			string phone = ptool.PhoneNumber ();
 			string serial =ptool.DeviceIdIMEI();
+
 		
 			bills = GetBills();
 			invcount += bills.Count;
 			if (bills.Count > 0) {
-				_client.UploadOutletBillsAsync (bills.ToArray (), comp, brn, serial, phone);
+				_client.UploadOutletBillsAsync (bills.ToArray (), comp, brn, serial, ver );
 			} else {
 				RunOnUiThread (() => Uploadhandle.Invoke(CallingActivity,invcount,_errmsg));
 			}
