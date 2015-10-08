@@ -200,6 +200,7 @@
     <Compile Include="Helper\NumberToWordHelper.cs" />
     <Compile Include="Printing\EPSONHelper\PrintDMCNote.cs" />
     <Compile Include="Printing\HPPCLHelper\PrintPCLCNote.cs" />
+    <Compile Include="Printing\PrintUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

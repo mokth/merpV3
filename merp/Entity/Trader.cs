@@ -67,6 +67,8 @@ namespace wincom.mobile.erp
 		/// </summary>
 		/// <value>The type of the cust.</value>
 		public string CustType{ get; set;}
+
+		public string AgentCode{ get; set;}
 	}
 }
 

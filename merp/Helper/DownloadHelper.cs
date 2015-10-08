@@ -366,7 +366,7 @@ namespace wincom.mobile.erp
 					itm.VIPPrice = item.VIPPrice;
 					itm.WholeSalePrice = item.WholesalePrice;
 					itm.Barcode = item.Barcode;
-
+					itm.StdUom = item.UOM;
 					db.Insert (itm);
 				}
 			}
@@ -402,6 +402,7 @@ namespace wincom.mobile.erp
 					itm.gst = item.Gst;
 					itm.PayCode = item.PayCode;
 					itm.CustType = item.CustType;
+					itm.AgentCode = item.ExtraInfo;
 
 					db.Insert (itm);
 //					if (list2.Where (x => x.CustCode == itm.CustCode).ToList ().Count () == 0) {

@@ -30,6 +30,13 @@ namespace wincom.mobile.erp
 
 		}
 
+		public void PrintSpace(Stream mmOutputStream,int numofSpace)
+		{
+			byte[] cc = Encoding.ASCII.GetBytes ("".PadRight(numofSpace,' '));
+			mmOutputStream.Write (cc, 0, cc.Length);
+
+		}
+
 		public void InitPrinter(Stream mmOutputStream)
 		{ 
 			byte[]  charfont;
@@ -77,6 +84,15 @@ namespace wincom.mobile.erp
 			mmOutputStream.Write(charfont, 0, charfont.Length);
 
 		}
+
+		public void Set1Per8InchLineSpacing(Stream mmOutputStream)
+		{ 
+			byte[]  charfont;
+			charfont = new Byte[] { 27,48 }; 
+			mmOutputStream.Write(charfont, 0, charfont.Length);
+
+		}
+
 
 		public void SetLineFeed(Stream mmOutputStream,int noOfline)
 		{ 
@@ -155,6 +171,26 @@ namespace wincom.mobile.erp
 		public List<string> GetLine(string line,int lineLen) 
 		{
 			string[] text = line.Split(new char[] { ' ','\n','\r' });
+			List<string> lines = new List<string>();
+			string str = "";
+			foreach (string txt in text)
+			{
+				if ((str.Length + txt.Length + 1) < lineLen)
+					str = str + txt + " ";
+				else
+				{
+					lines.Add(str);
+					str = txt+" ";
+				}
+			}
+			lines.Add(str);
+
+			return lines;
+		}
+
+		public List<string> GetNote(string line,int lineLen) 
+		{
+			string[] text = line.Split(new char[] { '\n','\r' });
 			List<string> lines = new List<string>();
 			string str = "";
 			foreach (string txt in text)

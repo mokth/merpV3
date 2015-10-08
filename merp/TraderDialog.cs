@@ -179,6 +179,11 @@ namespace wincom.mobile.erp
 						results.Add (itm);
 						continue;
 					}
+
+					if (itm.AgentCode.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
 				}
 			}
 			return results;

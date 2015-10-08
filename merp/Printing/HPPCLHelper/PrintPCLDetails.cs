@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
@@ -35,7 +36,14 @@ namespace wincom.mobile.erp
 			string line = "";
 			int itemno = 1;
 			byte[] charfont;
+			IEnumerable<Item> itemcodes = DataHelper.GetItems ();
+			string uom = "";
 			foreach (InvoiceDtls dtl in invdtls) {
+				uom = "";
+				var item = from p in itemcodes	where p.ICode == dtl.icode select p;
+				if (item.ToList ().Count > 0)
+					uom = item.ToList () [0].StdUom;
+				
 				if (dtl.icode.Length < 15 && dtl.description.Length < 28) {
 					ttlline += 1;
 					line = (itemno.ToString () + ".").PadRight (4, ' ') + 
@@ -43,7 +51,7 @@ namespace wincom.mobile.erp
 							dtl.description.ToUpper ().PadRight (29, ' ') + 
 							dtl.price.ToString ("n2").PadLeft (9, ' ') + 
 							dtl.qty.ToString ("n0").PadLeft (5, ' ') + 
-							"".PadLeft (6, ' ') + 
+							uom.PadLeft (6, ' ') + 
 							dtl.tax.ToString ("n2").PadLeft (8, ' ') +
 							dtl.taxgrp.PadLeft (7, ' ') + 
 						    dtl.amount.ToString("n2") .PadLeft(10, ' ') + "\r";
@@ -55,7 +63,7 @@ namespace wincom.mobile.erp
 							dtl.description.ToUpper ().PadRight (29, ' ') + 
 							dtl.price.ToString ("n2").PadLeft (9, ' ') + 
 							dtl.qty.ToString ("n0").PadLeft (5, ' ') + 
-							"".PadLeft (6, ' ') + 
+							uom.PadLeft (6, ' ') + 
 							dtl.tax.ToString ("n2").PadLeft (8, ' ') +
 							dtl.taxgrp.PadLeft (7, ' ') + 
 							dtl.amount.ToString("n2") .PadLeft(10, ' ') + "\r";
@@ -78,7 +86,7 @@ namespace wincom.mobile.erp
 						lines[0].PadRight (29, ' ') + 
 						dtl.price.ToString ("n2").PadLeft (9, ' ') + 
 						dtl.qty.ToString ("n0").PadLeft (5, ' ') + 
-						"".PadLeft (6, ' ') + 
+						uom.PadLeft (6, ' ') + 
 						dtl.tax.ToString ("n2").PadLeft (8, ' ') +
 						dtl.taxgrp.PadLeft (7, ' ') + 
 						dtl.amount.ToString("n2") .PadLeft(10, ' ') + "\r";
@@ -115,8 +123,13 @@ namespace wincom.mobile.erp
 			byte[] charfont;
 			Regex re = new Regex("\r\r$");
 			string desc = "";
+			IEnumerable<Item> itemcodes = DataHelper.GetItems ();
+			string uom = "";
 			foreach (InvoiceDtls dtl in invdtls) {
-				
+				uom = "";
+				var item = from p in itemcodes	where p.ICode == dtl.icode select p;
+				if (item.ToList ().Count > 0)
+					uom = item.ToList () [0].StdUom;
 				desc = re.Replace(dtl.description, "").ToUpper();
 				if (dtl.icode.Length < 15 && desc.Length < 28) {
 					ttlline += 1;
@@ -125,7 +138,7 @@ namespace wincom.mobile.erp
 						desc.PadRight (29, ' ') + 
 						dtl.price.ToString ("n2").PadLeft (9, ' ') + 
 						dtl.qty.ToString ("n0").PadLeft (5, ' ') + 
-						"".PadLeft (6, ' ') + 
+						uom.PadLeft (6, ' ') + 
 						dtl.tax.ToString ("n2").PadLeft (8, ' ') +
 						dtl.taxgrp.PadLeft (7, ' ') + 
 						dtl.amount.ToString("n2") .PadLeft(10, ' ') + "\r";
@@ -137,7 +150,7 @@ namespace wincom.mobile.erp
 						desc.PadRight (29, ' ') + 
 						dtl.price.ToString ("n2").PadLeft (9, ' ') + 
 						dtl.qty.ToString ("n0").PadLeft (5, ' ') + 
-						"".PadLeft (6, ' ') + 
+						uom.PadLeft (6, ' ') + 
 						dtl.tax.ToString ("n2").PadLeft (8, ' ') +
 						dtl.taxgrp.PadLeft (7, ' ') + 
 						dtl.amount.ToString("n2") .PadLeft(10, ' ') + "\r";
@@ -161,7 +174,7 @@ namespace wincom.mobile.erp
 						lines[0].PadRight (29, ' ') + 
 						dtl.price.ToString ("n2").PadLeft (9, ' ') + 
 						dtl.qty.ToString ("n0").PadLeft (5, ' ') + 
-						"".PadLeft (6, ' ') + 
+						uom.PadLeft (6, ' ') + 
 						dtl.tax.ToString ("n2").PadLeft (8, ' ') +
 						dtl.taxgrp.PadLeft (7, ' ') + 
 						dtl.amount.ToString("n2") .PadLeft(10, ' ') + "\r";
@@ -193,8 +206,13 @@ namespace wincom.mobile.erp
 			byte[] charfont;
 			Regex re = new Regex("\r\r$");
 			string desc = "";
+			IEnumerable<Item> itemcodes = DataHelper.GetItems ();
+			string uom = "";
 			foreach (CNNoteDtls dtl in invdtls) {
-
+				uom = "";
+				var item = from p in itemcodes	where p.ICode == dtl.icode select p;
+				if (item.ToList ().Count > 0)
+					uom = item.ToList () [0].StdUom;
 				desc = re.Replace(dtl.description, "").ToUpper();
 				if (dtl.icode.Length < 15 && desc.Length < 28) {
 					ttlline += 1;
@@ -203,7 +221,7 @@ namespace wincom.mobile.erp
 						desc.PadRight (29, ' ') + 
 						dtl.price.ToString ("n2").PadLeft (9, ' ') + 
 						dtl.qty.ToString ("n0").PadLeft (5, ' ') + 
-						"".PadLeft (6, ' ') + 
+						uom.PadLeft (6, ' ') + 
 						dtl.tax.ToString ("n2").PadLeft (8, ' ') +
 						dtl.taxgrp.PadLeft (7, ' ') + 
 						dtl.amount.ToString("n2") .PadLeft(10, ' ') + "\r";
@@ -215,7 +233,7 @@ namespace wincom.mobile.erp
 						desc.PadRight (29, ' ') + 
 						dtl.price.ToString ("n2").PadLeft (9, ' ') + 
 						dtl.qty.ToString ("n0").PadLeft (5, ' ') + 
-						"".PadLeft (6, ' ') + 
+						uom.PadLeft (6, ' ') + 
 						dtl.tax.ToString ("n2").PadLeft (8, ' ') +
 						dtl.taxgrp.PadLeft (7, ' ') + 
 						dtl.amount.ToString("n2") .PadLeft(10, ' ') + "\r";
@@ -239,7 +257,7 @@ namespace wincom.mobile.erp
 						lines[0].PadRight (29, ' ') + 
 						dtl.price.ToString ("n2").PadLeft (9, ' ') + 
 						dtl.qty.ToString ("n0").PadLeft (5, ' ') + 
-						"".PadLeft (6, ' ') + 
+						uom.PadLeft (6, ' ') + 
 						dtl.tax.ToString ("n2").PadLeft (8, ' ') +
 						dtl.taxgrp.PadLeft (7, ' ') + 
 						dtl.amount.ToString("n2") .PadLeft(10, ' ') + "\r";

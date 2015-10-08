@@ -260,6 +260,8 @@ namespace WcfServiceItem
         
         private string CustomerNameField;
         
+        private string ExtraInfoField;
+        
         private string FaxField;
         
         private string GstField;
@@ -356,6 +358,19 @@ namespace WcfServiceItem
             set
             {
                 this.CustomerNameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ExtraInfo
+        {
+            get
+            {
+                return this.ExtraInfoField;
+            }
+            set
+            {
+                this.ExtraInfoField = value;
             }
         }
         

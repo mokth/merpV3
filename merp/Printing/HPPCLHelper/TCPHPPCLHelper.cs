@@ -67,6 +67,11 @@ namespace wincom.mobile.erp
 		    charfont = new Byte[] { 27, 40, 115, 48, 84 }; //Line Printer mode
 			mmOutputStream.Write(charfont, 0, charfont.Length);
 
+			charfont = new Byte[] { 27, 38, 97, 48, 51,76 }; //left margin 15col
+			mmOutputStream.Write(charfont, 0, charfont.Length);
+
+			charfont = new Byte[] { 27, 38, 108, 48, 52,69 }; //top margin 15col
+			mmOutputStream.Write(charfont, 0, charfont.Length);
 			//harfont = new Byte[] { 27, 40, 115, 49, 50, 72 }; //cpi12
 			//mmOutputStream.Write(charfont, 0, charfont.Length);
 		}

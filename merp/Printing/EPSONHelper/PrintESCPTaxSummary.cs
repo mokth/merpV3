@@ -20,7 +20,7 @@ namespace wincom.mobile.erp
 				select new {taxgrp = g.Key, ttltax = g.Sum (x => x.tax),ttlAmt = g.Sum (v => v.netamount)};
 
 
-			test += "------------------------------------------------\n";
+		//	test += "------------------------------------------------\n";
 			test += "SUMMARY  TAX GROUP             AMOUNT   TAX AMT \n";
 			test += "------------------------------------------------\n";
 			//       12345678 123456789012345 123456789012 1234567890 
@@ -36,7 +36,7 @@ namespace wincom.mobile.erp
 				test += "".PadRight(9,' ')+pline + "\n";
 				pline = "";
 			}
-
+			test = test + "\n";
 		}
 
 		public void PrintCNTaxSumm(ref string test,CNNoteDtls[] list )
@@ -50,7 +50,7 @@ namespace wincom.mobile.erp
 				select new {taxgrp = g.Key, ttltax = g.Sum (x => x.tax),ttlAmt = g.Sum (v => v.netamount)};
 
 
-			test += "------------------------------------------------\n";
+			//test += "------------------------------------------------\n";
 			test += "SUMMARY  TAX GROUP             AMOUNT   TAX AMT \n";
 			test += "------------------------------------------------\n";
 			//       12345678 123456789012345 123456789012 1234567890 
@@ -66,7 +66,7 @@ namespace wincom.mobile.erp
 				test += "".PadRight(9,' ')+pline + "\n";
 				pline = "";
 			}
-
+			test = test + "\n";
 		}
 
 

@@ -54,7 +54,7 @@ namespace wincom.mobile.erp
 			text = "";
 			errMsg = "";
 			bool isPrinted = false;
-		
+
 			TCPDotMatrixHelper device = new TCPDotMatrixHelper();
 			device.SetCallingActivity (callingActivity);
 			device.SetIsPrintCompLogo (iSPrintCompLogo ());
@@ -72,19 +72,28 @@ namespace wincom.mobile.erp
 			try {
 				string dtltexts ="";
 				List<string> dtlLines = prtDetail.GetPrintDetalis(inv, list);
+				List<string> remlines = new List<string>();
 				int lineRem;
-				int page = Math.DivRem (dtlLines.Count, 20,out lineRem);
+				int lineRemark=0;
+				if(!string.IsNullOrEmpty(inv.remark))
+				{
+					string remtext = "REMARK: "+inv.remark.ToUpper();
+					remlines= PrintUtil.GetLine(remtext,90 );
+					lineRemark= remlines.Count+1;
+				}
+
+				int page = Math.DivRem (dtlLines.Count+lineRemark, 20,out lineRem);
 				bool squeezeTopage = false;
 				if (lineRem < 4)
 					squeezeTopage = true;
 				else page +=1;
 
-				int printpage = Math.DivRem (dtlLines.Count, 35, out lineRem);
+				int printpage = Math.DivRem (dtlLines.Count+lineRemark, 35, out lineRem);
 				if (printpage ==0)
 				{
 					if (page>1)
 					{
-						int remlinecount= 35-dtlLines.Count;
+						int remlinecount= 35-dtlLines.Count+lineRemark;
 						for(int i=0; i <remlinecount;i++)
 						{
 							dtlLines.Add("\n");
@@ -97,7 +106,7 @@ namespace wincom.mobile.erp
 				int recno=35;
 				int printedRecno=0;
 				for (int i = 1; i < page; i++) {	
-					pageno = string.Format("{0} OF {1}",i,page);
+					pageno = string.Format("{0} OF {1}",i,page==0?1:page);
 					prtcompHeader.PrintHeader (device.mmOutputStream, inv,pageno);
 					for(int y=0; y<recno;y++)
 					{
@@ -110,7 +119,7 @@ namespace wincom.mobile.erp
 				}
 
 				int lastpageRecno=0;
-				pageno = string.Format("{0} OF {1}",page_no,page);
+				pageno = string.Format("{0} OF {1}",page_no,(page==0)?1:page);
 				prtcompHeader.PrintHeader (device.mmOutputStream, inv,pageno);
 				for(int y=printedRecno; y < dtlLines.Count ;y++)
 				{
@@ -118,14 +127,22 @@ namespace wincom.mobile.erp
 					lastpageRecno+=1;
 				}
 
+				if ( remlines.Count>0)
+				{
+					prtDetail.PrintLine (device.mmOutputStream,"\n");
+					foreach(string rline in remlines)
+					{
+						prtDetail.PrintLine (device.mmOutputStream, rline+"\n");
+					}
+				}
 
 				string text = "";
 				prtTaxSumm.PrintTaxSumm (ref text, list);
 				string[] taxline = text.Split (new char[]{ '\n' });
 				int tttline = lastpageRecno + taxline.Length;
-				int remindline = 42 - (tttline + 1)-9; // 9 is the footer line
+				int remindline = 40 - (tttline + 1)-9; // 9 is the footer line
 				SetLineFeed (device.mmOutputStream, remindline);
-				prtDetail.PrintLine (device.mmOutputStream, text);
+				prtDetail.PrintSmallLine (device.mmOutputStream, text);
 				prtFooter.PrintFooter (device.mmOutputStream, prtDetail.TotaTaxAmount, prtDetail.TotalNetAmount);
 				success = true;
 			} catch (Exception ex) {

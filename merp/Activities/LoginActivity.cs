@@ -56,9 +56,12 @@ namespace wincom.mobile.erp
 				createTable (pathToDatabase);
 			} else
 			{
-				if (pInfo.VersionCode > 14) {
-					if (!CheckIfColumnExists())
+				if (pInfo.VersionCode == 15) {
+					if (!CheckIfColumnExists ()) {
 						UpdateDatbase ();
+						UpdateItem ();
+						UpdateTrader ();
+					}
 				}
 			}
 			//else {
@@ -132,9 +135,9 @@ namespace wincom.mobile.erp
 				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
 
 					string sql = @"ALTER TABLE AdPara RENAME TO sqlitestudio_temp_table;
-								   CREATE TABLE AdPara (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, PrinterName varchar, Prefix varchar, PaperSize varchar, Warehouse varchar, ReceiptTitle varchar, RunNo integer, CNRunNo integer, SORunNo integer, DORunNo integer, CNPrefix varchar, DOPrefix varchar, SOPrefix varchar, PrinterIP varchar, PrinterType varchar);
+								   CREATE TABLE AdPara (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, PrinterName varchar, Prefix varchar, PaperSize varchar, Warehouse varchar, ReceiptTitle varchar, RunNo integer, CNRunNo integer, SORunNo integer, DORunNo integer, CNPrefix varchar, DOPrefix varchar, SOPrefix varchar, PrinterIP varchar, PrinterType varchar,FooterNote varchar,FooterCNNote varchar,FooterDONote,FooterSONote varchar);
 								   INSERT INTO AdPara (ID, PrinterName, Prefix, PaperSize, Warehouse, ReceiptTitle, RunNo, CNRunNo, SORunNo, DORunNo, CNPrefix, DOPrefix, SOPrefix) SELECT ID, PrinterName, Prefix, PaperSize, Warehouse, ReceiptTitle, RunNo, CNRunNo, SORunNo, DORunNo, CNPrefix, DOPrefix, SOPrefix FROM sqlitestudio_temp_table;
-								   DROP TABLE sqlitestudio_temp_table;";
+								   DROP TABLE sqlitestudio_temp_table";
 					string[] sqls = sql.Split (new char[]{ ';' });
 					foreach (string ssql in sqls) {
 						conn.Execute (ssql, new object[]{ });
@@ -142,6 +145,46 @@ namespace wincom.mobile.erp
 				}
 			} catch (Exception ex) {
 				Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
+			}
+		}
+
+		private void UpdateItem()
+		{
+			try {
+				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
+
+					string sql = @"ALTER TABLE Item RENAME TO sqlitestudio_temp_table2;
+									CREATE TABLE Item (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, ICode varchar, IDesc varchar, Price float, tax float, taxgrp varchar, isincludesive integer, VIPPrice float, RetailPrice float, WholeSalePrice float, Barcode varchar, StdUom VARCHAR);
+									INSERT INTO Item (ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode) SELECT ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode FROM sqlitestudio_temp_table2;
+									DROP TABLE sqlitestudio_temp_table2";
+					string[] sqls = sql.Split (new char[]{ ';' });
+					foreach (string ssql in sqls) {
+						conn.Execute (ssql, new object[]{ });
+					}
+				}
+			} catch (Exception ex) {
+				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
+				AlertShow("UpdateItem() "+ex.Message);
+			}
+		}
+
+		private void UpdateTrader()
+		{
+			try {
+				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
+
+					string sql = @"ALTER TABLE Trader RENAME TO sqlitestudio_temp_table3;
+								   CREATE TABLE Trader (CustCode varchar PRIMARY KEY NOT NULL, CustName varchar, Addr1 varchar, Addr2 varchar, Addr3 varchar, Addr4 varchar, Tel varchar, Fax varchar, gst varchar, PayCode varchar, CustType varchar, AgentCode VARCHAR);
+							       INSERT INTO Trader (CustCode, CustName, Addr1, Addr2, Addr3, Addr4, Tel, Fax, gst, PayCode, CustType) SELECT CustCode, CustName, Addr1, Addr2, Addr3, Addr4, Tel, Fax, gst, PayCode, CustType FROM sqlitestudio_temp_table3;
+								   DROP TABLE sqlitestudio_temp_table3";
+					string[] sqls = sql.Split (new char[]{ ';' });
+					foreach (string ssql in sqls) {
+						conn.Execute (ssql, new object[]{ });
+					}
+				}
+			} catch (Exception ex) {
+				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
+				AlertShow("UpdateTrader() "+ex.Message);
 			}
 		}
 

@@ -34,26 +34,24 @@ namespace wincom.mobile.erp
 			//SetCenter(mmOutputStream, false);
 			SetLineFeed (mmOutputStream, 2);
 
-			string strline = "".PadRight(65, ' ') + "  TAX INVOICE\r"; line +=1;
+			Trader cust = DataHelper.GetTrader (pathToDatabase, inv.custcode);
+
+			string strline =cust.CustName.ToUpper().PadRight(65, ' ') + "  TAX INVOICE\r"; line +=1;
 			SetBold(mmOutputStream, true);
 			charfont = Encoding.ASCII.GetBytes(strline);
 			mmOutputStream.Write(charfont, 0, charfont.Length);
 
-			Trader cust = DataHelper.GetTrader (pathToDatabase, inv.custcode);
-			strline = cust.CustName.ToUpper().PadRight(65, ' ');
-			charfont = Encoding.ASCII.GetBytes(strline);
-			mmOutputStream.Write(charfont, 0, charfont.Length);
-
 			SetBold(mmOutputStream, false);
-			string line1 = "  INVOICE NO: " + inv.invno + "\r"; line +=1;
-			line1 = line1 + cust.Addr1.ToUpper ().PadRight (65, ' ') + "  DATE      : " + inv.invdate.ToString ("dd-MM-yyyy") + "\r";
+			string line1 = cust.Addr1.ToUpper ().PadRight (65, ' ') +  "  INVOICE NO: " + inv.invno + "\r"; line +=1;
+			line1 = line1 + cust.Addr2.ToUpper ().PadRight (65, ' ') + "  DATE      : " + inv.invdate.ToString ("dd-MM-yyyy") + "\r";
 			line +=1;
-			line1 = line1 +  cust.Addr2.ToUpper().PadRight(65, ' ') + "  TERMS     : "+cust.PayCode+ "\r";
-			line +=1;
-			line1 = line1 +  cust.Addr3.ToUpper().PadRight(65, ' ') + "  PAGE NO   : "+pageno+"\r";
+			line1 = line1 +  cust.Addr3.ToUpper().PadRight(65, ' ') + "  TERMS     : "+cust.PayCode+ "\r";
 			line +=1;
 			address = "TEL: " + cust.Tel + "   FAX: " + cust.Fax;
-			line1 = line1 + address.PadRight(65, ' ') + " \r";
+			line1 = line1 +  address.ToUpper().PadRight(65, ' ') + "  PAGE NO   : "+pageno+"\r";
+			line +=1;
+			address = "GST NO: " + cust.gst; 
+			line1 = line1 + address.ToUpper().PadRight(65, ' ') + " \r";
 			line +=1;
 			charfont = Encoding.ASCII.GetBytes(line1);
 			mmOutputStream.Write(charfont, 0, charfont.Length);
@@ -90,26 +88,24 @@ namespace wincom.mobile.erp
 			//SetCenter(mmOutputStream, false);
 			SetLineFeed (mmOutputStream, 2);
 
-			string strline = "".PadRight(65, ' ') + "  CREDIT NOTE\r"; line +=1;
+			Trader cust = DataHelper.GetTrader (pathToDatabase, inv.custcode);
+
+			string strline =cust.CustName.ToUpper().PadRight(65, ' ') + "  CREDIT NOTE\r"; line +=1;
 			SetBold(mmOutputStream, true);
 			charfont = Encoding.ASCII.GetBytes(strline);
 			mmOutputStream.Write(charfont, 0, charfont.Length);
 
-			Trader cust = DataHelper.GetTrader (pathToDatabase, inv.custcode);
-			strline = cust.CustName.ToUpper().PadRight(65, ' ');
-			charfont = Encoding.ASCII.GetBytes(strline);
-			mmOutputStream.Write(charfont, 0, charfont.Length);
-
 			SetBold(mmOutputStream, false);
-			string line1 = "  C/NOTE NO : " + inv.invno + "\r"; line +=1;
-			line1 = line1 + cust.Addr1.ToUpper ().PadRight (65, ' ') + "  DATE      : " + inv.invdate.ToString ("dd-MM-yyyy") + "\r";
+			string line1 = cust.Addr1.ToUpper ().PadRight (65, ' ') +  "  C/NOTE NO : " + inv.cnno + "\r"; line +=1;
+			line1 = line1 + cust.Addr2.ToUpper ().PadRight (65, ' ') + "  INVOICE NO: " + inv.invno + "\r";
 			line +=1;
-			line1 = line1 +  cust.Addr2.ToUpper().PadRight(65, ' ') + "  TERMS     : "+cust.PayCode+ "\r";
-			line +=1;
-			line1 = line1 +  cust.Addr3.ToUpper().PadRight(65, ' ') + "  PAGE NO   : "+pageno+"\r";
+			line1 = line1 +  cust.Addr3.ToUpper().PadRight(65, ' ') + "  DATE      : " + inv.invdate.ToString ("dd-MM-yyyy") + "\r";
 			line +=1;
 			address = "TEL: " + cust.Tel + "   FAX: " + cust.Fax;
-			line1 = line1 + address.PadRight(65, ' ') + " \r";
+			line1 = line1 +  address.ToUpper().PadRight(65, ' ') + "  TERMS     : "+cust.PayCode+ "\r";
+			line +=1;
+			address = "GST NO: " + cust.gst; 
+			line1 = line1 + address.ToUpper().PadRight(65, ' ') + "  PAGE NO   : "+pageno+"\r";
 			line +=1;
 			charfont = Encoding.ASCII.GetBytes(line1);
 			mmOutputStream.Write(charfont, 0, charfont.Length);

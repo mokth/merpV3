@@ -46,16 +46,13 @@ namespace wincom.mobile.erp
 
 		}
 
-
 		public void Set12CPI(Stream mmOutputStream)
 		{ 
 			byte[]  charfont;
-			charfont = new Byte[] { 27, 40, 115, 49, 50 ,72 }; 
+			charfont = new Byte[] { 27, 40, 115, 49, 51 ,72 }; //50
 			mmOutputStream.Write(charfont, 0, charfont.Length);
 
 		}
-
-
 
 		public void Set16CPI(Stream mmOutputStream)
 		{ 
@@ -105,6 +102,22 @@ namespace wincom.mobile.erp
 			}
 		}
 
+		public void Set1Per6InchLineSpacing(Stream mmOutputStream)
+		{ 
+			byte[]  charfont;
+			charfont = new Byte[] { 27,38, 108,54, 68 }; 
+			mmOutputStream.Write(charfont, 0, charfont.Length);
+
+		}
+
+		public void Set1Per8InchLineSpacing(Stream mmOutputStream)
+		{ 
+			byte[]  charfont;
+			charfont = new Byte[] { 27,38, 108,56, 68 }; 
+			mmOutputStream.Write(charfont, 0, charfont.Length);
+
+		}
+
 //		public void SetDoubleStrike(Stream mmOutputStream, bool isOn)
 //		{
 //			byte[] charfont;
@@ -142,6 +155,25 @@ namespace wincom.mobile.erp
 		public List<string> GetLine(string line,int lineLen) 
 		{
 			string[] text = line.Split(new char[] { ' ','\n','\r' });
+			List<string> lines = new List<string>();
+			string str = "";
+			foreach (string txt in text)
+			{
+				if ((str.Length + txt.Length + 1) < lineLen)
+					str = str + txt + " ";
+				else
+				{
+					lines.Add(str);
+					str = txt+" ";
+				}
+			}
+			lines.Add(str);
+
+			return lines;
+		}
+		public List<string> GetNote(string line,int lineLen) 
+		{
+			string[] text = line.Split(new char[] { '\n','\r' });
 			List<string> lines = new List<string>();
 			string str = "";
 			foreach (string txt in text)

@@ -23,6 +23,10 @@ namespace wincom.mobile.erp
 		//Print Server printing added
 		public string PrinterIP{ get; set;}
 		public string PrinterType{ get; set;}
+		public string FooterNote{ get; set;}
+		public string FooterCNNote{ get; set;}
+		public string FooterDONote{ get; set;}
+		public string FooterSONote{ get; set;}
 	}
 
 	public class AdNumDate

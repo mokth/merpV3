@@ -379,7 +379,7 @@ namespace wincom.mobile.erp
 				apara.DORunNo = pro.DORunNo;
 				apara.SOPrefix = pro.SOPrefix;
 				apara.SORunNo = pro.SORunNo;
-
+				apara.FooterNote = pro.InvTitle;
 
 				if (list3.Count == 0) {
 					apara.ReceiptTitle = "TAX INVOICE";
@@ -521,6 +521,18 @@ namespace wincom.mobile.erp
 				list.CopyTo (invs);
 			}
 			return invs;
+		}
+
+		public static Item[] GetItems()
+		{
+			string pathToDatabase = ((GlobalvarsApp)Application.Context).DATABASE_PATH;
+			Item[] items =  {};
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list = db.Table <Item> ().ToList();
+				items = new Item[list.Count];
+				list.CopyTo (items);
+			}
+			return items;
 		}
 	}
 }

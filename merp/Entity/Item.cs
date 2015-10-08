@@ -59,6 +59,9 @@ namespace wincom.mobile.erp
 		public double WholeSalePrice { get; set; }
 
 		public string Barcode { get; set; }
+
+		public string StdUom { get; set; }
+
 	}
 
 
