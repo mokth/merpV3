@@ -104,7 +104,7 @@ namespace wincom.mobile.erp
 		{
 			Item itm = adapter[e.Position];
 			if (itm != null) {
-				_selectedItem = itm.ICode + " | " + itm.IDesc;
+				_selectedItem = itm.ICode + " | " + itm.IDesc.Trim();
 				Hashtable param = new Hashtable ();
 				param.Add ("SELECTED", _selectedItem);
 				EventParam p = new EventParam (EventID.ICODE_SELECTED, param);

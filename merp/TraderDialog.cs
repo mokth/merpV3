@@ -120,7 +120,7 @@ namespace wincom.mobile.erp
 		{
 			Trader itm = adapter[e.Position];
 			if (itm != null) {
-				_selectedItem = itm.CustCode + " | " + itm.CustName;
+				_selectedItem = itm.CustCode + " | " + itm.CustName.Trim();
 				Hashtable param = new Hashtable ();
 				param.Add ("SELECTED", _selectedItem);
 				//int eventID = (_filter == null ? EventID.CUSTCODE_SELECTED : EventID.CUSTCODE2_SELECTED);
@@ -180,9 +180,11 @@ namespace wincom.mobile.erp
 						continue;
 					}
 
-					if (itm.AgentCode.ToUpper().IndexOf (searchFor) >= 0) {
-						results.Add (itm);
-						continue;
+					if (itm.AgentCode != null) {
+						if (itm.AgentCode.ToUpper ().IndexOf (searchFor) >= 0) {
+							results.Add (itm);
+							continue;
+						}
 					}
 				}
 			}

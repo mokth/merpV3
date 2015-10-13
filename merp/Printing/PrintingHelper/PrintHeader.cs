@@ -29,8 +29,8 @@ namespace wincom.mobile.erp
 			string title1 = "INVOICE";
 			string title2 = "";
 
-			string date = DateTime.Now.ToString ("dd-MM-yyyy");
-			string datetime = DateTime.Now.ToString ("dd-MM-yyyy hh:mm tt");
+			string date = inv.invdate.ToString ("dd-MM-yyyy");
+			string datetime = inv.invdate.ToString ("dd-MM-yyyy hh:mm tt");
 			if (compinfo.ShowTime) {
 				test += datetime+title1.PadLeft(41-datetime.Length,' ')+"\n";
 			} else {
@@ -70,8 +70,8 @@ namespace wincom.mobile.erp
 			if (titles.Length == 0 || title1=="")
 				title1 = "TAX INVOICE";
 
-			string date = DateTime.Now.ToString ("dd-MM-yyyy");
-			string datetime = DateTime.Now.ToString ("dd-MM-yyyy hh:mm tt");
+			string date = inv.invdate.ToString ("dd-MM-yyyy");
+			string datetime = inv.invdate.ToString ("dd-MM-yyyy hh:mm tt");
 			if (compinfo.ShowTime) {
 				test += datetime+title1.PadLeft(41-datetime.Length,' ')+"\n";
 			} else {
@@ -113,8 +113,8 @@ namespace wincom.mobile.erp
 			string title2 = "";
 			title1 = "CREDIT NOTE";
 
-			string date = DateTime.Now.ToString ("dd-MM-yyyy");
-			string datetime = DateTime.Now.ToString ("dd-MM-yyyy hh:mm tt");
+			string date =inv.invdate.ToString ("dd-MM-yyyy");
+			string datetime = inv.invdate.ToString ("dd-MM-yyyy hh:mm tt");
 			if (compinfo.ShowTime) {
 				test += datetime+title1.PadLeft(41-datetime.Length,' ')+"\n";
 			} else {
@@ -158,8 +158,8 @@ namespace wincom.mobile.erp
 		{
 			string userid = USERID;
 			string title1 = "SALES ORDER";
-			string date = DateTime.Now.ToString ("dd-MM-yyyy");
-			string datetime = DateTime.Now.ToString ("dd-MM-yyyy hh:mm tt");
+			string date = so.sodate.ToString ("dd-MM-yyyy");
+			string datetime = so.sodate.ToString ("dd-MM-yyyy hh:mm tt");
 			if (compinfo.ShowTime) {
 				test += datetime+title1.PadLeft(41-datetime.Length,' ')+"\n";
 			} else {
@@ -183,8 +183,8 @@ namespace wincom.mobile.erp
 		{
 			string userid = USERID;
 			string title1 = "DELIVERY ORDER";
-			string date = DateTime.Now.ToString ("dd-MM-yyyy");
-			string datetime = DateTime.Now.ToString ("dd-MM-yyyy hh:mm tt");
+			string date = doOrder.dodate.ToString ("dd-MM-yyyy");
+			string datetime = doOrder.dodate.ToString ("dd-MM-yyyy hh:mm tt");
 			if (compinfo.ShowTime) {
 				test += datetime+title1.PadLeft(41-datetime.Length,' ')+"\n";
 			} else {
@@ -213,8 +213,8 @@ namespace wincom.mobile.erp
 		{
 			string userid = USERID;
 			string title1 = "PAYMENT VOUCHER";
-			string date = DateTime.Now.ToString ("dd-MM-yyyy");
-			string datetime = DateTime.Now.ToString ("dd-MM-yyyy hh:mm tt");
+			string date = so.sodate.ToString ("dd-MM-yyyy");
+			string datetime = so.sodate.ToString ("dd-MM-yyyy hh:mm tt");
 			if (compinfo.ShowTime) {
 				test += datetime+title1.PadLeft(41-datetime.Length,' ')+"\n";
 			} else {
