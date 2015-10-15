@@ -165,7 +165,7 @@ namespace wincom.mobile.erp
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 				inv = new Invoice ();
 				inv.invno= invno;
-				inv.invdate = DateTime.Now;
+				inv.invdate = DateTime.Today;
 				inv.trxtype = "CASH";
 				inv.created = DateTime.Now;
 				inv.amount = 0;
