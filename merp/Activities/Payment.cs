@@ -1,9 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -66,6 +64,9 @@ namespace wincom.mobile.erp
 			{
 				CalChanges ();
 				e.Handled = true;   
+				View view = sender as View;
+				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+				imm.HideSoftInputFromWindow(view.WindowToken, 0);
 			}
 		}
 

@@ -106,11 +106,18 @@ namespace wincom.mobile.erp
 			{
 				//CalAmt ();
 				e.Handled = true;   
-				//Button butSave = FindViewById<Button> (Resource.Id.Save);
-				//butSave.RequestFocus ();
+				View view = sender as View;
+				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+				imm.HideSoftInputFromWindow(view.WindowToken, 0);
 			}
 		}
 
+		void ShowKeyBoard(View view)
+		{
+			InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+			imm.ShowSoftInputFromInputMethod(view.WindowToken, ShowFlags.Forced);
+			imm.ToggleSoftInput (ShowFlags.Forced, 0); 
+		}
 
 		private void LoadData(string sono,string uid)
 		{
@@ -221,6 +228,7 @@ namespace wincom.mobile.erp
 			//EditText price = FindViewById<EditText> (Resource.Id.txtprice);
 			EditText qty = FindViewById<EditText> (Resource.Id.txtqty);
 			qty.RequestFocus ();
+			ShowKeyBoard (qty);
 
 		}
 

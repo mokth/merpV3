@@ -111,10 +111,19 @@ namespace wincom.mobile.erp
 			{
 				CalAmt ();
 				e.Handled = true;   
-				//Button butSave = FindViewById<Button> (Resource.Id.Save);
-				//butSave.RequestFocus ();
+				View view = sender as View;
+				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+				imm.HideSoftInputFromWindow(view.WindowToken, 0);
 			}
 		}
+
+		void ShowKeyBoard(View view)
+		{
+			InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+			imm.ShowSoftInputFromInputMethod(view.WindowToken, ShowFlags.Forced);
+			imm.ToggleSoftInput (ShowFlags.Forced, 0); 
+		}
+
 		private void CalAmt()
 		{
 			EditText ttlamt = FindViewById<EditText> (Resource.Id.txtamount);
@@ -313,7 +322,7 @@ namespace wincom.mobile.erp
 			taxper = item.tax;
 			isInclusive = item.isincludesive;
 			qty.RequestFocus ();
-
+			ShowKeyBoard (qty);
 		}
 
 		void ShowItemLookUp()

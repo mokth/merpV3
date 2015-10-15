@@ -19,6 +19,16 @@
             style="@style/ButtonBlueThem"
             android:drawableLeft="@drawable/shop" />
         <Button
+            android:text="@string/submenu_pos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/butPOS"
+            android:height="53dp"
+            android:background="@drawable/bluethem_btn_default_holo_light"
+            android:drawableLeft="@drawable/shop"
+            style="@style/ButtonBlueThem" />
+        <Button
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:text="@string/submenu_cn"
             android:layout_width="match_parent"

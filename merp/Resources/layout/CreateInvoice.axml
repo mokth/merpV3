@@ -150,6 +150,16 @@
                 android:textColor="#ff140000"
                 android:inputType="textMultiLine|textCapCharacters|textCapSentences"
                 android:background="@drawable/bluethem_edit_text_holo_light"
+                android:textColorHint="@color/xam_gray" />
+            <EditText
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/newinv_remark"
+                android:paddingLeft="5dp"
+                android:textColor="#ff140000"
+                android:inputType="textMultiLine|textCapCharacters|textCapSentences"
+                android:background="@drawable/bluethem_edit_text_holo_light"
                 android:hint="@string/form_remark"
                 android:textColorHint="@color/xam_gray" />
         </LinearLayout>

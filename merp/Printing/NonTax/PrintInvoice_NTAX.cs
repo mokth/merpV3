@@ -64,7 +64,7 @@ namespace wincom.mobile.erp
 		private void GetInvoiceText (Invoice inv, InvoiceDtls[] list)
 		{
 			prtcompHeader.PrintCompHeader (ref text);
-			prtCustHeader.PrintCustomer (ref text, inv.custcode);
+			prtCustHeader.PrintCustomerInv (ref text, inv);
 			prtHeader.PrintHeader_NTax (ref text, inv);
 			string dline = "";
 			double ttlAmt = 0;

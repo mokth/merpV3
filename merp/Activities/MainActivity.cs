@@ -47,6 +47,8 @@ namespace wincom.mobile.erp
 			but.Click += butClick;
 			Button butTrxList = FindViewById<Button> (Resource.Id.butInvlist);
 			butTrxList.Click+= ButInvlist_Click;
+			Button butPOS = FindViewById<Button> (Resource.Id.butPOS);
+			butPOS.Click += ButPOS_Click;
 			Button butdown = FindViewById<Button> (Resource.Id.butDown);
 			butdown.Click += butDownloadItems;
 			Button butup = FindViewById<Button> (Resource.Id.butupload);
@@ -80,6 +82,12 @@ namespace wincom.mobile.erp
 		{
 			//var intent = new Intent(this, typeof(InvoiceActivity));
 			var intent =ActivityManager.GetActivity<InvoiceActivity>(this.ApplicationContext);
+			StartActivity(intent);
+		}
+
+		void ButPOS_Click (object sender, EventArgs e)
+		{
+			var intent =ActivityManager.GetActivity<CashSalesActivity>(this.ApplicationContext);
 			StartActivity(intent);
 		}
 

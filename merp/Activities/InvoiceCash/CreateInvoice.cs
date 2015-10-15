@@ -121,7 +121,7 @@ namespace wincom.mobile.erp
 		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
 		{
 			Spinner spinner = (Spinner)sender;
-
+			EditText txtcustname = FindViewById<EditText> (Resource.Id.newinv_custname);
 			string txt = spinner.GetItemAtPosition (e.Position).ToString();
 			string[] codes = txt.Split (new char[]{ '|' });
 			if (codes.Length == 0)
@@ -151,6 +151,11 @@ namespace wincom.mobile.erp
 					}
 				}//else spinnerType.Enabled = true;
 
+				if (codes [0].Trim () == "COD" || codes [0].Trim () == "CASH") {
+					txtcustname.Enabled = true;
+				}else txtcustname.Enabled =false;
+
+				txtcustname.Text = codes [1].Trim ();
 			}
 
 		}
@@ -197,7 +202,8 @@ namespace wincom.mobile.erp
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
 			Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
 			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
-			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
+			EditText remark = FindViewById<EditText> (Resource.Id.newinv_remark);
+			EditText custname = FindViewById<EditText> (Resource.Id.newinv_custname);
 			string[] prefixs = apara.Prefix.Trim ().ToUpper ().Split(new char[]{'|'});
 			string prefix = "";
 			string trxtype = spinner2.SelectedItem.ToString ();
@@ -242,7 +248,9 @@ namespace wincom.mobile.erp
 				inv.custcode = codes [0].Trim ();
 				inv.isUploaded = false;
 				inv.remark = remark.Text.ToUpper();
-
+				if (codes [0].Trim () == "COD" || codes [0].Trim () == "CASH") {
+					inv.description = custname.Text.ToUpper ();
+				}
 				txtinvno.Text = invno;
 				db.Insert (inv);
 				adNum.RunNo = runno;

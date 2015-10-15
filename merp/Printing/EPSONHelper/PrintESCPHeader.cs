@@ -36,7 +36,8 @@ namespace wincom.mobile.erp
 			SetLineFeed (mmOutputStream, 2);
 
 			Trader cust = DataHelper.GetTrader (pathToDatabase, inv.custcode);
-			string strline = cust.CustName.ToUpper().PadRight(65, ' ') + "  TAX INVOICE\n"; line +=1;
+			//string strline = cust.CustName.ToUpper().PadRight(65, ' ') + "  TAX INVOICE\n"; line +=1;
+			string strline = inv.description.ToUpper().PadRight(65, ' ') + "  TAX INVOICE\n"; line +=1;
 			SetBold(mmOutputStream, true);
 			charfont = Encoding.ASCII.GetBytes(strline);
 			mmOutputStream.Write(charfont, 0, charfont.Length);

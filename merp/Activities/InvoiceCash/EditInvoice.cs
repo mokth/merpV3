@@ -28,6 +28,7 @@ namespace wincom.mobile.erp
 		EditText ccType ;
 		EditText ccNo;
 		AccessRights rights;
+		int CashPos=-1;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -54,7 +55,7 @@ namespace wincom.mobile.erp
 			butSave.Text = Resources.GetString(Resource.String.but_save);// "SAVE";
 			Button butCancel = FindViewById<Button> (Resource.Id.newinv_cancel);
 			Button butFind = FindViewById<Button> (Resource.Id.newinv_bfind);
-			//spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
+			spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
 
 			butSave.Click += butSaveClick;
 			butCancel.Click += butCancelClick;
@@ -73,8 +74,13 @@ namespace wincom.mobile.erp
 			LoadTrader ();
 
 			List<string> icodes = new List<string> ();
+			int counter = 0;
 			foreach (Trader item in custs) {
 				icodes.Add (item.CustCode+" | "+item.CustName.Trim());
+				if (item.CustCode.Trim() == "COD" || item.CustCode.Trim() == "CASH") {
+					CashPos = counter;
+				}
+				counter += 1;
 			}
 
 			dataAdapter = new ArrayAdapter<String> (this, Resource.Layout.spinner_item, icodes);
@@ -110,16 +116,25 @@ namespace wincom.mobile.erp
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
 			//Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
 			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
-			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
+			EditText remark = FindViewById<EditText> (Resource.Id.newinv_remark);
+			EditText txtcustname = FindViewById<EditText> (Resource.Id.newinv_custname);
 
 			trxdate.Text = invInfo.invdate.ToString ("dd-MM-yyyy");
-			int pos1= dataAdapter.GetPosition (invInfo.custcode+" | "+invInfo.description);
-			int pos2 = invInfo.trxtype == "CASH" ? 0 : 1;
+
+			if (invInfo.custcode == "COD" || invInfo.custcode == "CASH") {
+				spinner.SetSelection (CashPos);
+			} else {
+				int pos1= dataAdapter.GetPosition (invInfo.custcode+" | "+invInfo.description);
+				spinner.SetSelection (pos1);
+			}
+
+			//int pos2 = invInfo.trxtype == "CASH" ? 0 : 1;
 			//int pos2= dataAdapter2.GetPosition (invInfo.trxtype);
-			spinner.SetSelection (pos1);
-			spinnerType.SetSelection(pos2);
+
+			//spinnerType.SetSelection(pos2);
 			remark.Text = invInfo.remark;
 			txtinvno.Text = invInfo.invno;
+			txtcustname.Text = invInfo.description;
 
 
 		}
@@ -140,7 +155,7 @@ namespace wincom.mobile.erp
 		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
 		{
 			Spinner spinner = (Spinner)sender;
-
+			EditText txtcustname = FindViewById<EditText> (Resource.Id.newinv_custname);
 			string txt = spinner.GetItemAtPosition (e.Position).ToString();
 			string[] codes = txt.Split (new char[]{ '|' });
 			if (codes.Length == 0)
@@ -148,26 +163,15 @@ namespace wincom.mobile.erp
 
 			Trader item =custs.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
 			if (item != null) {
-				//TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
-				//name.Text = item.CustName;
-				Spinner spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
-				int pos = -1;
-				string paycode = item.PayCode.ToUpper().Trim();
-				if (!string.IsNullOrEmpty (paycode)) {
-					if (paycode.Contains ("CASH")|| paycode.Contains ("COD")) {
-						pos = dataAdapter2.GetPosition ("CASH");
-					} else {
-						pos = dataAdapter2.GetPosition ("INVOICE");
-					}
-				}else
-					pos = dataAdapter2.GetPosition ("CASH");
 
-				if (pos > -1) {
-					spinnerType.SetSelection (pos);
-					if (!rights.InvEditTrxType) {
-						spinnerType.Enabled = false;
-					}
-				}//else spinnerType.Enabled = true;
+				if (codes [0].Trim () == "COD" || codes [0].Trim () == "CASH") {
+					txtcustname.Enabled = true;
+				} else {
+					txtcustname.Enabled = false;
+					txtcustname.Text = codes [1].Trim ();
+				}
+
+
 			}
 
 		}
@@ -199,7 +203,8 @@ namespace wincom.mobile.erp
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
 			Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
 			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
-			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
+			EditText txtcustname = FindViewById<EditText> (Resource.Id.newinv_custname);
+			EditText remark = FindViewById<EditText> (Resource.Id.newinv_remark);
 
 			if (spinner.SelectedItem == null) {
 				Toast.MakeText (this, Resources.GetString(Resource.String.msg_invalidcust), ToastLength.Long).Show ();			
@@ -221,6 +226,10 @@ namespace wincom.mobile.erp
 				//inv.amount = 0;
 				invInfo.custcode = codes [0].Trim ();
 				invInfo.isUploaded = false;
+
+				if (codes [0].Trim () == "COD" || codes [0].Trim () == "CASH") {
+					inv.description = txtcustname.Text.ToUpper ();
+				}
 			
 				db.Update (invInfo);
 				lSave = true;

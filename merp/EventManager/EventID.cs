@@ -17,6 +17,7 @@ namespace wincom.mobile.erp
 		public const int DOWNLOADED_PROFILE = 202;
 		public const int DOWNLOADED_SETTINGS = 203;
 		public const int DOWNLOADED_RUNNO = 204;
+		public const int PAYMENT_PAID= 205;
 
 
 	}

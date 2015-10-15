@@ -201,6 +201,8 @@
     <Compile Include="Printing\EPSONHelper\PrintDMCNote.cs" />
     <Compile Include="Printing\HPPCLHelper\PrintPCLCNote.cs" />
     <Compile Include="Printing\PrintUtil.cs" />
+    <Compile Include="Activities\InvoiceCash\PaidDialog.cs" />
+    <Compile Include="Activities\InvoiceCash\CashSalesActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -550,6 +552,9 @@
     <AndroidResource Include="Resources\menu-ms\popupHis.xml" />
     <AndroidResource Include="Resources\menu-ms\popupInv.xml" />
     <AndroidResource Include="Resources\menu-ms\popupItem.xml" />
+    <AndroidResource Include="Resources\layout\CashEntry.axml" />
+    <AndroidResource Include="Resources\layout\InvDtlItemViewCS.axml" />
+    <AndroidResource Include="Resources\layout-large-port\InvDtlItemViewCS.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup />

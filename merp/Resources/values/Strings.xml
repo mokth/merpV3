@@ -142,10 +142,11 @@
       <string name="msg_bluetoothnofound">Can not Find Bluetooth device,try again.</string> 
     <string name="msg_bluetoothfound">found device </string> 
      <string name="msg_bluetootherror">Error in Bluetooth device. Try again.</string> 
-
-
        <string name="form_sono">SALES ORDER NO</string>
        <string name="form_custpono">CUSTOMER PO NO</string>
        <string name="form_billto">BILL TO</string>
        <string name="form_remark">REMARK</string>
+
+      <string name="submenu_pos">CASH BILL(POS)</string>
+    <string name="button_Paid">PAID</string>
    </resources>
