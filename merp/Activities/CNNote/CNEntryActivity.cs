@@ -118,9 +118,9 @@ namespace wincom.mobile.erp
 			{
 				CalAmt ();
 				e.Handled = true;   
-				View view = sender as View;
-				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
-				imm.HideSoftInputFromWindow(view.WindowToken, 0);
+//				View view = sender as View;
+//				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+//				imm.HideSoftInputFromWindow(view.WindowToken, 0);
 			}
 		}
 
@@ -343,7 +343,7 @@ namespace wincom.mobile.erp
 			taxper = item.tax;
 			isInclusive = item.isincludesive;
 			qty.RequestFocus ();
-			ShowKeyBoard (qty);
+			//ShowKeyBoard (qty);
 
 		}
 
@@ -355,7 +355,17 @@ namespace wincom.mobile.erp
 
 		void SetSelectedItem(string text)
 		{
-			int position=dataAdapter.GetPosition (text);
+			string[] selected = text.Split(new char[]{'|'});
+			if (selected.Length <= 1)
+				return;
+
+			string temp = "";
+			if (selected [1].Trim ().Length > 40) {
+				temp = selected [0].Trim () + " | " + selected [1].Trim ().Substring (0, 40) + "...";
+			} else
+				temp = text;
+			
+			int position=dataAdapter.GetPosition (temp);
 			spinner.SetSelection (position);
 		}
 

@@ -48,7 +48,8 @@ namespace wincom.mobile.erp
 			Button butTrxList = FindViewById<Button> (Resource.Id.butInvlist);
 			butTrxList.Click+= ButInvlist_Click;
 			Button butPOS = FindViewById<Button> (Resource.Id.butPOS);
-			butPOS.Click += ButPOS_Click;
+			butPOS.Visibility = ViewStates.Gone;
+			//butPOS.Click += ButPOS_Click;
 			Button butdown = FindViewById<Button> (Resource.Id.butDown);
 			butdown.Click += butDownloadItems;
 			Button butup = FindViewById<Button> (Resource.Id.butupload);

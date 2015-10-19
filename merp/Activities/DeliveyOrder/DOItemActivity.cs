@@ -141,7 +141,10 @@ namespace wincom.mobile.erp
 
 		void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e) {
 			DelOrderDtls item = listData.ElementAt (e.Position);
-			if (item.icode.IndexOf ("TOTAL") > -1)
+			if (item.icode.IndexOf ("TAX") > -1)
+				return;
+
+			if (item.icode.IndexOf ("AMOUNT") > -1)
 				return;
 			
 			PopupMenu menu = new PopupMenu (e.Parent.Context, e.View);

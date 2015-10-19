@@ -81,8 +81,14 @@ namespace wincom.mobile.erp
 			}
 
 			List<string> icodes = new List<string> ();
+//			foreach (Item item in items) {
+//				icodes.Add (item.ICode+" | "+item.IDesc);
+//			}
 			foreach (Item item in items) {
-				icodes.Add (item.ICode+" | "+item.IDesc);
+				//icodes.Add (item.ICode+" | "+item.IDesc);
+				if (item.IDesc.Length > 40) {
+					icodes.Add (item.ICode + " | " + item.IDesc.Substring(0,40)+"...");
+				}else icodes.Add (item.ICode + " | " + item.IDesc);
 			}
 
 			dataAdapter = new ArrayAdapter<String>(this,Resource.Layout.spinner_item, icodes);
@@ -111,9 +117,9 @@ namespace wincom.mobile.erp
 			{
 				CalAmt ();
 				e.Handled = true;   
-				View view = sender as View;
-				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
-				imm.HideSoftInputFromWindow(view.WindowToken, 0);
+//				View view = sender as View;
+//				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+//				imm.HideSoftInputFromWindow(view.WindowToken, 0);
 			}
 		}
 
@@ -322,7 +328,7 @@ namespace wincom.mobile.erp
 			taxper = item.tax;
 			isInclusive = item.isincludesive;
 			qty.RequestFocus ();
-			ShowKeyBoard (qty);
+			//ShowKeyBoard (qty);
 		}
 
 		void ShowItemLookUp()
@@ -333,7 +339,17 @@ namespace wincom.mobile.erp
 
 		void SetSelectedItem(string text)
 		{
-			int position=dataAdapter.GetPosition (text);
+			string[] selected = text.Split(new char[]{'|'});
+			if (selected.Length <= 1)
+				return;
+
+			string temp = "";
+			if (selected [1].Trim ().Length > 40) {
+				temp = selected [0].Trim () + " | " + selected [1].Trim ().Substring (0, 40) + "...";
+			} else
+				temp = text;
+
+			int position=dataAdapter.GetPosition (temp);
 			spinner.SetSelection (position);
 		}
 
