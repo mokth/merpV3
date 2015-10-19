@@ -9,12 +9,12 @@ namespace wincom.mobile.erp
 {
 	public class PrintSummary:PrintDocumentBase,IPrintDocument
 	{
-		Invoice inv;
-		InvoiceDtls[] list;
-		int noOfCopy=1;
-		DateTime printDate1;
-		DateTime printDate2;
-		Activity callingActivity;
+		internal Invoice inv;
+		internal InvoiceDtls[] list;
+		internal int noOfCopy=1;
+		internal DateTime printDate1;
+		internal DateTime printDate2;
+		internal Activity callingActivity;
 
 		public void SetCallingActivity (Activity activity)
 		{
@@ -58,12 +58,16 @@ namespace wincom.mobile.erp
 			return errMsg;
 		}
 
-		private bool Print()
+		internal virtual bool Print()
 		{
 			text = "";
 			errMsg = "";
 			bool isPrinted = false;
 			text = GetInvoiceSumm (printDate1, printDate2);
+
+//			if (para.PaperSize == "8.5Inch") {
+//				if (para.PrinterType == "Network Laserjet Printer")
+					
 			IPrintToDevice device = PrintDeviceManager.GetPrintingDevice<BlueToothDeviceHelper> ();
 			device.SetCallingActivity (callingActivity);
 			isPrinted = device.StartPrint (text, noOfCopy, ref errMsg);

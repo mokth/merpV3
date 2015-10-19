@@ -13,7 +13,7 @@ using Android.Views.InputMethods;
 
 namespace wincom.mobile.erp
 {
-	[Activity (Label = "CashSalesActivity",ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]			
+	[Activity (Label = "CASH SALES",ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]			
 	public class CashSalesActivity : Activity,IEventListener,Android.Views.View.IOnKeyListener
 	{
 		string pathToDatabase;

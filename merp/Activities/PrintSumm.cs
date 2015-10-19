@@ -95,7 +95,7 @@ namespace wincom.mobile.erp
 
 		void PrintInvSumm(DateTime printdate1,DateTime printdate2)
 		{
-			IPrintDocument prtInv = PrintDocManager.GetPrintDocument<PrintSummary>();
+			IPrintDocument prtInv = PrintDocManager.GetPrintSummary<PrintSummary>();
 			prtInv.SetNoOfCopy (1);
 			Hashtable para = new Hashtable ();
 			para.Add ("DateStart", printdate1);

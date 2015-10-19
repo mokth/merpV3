@@ -45,6 +45,26 @@ namespace wincom.mobile.erp
 			return intent;
 		}
 
+		public static IPrintDocument GetPrintSummary<T>()
+		{
+			//string USERDEFINE = ((GlobalvarsApp)Application.Context).USERFUNCTION;
+			string pathToDatabase = ((GlobalvarsApp)Application.Context).DATABASE_PATH;
+			IPrintDocument  intent = null;
+			string classname = "";
+
+			AdPara para= DataHelper.GetAdPara (pathToDatabase);
+
+			if (para.PaperSize == "8.5Inch") {
+				if (para.PrinterType == "Network Laserjet Printer")
+					intent = GetPrintDocumentEX<PrintPCLSumm> ();
+				else intent = GetPrintDocumentEX<PrintESCSumm> ();
+			} else {
+				intent = GetPrintDocumentEX<T> ();
+			}
+
+			return intent;
+		}
+
 		private static IPrintDocument GetPrintDocumentEX<T>()
 		{
 			string USERDEFINE = ((GlobalvarsApp)Application.Context).USERFUNCTION;

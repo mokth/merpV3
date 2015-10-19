@@ -427,6 +427,18 @@ namespace wincom.mobile.erp
 			return inv;
 		}
 
+		public static CNNote GetCNNoteByInvNo(string pathToDatabase,string invno)
+		{
+			CNNote inv=null;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list2 = db.Table<CNNote> ().ToList<CNNote>().Where(x=>x.invno==invno).ToList();
+				if (list2.Count > 0) {
+					inv = list2 [0];
+				}
+			}
+			return inv;
+		}
+
 		public static SaleOrder GetSO(string pathToDatabase,string sono)
 		{
 			SaleOrder inv=null;

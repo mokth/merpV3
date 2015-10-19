@@ -203,6 +203,9 @@
     <Compile Include="Printing\PrintUtil.cs" />
     <Compile Include="Activities\InvoiceCash\PaidDialog.cs" />
     <Compile Include="Activities\InvoiceCash\CashSalesActivity.cs" />
+    <Compile Include="Printing\PrintSummary_HB.cs" />
+    <Compile Include="Printing\EPSONHelper\PrintESCSumm.cs" />
+    <Compile Include="Printing\HPPCLHelper\PrintPCLSumm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
