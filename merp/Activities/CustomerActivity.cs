@@ -66,7 +66,8 @@ namespace wincom.mobile.erp
 
 		void ListView_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
-			Trader item = listData.ElementAt (e.Position);
+			//Trader item = listData.ElementAt (e.Position);
+			Trader item = adapter[e.Position];// listData.ElementAt (e.Position);
 			var intent = new Intent (this, typeof(TraderActivity));
 			intent.PutExtra ("custcode", item.CustCode);
 			StartActivity (intent);
