@@ -105,7 +105,10 @@ namespace wincom.mobile.erp
 						var biList = allbills.Where (x => x.InvNo == bill.InvNo && x.Module == module).ToList ();
 						if (biList.Count == 0)
 							continue;
-						biList [0].IsUploaded = true;
+						foreach(var bitem in biList)
+						{
+							bitem.IsUploaded = true;
+						}
 
 						if (module =="INV") {
 							var found = listInv.Where (x => x.invno == bill.InvNo && bill.TrxType == x.trxtype).ToList<Invoice> ();
@@ -335,9 +338,25 @@ namespace wincom.mobile.erp
 		{
 			
 			bills = new List<OutLetBill> ();
-			var list1 = allbills.Where (x => x.IsUploaded == false)
-					.Take (10)
-					.ToList ();
+			var list11 = from p in allbills
+			             where p.IsUploaded == false
+			             group p by p.InvNo into g
+				select new {key = g.Key,result = g.ToList (),count=g.Count()};
+
+			int counter = 0;
+			List<OutLetBillTemp> list1 = new List<OutLetBillTemp> ();
+			foreach (var grp in list11) {
+				counter = counter + grp.count;
+				list1.AddRange(grp.result);
+				if (counter > 30) {
+					break;
+				}
+			}
+
+//			var list1 = allbills.Where (x => x.IsUploaded == false)
+//				.GroupBy(x=>x.InvNo)
+//					.Take (10)
+//					.ToList ();
 		
 			foreach (OutLetBillTemp trx in list1) {
 					

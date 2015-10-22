@@ -500,13 +500,14 @@ namespace wincom.mobile.erp
 			}
 			var item = found [0];
 			AddBarCodeItem (item);
+			RefreshItemList ();
 			txtbarcode.Text = "";
 			txtbarcode.RequestFocus ();
 		}
 
 		private void AddBarCodeItem(Item prd )
 		{
-			TextView txtInvNo =  FindViewById<TextView> (Resource.Id.txtInvnp);
+			//TextView txtInvNo =  FindViewById<TextView> (Resource.Id.txtInvnp);
 			double stqQty = 1;
 			double uprice= Utility.GetUnitPrice (trd, prd);
 			double taxval = prd.tax;
@@ -524,20 +525,20 @@ namespace wincom.mobile.erp
 				taxamt = Math.Round(amount * (taxval / 100),2,MidpointRounding.AwayFromZero);
 			}
 
-			InvoiceDtls inv = new InvoiceDtls ();
-			inv.invno = txtInvNo.Text;
-			inv.amount = amount;
-			inv.icode = prd.ICode;
-			inv.price = uprice;
-			inv.qty = stqQty;
-			inv.tax = taxamt;
-			inv.taxgrp = prd.taxgrp;
-			inv.netamount = netamount;
-			inv.description = prd.IDesc;
+			InvoiceDtls invdtls = new InvoiceDtls ();
+			invdtls.invno = inv.invno;
+			invdtls.amount = amount;
+			invdtls.icode = prd.ICode;
+			invdtls.price = uprice;
+			invdtls.qty = stqQty;
+			invdtls.tax = taxamt;
+			invdtls.taxgrp = prd.taxgrp;
+			invdtls.netamount = netamount;
+			invdtls.description = prd.IDesc;
 			//int id = Convert.ToInt32 (ITEMUID);				
 			//inv..title = spinner.SelectedItem.ToString ();
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				var list =db.Table<InvoiceDtls> ().Where (x => x.invno == txtInvNo.Text && x.icode == prd.ICode).ToList ();
+				var list =db.Table<InvoiceDtls> ().Where (x => x.invno == inv.invno && x.icode == prd.ICode).ToList ();
 				if (list.Count > 0) {
 					list [0].qty = list [0].qty + 1;
 					stqQty = list [0].qty;
@@ -557,7 +558,7 @@ namespace wincom.mobile.erp
 					list [0].netamount = netamount;
 
 					db.Update (list [0]);
-				}else db.Insert (inv);
+				}else db.Insert (invdtls);
 			}
 			spinItem.SetSelection (-1);
 			Toast.MakeText (this, Resources.GetString(Resource.String.msg_itemadded), ToastLength.Long).Show ();
