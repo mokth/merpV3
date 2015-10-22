@@ -69,7 +69,7 @@ namespace wincom.mobile.erp
 							dtl.amount.ToString("n2") .PadLeft(10, ' ') + "\r";
 					PrintLine (line,mmOutputStream);
 					PrintLine (dtl.icode.ToUpper().Substring(15)+"\r",mmOutputStream);
-				}else if (dtl.description.Length > 28) {
+				}else if (dtl.description.Length >= 28) {
 					List<string> lines = GetLine (dtl.description,28);
 					ttlline = ttlline + lines.Count;
 					List<string> ICodes = new List<string> ();
@@ -157,7 +157,7 @@ namespace wincom.mobile.erp
 					text.Add(line);
 					text.Add("".PadRight (4, ' ') +dtl.icode.ToUpper ().Substring (15) + "\r");
 
-				}else if (desc.Length > 28) {
+				}else if (desc.Length >= 28) {
 					List<string> lines = GetLine (desc,28);
 					ttlline = ttlline + lines.Count;
 					List<string> ICodes = new List<string> ();
@@ -240,7 +240,7 @@ namespace wincom.mobile.erp
 					text.Add(line);
 					text.Add("".PadRight (4, ' ') +dtl.icode.ToUpper ().Substring (15) + "\r");
 
-				}else if (desc.Length > 28) {
+				}else if (desc.Length >= 28) {
 					List<string> lines = GetLine (desc,28);
 					ttlline = ttlline + lines.Count;
 					List<string> ICodes = new List<string> ();

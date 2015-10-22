@@ -151,7 +151,7 @@ namespace wincom.mobile.erp
 					text.Add(line);
 					text.Add("".PadRight (4, ' ') +dtl.icode.ToUpper ().Substring (15) + "\n");
 
-				}else if (desc.Length > 28) {
+				}else if (desc.Length >= 28) {
 					List<string> lines = GetLine (desc,28);
 					ttlline = ttlline + lines.Count;
 					List<string> ICodes = new List<string> ();
@@ -234,7 +234,7 @@ namespace wincom.mobile.erp
 					text.Add(line);
 					text.Add("".PadRight (4, ' ') +dtl.icode.ToUpper ().Substring (15) + "\n");
 
-				}else if (desc.Length > 28) {
+				}else if (desc.Length >= 28) {
 					List<string> lines = GetLine (desc,28);
 					ttlline = ttlline + lines.Count;
 					List<string> ICodes = new List<string> ();

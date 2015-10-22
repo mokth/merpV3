@@ -157,7 +157,13 @@ namespace wincom.mobile.erp
 			}
 			if (num1 > 7)
 			{
-				dec = string.Format("0.{0}{1}", num0 + 1, 0);
+				int val = num0 + 1;
+				if (val > 9)
+				{
+					intval = intval + 1;
+					val = 0;
+				}
+				dec = string.Format("0.{0}{1}", val, 0);
 				rdec = string.Format("0.0{0}", 10-num1);
 				isUp = true;
 			}
