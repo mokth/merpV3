@@ -66,9 +66,14 @@ namespace wincom.mobile.erp
 			butNew.Click += butCancelClick;
 			EditText trxdate =  FindViewById<EditText> (Resource.Id.newinv_date);
  			//trxdate.Text = _date.ToString ("dd-MM-yyyy");
-			trxdate.Click += delegate(object sender, EventArgs e) {
-				ShowDialog (0);
-			};
+//			trxdate.Click += delegate(object sender, EventArgs e) {
+//				ShowDialog (0);
+//			};
+			//19-Nov-2015
+			//disable the date, for edit mode, date should not be editable
+			//cuase running number issue.
+			trxdate.Enabled = false;
+
 			butFind.Click+= (object sender, EventArgs e) => {
 				ShowCustLookUp();
 			};

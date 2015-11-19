@@ -1781,6 +1781,11 @@ public interface IService1
     System.IAsyncResult BeginGetRunno(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState);
     
     WcfServiceItem.RunnoInfo[] EndGetRunno(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/GetVersion", ReplyAction="http://tempuri.org/IService1/GetVersionResponse")]
+    System.IAsyncResult BeginGetVersion(System.AsyncCallback callback, object asyncState);
+    
+    string EndGetVersion(System.IAsyncResult result);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2066,6 +2071,29 @@ public partial class GetRunnoCompletedEventArgs : System.ComponentModel.AsyncCom
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class GetVersionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public GetVersionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public string Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((string)(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 public partial class Service1Client : System.ServiceModel.ClientBase<IService1>, IService1
 {
     
@@ -2140,6 +2168,12 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     private EndOperationDelegate onEndGetRunnoDelegate;
     
     private System.Threading.SendOrPostCallback onGetRunnoCompletedDelegate;
+    
+    private BeginOperationDelegate onBeginGetVersionDelegate;
+    
+    private EndOperationDelegate onEndGetVersionDelegate;
+    
+    private System.Threading.SendOrPostCallback onGetVersionCompletedDelegate;
     
     private BeginOperationDelegate onBeginOpenDelegate;
     
@@ -2229,6 +2263,8 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     public event System.EventHandler<UploadOutletBillsExCompletedEventArgs> UploadOutletBillsExCompleted;
     
     public event System.EventHandler<GetRunnoCompletedEventArgs> GetRunnoCompleted;
+    
+    public event System.EventHandler<GetVersionCompletedEventArgs> GetVersionCompleted;
     
     public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
     
@@ -2972,6 +3008,61 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
                     userid}, this.onEndGetRunnoDelegate, this.onGetRunnoCompletedDelegate, userState);
     }
     
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult IService1.BeginGetVersion(System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginGetVersion(callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    string IService1.EndGetVersion(System.IAsyncResult result)
+    {
+        return base.Channel.EndGetVersion(result);
+    }
+    
+    private System.IAsyncResult OnBeginGetVersion(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        return ((IService1)(this)).BeginGetVersion(callback, asyncState);
+    }
+    
+    private object[] OnEndGetVersion(System.IAsyncResult result)
+    {
+        string retVal = ((IService1)(this)).EndGetVersion(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnGetVersionCompleted(object state)
+    {
+        if ((this.GetVersionCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.GetVersionCompleted(this, new GetVersionCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void GetVersionAsync()
+    {
+        this.GetVersionAsync(null);
+    }
+    
+    public void GetVersionAsync(object userState)
+    {
+        if ((this.onBeginGetVersionDelegate == null))
+        {
+            this.onBeginGetVersionDelegate = new BeginOperationDelegate(this.OnBeginGetVersion);
+        }
+        if ((this.onEndGetVersionDelegate == null))
+        {
+            this.onEndGetVersionDelegate = new EndOperationDelegate(this.OnEndGetVersion);
+        }
+        if ((this.onGetVersionCompletedDelegate == null))
+        {
+            this.onGetVersionCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetVersionCompleted);
+        }
+        base.InvokeAsync(this.onBeginGetVersionDelegate, null, this.onEndGetVersionDelegate, this.onGetVersionCompletedDelegate, userState);
+    }
+    
     private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState)
     {
         return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
@@ -3273,6 +3364,20 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
         {
             object[] _args = new object[0];
             WcfServiceItem.RunnoInfo[] _result = ((WcfServiceItem.RunnoInfo[])(base.EndInvoke("GetRunno", _args, result)));
+            return _result;
+        }
+        
+        public System.IAsyncResult BeginGetVersion(System.AsyncCallback callback, object asyncState)
+        {
+            object[] _args = new object[0];
+            System.IAsyncResult _result = base.BeginInvoke("GetVersion", _args, callback, asyncState);
+            return _result;
+        }
+        
+        public string EndGetVersion(System.IAsyncResult result)
+        {
+            object[] _args = new object[0];
+            string _result = ((string)(base.EndInvoke("GetVersion", _args, result)));
             return _result;
         }
     }
