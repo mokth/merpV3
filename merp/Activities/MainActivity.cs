@@ -48,7 +48,7 @@ namespace wincom.mobile.erp
 			Button butCash = FindViewById<Button> (Resource.Id.butCash);
 			butCash.Click += butCashClick;
 			Button butTrxList = FindViewById<Button> (Resource.Id.butInvlist);
-			butTrxList.Click+= ButInvlist_Click;
+			butTrxList.Click += ButInvlist_Click;
 			Button butPOS = FindViewById<Button> (Resource.Id.butPOS);
 			butPOS.Visibility = ViewStates.Gone;
 			//butPOS.Click += ButPOS_Click;
@@ -65,11 +65,11 @@ namespace wincom.mobile.erp
 			//Button butAbt = FindViewById<Button> (Resource.Id.butAbout);
 			//butAbt.Click+= ButAbt_Click;
 			Button butCNNote = FindViewById<Button> (Resource.Id.butcnnote);
-			butCNNote.Click+= ButCNNote_Click;
+			butCNNote.Click += ButCNNote_Click;
 			Button butSO = FindViewById<Button> (Resource.Id.butso);
-			butSO.Click+= ButSO_Click;
+			butSO.Click += ButSO_Click;
 			Button butDO = FindViewById<Button> (Resource.Id.butdo);
-			butDO.Click+= ButDO_Click;
+			butDO.Click += ButDO_Click;
 			if (!rights.IsSOModule) {
 				butSO.Visibility = ViewStates.Gone;
 			}
@@ -79,68 +79,6 @@ namespace wincom.mobile.erp
 			if (!rights.IsDOModule) {
 				butDO.Visibility = ViewStates.Gone;
 			}
-			CheckSystemUpdate ();
-
-		}
-
-		private void CheckSystemUpdate()
-		{
-			WCFHelper wcf = new WCFHelper ();
-			try{
-				Service1Client client = wcf.GetServiceClient ();
-				client.GetVersionCompleted+= Client_GetVersionCompleted;
-				client.GetVersionAsync ();
-			}catch {
-			}
-		}
-
-		void Client_GetVersionCompleted (object sender, GetVersionCompletedEventArgs e)
-		{
-			string msg = null;
-			bool success = true;
-			if ( e.Error != null)
-			{
-				msg =  e.Error.Message;
-				success = false;
-			}
-			else if ( e.Cancelled)
-			{
-				msg = Resources.GetString(Resource.String.msg_reqcancel);
-				success = false;
-			}
-			else
-			{
-				RunOnUiThread (() => SystemUpdate(e.Result ));
-			}
-		}
-
-		void SystemUpdate (string version)
-		{
-			PackageInfo pInfo = PackageManager.GetPackageInfo (PackageName, 0);
-			double webver = Convert.ToDouble (version);
-			double locver = Convert.ToDouble (pInfo.VersionName);
-			if (webver > locver) {
-
-				var builderd = new AlertDialog.Builder(this);
-
-				builderd.SetMessage("New Version "+version+ " is available, ready to update?" );
-				//builderd.SetMessage("Confirm to download database from server ? All local data will be overwritten by the downloaded data.");
-				builderd.SetPositiveButton("OK", (s, e) => { UpdateSysem ();;});
-				builderd.SetNegativeButton("Cancel", (s, e) => { /* do something on Cancel click */ });
-				builderd.Create().Show();
-
-			}
-		}
-
-		void UpdateSysem ()
-		{
-			PackageInfo pInfo = PackageManager.GetPackageInfo (PackageName, 0);
-			String appPackageName = pInfo.PackageName;
-			Android.Net.Uri url = Android.Net.Uri.Parse ("market://details?id=" + appPackageName);
-			// 28 3.13
-			Intent marketIntent = new Intent (Intent.ActionView, url);
-			marketIntent.AddFlags (ActivityFlags.NoHistory | ActivityFlags.ClearWhenTaskReset | ActivityFlags.MultipleTask | ActivityFlags.NewTask);
-			StartActivity (marketIntent);
 		}
 		
 
