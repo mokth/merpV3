@@ -36,7 +36,9 @@ namespace wincom.mobile.erp
 			if (!((GlobalvarsApp)this.Application).ISLOGON) {
 				Finish ();
 			}
-			SetTitle (Resource.String.title_invoice);
+
+			SetTitle (Resource.String.title_cash);
+
 			// Create your application here
 			SetContentView (Resource.Layout.ListView);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
@@ -178,6 +180,9 @@ namespace wincom.mobile.erp
 		{
 			//var intent = new Intent (this, typeof(EditInvoice));
 			var intent =ActivityManager.GetActivity<EditInvoice>(this.ApplicationContext);
+
+			intent.PutExtra ("trxtype", inv.trxtype);
+
 			intent.PutExtra ("invoiceno", inv.invno);
 			StartActivity (intent);
 		}
@@ -233,7 +238,7 @@ namespace wincom.mobile.erp
 		private void CreateNewInvoice()
 		{
 			//var intent = new Intent(this, typeof(CreateInvoice));
-			var intent =ActivityManager.GetActivity<CreateInvoice>(this.ApplicationContext);
+			var intent =ActivityManager.GetActivity<CreateCashBill>(this.ApplicationContext);
 			StartActivity(intent);
 		}
 

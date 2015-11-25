@@ -13,8 +13,8 @@ using System.IO;
 
 namespace wincom.mobile.erp
 {
-	[Activity (Label = "NEW INVOICE",Icon="@drawable/shop")]			
-	public class CreateInvoice : Activity,IEventListener
+	[Activity (Label = "NEW CASH BILL",Icon="@drawable/shop")]			
+	public class CreateCashBill : Activity,IEventListener
 	{
 		string pathToDatabase;
 		string compcode;
@@ -33,8 +33,7 @@ namespace wincom.mobile.erp
 				Finish ();
 			}
 			this.Window.SetSoftInputMode (SoftInput.StateAlwaysHidden);
-
-			SetTitle (Resource.String.title_invoicenew);
+			SetTitle (Resource.String.title_cashnew);
 			SetContentView (Resource.Layout.CreateInvoice);
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
 
@@ -48,7 +47,7 @@ namespace wincom.mobile.erp
 			Button butSave = FindViewById<Button> (Resource.Id.newinv_bsave);
 			Button butNew = FindViewById<Button> (Resource.Id.newinv_cancel);
 			Button butFind = FindViewById<Button> (Resource.Id.newinv_bfind);
-			spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
+			//spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
 			butSave.Click += butSaveClick;
 			butNew.Click += butCancelClick;
 			TextView invno =  FindViewById<TextView> (Resource.Id.newinv_no);
@@ -94,6 +93,9 @@ namespace wincom.mobile.erp
 			spinnerType.Adapter =dataAdapter2;
 			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
 			remark.RequestFocus ();
+			spinnerType.SetSelection (0);
+			spinnerType.Enabled = false;
+
 		}
 
 		public override void OnBackPressed() {
@@ -107,7 +109,7 @@ namespace wincom.mobile.erp
 				count1 = db.Table<Item>().Count ();
 			}
 			if (count1 > 0)
-				CreateNewInvoice ();
+				CreateNewCashBill ();
 			else {
 				Toast.MakeText (this,Resources.GetString(Resource.String.msg_noitem), ToastLength.Long).Show ();	
 			}
@@ -118,47 +120,49 @@ namespace wincom.mobile.erp
 			base.OnBackPressed();
 		}
 
-		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
-		{
-			Spinner spinner = (Spinner)sender;
-			EditText txtcustname = FindViewById<EditText> (Resource.Id.newinv_custname);
-			string txt = spinner.GetItemAtPosition (e.Position).ToString();
-			string[] codes = txt.Split (new char[]{ '|' });
-			if (codes.Length == 0)
-				return;
-			
-			Trader item =items.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
-			if (item != null) {
-				//TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
-				//name.Text = item.CustName;
-				Spinner spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
-				int pos = -1;
-				string paycode = item.PayCode.ToUpper ().Trim ();
-				if (!string.IsNullOrEmpty (paycode)) {
-					if (paycode.Contains ("CASH")|| paycode.Contains ("COD")) {
-						pos = dataAdapter2.GetPosition ("CASH");
-					} else {
-						pos = dataAdapter2.GetPosition ("INVOICE");
-					}
-				} else
-					pos = dataAdapter2.GetPosition ("CASH");
 
+//		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
+//		{
+//			Spinner spinner = (Spinner)sender;
+//			EditText txtcustname = FindViewById<EditText> (Resource.Id.newinv_custname);
+//			string txt = spinner.GetItemAtPosition (e.Position).ToString();
+//			string[] codes = txt.Split (new char[]{ '|' });
+//			if (codes.Length == 0)
+//				return;
+//			
+//			Trader item =items.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
+//			if (item != null) {
+//				//TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
+//				//name.Text = item.CustName;
+//				Spinner spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
+//				int pos = -1;
+//				string paycode = item.PayCode.ToUpper ().Trim ();
+//				if (!string.IsNullOrEmpty (paycode)) {
+//					if (paycode.Contains ("CASH")|| paycode.Contains ("COD")) {
+//						pos = dataAdapter2.GetPosition ("CASH");
+//					} else {
+//						pos = dataAdapter2.GetPosition ("INVOICE");
+//					}
+//				} else
+//					pos = dataAdapter2.GetPosition ("CASH");
+//
+//
+//				if (pos > -1) {
+//					spinnerType.SetSelection (pos);
+//					if (!rights.InvEditTrxType) {
+//						spinnerType.Enabled = false;
+//					}
+//				}//else spinnerType.Enabled = true;
+//
+//				if (codes [0].Trim () == "COD" || codes [0].Trim () == "CASH") {
+//					txtcustname.Enabled = true;
+//				}else txtcustname.Enabled =false;
+//
+//				txtcustname.Text = codes [1].Trim ();
+//			}
+//
+//		}
 
-				if (pos > -1) {
-					spinnerType.SetSelection (pos);
-					if (!rights.InvEditTrxType) {
-						spinnerType.Enabled = false;
-					}
-				}//else spinnerType.Enabled = true;
-
-				if (codes [0].Trim () == "COD" || codes [0].Trim () == "CASH") {
-					txtcustname.Enabled = true;
-				}else txtcustname.Enabled =false;
-
-				txtcustname.Text = codes [1].Trim ();
-			}
-
-		}
 		[Obsolete]
 		protected override Dialog OnCreateDialog (int id)
 		{
@@ -180,6 +184,7 @@ namespace wincom.mobile.erp
 			var intent =ActivityManager.GetActivity<EntryActivity>(this.ApplicationContext);
 			//var intent = new Intent (this, typeof(EntryActivity));
 
+			intent.PutExtra ("trxtype", inv.trxtype);
 			intent.PutExtra ("invoiceno", inv.invno);
 			intent.PutExtra ("customer", codes [1].Trim ());
 			intent.PutExtra ("custcode",codes [0].Trim ());
@@ -188,7 +193,8 @@ namespace wincom.mobile.erp
 			StartActivity (intent);
 		}
 
-		private void CreateNewInvoice()
+
+		private void CreateNewCashBill()
 		{
 			Invoice inv = new Invoice ();
 			EditText trxdate =  FindViewById<EditText> (Resource.Id.newinv_date);
@@ -200,22 +206,19 @@ namespace wincom.mobile.erp
 			DateTime tmr = invdate.AddDays (1);
 			AdNumDate adNum;// = DataHelper.GetNumDate (pathToDatabase, invdate);
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
-			Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
+			//Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
+
 			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
 			EditText remark = FindViewById<EditText> (Resource.Id.newinv_remark);
 			EditText custname = FindViewById<EditText> (Resource.Id.newinv_custname);
 			string[] prefixs = apara.Prefix.Trim ().ToUpper ().Split(new char[]{'|'});
 			string prefix = "";
-			string trxtype = spinner2.SelectedItem.ToString ();
-			if (trxtype == "CASH") {
-				adNum = DataHelper.GetNumDate (pathToDatabase, invdate, "CS");
-				if (prefixs.Length > 1) {
-					prefix = prefixs [1];
-				}else prefix = prefixs [0];
-			} else {
-				adNum = DataHelper.GetNumDate (pathToDatabase, invdate, "INV");
-				prefix = prefixs [0];
-			}
+			string trxtype = "CASH";
+			adNum = DataHelper.GetNumDate (pathToDatabase, invdate, "CS");
+			if (prefixs.Length > 1) {
+				prefix = prefixs [1];
+			}else prefix = prefixs [0];
+
 
 
 			if (spinner.SelectedItem == null) {
@@ -232,7 +235,8 @@ namespace wincom.mobile.erp
 
 				string invno = "";
 				int runno = adNum.RunNo + 1;
-				int currentRunNo =DataHelper.GetLastInvRunNo (pathToDatabase, invdate,spinner2.SelectedItem.ToString ());
+				int currentRunNo =DataHelper.GetLastInvRunNo (pathToDatabase, invdate,"CASH");
+
 				if (currentRunNo >= runno)
 					runno = currentRunNo + 1;
 				
@@ -240,7 +244,7 @@ namespace wincom.mobile.erp
 
 				txtinvno.Text= invno;
 				inv.invdate = invdate;
-				inv.trxtype = spinner2.SelectedItem.ToString ();
+				inv.trxtype = "CASH";
 				inv.created = DateTime.Now;
 				inv.invno = invno;
 				inv.description = codes [1].Trim ();//custname.Text;
