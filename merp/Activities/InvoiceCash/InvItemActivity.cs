@@ -27,11 +27,13 @@ namespace wincom.mobile.erp
 		string CUSTCODE ="";
 		string CUSTNAME ="";
 		string EDITMODE="";
+		string TRXTYPE;
 		EditText txtbarcode;
 		CompanyInfo comp;
 		bool isNotAllowEditAfterPrinted  ;
 		AccessRights rights;
 		string COMPCODE;
+
 		List<Item> items = null;
 
 		protected override void OnCreate (Bundle bundle)
@@ -41,16 +43,19 @@ namespace wincom.mobile.erp
 				Finish ();
 			}
 			SetContentView (Resource.Layout.InvDtlView);
+			TRXTYPE= Intent.GetStringExtra ("trxtype") ?? "CASH";
+			invno = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
+			CUSTCODE = Intent.GetStringExtra ("custcode") ?? "AUTO";
+			EDITMODE = Intent.GetStringExtra ("editmode") ?? "AUTO";
 
-			SetTitle (Resource.String.title_invoiceitems);
+			if (TRXTYPE == "CASH") {
+				SetTitle (Resource.String.title_cashitems);
+			} else SetTitle (Resource.String.title_invoiceitems);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			COMPCODE = ((GlobalvarsApp)this.Application).COMPANY_CODE;
 			rights = Utility.GetAccessRights (pathToDatabase);
 
 
-			invno = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
-			CUSTCODE = Intent.GetStringExtra ("custcode") ?? "AUTO";
-			EDITMODE = Intent.GetStringExtra ("editmode") ?? "AUTO";
 
 			isNotAllowEditAfterPrinted  = DataHelper.GetInvoicePrintStatus (pathToDatabase,invno,rights);
 			txtbarcode = FindViewById<EditText> (Resource.Id.txtbarcode);
@@ -66,14 +71,20 @@ namespace wincom.mobile.erp
 
 			Button butInvBack= FindViewById<Button> (Resource.Id.butInvItmBack); 
 			butInvBack.Click += (object sender, EventArgs e) => {
+				Invoice temp = new Invoice();
+				UpdateInvoiceAmount(invno,ref temp);
+
 				if (EDITMODE.ToLower()=="new")
 				{
 					DeleteInvWithEmptyInovItem();
 				}
-				UpdateInvoiceAmount(invno);
-				var intent =ActivityManager.GetActivity<InvoiceActivity>(this.ApplicationContext);
+				Intent intent =null;
+				if (temp.trxtype=="CASH"){
+				 intent =ActivityManager.GetActivity<CashActivity>(this.ApplicationContext);
+				}else  intent =ActivityManager.GetActivity<InvoiceActivity>(this.ApplicationContext);
+
 				StartActivity(intent);
-				//StartActivity(typeof(InvoiceActivity));
+
 			};
 
 			txtbarcode.SetOnKeyListener (this);
@@ -180,6 +191,7 @@ namespace wincom.mobile.erp
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			COMPCODE = ((GlobalvarsApp)this.Application).COMPANY_CODE;
 			rights = Utility.GetAccessRights (pathToDatabase);
+			TRXTYPE= Intent.GetStringExtra ("trxtype") ?? "CASH";
 			invno = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
 			CUSTCODE = Intent.GetStringExtra ("custcode") ?? "AUTO";
 			isNotAllowEditAfterPrinted  = DataHelper.GetInvoicePrintStatus (pathToDatabase,invno,rights);
@@ -270,6 +282,7 @@ namespace wincom.mobile.erp
 			//var intent = new Intent(this, typeof(EntryActivity));
 			var intent =ActivityManager.GetActivity<EntryActivity>(this.ApplicationContext);
 			intent.PutExtra ("invoiceno",inv.invno );
+			intent.PutExtra ("trxtype",TRXTYPE );
 			intent.PutExtra ("itemuid",inv.ID.ToString() );
 			intent.PutExtra ("editmode","EDIT" );
 			intent.PutExtra ("customer",CUSTNAME );
@@ -283,6 +296,7 @@ namespace wincom.mobile.erp
 			var intent =ActivityManager.GetActivity<EntryActivity>(this.ApplicationContext);
 			StartActivity(intent);
 			intent.PutExtra ("invoiceno",invNo );
+			intent.PutExtra ("trxtype",TRXTYPE );
 			intent.PutExtra ("itemuid","-1");
 			intent.PutExtra ("editmode","NEW" );
 			intent.PutExtra ("customer",CUSTNAME );
@@ -399,7 +413,7 @@ namespace wincom.mobile.erp
 			listView.SetSelection (listView.Count - 1);
 		}
 
-		public void UpdateInvoiceAmount(string invno)
+		public void UpdateInvoiceAmount(string invno,ref Invoice inv)
 		{
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 				var itemlist = db.Table<InvoiceDtls> ().Where (x => x.invno == invno);	
@@ -409,6 +423,7 @@ namespace wincom.mobile.erp
 				if (invlist.Count > 0) {
 					invlist [0].amount = ttlamt;
 					invlist [0].taxamt = ttltax;
+					inv = invlist [0];
 					db.Update (invlist [0]);
 				}
 			}

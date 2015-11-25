@@ -45,6 +45,8 @@ namespace wincom.mobile.erp
 			AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
 			Button but = FindViewById<Button> (Resource.Id.butSecond);
 			but.Click += butClick;
+			Button butCash = FindViewById<Button> (Resource.Id.butCash);
+			butCash.Click += butCashClick;
 			Button butTrxList = FindViewById<Button> (Resource.Id.butInvlist);
 			butTrxList.Click+= ButInvlist_Click;
 			Button butPOS = FindViewById<Button> (Resource.Id.butPOS);
@@ -144,10 +146,16 @@ namespace wincom.mobile.erp
 
 		private void butClick(object sender,EventArgs e)
 		{
-			//var intent = new Intent(this, typeof(InvoiceActivity));
 			var intent =ActivityManager.GetActivity<InvoiceActivity>(this.ApplicationContext);
 			StartActivity(intent);
 		}
+
+		private void butCashClick(object sender,EventArgs e)
+		{
+			var intent =ActivityManager.GetActivity<CashActivity>(this.ApplicationContext);
+			StartActivity(intent);
+		}
+
 
 		void ButPOS_Click (object sender, EventArgs e)
 		{

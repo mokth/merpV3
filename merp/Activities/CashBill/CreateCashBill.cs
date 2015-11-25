@@ -94,8 +94,6 @@ namespace wincom.mobile.erp
 			spinnerType.Adapter =dataAdapter2;
 			EditText remark = FindViewById<EditText> (Resource.Id.newinv_custname);
 			remark.RequestFocus ();
-			spinnerType.SetSelection (1);
-			spinnerType.Enabled = false;
 		}
 
 		public override void OnBackPressed() {
@@ -133,25 +131,25 @@ namespace wincom.mobile.erp
 			if (item != null) {
 				//TextView name = FindViewById<TextView> (Resource.Id.newinv_custname);
 				//name.Text = item.CustName;
-				//Spinner spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
-				//int pos = -1;
-				//string paycode = item.PayCode.ToUpper ().Trim ();
-//				if (!string.IsNullOrEmpty (paycode)) {
-//					if (paycode.Contains ("CASH")|| paycode.Contains ("COD")) {
-//						pos = dataAdapter2.GetPosition ("CASH");
-//					} else {
-//						pos = dataAdapter2.GetPosition ("INVOICE");
-//					}
-//				} else
-//					pos = dataAdapter2.GetPosition ("CASH");
-//
-//
-//				if (pos > -1) {
-//					spinnerType.SetSelection (pos);
-//					if (!rights.InvEditTrxType) {
-//						spinnerType.Enabled = false;
-//					}
-//				}//else spinnerType.Enabled = true;
+				Spinner spinnerType = FindViewById<Spinner> (Resource.Id.newinv_type);
+				int pos = -1;
+				string paycode = item.PayCode.ToUpper ().Trim ();
+				if (!string.IsNullOrEmpty (paycode)) {
+					if (paycode.Contains ("CASH")|| paycode.Contains ("COD")) {
+						pos = dataAdapter2.GetPosition ("CASH");
+					} else {
+						pos = dataAdapter2.GetPosition ("INVOICE");
+					}
+				} else
+					pos = dataAdapter2.GetPosition ("CASH");
+
+
+				if (pos > -1) {
+					spinnerType.SetSelection (pos);
+					if (!rights.InvEditTrxType) {
+						spinnerType.Enabled = false;
+					}
+				}//else spinnerType.Enabled = true;
 
 				if (codes [0].Trim () == "COD" || codes [0].Trim () == "CASH") {
 					txtcustname.Enabled = true;
@@ -182,7 +180,6 @@ namespace wincom.mobile.erp
 			var intent =ActivityManager.GetActivity<EntryActivity>(this.ApplicationContext);
 			//var intent = new Intent (this, typeof(EntryActivity));
 
-			intent.PutExtra ("trxtype", inv.trxtype);
 			intent.PutExtra ("invoiceno", inv.invno);
 			intent.PutExtra ("customer", codes [1].Trim ());
 			intent.PutExtra ("custcode",codes [0].Trim ());
@@ -210,15 +207,15 @@ namespace wincom.mobile.erp
 			string[] prefixs = apara.Prefix.Trim ().ToUpper ().Split(new char[]{'|'});
 			string prefix = "";
 			string trxtype = spinner2.SelectedItem.ToString ();
-//			if (trxtype == "CASH") {
-//				adNum = DataHelper.GetNumDate (pathToDatabase, invdate, "CS");
-//				if (prefixs.Length > 1) {
-//					prefix = prefixs [1];
-//				}else prefix = prefixs [0];
-//			} else {
+			if (trxtype == "CASH") {
+				adNum = DataHelper.GetNumDate (pathToDatabase, invdate, "CS");
+				if (prefixs.Length > 1) {
+					prefix = prefixs [1];
+				}else prefix = prefixs [0];
+			} else {
 				adNum = DataHelper.GetNumDate (pathToDatabase, invdate, "INV");
 				prefix = prefixs [0];
-			//}
+			}
 
 
 			if (spinner.SelectedItem == null) {
@@ -243,7 +240,7 @@ namespace wincom.mobile.erp
 
 				txtinvno.Text= invno;
 				inv.invdate = invdate;
-				inv.trxtype = "INVOICE";//spinner2.SelectedItem.ToString ();
+				inv.trxtype = spinner2.SelectedItem.ToString ();
 				inv.created = DateTime.Now;
 				inv.invno = invno;
 				inv.description = codes [1].Trim ();//custname.Text;

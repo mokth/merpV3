@@ -17,8 +17,8 @@ using Java.Util;
 
 namespace wincom.mobile.erp
 {
-	[Activity (Label = "INVOICE",Icon="@drawable/shop")]			
-	public class InvoiceActivity : Activity
+	[Activity (Label = "CASH BILL",Icon="@drawable/shop")]			
+	public class CashActivity : Activity
 	{
 		ListView listView ;
 		List<Invoice> listData = new List<Invoice> ();
@@ -107,7 +107,6 @@ namespace wincom.mobile.erp
 			Invoice item = listData.ElementAt (e.Position);
 			//var intent = new Intent(this, typeof(InvItemActivity));
 			var intent =ActivityManager.GetActivity<InvItemActivity>(this.ApplicationContext);
-			intent.PutExtra ("trxtype", item.trxtype);
 			intent.PutExtra ("invoiceno",item.invno );
 			intent.PutExtra ("custcode",item.custcode );
 			StartActivity(intent);
@@ -180,7 +179,6 @@ namespace wincom.mobile.erp
 			//var intent = new Intent (this, typeof(EditInvoice));
 			var intent =ActivityManager.GetActivity<EditInvoice>(this.ApplicationContext);
 			intent.PutExtra ("invoiceno", inv.invno);
-			intent.PutExtra ("trxtype", inv.trxtype);
 			StartActivity (intent);
 		}
 		void Delete(Invoice inv)
@@ -213,7 +211,7 @@ namespace wincom.mobile.erp
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{
 				var list2 = db.Table<Invoice> ()
-					.Where (x => x.isUploaded == false&&x.trxtype=="INVOICE" )
+					.Where (x => x.isUploaded == false && x.trxtype=="CASH")
 					.OrderByDescending(x=>x.invdate)
 					.ThenByDescending (x => x.created)
 					.ToList<Invoice> ();

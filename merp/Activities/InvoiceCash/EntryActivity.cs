@@ -28,6 +28,7 @@ namespace wincom.mobile.erp
 		string ITEMUID ="";
 		string INVOICENO="";
 		string FIRSTLOAD="";
+		string TRXTYPE;
 		Spinner spinner;
 		ArrayAdapter<String> dataAdapter;
 		double taxper;
@@ -41,16 +42,19 @@ namespace wincom.mobile.erp
 			if (!((GlobalvarsApp)this.Application).ISLOGON) {
 				Finish ();
 			}
-			SetTitle (Resource.String.title_invitementry);
-			EventManagerFacade.Instance.GetEventManager().AddListener(this);
-			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
-			rights = Utility.GetAccessRights (pathToDatabase);
-
+			TRXTYPE= Intent.GetStringExtra ("trxtype") ?? "CASH";
 			INVOICENO = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
 			ITEMUID = Intent.GetStringExtra ("itemuid") ?? "AUTO";
 			EDITMODE = Intent.GetStringExtra ("editmode") ?? "AUTO";
 			CUSTOMER= Intent.GetStringExtra ("customer") ?? "AUTO";
 			CUSTCODE= Intent.GetStringExtra ("custcode") ?? "AUTO";
+			if (TRXTYPE == "CASH") {
+				SetTitle (Resource.String.title_cashitementry);
+			}else SetTitle (Resource.String.title_invitementry);
+			EventManagerFacade.Instance.GetEventManager().AddListener(this);
+			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
+			rights = Utility.GetAccessRights (pathToDatabase);
+
 			trd = DataHelper.GetTrader (pathToDatabase, CUSTCODE);
 			// Create your application here
 			SetContentView (Resource.Layout.Entry);
@@ -372,6 +376,8 @@ namespace wincom.mobile.erp
 			intent.PutExtra ("invoiceno",INVOICENO );
 			intent.PutExtra ("custcode",CUSTCODE );
 			intent.PutExtra ("editmode",EDITMODE );
+			intent.PutExtra ("trxtype", TRXTYPE);
+
 			StartActivity(intent);
 		}
 		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)

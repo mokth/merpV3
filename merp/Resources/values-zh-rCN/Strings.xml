@@ -35,7 +35,8 @@
     <string name="mainmenu_settings">设置</string>
     <string name="mainmenu_about">关于</string>
     <string name="mainmenu_exit">退出</string>
-    <string name="submenu_inv">发票/现金票据</string>
+    <string name="submenu_cash">现金票据</string>
+    <string name="submenu_inv">发票</string>
     <string name="submenu_cn">退货单/退款单</string>
     <string name="submenu_do">发货单据</string>
     <string name="submenu_so">销售订单</string>
@@ -90,11 +91,18 @@
     <string name="login_pass">密码</string>
     <string name="login_code">安全密码</string>
 
-   <string name="title_invoice">发票/现金票据</string>
-    <string name="title_invoiceedit">编辑发票/现金票据</string>
-    <string name="title_invoiceitems">发票/现金票据货单</string>
-    <string name="title_invoicenew">新发票现金票据</string>
-    <string name="title_invitementry">发票/现金票据货单输入</string>
+    <string name="title_cash">现金票据</string>
+    <string name="title_cashnew">新现金票据</string>
+    <string name="title_cashedit">编辑现金票据</string>
+    <string name="title_cashitems">现金票据货单</string>
+    <string name="title_cashitementry">现金票据货单输入</string>
+
+    <string name="title_invoice">发票</string>
+    <string name="title_invoiceedit">编辑发票</string>
+    <string name="title_invoiceitems">发票货单</string>
+    <string name="title_invoicenew">新发票</string>
+    <string name="title_invitementry">发票货单输入</string>
+
     <string name="title_creditnote">退货单/退款单</string>
     <string name="title_creditnoteedit">编辑退货单/退款单</string>
     <string name="title_creditnoteitems">退货单/退款单货单</string>

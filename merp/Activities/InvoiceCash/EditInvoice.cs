@@ -24,6 +24,7 @@ namespace wincom.mobile.erp
 		Spinner spinner;
 		Spinner spinnerType ;
 		string INVOICENO="";
+		string TRXTYPE="";
 		Invoice invInfo;
 		EditText ccType ;
 		EditText ccNo;
@@ -36,13 +37,19 @@ namespace wincom.mobile.erp
 			if (!((GlobalvarsApp)this.Application).ISLOGON) {
 				Finish ();
 			}
-			SetTitle (Resource.String.title_invoiceedit);
+			INVOICENO= Intent.GetStringExtra ("invoiceno")??"AUTO";
+			TRXTYPE= Intent.GetStringExtra ("trxtype") ?? "CASH";
+			if (TRXTYPE == "CASH") {
+				SetTitle (Resource.String.title_cashedit);
+			} else {
+				SetTitle (Resource.String.title_invoiceedit);
+			}
 			SetContentView (Resource.Layout.CreateInvoice);
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			rights = Utility.GetAccessRights (pathToDatabase);
 
-			INVOICENO = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
+
 			invInfo =DataHelper.GetInvoice (pathToDatabase, INVOICENO);
 			if (invInfo == null) {
 				base.OnBackPressed ();
@@ -133,10 +140,10 @@ namespace wincom.mobile.erp
 				spinner.SetSelection (pos1);
 			}
 
-			//int pos2 = invInfo.trxtype == "CASH" ? 0 : 1;
+			int pos2 = TRXTYPE == "CASH" ? 0 : 1;
 			//int pos2= dataAdapter2.GetPosition (invInfo.trxtype);
 
-			//spinnerType.SetSelection(pos2);
+			spinnerType.SetSelection(pos2);
 			remark.Text = invInfo.remark;
 			txtinvno.Text = invInfo.invno;
 			txtcustname.Text = invInfo.description;
@@ -206,7 +213,7 @@ namespace wincom.mobile.erp
 			}
 			DateTime invdate = Utility.ConvertToDate (trxdate.Text);
 			Spinner spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
-			Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
+			//Spinner spinner2 = FindViewById<Spinner> (Resource.Id.newinv_type);
 			TextView txtinvno =FindViewById<TextView> (Resource.Id.newinv_no);
 			EditText txtcustname = FindViewById<EditText> (Resource.Id.newinv_custname);
 			EditText remark = FindViewById<EditText> (Resource.Id.newinv_remark);
@@ -224,7 +231,7 @@ namespace wincom.mobile.erp
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 
 				invInfo.invdate = invdate;
-				invInfo.trxtype = spinner2.SelectedItem.ToString ();
+				invInfo.trxtype = TRXTYPE;//spinner2.SelectedItem.ToString ();
 				invInfo.created = DateTime.Now;
 				invInfo.description = codes [1].Trim ();
 				invInfo.remark = remark.Text.ToUpper ();

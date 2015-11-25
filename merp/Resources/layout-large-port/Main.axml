@@ -8,6 +8,17 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <Button
+            android:text="@string/submenu_cash"
+            android:background="@drawable/bluethem_btn_default_holo_light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/butCash"
+            android:textSize="24sp"
+            android:height="80dp"
+            style="@style/ButtonBlueThem"
+            android:drawableLeft="@drawable/shop" />
+        <Button
             android:text="@string/submenu_inv"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:layout_width="match_parent"

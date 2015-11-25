@@ -35,7 +35,8 @@
     <string name="mainmenu_settings">SETTINGS</string>
     <string name="mainmenu_about">ABOUT</string>
     <string name="mainmenu_exit">EXIT</string>
-    <string name="submenu_inv">INVOICE/CASH BILL</string>
+    <string name="submenu_cash">CASH BILL</string>
+    <string name="submenu_inv">INVOICE</string>
     <string name="submenu_cn">CREDIT NOTE</string>
     <string name="submenu_do">DELIVERY ORDER</string>
     <string name="submenu_so">SALES ORDER</string>
@@ -84,11 +85,18 @@
     <string name="but_login">LOGIN</string>
     <string name="but_save">SAVE</string>
 
+     <string name="title_cash">CASH BILL</string>
+    <string name="title_cashnew">NEW CASH BILL</string>
+    <string name="title_cashedit">EDIT CASH BILL</string>
+    <string name="title_cashitems">CASH BILL ITEMS</string>
+    <string name="title_cashitementry">CASH BILL ITEM ENTRY</string>
+
     <string name="title_invoice">INVOICE</string>
+    <string name="title_invoicenew">NEW INVOICE</string>
     <string name="title_invoiceedit">EDIT INVOICE</string>
     <string name="title_invoiceitems">INVOICE ITEMS</string>
-    <string name="title_invoicenew">NEW INVOICE</string>
     <string name="title_invitementry">INVOICE ITEM ENTRY</string>
+
     <string name="title_creditnote">CREDIT NOTE</string>
     <string name="title_creditnoteedit">CREDIT NOTE</string>
     <string name="title_creditnoteitems">CREDIT NOTE ITEMS</string>

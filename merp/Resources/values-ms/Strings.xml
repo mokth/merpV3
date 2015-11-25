@@ -35,12 +35,14 @@
     <string name="mainmenu_settings">TETAPAN</string>
     <string name="mainmenu_about">MENGENAI SISTEM</string>
     <string name="mainmenu_exit">KELUAR</string>
-    <string name="submenu_inv">INVOIS/BIL TUNAI</string>
+    <string name="submenu_cash">BIL TUNAI</string>
+    <string name="submenu_inv">INVOIS</string>
     <string name="submenu_cn">NOTA KREDIT</string>
     <string name="submenu_do">PESANAN PENGHANTARAN</string>
     <string name="submenu_so">PESANAN JUALAN</string>
     <string name="submenu_back">MENU UTAMA</string>
     <string name="submenu_invlist">SENARAI INVOIS/BIL TUNAI</string>
+     
     <string name="submenu_cnlist">SENARAI NOTA KREDIT</string>
     <string name="submenu_dolist">SENEARAI P/PENGHANTARAN</string>
     <string name="submenu_solist">SENARAI P/JUALAN</string>
@@ -83,6 +85,12 @@
     <string name="login_code">KOD KESELAMATAN</string>
     <string name="but_login">MASUK</string>
     <string name="but_save">SIMPAN</string>
+
+     <string name="title_cash">BIL TUNAI</string>
+    <string name="title_cashnew">BIL TUNAI BARU</string>
+    <string name="title_cashedit">EDIT BIL TUNAI</string>
+    <string name="title_cashitems">ITEM BIL TUNAI</string>
+    <string name="title_cashitementry">BORANG BIL TUNAI</string>
 
     <string name="title_invoice">INVOIS</string>
     <string name="title_invoiceedit">EDIT INVOICE</string>
