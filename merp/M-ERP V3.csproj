@@ -47,7 +47,6 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
-    <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
     <MandroidI18n>cjk</MandroidI18n>
     <AndroidKeyStore>True</AndroidKeyStore>
     <AndroidSigningKeyStore>C:\Users\MoK-Lenovo\AppData\Local\Xamarin\Mono for Android\Keystore\com.wincom.merp\com.wincom.merp.keystore</AndroidSigningKeyStore>
@@ -208,6 +207,10 @@
     <Compile Include="Printing\HPPCLHelper\PrintPCLSumm.cs" />
     <Compile Include="Activities\CashBill\CashActivity.cs" />
     <Compile Include="Activities\CashBill\CreateCashBill.cs" />
+    <Compile Include="Activities\InvoiceCash\POSSalesActivity.cs" />
+    <Compile Include="Helper\Conv2NumTool.cs" />
+    <Compile Include="Activities\InvoiceCash\EntryActivityEx.cs" />
+    <Compile Include="Activities\CNNote\CNEntryActivityEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -560,6 +563,9 @@
     <AndroidResource Include="Resources\layout\CashEntry.axml" />
     <AndroidResource Include="Resources\layout\InvDtlItemViewCS.axml" />
     <AndroidResource Include="Resources\layout-large-port\InvDtlItemViewCS.axml" />
+    <AndroidResource Include="Resources\layout\POSCashEntry.axml" />
+    <AndroidResource Include="Resources\layout-large-port\POSCashEntry.axml" />
+    <AndroidResource Include="Resources\layout\EntryEx.axml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

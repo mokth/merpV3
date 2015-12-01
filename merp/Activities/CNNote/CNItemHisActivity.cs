@@ -47,7 +47,7 @@ namespace wincom.mobile.erp
 			populate (listData);
 			listView = FindViewById<ListView> (Resource.Id.invitemList);
 			SetViewDlg viewdlg = SetViewDelegate;
-			listView.Adapter = new GenericListAdapter<CNNoteDtls> (this, listData, Resource.Layout.InvDtlItemView, viewdlg);
+			listView.Adapter = new GenericListAdapter<CNNoteDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
 		}
 	
 		private void SetViewDelegate(View view,object clsobj)
@@ -56,16 +56,42 @@ namespace wincom.mobile.erp
 			string sqty =item.qty==0?"": item.qty.ToString ();
 			string sprice =item.price==0?"": item.price.ToString ("n2");
 
-			view.FindViewById<TextView> (Resource.Id.invitemcode).Text = item.icode;
-			view.FindViewById<TextView> (Resource.Id.invitemdesc).Text = item.description;
-			view.FindViewById<TextView> (Resource.Id.invitemqty).Text = sqty;
-			view.FindViewById<TextView> (Resource.Id.invitemtaxgrp).Text = item.taxgrp;
-			view.FindViewById<TextView> (Resource.Id.invitemtax).Text = item.tax.ToString ("n2");
-			view.FindViewById<TextView> (Resource.Id.invitemprice).Text = sprice;
-			view.FindViewById<TextView> (Resource.Id.invitemamt).Text = item.netamount.ToString ("n2");
-
-
+			if (item.icode == "TAX" || item.icode == "AMOUNT") {
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayout1).Visibility = ViewStates.Gone;
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayout2).Visibility = ViewStates.Visible;
+				view.FindViewById<TextView> (Resource.Id.invitemdesc).Visibility = ViewStates.Gone;
+				view.FindViewById<TextView> (Resource.Id.invitemTemp1).Text = item.description;
+				view.FindViewById<TextView> (Resource.Id.invitemTemp2).Text =item.netamount.ToString ("n2");
+			} else {
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayout2).Visibility = ViewStates.Gone;
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayout1).Visibility = ViewStates.Visible;
+				view.FindViewById<TextView> (Resource.Id.invitemdesc).Visibility = ViewStates.Visible;
+				view.FindViewById<TextView> (Resource.Id.invitemdesc).Text = item.description;
+				view.FindViewById<TextView> (Resource.Id.invitemcode).Text = item.icode;
+				view.FindViewById<TextView> (Resource.Id.invitemtax).Text = item.tax.ToString ("n2");
+				view.FindViewById<TextView> (Resource.Id.invitemprice).Text = sprice;
+				view.FindViewById<TextView> (Resource.Id.invitemamt).Text = item.netamount.ToString ("n2");
+				view.FindViewById<TextView> (Resource.Id.invitemqty).Text = sqty;
+				view.FindViewById<TextView> (Resource.Id.invitemtaxgrp).Text = item.taxgrp;
+			}
 		}
+
+//		private void SetViewDelegate(View view,object clsobj)
+//		{
+//			CNNoteDtls item = (CNNoteDtls)clsobj;
+//			string sqty =item.qty==0?"": item.qty.ToString ();
+//			string sprice =item.price==0?"": item.price.ToString ("n2");
+//
+//			view.FindViewById<TextView> (Resource.Id.invitemcode).Text = item.icode;
+//			view.FindViewById<TextView> (Resource.Id.invitemdesc).Text = item.description;
+//			view.FindViewById<TextView> (Resource.Id.invitemqty).Text = sqty;
+//			view.FindViewById<TextView> (Resource.Id.invitemtaxgrp).Text = item.taxgrp;
+//			view.FindViewById<TextView> (Resource.Id.invitemtax).Text = item.tax.ToString ("n2");
+//			view.FindViewById<TextView> (Resource.Id.invitemprice).Text = sprice;
+//			view.FindViewById<TextView> (Resource.Id.invitemamt).Text = item.netamount.ToString ("n2");
+//
+//
+//		}
 
 		protected override void OnResume()
 		{
@@ -76,7 +102,7 @@ namespace wincom.mobile.erp
 			populate (listData);
 			listView = FindViewById<ListView> (Resource.Id.invitemList);
 			SetViewDlg viewdlg = SetViewDelegate;
-			listView.Adapter = new GenericListAdapter<CNNoteDtls> (this, listData, Resource.Layout.InvDtlItemView, viewdlg);
+			listView.Adapter = new GenericListAdapter<CNNoteDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
 		}
 			
 		void populate(List<CNNoteDtls> list)
@@ -107,15 +133,47 @@ namespace wincom.mobile.erp
 					list1 [0].amount = ttlamt;
 					db.Update (list1 [0]);
 				}
+//				CNNoteDtls inv1 = new CNNoteDtls ();
+//				inv1.icode = "TAX";
+//				inv1.netamount = ttltax;
+//				CNNoteDtls inv2 = new CNNoteDtls ();
+//				inv2.icode = "AMOUNT";
+//				inv2.netamount = ttlamt;
+//
+//				list.Add (inv1);
+//				list.Add (inv2);
+
+				double roundVal = 0;
+				double ttlNet = Utility.AdjustToNear (ttlamt + ttltax, ref roundVal);
 				CNNoteDtls inv1 = new CNNoteDtls ();
 				inv1.icode = "TAX";
-				inv1.netamount = ttltax;
+				inv1.netamount = ttlamt;
+				inv1.description = "TOTAL EXCL GST";
 				CNNoteDtls inv2 = new CNNoteDtls ();
 				inv2.icode = "AMOUNT";
-				inv2.netamount = ttlamt;
+				inv2.netamount = ttltax;
+				inv2.description = "TOTAL 6% GST" ;
+				CNNoteDtls inv3 = new CNNoteDtls ();
+				inv3.icode = "TAX";
+				inv3.netamount = ttlamt + ttltax;
+				inv3.description = "TOTAL INCL GST" ;
+				CNNoteDtls inv4 = new CNNoteDtls ();
+				inv4.icode = "AMOUNT";
+				inv4.netamount =  roundVal;
+				inv4.description = "ROUNDING ADJUST";
+				CNNoteDtls inv5 = new CNNoteDtls ();
+				inv5.icode = "AMOUNT";
+				inv5.netamount = ttlNet;
+				inv5.description = "NET TOTAL";
+
 
 				list.Add (inv1);
 				list.Add (inv2);
+				list.Add (inv3);
+				if (invno.IndexOf("(CS)") >-1) {
+					list.Add (inv4);
+					list.Add (inv5);
+				}
 			}
 		}
 	}

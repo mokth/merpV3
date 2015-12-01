@@ -16,7 +16,7 @@ using Android.Views.InputMethods;
 namespace wincom.mobile.erp
 {
 	[Activity (Label = "CREDIT NOTE ITEM ENTRY",Icon="@drawable/bill")]			
-	public class CNEntryActivity : Activity,IEventListener
+	public class CNEntryActivity_Ori : Activity,IEventListener
 	{
 		string pathToDatabase;
 		List<Item> items = null;

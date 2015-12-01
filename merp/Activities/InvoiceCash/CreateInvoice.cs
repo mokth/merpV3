@@ -179,7 +179,7 @@ namespace wincom.mobile.erp
 		void ShowItemEntry (Invoice inv, string[] codes)
 		{
 			string COMPCODE = ((GlobalvarsApp)this.Application).COMPANY_CODE;
-			var intent =ActivityManager.GetActivity<EntryActivity>(this.ApplicationContext);
+			var intent =ActivityManager.GetActivity<EntryActivityEx>(this.ApplicationContext);
 			//var intent = new Intent (this, typeof(EntryActivity));
 
 			intent.PutExtra ("trxtype", inv.trxtype);

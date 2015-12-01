@@ -101,6 +101,7 @@ namespace wincom.mobile.erp
 			var intent = new Intent(this, typeof(InvItemHisActivity));
 			intent.PutExtra ("invoiceno",item.invno );
 			intent.PutExtra ("custcode",item.custcode );
+			intent.PutExtra ("trxtype",item.trxtype );
 			StartActivity(intent);
 		}
 

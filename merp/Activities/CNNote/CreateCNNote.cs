@@ -136,7 +136,7 @@ namespace wincom.mobile.erp
 		void ShowItemEntry (CNNote inv, string[] codes)
 		{
 			//var intent = new Intent (this, typeof(CNEntryActivity)); //need to change
-			var intent =ActivityManager.GetActivity<CNEntryActivity>(this.ApplicationContext);
+			var intent =ActivityManager.GetActivity<CNEntryActivityEx>(this.ApplicationContext);
 			intent.PutExtra ("invoiceno", inv.cnno);
 			intent.PutExtra ("customer", codes [1].Trim ());
 			intent.PutExtra ("custcode",codes [0].Trim ());

@@ -19,7 +19,7 @@ using Android.Content.PM;
 
 namespace wincom.mobile.erp
 {
-	[Activity (Label = "WINCOM M-ERP",Icon = "@drawable/icon")]
+	[Activity (Label = "WINCOM M-ERP V4",Icon = "@drawable/icon")]
 	public class MainActivity :Activity
 	{
 		//List<Item> items = null;
@@ -50,8 +50,8 @@ namespace wincom.mobile.erp
 			Button butTrxList = FindViewById<Button> (Resource.Id.butInvlist);
 			butTrxList.Click += ButInvlist_Click;
 			Button butPOS = FindViewById<Button> (Resource.Id.butPOS);
-			butPOS.Visibility = ViewStates.Gone;
-			//butPOS.Click += ButPOS_Click;
+			//butPOS.Visibility = ViewStates.Gone;
+			butPOS.Click += ButPOS_Click;
 			Button butdown = FindViewById<Button> (Resource.Id.butDown);
 			butdown.Click += butDownloadItems;
 			Button butup = FindViewById<Button> (Resource.Id.butupload);
@@ -97,7 +97,7 @@ namespace wincom.mobile.erp
 
 		void ButPOS_Click (object sender, EventArgs e)
 		{
-			var intent =ActivityManager.GetActivity<CashSalesActivity>(this.ApplicationContext);
+			var intent =ActivityManager.GetActivity<POSSalesActivity>(this.ApplicationContext);
 			StartActivity(intent);
 		}
 

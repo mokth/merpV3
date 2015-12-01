@@ -6,7 +6,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@android:drawable/alert_light_frame">
         <LinearLayout
             android:layout_width="fill_parent"
@@ -23,8 +23,8 @@
                     android:text="SALES AMOUNT"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:layout_height="match_parent"
+                    android:textSize="18sp"
                     android:id="@+id/lbinvno"
                     android:textColor="#ff1131f0"
                     android:paddingLeft="5dp" />
@@ -61,11 +61,11 @@
                 android:layout_weight="1.2"
                 android:padding="2dip">
                 <TextView
-                    android:text="ROUND ADJUSTMENT"
+                    android:text="ROUND ADJ"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:layout_height="match_parent"
+                    android:textSize="18sp"
                     android:id="@+id/lbinvno"
                     android:textColor="#ff1131f0"
                     android:paddingLeft="5dp" />
@@ -105,8 +105,8 @@
                     android:text="TOTAL AMOUNT"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:layout_height="match_parent"
+                    android:textSize="18sp"
                     android:id="@+id/lbinvno"
                     android:textColor="#ff1131f0"
                     android:paddingLeft="5dp" />
@@ -146,8 +146,8 @@
                     android:text="CASH"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:layout_height="match_parent"
+                    android:textSize="18sp"
                     android:id="@+id/lbinvno"
                     android:textColor="#ff1131f0"
                     android:paddingLeft="5dp" />
@@ -185,7 +185,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:id="@+id/lbinvno"
                     android:textColor="#ff1131f0"
                     android:paddingLeft="5dp"

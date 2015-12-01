@@ -1,9 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -72,16 +70,25 @@ namespace wincom.mobile.erp
 				txtTotal.Text = ttlAmt.ToString ("n2");
 				txtCash.EditorAction += HandleEditorAction;
 				txtCash.AfterTextChanged += TxtCash_AfterTextChanged;
-
+				txtCash.Text = "0";
 				butInvBack.Visibility = ViewStates.Gone;
 
 				builder.SetView (view);
 				builder.SetPositiveButton ("PAID", HandlePositiveButtonClick);
 				builder.SetNegativeButton ("CANCEL", HandleNegativeButtonClick);
+				txtCash.RequestFocus ();
+				ShowKeyBoard (view);
 			}
 			var dialog = builder.Create();
 			//Now return the constructed dialog to the calling activity
 			return dialog;
+		}
+
+		void ShowKeyBoard(View view)
+		{
+			InputMethodManager imm = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
+			imm.ShowSoftInputFromInputMethod(view.WindowToken, ShowFlags.Forced);
+			imm.ToggleSoftInput (ShowFlags.Forced, 0); 
 		}
 
 		private void HandlePositiveButtonClick(object sender, DialogClickEventArgs e)
@@ -90,6 +97,7 @@ namespace wincom.mobile.erp
 			Hashtable param = new Hashtable ();
 			EventParam p = new EventParam (EventID.PAYMENT_PAID , param);
 			EventManagerFacade.Instance.GetEventManager ().PerformEvent (this.Activity, p);
+
 			dialog.Dismiss();
 		}
 		private void  HandleNegativeButtonClick(object sender, DialogClickEventArgs e)
@@ -109,9 +117,9 @@ namespace wincom.mobile.erp
 			{
 				CalChanges ();
 				e.Handled = true;   
-				View view = sender as View;
-				InputMethodManager imm = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
-				imm.HideSoftInputFromWindow(view.WindowToken, 0);
+//				View view = sender as View;
+//				InputMethodManager imm = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
+//				imm.HideSoftInputFromWindow(view.WindowToken, 0);
 			}
 		}
 

@@ -68,7 +68,7 @@ namespace wincom.mobile.erp
 			listView.ItemClick += OnListItemClick;
 			//listView.Adapter = new CusotmItemListAdapter(this, listData);
 			SetViewDlg viewdlg = SetViewDelegate;
-			listView.Adapter = new GenericListAdapter<SaleOrderDtls> (this, listData, Resource.Layout.InvDtlItemView, viewdlg);
+			listView.Adapter = new GenericListAdapter<SaleOrderDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
 		}
 		public override void OnBackPressed() {
 			// do nothing.
@@ -108,18 +108,44 @@ namespace wincom.mobile.erp
 			string sqty =item.qty==0?"": item.qty.ToString ();
 			string sprice =item.price==0?"": item.price.ToString ("n2");
 
-			view.FindViewById<TextView> (Resource.Id.invitemcode).Text = item.icode;
-			view.FindViewById<TextView> (Resource.Id.invitemdesc).Text = item.description;
-			view.FindViewById<TextView> (Resource.Id.invitemqty).Text = sqty;
-			view.FindViewById<TextView> (Resource.Id.invitemtaxgrp).Text = item.taxgrp;
 			if (item.icode == "TAX" || item.icode == "AMOUNT") {
-				view.FindViewById<TextView> (Resource.Id.invitemtax).Text = "";
-			}else view.FindViewById<TextView> (Resource.Id.invitemtax).Text = item.tax.ToString ("n2");
-			view.FindViewById<TextView> (Resource.Id.invitemprice).Text = sprice;
-			view.FindViewById<TextView> (Resource.Id.invitemamt).Text = item.netamount.ToString ("n2");
-
-
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayout1).Visibility = ViewStates.Gone;
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayout2).Visibility = ViewStates.Visible;
+				view.FindViewById<TextView> (Resource.Id.invitemdesc).Visibility = ViewStates.Gone;
+				view.FindViewById<TextView> (Resource.Id.invitemTemp1).Text = item.description;
+				view.FindViewById<TextView> (Resource.Id.invitemTemp2).Text =item.netamount.ToString ("n2");
+			} else {
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayout2).Visibility = ViewStates.Gone;
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayout1).Visibility = ViewStates.Visible;
+				view.FindViewById<TextView> (Resource.Id.invitemdesc).Visibility = ViewStates.Visible;
+				view.FindViewById<TextView> (Resource.Id.invitemdesc).Text = item.description;
+				view.FindViewById<TextView> (Resource.Id.invitemcode).Text = item.icode;
+				view.FindViewById<TextView> (Resource.Id.invitemtax).Text = item.tax.ToString ("n2");
+				view.FindViewById<TextView> (Resource.Id.invitemprice).Text = sprice;
+				view.FindViewById<TextView> (Resource.Id.invitemamt).Text = item.netamount.ToString ("n2");
+				view.FindViewById<TextView> (Resource.Id.invitemqty).Text = sqty;
+				view.FindViewById<TextView> (Resource.Id.invitemtaxgrp).Text = item.taxgrp;
+			}
 		}
+
+//		private void SetViewDelegate(View view,object clsobj)
+//		{
+//			SaleOrderDtls item = (SaleOrderDtls)clsobj;
+//			string sqty =item.qty==0?"": item.qty.ToString ();
+//			string sprice =item.price==0?"": item.price.ToString ("n2");
+//
+//			view.FindViewById<TextView> (Resource.Id.invitemcode).Text = item.icode;
+//			view.FindViewById<TextView> (Resource.Id.invitemdesc).Text = item.description;
+//			view.FindViewById<TextView> (Resource.Id.invitemqty).Text = sqty;
+//			view.FindViewById<TextView> (Resource.Id.invitemtaxgrp).Text = item.taxgrp;
+//			if (item.icode == "TAX" || item.icode == "AMOUNT") {
+//				view.FindViewById<TextView> (Resource.Id.invitemtax).Text = "";
+//			}else view.FindViewById<TextView> (Resource.Id.invitemtax).Text = item.tax.ToString ("n2");
+//			view.FindViewById<TextView> (Resource.Id.invitemprice).Text = sprice;
+//			view.FindViewById<TextView> (Resource.Id.invitemamt).Text = item.netamount.ToString ("n2");
+//
+//
+//		}
 
 		protected override void OnResume()
 		{
@@ -137,7 +163,7 @@ namespace wincom.mobile.erp
 			populate (listData);
 			listView = FindViewById<ListView> (Resource.Id.invitemList);
 			SetViewDlg viewdlg = SetViewDelegate;
-			listView.Adapter = new GenericListAdapter<SaleOrderDtls> (this, listData, Resource.Layout.InvDtlItemView, viewdlg);
+			listView.Adapter = new GenericListAdapter<SaleOrderDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
 		}
 
 		void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e) {
@@ -202,7 +228,7 @@ namespace wincom.mobile.erp
 					if (arrlist.Count > 0) {
 						listData.Remove (arrlist [0]);
 						SetViewDlg viewdlg = SetViewDelegate;
-						listView.Adapter = new GenericListAdapter<SaleOrderDtls> (this, listData, Resource.Layout.InvDtlItemView, viewdlg);
+						listView.Adapter = new GenericListAdapter<SaleOrderDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
 					}
 				}
 			}
@@ -258,15 +284,24 @@ namespace wincom.mobile.erp
 					list1 [0].amount = ttlamt;
 					db.Update (list1 [0]);
 				}
+			
 				SaleOrderDtls inv1 = new SaleOrderDtls ();
 				inv1.icode = "TAX";
-				inv1.netamount = ttltax;
+				inv1.netamount = ttlamt;
+				inv1.description = "TOTAL EXCL GST";
 				SaleOrderDtls inv2 = new SaleOrderDtls ();
 				inv2.icode = "AMOUNT";
-				inv2.netamount = ttlamt;
-
+				inv2.netamount = ttltax;
+				inv2.description = "TOTAL 6% GST" ;
+				SaleOrderDtls inv3 = new SaleOrderDtls ();
+				inv3.icode = "TAX";
+				inv3.netamount = ttlamt + ttltax;
+				inv3.description = "TOTAL INCL GST" ;
+			
 				list.Add (inv1);
 				list.Add (inv2);
+				list.Add (inv3);
+			
 			}
 		}
 	}
