@@ -61,6 +61,10 @@ namespace wincom.mobile.erp
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+			if (!((GlobalvarsApp)this.Application).ISLOGON) {
+				Finish ();
+			}
+
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			rights = Utility.GetAccessRights (pathToDatabase);

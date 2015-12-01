@@ -63,6 +63,10 @@ namespace wincom.mobile.erp
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+			if (!((GlobalvarsApp)this.Application).ISLOGON) {
+				Finish ();
+			}
+
 			this.RequestWindowFeature(WindowFeatures.NoTitle);
 			TRXTYPE= Intent.GetStringExtra ("trxtype") ?? "CASH";
 			INVOICENO = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
