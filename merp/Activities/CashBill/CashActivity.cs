@@ -170,10 +170,13 @@ namespace wincom.mobile.erp
 
 		void payment(Invoice inv)
 		{
-			var intent = new Intent (this, typeof(Payment));
-			double ttl = inv.amount + inv.taxamt;
-			intent.PutExtra ("amount", ttl.ToString());
-			StartActivity (intent);
+//			var intent = new Intent (this, typeof(Payment));
+//			double ttl = inv.amount + inv.taxamt;
+//			intent.PutExtra ("amount", ttl.ToString());
+//			StartActivity (intent);
+			var dialog = CashDialog.NewInstance();
+			dialog.Amount =inv.amount + inv.taxamt;
+			dialog.Show(FragmentManager, "dialogPaid");
 		}
 
 		void Edit(Invoice inv)

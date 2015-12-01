@@ -37,10 +37,13 @@ namespace wincom.mobile.erp
 			SetTitle (Resource.String.title_invoicenew);
 			SetContentView (Resource.Layout.CreateInvoice);
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
+			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
+			compcode = ((GlobalvarsApp)this.Application).COMPANY_CODE;
+			apara =  DataHelper.GetAdPara (pathToDatabase);
+			rights = Utility.GetAccessRights (pathToDatabase);
 
 			_date = DateTime.Today;
 		
-
 			// Create your application here
 
 			spinner = FindViewById<Spinner> (Resource.Id.newinv_custcode);
@@ -55,18 +58,18 @@ namespace wincom.mobile.erp
 			invno.Text = "AUTO";
 			EditText trxdate =  FindViewById<EditText> (Resource.Id.newinv_date);
  			trxdate.Text = _date.ToString ("dd-MM-yyyy");
-			trxdate.Click += delegate(object sender, EventArgs e) {
-				ShowDialog (0);
-			};
+			if (rights.InvEditTrxDate) {
+				trxdate.Click += delegate(object sender, EventArgs e) {
+					ShowDialog (0);
+				};
+			} else
+				trxdate.Enabled = false;
 		
 			butFind.Click+= (object sender, EventArgs e) => {
 				ShowCustLookUp();
 			};
 
-			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
-			compcode = ((GlobalvarsApp)this.Application).COMPANY_CODE;
-			apara =  DataHelper.GetAdPara (pathToDatabase);
-			rights = Utility.GetAccessRights (pathToDatabase);
+
 			//SqliteConnection.CreateFile(pathToDatabase);
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{

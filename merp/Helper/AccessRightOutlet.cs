@@ -36,6 +36,7 @@ namespace wincom.mobile.erp
 		public string INUP = "Invoice Allow Edit Unit Price";
 		public string INEP = "Invoice No Edit After Print";
 		public string INTX = "Invoice Edit TrxType";
+		public string INTD = "Invoice Edit TrxDate";
 		public string INUU = "Upload Invoice";
 
 		//CN
@@ -45,6 +46,7 @@ namespace wincom.mobile.erp
 		public string CNP = "C/NOTE Allow Print";
 		public string CNEP = "C/NOTE No Edit After Print";
 		public string CNUP = "C/NOTE Allow Edit Unit Price";
+		public string CNTD = "C/NOTE Edit TrxDate";
 		public string CNUU = "Upload C/NOTE";
 
 		//DO
@@ -53,6 +55,7 @@ namespace wincom.mobile.erp
 		public string DOD = "Delivery Order Allow Delete";
 		public string DOP = "Delivery Order Allow Print";
 		public string DOEP = "Delivery Order No Edit After Print";
+		public string DOTD = "Delivery Order Edit TrxDate";
 		public string DOUP = "Upload Delivery Order";
 
 		//SO
@@ -62,6 +65,7 @@ namespace wincom.mobile.erp
 		public string SOP = "Sales Order Allow Print";
 		public string SOEP = "Sales Order No Edit After Print";
 		public string SOUP = "Sales Order Allow Edit Unit Price";
+		public string SOTD = "Sales Order Edit TrxDate";
 		public string SOUU = "Upload Sales Order";
 	}
 
@@ -86,6 +90,7 @@ namespace wincom.mobile.erp
 		public string INUP = "InvEditUPrice";
 		public string INEP = "InvNotEditAftPrint";
 		public string INTX = "InvEditTrxType";
+		public string INTD = "InvEditTrxDate";
 		public string INUU = "InvUpload";
 
 		//invouice
@@ -95,6 +100,7 @@ namespace wincom.mobile.erp
 		public string CNP = "CNAllowPrint";
 		public string CNEP = "CNNotEditAftPrint";
 		public string CNUP = "CNEditUPrice";
+		public string CNTD = "CNEditTrxDate";
 		public string CNUU = "CNUpload";
 
 		public string DOA = "DOAllowAdd";
@@ -103,6 +109,7 @@ namespace wincom.mobile.erp
 		public string DOP = "DOAllowPrint";
 		public string DOEP = "DONotEditAftPrint";
 		public string DOUP = "DOUpload";
+		public string DOTD = "DOEditTrxDate";
 
 		public string SOA = "SOAllowAdd";
 		public string SOE = "SOAllowEdit";
@@ -111,6 +118,7 @@ namespace wincom.mobile.erp
 		public string SOEP = "SONotEditAftPrint";
 		public string SOUP = "SOEditUPrice";
 		public string SOUU = "SOUpload";
+		public string SOTD = "SOEditTrxDate";
 	}
 
 	public class AccessRights
@@ -120,8 +128,7 @@ namespace wincom.mobile.erp
 		public bool IsAllowClrPostedTrx { get; set; }
 		public bool IsCustByAgent { get; set; }
 		public bool IsPrintCompLogo { get; set; }
-		public bool IsLoginControl{ get; set; 
-		}
+		public bool IsLoginControl { get; set; }
 		public bool IsSOModule { get; set; }
 		public bool IsDOModule { get; set; }
 		public bool IsCNModule { get; set; }
@@ -134,6 +141,7 @@ namespace wincom.mobile.erp
 		public bool InvEditUPrice { get; set; }
 		public bool InvNotEditAftPrint { get; set; }
 		public bool InvEditTrxType { get; set; }
+		public bool InvEditTrxDate { get; set; }
 		public bool InvUpload { get; set; }
 		//CN
 		public bool CNAllowAdd { get; set; }
@@ -143,6 +151,7 @@ namespace wincom.mobile.erp
 		public bool CNNotEditAftPrint { get; set; }
 		public bool CNUpload { get; set; }
 		public bool CNEditUPrice { get; set; }
+		public bool CNEditTrxDate { get; set; }
 		//DO
 		public bool DOAllowAdd { get; set; }
 		public bool DOAllowEdit { get; set; }
@@ -150,6 +159,7 @@ namespace wincom.mobile.erp
 		public bool DOAllowPrint { get; set; }
 		public bool DONotEditAftPrint { get; set; }
 		public bool DOUpload { get; set; }
+		public bool DOEditTrxDate { get; set; }
 		//SO
 		public bool SOAllowAdd { get; set; }
 		public bool SOAllowEdit { get; set; }
@@ -158,6 +168,7 @@ namespace wincom.mobile.erp
 		public bool SONotEditAftPrint { get; set; }
 		public bool SOEditUPrice { get; set; }
 		public bool SOUpload { get; set; }
+		public bool SOEditTrxDate { get; set; }
 
 	}
 }

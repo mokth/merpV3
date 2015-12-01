@@ -24,6 +24,8 @@ namespace wincom.mobile.erp
 		DateTime _date ;
 		AdPara apara = null;
 		Spinner spinner;
+		string compcode;
+		AccessRights rights;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -34,6 +36,10 @@ namespace wincom.mobile.erp
 			SetTitle (Resource.String.title_donew);
 			SetContentView (Resource.Layout.CreateDO);
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
+			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
+			compcode = ((GlobalvarsApp)this.Application).COMPANY_CODE;
+			apara =  DataHelper.GetAdPara (pathToDatabase);
+			rights = Utility.GetAccessRights (pathToDatabase);
 
 			// Create your application here
 			_date = DateTime.Today;
@@ -50,15 +56,20 @@ namespace wincom.mobile.erp
 			invno.Text = "AUTO";
 			EditText trxdate =  FindViewById<EditText> (Resource.Id.newinv_date);
  			trxdate.Text = _date.ToString ("dd-MM-yyyy");
-			trxdate.Click += delegate(object sender, EventArgs e) {
-				ShowDialog (0);
-			};
+//			trxdate.Click += delegate(object sender, EventArgs e) {
+//				ShowDialog (0);
+//			};
+			if (rights.DOEditTrxDate) {
+				trxdate.Click += delegate(object sender, EventArgs e) {
+					ShowDialog (0);
+				};
+			} else
+				trxdate.Enabled = false;
 			butFind.Click+= (object sender, EventArgs e) => {
 				ShowCustLookUp();
 			};
 
-			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
-			apara =  DataHelper.GetAdPara (pathToDatabase);
+
 			//SqliteConnection.CreateFile(pathToDatabase);
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{

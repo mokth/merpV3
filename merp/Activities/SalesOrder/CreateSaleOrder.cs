@@ -25,7 +25,8 @@ namespace wincom.mobile.erp
 		AdPara apara = null;
 		Spinner spinner;
 		Spinner spinnerBill;
-
+		string compcode;
+		AccessRights rights;
 
 		//AccessRights rights;
 
@@ -40,8 +41,9 @@ namespace wincom.mobile.erp
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
 
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
-			//rights = Utility.GetAccessRights (pathToDatabase);
+			compcode = ((GlobalvarsApp)this.Application).COMPANY_CODE;
 			apara =  DataHelper.GetAdPara (pathToDatabase);
+			rights = Utility.GetAccessRights (pathToDatabase);
 
 			// Create your application here
 			_date = DateTime.Today;
@@ -58,9 +60,16 @@ namespace wincom.mobile.erp
 			invno.Text = "AUTO";
 			EditText trxdate =  FindViewById<EditText> (Resource.Id.newinv_date);
  			trxdate.Text = _date.ToString ("dd-MM-yyyy");
-			trxdate.Click += delegate(object sender, EventArgs e) {
-				ShowDialog (0);
-			};
+//			trxdate.Click += delegate(object sender, EventArgs e) {
+//				ShowDialog (0);
+//			};
+			if (rights.SOEditTrxDate) {
+				trxdate.Click += delegate(object sender, EventArgs e) {
+					ShowDialog (0);
+				};
+			} else
+				trxdate.Enabled = false;
+			
 			butFind.Click+= (object sender, EventArgs e) => {
 				ShowCustLookUp();
 			};

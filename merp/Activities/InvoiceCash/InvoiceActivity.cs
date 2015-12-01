@@ -118,7 +118,7 @@ namespace wincom.mobile.erp
 			PopupMenu menu = new PopupMenu (e.Parent.Context, e.View);
 			menu.Inflate (Resource.Menu.popupInv);
 			var mitem =menu.Menu.FindItem(Resource.Id.poppay);
-			mitem.SetVisible (true);
+			mitem.SetVisible (false);
 			//if (!compinfo.AllowDelete) {
 				menu.Menu.RemoveItem (Resource.Id.popInvdelete);
 			//}
