@@ -73,7 +73,6 @@
     <Compile Include="SQLite.cs" />
     <Compile Include="CusotmListAdapter.cs" />
     <Compile Include="Service1.cs" />
-    <Compile Include="GenericAdapter.cs" />
     <Compile Include="Activities\CustomerActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
@@ -213,6 +212,8 @@
     <Compile Include="Activities\CNNote\CNEntryActivityEx.cs" />
     <Compile Include="Activities\CashBill\CashBillListing.cs" />
     <Compile Include="Activities\CashBill\PaymentActivity.cs" />
+    <Compile Include="GenericAdapter.cs" />
+    <Compile Include="Activities\CashBill\CashItemActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

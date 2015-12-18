@@ -106,8 +106,8 @@ namespace wincom.mobile.erp
 
 				builder.SetView (view);
 				builder.SetPositiveButton ("PAID/PRINT", HandlePositiveButtonClick);
-				builder.SetNegativeButton ("PAID",HandlePaidOnlyButtonClick);
-				builder.SetNeutralButton ("CANCEL",  HandleNegativeButtonClick );
+				builder.SetNegativeButton ("CANCEL",HandleNegativeButtonClick );
+				builder.SetNeutralButton ("PAID", HandlePaidOnlyButtonClick );
 
 				txtCash.RequestFocus ();
 				ShowKeyBoard (view);

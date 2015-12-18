@@ -59,7 +59,7 @@ namespace wincom.mobile.erp
 			//	butNew.Enabled = false;
 
 			listView.ItemClick += OnListItemLongClick;//OnListItemClick;
-			//listView.ItemLongClick += 
+			listView.ItemLongClick += ListView_ItemLongClick;
 			//listView.Adapter = new CusotmListAdapter(this, listData);
 			SetViewDlg viewdlg = SetViewDelegate;
 			listView.Adapter = new GenericListAdapter<Invoice> (this, listData, Resource.Layout.ListItemRow, viewdlg);
@@ -68,6 +68,15 @@ namespace wincom.mobile.erp
 
 		public override void OnBackPressed() {
 			// do nothing.
+		}
+
+		void ListView_ItemLongClick (object sender, AdapterView.ItemLongClickEventArgs e)
+		{
+			Invoice item = listData.ElementAt (e.Position);
+			var intent =ActivityManager.GetActivity<CashItemActivity>(this.ApplicationContext);
+			intent.PutExtra ("invoiceno",item.invno );
+			intent.PutExtra ("custcode",item.custcode );
+			StartActivity(intent);
 		}
 
 		private void SetViewDelegate(View view,object clsobj)

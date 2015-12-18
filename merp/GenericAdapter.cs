@@ -4,6 +4,7 @@ using Android.App;
 using System.Collections.Generic;
 using Android.Views;
 using Android.Graphics;
+using System.Reflection;
 
 namespace wincom.mobile.erp
 {
@@ -78,14 +79,21 @@ namespace wincom.mobile.erp
 				_dlg.Invoke (view, item);
 			}
 
+			PropertyInfo picode = item.GetType ().GetProperty ("icode");
+			if (picode != null) {
+				object tmp=	picode.GetValue (item);
+				if (tmp != null) {
+					if (tmp.ToString() == "TAX" || tmp.ToString() == "AMOUNT") {
+						view.SetBackgroundColor (Color.WhiteSmoke);
+						SetChildFontColor (view,Color.DarkBlue);
 
-			if (position % 2 == 1) {
-				view.SetBackgroundResource (Resource.Drawable.listview_selector_even);
-				SetChildFontColor (view,Color.White);
-			} else {
-				view.SetBackgroundResource (Resource.Drawable.listview_selector_odd);
-				SetChildFontColor (view,Color.Black);
+					}else SetRecordColor (view,position);
+				}
+				else SetRecordColor (view,position);
 			}
+			else SetRecordColor (view,position);
+
+
 			return view;
 		}
 
@@ -122,6 +130,19 @@ namespace wincom.mobile.erp
 //				a.NotifyDataSetChanged();
 //			}
 //		}
+
+		void SetRecordColor (View view,int position)
+		{
+			if (position % 2 == 1) {
+				view.SetBackgroundResource (Resource.Drawable.listview_selector_even);
+				SetChildFontColor (view, Color.White);
+			}
+			else {
+				view.SetBackgroundResource (Resource.Drawable.listview_selector_odd);
+				SetChildFontColor (view, Color.Black);
+			}
+
+		}
 	}
 
 	public class GenericListAdapterEx<T> : BaseAdapter<T>
@@ -191,7 +212,6 @@ namespace wincom.mobile.erp
 			if (item != null) {
 				_dlg.Invoke (view, item);
 			}
-
 
 
 			InvoiceDtls itmcode = item as InvoiceDtls;

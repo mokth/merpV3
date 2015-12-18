@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/invitemdesc"
         android:textSize="16sp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:textColor="#ffffff"
@@ -17,15 +17,16 @@
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
+        android:weightSum="7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1">
         <TextView
             android:id="@+id/invitemcode"
             android:textSize="15sp"
-            android:layout_width="0sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2.1"
+            android:layout_weight="2.3"
             android:singleLine="true"
             android:textColor="#ffffff"
             android:typeface="sans" />
@@ -89,6 +90,7 @@
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
+        android:weightSum="3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout2">
@@ -97,7 +99,7 @@
             android:textSize="16sp"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="2.3"
             android:singleLine="true"
             android:gravity="right"
             android:textAlignment="gravity"
@@ -108,7 +110,7 @@
             android:id="@+id/invitemTemp2"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.65"
             android:singleLine="true"
             android:textColor="#ffffff"
             android:gravity="right"

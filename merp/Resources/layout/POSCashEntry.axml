@@ -329,37 +329,39 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:id="@+id/Save"
                     android:text="@string/button_add"
+                    android:width="80dp"
                     android:drawableLeft="@drawable/add"
-                    android:width="80dp" />
+                    android:textAllCaps="false"
+                    android:linksClickable="false" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:text="@string/button_Paid"
                     android:id="@+id/Paid"
                     android:drawableLeft="@drawable/shop"
-                    android:width="80dp" />
+                    android:width="85dp" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:id="@+id/NewBill"
                     android:text="@string/button_new"
                     android:drawableLeft="@drawable/bill"
-                    android:width="80dp" />
+                    android:width="85dp" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:text="@string/button_cancel"
                     android:id="@+id/Cancel"
                     android:drawableLeft="@android:drawable/ic_delete"
@@ -370,7 +372,7 @@
                     android:textColor="#ffffff"
                     android:typeface="sans"
                     android:id="@+id/List"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:text="BILLS"
                     android:drawableLeft="@drawable/shoplist"
                     android:width="95dp" />
@@ -380,7 +382,7 @@
                     android:textColor="#ffffff"
                     android:typeface="sans"
                     android:id="@+id/Print"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:text="@string/button_print"
                     android:drawableLeft="@drawable/print"
                     android:width="95dp" />
@@ -389,7 +391,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:text="@string/submenu_back"
                     android:id="@+id/Home"
                     android:drawableLeft="@drawable/home"
