@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Views.InputMethods;
+using System.Collections;
 
 namespace wincom.mobile.erp
 {
@@ -37,6 +38,7 @@ namespace wincom.mobile.erp
 		volatile bool IsEdit;
 		volatile int IDdtls;
 		volatile bool IsFirePaid;
+		volatile bool IsFirePaidOnly;
 
 		Spinner spinItem;
 		Spinner spinCust;
@@ -46,8 +48,9 @@ namespace wincom.mobile.erp
 		ListView listView;
 		TextView txtcust;
 		TextView txtInvNo;
-		TextView txtInvDate;
+		EditText txtInvDate;
 		TextView txtInvMode;
+		TextView txttax;
 		Button butFindCust;
 		Button butFindItem;
 		Button butNew;
@@ -56,13 +59,17 @@ namespace wincom.mobile.erp
 		Button butAdd ;
 		Button butCancel;
 		Button butPaid ;
+		Button butList;
 		Button butPrint;
+		DateTime _date ;
 
 		List<InvoiceDtls> listData;
 		TextView _tv;
 		RelativeLayout.LayoutParams _layoutParamsPortrait;
 		RelativeLayout.LayoutParams _layoutParamsLandscape;
-
+		bool isNotAllowEditAfterPrinted  ;
+		string INVOICENO ;
+		string INVACTION;
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -71,9 +78,15 @@ namespace wincom.mobile.erp
 			}
 
 			this.RequestWindowFeature(WindowFeatures.NoTitle);
+			INVOICENO = Intent.GetStringExtra ("invoiceno") ?? "";
+			INVACTION = Intent.GetStringExtra ("action") ?? "";
+			_date = DateTime.Today;
+
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			rights = Utility.GetAccessRights (pathToDatabase);
+			isNotAllowEditAfterPrinted  = DataHelper.GetInvoicePrintStatus (pathToDatabase,invno,rights);
+
 			SetContentView (Resource.Layout.POSCashEntry);
 			_layoutParamsPortrait = new RelativeLayout.LayoutParams (ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);
 			_layoutParamsLandscape = new RelativeLayout.LayoutParams (ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);
@@ -84,11 +97,35 @@ namespace wincom.mobile.erp
 			ControlHandling ();
 
 			listData = new List<InvoiceDtls> ();
-			CreateCashBill ();
+			//CreateCashBill ();
+			LoadInvoice ();
 			populate (listData);
 			SetViewDlg viewdlg = SetViewDelegate;
-			listView.Adapter = new GenericListAdapter<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
+			listView.Adapter = new GenericListAdapterEx<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
 			listView.ItemClick += OnListItemClick;
+		}
+
+		void LoadInvoice ()
+		{
+			if (INVOICENO == "") {
+				if (INVACTION == "create") {
+					CreateCashBill ();
+				} else {
+					EnableControLs (false, false, true, false, true);
+					inv = new Invoice ();
+				}
+			}
+			else {
+				loadInvouce (INVOICENO);
+				txtInvMode.Text = "EDIT";
+				txtInvNo.Text = inv.invno;
+				txtInvDate.Text = inv.invdate.ToString ("dd-MM-yyyy");
+				int pos1= dAdapterCust.GetPosition (inv.custcode+" | "+inv.description.Trim());
+				if (pos1>0)
+					 spinCust.SetSelection (pos1);
+				else spinCust.SetSelection (0);
+				EnableControLs (true, false, true, true, false);
+			}
 		}
 
 		#region view init
@@ -120,8 +157,9 @@ namespace wincom.mobile.erp
 			butFindCust.Click += (object sender, EventArgs e) => {
 				ShowCustLookUp ();
 			};
-			butPrint.Click += (object sender, EventArgs e) => {
-				Printreceipt ();
+			butList.Click += (object sender, EventArgs e) => {
+				//Printreceipt ();
+				CashBillList();
 			};
 			butCancel.Click += (object sender, EventArgs e) => {
 				CancelReceipt ();
@@ -131,6 +169,9 @@ namespace wincom.mobile.erp
 			};
 			butNew.Click += (object sender, EventArgs e) => {
 				NewBill ();
+			};
+			butPrint.Click += (object sender, EventArgs e) => {
+				Printreceipt();
 			};
 			butAdd.Click += butAddClick;
 			butPaid.Click += ButPaid_Click;
@@ -150,10 +191,45 @@ namespace wincom.mobile.erp
 		}
 
 		#endregion view init
-
 		void CreateCashBill()
 		{
-			DateTime invdate = DateTime.Now;
+			if (!Utility.IsValidDateString (txtInvDate.Text)) {
+				Toast.MakeText (this,Resources.GetString(Resource.String.msg_invaliddate), ToastLength.Long).Show ();	
+				return;
+			}
+			DateTime invdate = Utility.ConvertToDate (txtInvDate.Text);
+			ValidateInvDate (invdate);
+		}
+
+		void ValidateInvDate(DateTime invdate)
+		{
+			bool diffYearMonth = false;
+			DateTime today = DateTime.Today;
+			if (invdate.Year != today.Year) {
+				diffYearMonth = true;
+			}
+			if (invdate.Month != today.Month) {
+				diffYearMonth = true;
+			}
+			if (!diffYearMonth) {
+				CreateNewInv ();
+				return;
+			}
+
+			var builder = new AlertDialog.Builder(this);
+			builder.SetMessage("Invoice date is not in the current month. Confirm to use this date?");
+			builder.SetPositiveButton("YES", (s, e) => { CreateNewInv();});
+			builder.SetNegativeButton("NO", (s, e) => {
+				txtInvDate.Text =DateTime.Today.ToString("dd-MM-yyyy");
+				CreateNewInv();
+			});
+			builder.Create().Show();
+		}
+
+		void CreateNewInv()
+		{
+			
+			DateTime invdate = Utility.ConvertToDate (txtInvDate.Text);
 			DateTime tmr = invdate.AddDays (1);
 			AdNumDate adNum;// = DataHelper.GetNumDate (pathToDatabase, invdate);
 			apara =  DataHelper.GetAdPara (pathToDatabase);
@@ -175,7 +251,7 @@ namespace wincom.mobile.erp
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 				inv = new Invoice ();
 				inv.invno= invno;
-				inv.invdate = DateTime.Today;
+				inv.invdate = invdate;
 				inv.trxtype = "CASH";
 				inv.created = DateTime.Now;
 				inv.amount = 0;
@@ -193,6 +269,7 @@ namespace wincom.mobile.erp
 			txtInvMode.Text = "NEW";
 			IsSave = false;
 			IsFirePaid = false;
+			IsFirePaidOnly = false;
 			EnableControLs (true, true, false, true, false);
 
 		}
@@ -206,31 +283,53 @@ namespace wincom.mobile.erp
 			butFindItem = FindViewById<Button> (Resource.Id.bfindItem);
 			txtqty = FindViewById<EditText> (Resource.Id.txtqty);
 			txtprice = FindViewById<EditText> (Resource.Id.txtprice);
+			txttax =  FindViewById<TextView> (Resource.Id.txttax);
 			txtInvNo = FindViewById<TextView> (Resource.Id.txtInvno);
-			txtInvDate = FindViewById<TextView> (Resource.Id.txtInvdate);
+			txtInvDate = FindViewById<EditText> (Resource.Id.txtInvdate);
 			txtInvMode = FindViewById<TextView> (Resource.Id.txtInvmode);
 			txtcust = FindViewById<TextView> (Resource.Id.txtInvcust);
 			txtbarcode = FindViewById<EditText> (Resource.Id.txtbarcode);
 			butAdd = FindViewById<Button> (Resource.Id.Save);
 			butCancel = FindViewById<Button> (Resource.Id.Cancel);
-			butPaid = FindViewById<Button> (Resource.Id.Paid);
+	        butPaid = FindViewById<Button> (Resource.Id.Paid);
+			butList = FindViewById<Button> (Resource.Id.List);
 			butPrint = FindViewById<Button> (Resource.Id.Print);
 			butNew = FindViewById<Button> (Resource.Id.NewBill);
 			butHome= FindViewById<Button> (Resource.Id.Home);
 			listView = FindViewById<ListView> (Resource.Id.invitemList);
+			txtInvDate.Text = DateTime.Today.ToString("dd-MM-yyyy");
+			if (rights.InvEditTrxDate) {
+				txtInvDate.Click += delegate(object sender, EventArgs e) {
+					ShowDialog (0);
+				};
+			} else
+				txtInvDate.Enabled = false;
+
+
 			//txtcustname = FindViewById<EditText> (Resource.Id.newinv_custname);
 		}
 
 		void EnableControLs(bool lAdd,bool lCancel, bool lPrint, bool lPaid,bool lNew)
 		{
-			butAdd.Enabled = lAdd;
-			butCancel.Enabled = lCancel;
-			butPrint.Enabled = lPrint;
-			butPaid.Enabled = lPaid;
-			butNew.Enabled = lNew;
-//			if (lAdd) {
-//				txtInvNo.Visibility = ViewStates.Gone;
-//			}else txtInvNo.Visibility = ViewStates.Visible;
+			butAdd.Visibility = (lAdd)?ViewStates.Visible:ViewStates.Gone ;
+			butCancel.Visibility = (lCancel)?ViewStates.Visible:ViewStates.Gone;
+			butList.Visibility = (lPrint)?ViewStates.Visible:ViewStates.Gone;
+			butPaid.Visibility = (lPaid)?ViewStates.Visible:ViewStates.Gone;
+			butNew.Visibility = (lNew)?ViewStates.Visible:ViewStates.Gone;
+			butHome.Visibility = (lNew)?ViewStates.Visible:ViewStates.Gone;
+			butPrint.Visibility = ViewStates.Gone;
+
+			spinCust.Enabled = lAdd;
+			spinItem.Enabled = lAdd;
+			txtqty.Enabled = lAdd;
+			txtprice.Enabled = lAdd;
+			txtbarcode.Enabled = lAdd;
+			butFindCust.Enabled = lAdd;
+			butFindItem.Enabled = lAdd;
+			txtInvDate.Enabled = lNew;
+
+			if (!rights.InvAllowAdd)
+				butAdd.Visibility = ViewStates.Gone;
 		}
 
 		#endregion Control stuff
@@ -340,7 +439,7 @@ namespace wincom.mobile.erp
 //					if (arrlist.Count > 0) {
 //						listData.Remove (arrlist [0]);
 //						SetViewDlg viewdlg = SetViewDelegate;
-//						listView.Adapter = new GenericListAdapter<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
+//						listView.Adapter = new GenericListAdapterEx<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
 //					}
 				}
 			}
@@ -349,6 +448,15 @@ namespace wincom.mobile.erp
 		#endregion Item ListView stuff
 
 		#region Loading Data
+		void loadInvouce(string invno){
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list = db.Table<Invoice> ().Where (x => x.invno == invno).ToList<Invoice> ();
+				if (list.Count > 0) {
+					inv = list [0];
+				}
+			}
+		}
+
 		void populate(List<InvoiceDtls> list)
 		{
 			list.Clear ();
@@ -406,6 +514,7 @@ namespace wincom.mobile.erp
 			}
 
 			icodes = new List<string> ();
+			icodes.Add ("");
 			foreach (Item item in items) {
 				if (item.IDesc.Length > 40) {
 					icodes.Add (item.ICode + " | " + item.IDesc.Substring(0,40)+"...");
@@ -413,6 +522,7 @@ namespace wincom.mobile.erp
 			}
 
 			custcodes = new List<string> ();
+			custcodes.Add ("");
 			foreach (Trader trd in trds) {
 				custcodes.Add (trd.CustCode+" | "+trd.CustName.Trim());
 			}
@@ -453,18 +563,20 @@ namespace wincom.mobile.erp
 			Spinner spinner = (Spinner)sender;
 
 			string []codedesc = spinner.GetItemAtPosition (e.Position).ToString().Split (new char[]{ '|' });
+			if (codedesc.Length <2)
+				return;
 			string icode = codedesc[0].Trim();
 			Item item =items.Where (x => x.ICode == icode).FirstOrDefault ();
-			TextView tax =  FindViewById<TextView> (Resource.Id.txttax);
-			EditText price = FindViewById<EditText> (Resource.Id.txtprice);
-			EditText qty = FindViewById<EditText> (Resource.Id.txtqty);
+//			TextView tax =  FindViewById<TextView> (Resource.Id.txttax);
+//			EditText price = FindViewById<EditText> (Resource.Id.txtprice);
+//			EditText qty = FindViewById<EditText> (Resource.Id.txtqty);
 
 			double uprice= Utility.GetUnitPrice (trd, item);
-			price.Text = uprice.ToString ();
-			tax.Text = item.taxgrp;
+			txtprice.Text = uprice.ToString ();
+			txttax.Text = item.taxgrp;
 			taxper = item.tax;
 			isInclusive = item.isincludesive;
-			qty.RequestFocus ();
+			txtqty.RequestFocus ();
 			//ShowKeyBoard (qty as View);
 
 		}
@@ -475,7 +587,7 @@ namespace wincom.mobile.erp
 
 			string txt = spinner.GetItemAtPosition (e.Position).ToString();
 			string[] codes = txt.Split (new char[]{ '|' });
-			if (codes.Length == 0)
+			if (codes.Length <2)
 				return;
 
 			trd  =trds.Where (x => x.CustCode ==codes[0].Trim()).FirstOrDefault ();
@@ -490,6 +602,20 @@ namespace wincom.mobile.erp
 		#endregion splinner Stuff
 
 		#region Editor Action
+
+		[Obsolete]
+		protected override Dialog OnCreateDialog (int id)
+		{
+			return new DatePickerDialog (this, HandleDateSet, _date.Year,
+				_date.Month - 1, _date.Day);
+		}
+
+		void HandleDateSet (object sender, DatePickerDialog.DateSetEventArgs e)
+		{
+			_date = e.Date;
+			txtInvDate.Text = _date.ToString ("dd-MM-yyyy");
+		}
+
 		private void HandleEditorAction(object sender, TextView.EditorActionEventArgs e)
 		{
 			e.Handled = false;
@@ -635,7 +761,8 @@ namespace wincom.mobile.erp
 					db.Update (list [0]);
 				}else db.Insert (invdtls);
 			}
-			spinItem.SetSelection (-1);
+			//spinItem.SetSelection (-1);
+			ClearItemData ();
 			Toast.MakeText (this, Resources.GetString(Resource.String.msg_itemadded), ToastLength.Long).Show ();
 		}
 
@@ -674,7 +801,7 @@ namespace wincom.mobile.erp
 		{
 			populate (listData);
 			SetViewDlg viewdlg = SetViewDelegate;
-			listView.Adapter = new GenericListAdapter<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
+			listView.Adapter = new GenericListAdapterEx<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
 			listView.SetSelection (listView.Count - 1);
 		}
 
@@ -745,6 +872,7 @@ namespace wincom.mobile.erp
 			//txtprice.Text = ""; 
 			//txtttltax.Text = "";
 			//txtttlamt.Text = "";
+			ClearItemData ();
 			RefreshItemList ();
 		}
 
@@ -755,7 +883,15 @@ namespace wincom.mobile.erp
 				spinCust.RequestFocus ();
 				return;			
 			}
+
+			if (spinCust.SelectedItem.ToString () == "") {
+				Toast.MakeText (this, Resources.GetString(Resource.String.msg_invalidcust), ToastLength.Long).Show ();			
+				spinCust.RequestFocus ();
+				return;			
+			}
+
 			if (ttlamt == 0) {
+				Toast.MakeText (this, Resources.GetString(Resource.String.msg_invalidqty), ToastLength.Long).Show ();			
 				return;
 			}
 			ShowPaidment ();
@@ -764,7 +900,15 @@ namespace wincom.mobile.erp
 		void ShowPaidment()
 		{
 			var dialog = CashDialog.NewInstance();
+			string[] codes = spinCust.SelectedItem.ToString ().Split (new char[]{ '|' });
+			if (codes.Length < 2) {
+				Toast.MakeText (this, Resources.GetString (Resource.String.msg_invalidcust), ToastLength.Long).Show ();
+				return;
+			}
 			dialog.Amount =ttlamt+ttltax;
+			dialog.CustName = codes [1];
+			dialog.InvNo = txtInvNo.Text;
+			dialog.Remark = string.IsNullOrEmpty (inv.remark) ? "" : inv.remark;
 			dialog.Show(FragmentManager, "dialogPaid");
 		}
 
@@ -775,17 +919,36 @@ namespace wincom.mobile.erp
 			ttltax = 0;
 			inv = new Invoice ();
 			ClearData ();
-			EnableControLs (false, false, false, false, true);
+			ClearAllData ();
+			EnableControLs (false, false, true, false, true);
 			RefreshItemList ();
 		}
 
-		void Printreceipt()
+		void CashBillList()
 		{
+			//var intent = new Intent (this, typeof(EditInvoice));
+			var intent =ActivityManager.GetActivity<CashBillListing>(this.ApplicationContext);
+			StartActivity (intent);
+		}
+
+		void Printreceipt()
+		{  
 			InvoiceDtls[] list;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)){
 				var ls= db.Table<InvoiceDtls> ().Where (x => x.invno==inv.invno).ToList<InvoiceDtls>();
 				list = new InvoiceDtls[ls.Count];
 				ls.CopyTo (list);
+			}
+
+			if (inv.custcode == null || inv.custcode == "") {
+			
+				string[] codes = spinCust.SelectedItem.ToString ().Split (new char[]{ '|' });
+				if (codes.Length < 2) {
+					Toast.MakeText (this, Resources.GetString (Resource.String.msg_invalidcust), ToastLength.Long).Show ();
+					return;
+				}
+				inv.custcode = codes [0].Trim();
+				inv.description = txtcustname;
 			}
 			//mmDevice = null;
 			//findBTPrinter ();
@@ -800,6 +963,7 @@ namespace wincom.mobile.erp
 			} else {
 				Toast.MakeText (this, prtInv.GetErrMsg(), ToastLength.Long).Show ();	
 			}
+
 		}
 
 		void updatePrintedStatus(Invoice inv)
@@ -818,25 +982,33 @@ namespace wincom.mobile.erp
 			}
 		}
 
-		void SaveCashBill()
+		void SaveCashBill(Hashtable param)
 		{
 			if (IsSave)
 				return;
 			
 			string[] codes = spinCust.SelectedItem.ToString ().Split (new char[]{ '|' });
-			if (codes.Length == 0) {
+			if (codes.Length < 2) {
 				Toast.MakeText (this, Resources.GetString (Resource.String.msg_invalidcust), ToastLength.Long).Show ();
 				return;
 			}
+			string remark = "";
+			bool needPrint = true;
+			if (param.Contains ("remark")) {
+				remark = param ["remark"].ToString ();
+			}
+			if (param.Contains ("print")) {
+				needPrint =  param ["print"].ToString ()=="yes";
+			}
+
 			try {
 				//txtInvNo.Text = "BILL No: " + inv.invno + " (PAID)";
 				txtInvMode.Text ="PAID";
-				EnableControLs (false, false, true, false, true);
 				inv.description = txtcustname;//  codes [1].Trim ();//custname.Text;
 				inv.amount = ttlamt;
 				inv.taxamt = ttltax;
 				inv.custcode = codes [0].Trim ();
-
+				inv.remark= remark;
 				using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 					var list2 = db.Table<InvoiceDtls> ().Where (x => x.invno == inv.invno).ToList<InvoiceDtls> ();
 					ttlamt = 0;
@@ -851,14 +1023,19 @@ namespace wincom.mobile.erp
 						temp [0].amount = ttlamt;
 						temp [0].taxamt = ttltax;
 						temp [0].custcode = codes [0].Trim ();
+						temp [0].remark= remark;
 						db.Update (temp [0]);
 					} else
 						db.Insert (inv);
-
-					IsCashPay = true;
-					IsSave = true;
-					Printreceipt ();
 				}
+
+				IsCashPay = true;
+				IsSave = true;
+				IsFirePaidOnly = true;
+				EnableControLs (false, false, true, false, true);
+				butPrint.Visibility= ViewStates.Visible;
+				if (needPrint)
+					Printreceipt ();
 			}
 			catch (Exception ex) {
 			
@@ -867,12 +1044,26 @@ namespace wincom.mobile.erp
 
 		void ClearData ()
 		{
-			//EditText txtttlamt = FindViewById<EditText> (Resource.Id.txtamount);
-		//	EditText txtttltax = FindViewById<EditText> (Resource.Id.txttaxamt);
 			txtqty.Text = "";
-			//txtprice.Text = "";
-		//	txtttltax.Text = "";
-		//	txtttlamt.Text = "";
+		}
+
+		void ClearItemData ()
+		{
+			txtqty.Text = "";
+			txtprice.Text = "";
+			txttax.Text = "";
+			spinItem.SetSelection (0);
+		}
+
+		void ClearAllData ()
+		{
+			txtqty.Text = "";
+			txtprice.Text = "";
+			txttax.Text = "";
+			txtInvNo.Text = "";
+			txtInvMode.Text = "";
+			txtInvDate.Text = DateTime.Today.ToString ("dd-MM-yyyy");
+			//	txtttlamt.Text = "";
 
 		}
 
@@ -889,7 +1080,9 @@ namespace wincom.mobile.erp
 		{
 			if (!IsSave)
 				DeleteInv ();
-			base.OnBackPressed();
+		
+			var intent =ActivityManager.GetActivity<MainActivity>(this.ApplicationContext);
+			StartActivity (intent);
 		}
 
 		private void DeleteInv()
@@ -943,7 +1136,13 @@ namespace wincom.mobile.erp
 			case EventID.PAYMENT_PAID:
 				if (!IsFirePaid) {
 					IsFirePaid = true;
-					RunOnUiThread (() => SaveCashBill ());
+					RunOnUiThread (() => SaveCashBill (e.Param));
+				}
+				break;
+			case EventID.PAYMENT_PRINT:
+				if (!IsFirePaidOnly) {
+					IsFirePaidOnly = true;
+					RunOnUiThread (() => SaveCashBill (e.Param));
 				}
 				break;
 			

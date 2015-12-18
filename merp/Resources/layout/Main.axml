@@ -11,11 +11,22 @@
         android:paddingBottom="1dp"
         android:paddingLeft="10dp">
         <Button
+            android:text="@string/submenu_pos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/butPOS"
+            android:height="53dp"
+            android:background="@drawable/bluethem_btn_default_holo_light"
+            android:drawableLeft="@drawable/shop"
+            style="@style/ButtonBlueThem" />
+        <Button
             android:text="CASH BILL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/butCash"
+            android:visibility="gone"
             android:height="53dp"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:drawableLeft="@drawable/shop"
@@ -26,16 +37,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/butSecond"
-            android:height="53dp"
-            android:background="@drawable/bluethem_btn_default_holo_light"
-            android:drawableLeft="@drawable/shop"
-            style="@style/ButtonBlueThem" />
-        <Button
-            android:text="@string/submenu_pos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/butPOS"
             android:height="53dp"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:drawableLeft="@drawable/shop"

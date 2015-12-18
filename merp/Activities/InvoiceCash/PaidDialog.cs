@@ -24,6 +24,10 @@ namespace wincom.mobile.erp
 		EditText txtTotal;
 		EditText txtCash;
 		EditText txtChange;
+		EditText txtCust;
+		EditText txtRemark;
+		EditText txtInvno;
+
 		string pathToDatabase;
 
 		static int eventid ;
@@ -33,11 +37,32 @@ namespace wincom.mobile.erp
 	    	var dialogFragment = new CashDialog();
 			return dialogFragment;
 		}
-				private double _amount;
+		private double _amount;
 		public double Amount
 		{
 			get { return _amount;}
 			set {  _amount =value;}
+		}
+
+		private string _custname;
+		public string CustName
+		{
+			get { return _custname;}
+			set {  _custname =value;}
+		}
+
+		private string _invno;
+		public string InvNo
+		{
+			get { return _invno;}
+			set {  _invno =value;}
+		}
+
+		private string _remark;
+		public string Remark
+		{
+			get { return _remark;}
+			set {  _remark =value;}
 		}
 
 		public override void OnCreate (Bundle savedInstanceState)
@@ -62,7 +87,13 @@ namespace wincom.mobile.erp
 				txtCash = view.FindViewById<EditText> (Resource.Id.paycash);
 				txtChange = view.FindViewById<EditText> (Resource.Id.paychange);
 				Button butInvBack = view.FindViewById<Button> (Resource.Id.payok); 
+				txtCust = view.FindViewById<EditText> (Resource.Id.newinv_custname);
+				txtRemark = view.FindViewById<EditText> (Resource.Id.newinv_remark);
+				txtInvno = view.FindViewById<EditText> (Resource.Id.newinvno);
 
+				txtRemark.Text = Remark;
+				txtInvno.Text = InvNo;
+				txtCust.Text = CustName;
 				txtAmt.Text = _amount.ToString ("n2");
 				double roundVal = 0;
 				double ttlAmt = Utility.AdjustToNear (_amount, ref roundVal);
@@ -74,8 +105,10 @@ namespace wincom.mobile.erp
 				butInvBack.Visibility = ViewStates.Gone;
 
 				builder.SetView (view);
-				builder.SetPositiveButton ("PAID", HandlePositiveButtonClick);
-				builder.SetNegativeButton ("CANCEL", HandleNegativeButtonClick);
+				builder.SetPositiveButton ("PAID/PRINT", HandlePositiveButtonClick);
+				builder.SetNegativeButton ("PAID",HandlePaidOnlyButtonClick);
+				builder.SetNeutralButton ("CANCEL",  HandleNegativeButtonClick );
+
 				txtCash.RequestFocus ();
 				ShowKeyBoard (view);
 			}
@@ -95,16 +128,30 @@ namespace wincom.mobile.erp
 		{
 			var dialog = (AlertDialog) sender;
 			Hashtable param = new Hashtable ();
+			param.Add ("print","yes");
+			param.Add ("remark", txtRemark.Text.ToUpper ());
 			EventParam p = new EventParam (EventID.PAYMENT_PAID , param);
 			EventManagerFacade.Instance.GetEventManager ().PerformEvent (this.Activity, p);
 
 			dialog.Dismiss();
 		}
+		private void  HandlePaidOnlyButtonClick(object sender, DialogClickEventArgs e)
+		{
+			var dialog = (AlertDialog)sender;
+			Hashtable param = new Hashtable ();
+			param.Add ("print","no");
+			param.Add ("remark", txtRemark.Text.ToUpper ());
+			EventParam p = new EventParam (EventID.PAYMENT_PRINT , param);
+			EventManagerFacade.Instance.GetEventManager ().PerformEvent (this.Activity, p);
+			dialog.Dismiss ();
+		}
+
 		private void  HandleNegativeButtonClick(object sender, DialogClickEventArgs e)
 		{
-			var dialog = (AlertDialog) sender;
-			dialog.Dismiss();
+			var dialog = (AlertDialog)sender;
+			dialog.Dismiss ();
 		}
+
 		void TxtCash_AfterTextChanged (object sender, Android.Text.AfterTextChangedEventArgs e)
 		{
 			CalChanges ();

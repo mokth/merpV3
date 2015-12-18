@@ -211,6 +211,8 @@
     <Compile Include="Helper\Conv2NumTool.cs" />
     <Compile Include="Activities\InvoiceCash\EntryActivityEx.cs" />
     <Compile Include="Activities\CNNote\CNEntryActivityEx.cs" />
+    <Compile Include="Activities\CashBill\CashBillListing.cs" />
+    <Compile Include="Activities\CashBill\PaymentActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

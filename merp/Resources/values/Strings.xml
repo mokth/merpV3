@@ -155,6 +155,6 @@
        <string name="form_billto">BILL TO</string>
        <string name="form_remark">REMARK</string>
 
-      <string name="submenu_pos">CASH BILL (P.O.S)</string>
+      <string name="submenu_pos">CASH BILL</string>
     <string name="button_Paid">PAID</string>
    </resources>

@@ -157,5 +157,6 @@
       <string name="msg_bluetoothnofound">无法找到蓝牙设备,请再试一次.</string> 
     <string name="msg_bluetoothfound">成功发现设备 </string> 
      <string name="msg_bluetootherror">蓝牙设备时出错. 请再试一次..</string> 
-
+      <string name="submenu_pos">CASH BILL</string>
+    <string name="button_Paid">PAID</string>
    </resources>

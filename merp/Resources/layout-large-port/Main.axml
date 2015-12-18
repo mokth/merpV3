@@ -8,12 +8,23 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <Button
+            android:text="@string/submenu_pos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/butPOS"
+            android:height="53dp"
+            android:background="@drawable/bluethem_btn_default_holo_light"
+            android:drawableLeft="@drawable/shop"
+            style="@style/ButtonBlueThem" />
+        <Button
             android:text="@string/submenu_cash"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/butCash"
+            android:visibility="gone"
             android:textSize="24sp"
             android:height="80dp"
             style="@style/ButtonBlueThem"
@@ -29,16 +40,6 @@
             android:height="80dp"
             style="@style/ButtonBlueThem"
             android:drawableLeft="@drawable/shop" />
-        <Button
-            android:text="@string/submenu_pos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/butPOS"
-            android:height="53dp"
-            android:background="@drawable/bluethem_btn_default_holo_light"
-            android:drawableLeft="@drawable/shop"
-            style="@style/ButtonBlueThem" />
         <Button
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:text="@string/submenu_cn"
