@@ -13,7 +13,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/butPOS"
-            android:height="53dp"
+            android:textSize="24sp"
+            android:height="80dp"
             android:background="@drawable/bluethem_btn_default_holo_light"
             android:drawableLeft="@drawable/shop"
             style="@style/ButtonBlueThem" />

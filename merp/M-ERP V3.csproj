@@ -569,6 +569,8 @@
     <AndroidResource Include="Resources\layout\POSCashEntry.axml" />
     <AndroidResource Include="Resources\layout-large-port\POSCashEntry.axml" />
     <AndroidResource Include="Resources\layout\EntryEx.axml" />
+    <AndroidResource Include="Resources\layout-large-port\Payment.axml" />
+    <AndroidResource Include="Resources\layout-large-port\EntryEx.axml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

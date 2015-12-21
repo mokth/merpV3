@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:gravity="top"
+    android:layout_gravity="top"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <LinearLayout
@@ -14,7 +14,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:textSize="14sp"
+                android:textSize="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/newinvno"
@@ -24,7 +24,7 @@
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:editable="false" />
             <EditText
-                android:textSize="14sp"
+                android:textSize="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/newinv_custname"
@@ -34,7 +34,7 @@
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:editable="false" />
             <EditText
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/newinv_remark"
@@ -61,7 +61,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:id="@+id/lbinvno"
                     android:textColor="#ff1131f0"
                     android:paddingLeft="5dp"
@@ -79,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/payamt"
-                    android:textSize="18sp"
+                    android:textSize="20dp"
                     android:paddingLeft="5dp"
                     android:gravity="right"
                     android:textAlignment="gravity"
@@ -105,7 +105,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:id="@+id/lbinvno"
                     android:textColor="#ff1131f0"
                     android:paddingLeft="5dp"
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/payround"
-                    android:textSize="18sp"
+                    android:textSize="20dp"
                     android:paddingLeft="5dp"
                     android:gravity="right"
                     android:textAlignment="gravity"
@@ -149,7 +149,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:id="@+id/lbinvno"
                     android:textColor="#ff1131f0"
                     android:paddingLeft="5dp"
@@ -167,7 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/paytotal"
-                    android:textSize="18sp"
+                    android:textSize="20dp"
                     android:gravity="right"
                     android:textAlignment="gravity"
                     android:paddingLeft="5dp"
@@ -193,7 +193,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:id="@+id/lbinvno"
                     android:textColor="#ff1131f0"
                     android:paddingLeft="5dp"
@@ -211,7 +211,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/paycash"
-                    android:textSize="18sp"
+                    android:textSize="20dp"
                     android:gravity="right"
                     android:textAlignment="gravity"
                     android:paddingLeft="5dp"
@@ -234,7 +234,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:id="@+id/lbinvno"
                     android:textColor="#ff1131f0"
                     android:paddingLeft="5dp"
@@ -255,7 +255,7 @@
                     android:id="@+id/paychange"
                     android:gravity="right"
                     android:textAlignment="gravity"
-                    android:textSize="18sp"
+                    android:textSize="20dp"
                     android:paddingLeft="5dp"
                     android:textColor="#fff01124"
                     android:background="@drawable/bluethem_edit_text_holo_light"
@@ -283,6 +283,7 @@
                 android:text="OK" />
         </TableRow>
         <TableRow
-            android:id="@+id/tableRow2" />
+            android:id="@+id/tableRow2">
+        </TableRow>
     </TableLayout>
 </LinearLayout>

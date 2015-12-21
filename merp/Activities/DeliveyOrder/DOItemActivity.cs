@@ -45,6 +45,10 @@ namespace wincom.mobile.erp
 
 			isNotAllowEditAfterPrinted  = DataHelper.GetDelOderPrintStatus (pathToDatabase,dono,rights);
 			Button butNew= FindViewById<Button> (Resource.Id.butnewItem); 
+			LinearLayout lly= FindViewById<LinearLayout> (Resource.Id.linearLayoutTitle); 
+			if (lly != null) {
+				lly.Visibility = ViewStates.Gone;
+			}
 			butNew.Click += (object sender, EventArgs e) => {
 				NewItem(dono);
 			};

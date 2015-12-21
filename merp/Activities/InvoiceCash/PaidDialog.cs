@@ -103,17 +103,22 @@ namespace wincom.mobile.erp
 				txtCash.AfterTextChanged += TxtCash_AfterTextChanged;
 				txtCash.Text = "0";
 				butInvBack.Visibility = ViewStates.Gone;
-
+			
 				builder.SetView (view);
 				builder.SetPositiveButton ("PAID/PRINT", HandlePositiveButtonClick);
 				builder.SetNegativeButton ("CANCEL",HandleNegativeButtonClick );
 				builder.SetNeutralButton ("PAID", HandlePaidOnlyButtonClick );
+			
 
 				txtCash.RequestFocus ();
 				ShowKeyBoard (view);
 			}
 			var dialog = builder.Create();
 			//Now return the constructed dialog to the calling activity
+
+
+			WindowManagerLayoutParams wmlp = dialog.Window.Attributes;
+			wmlp.Gravity = GravityFlags.Top | GravityFlags.Center;
 			return dialog;
 		}
 

@@ -37,6 +37,11 @@ namespace wincom.mobile.erp
 
 //			TableLayout tlay = FindViewById<TableLayout> (Resource.Id.tableLayout1);
 //			tlay.Visibility = ViewStates.Invisible;
+			LinearLayout lly= FindViewById<LinearLayout> (Resource.Id.linearLayoutTitle); 
+			if (lly != null) {
+				lly.Visibility = ViewStates.Gone;
+			}
+
 			Button butNew= FindViewById<Button> (Resource.Id.butnewItem); 
 			butNew.Visibility = ViewStates.Invisible;
 			Button butInvBack= FindViewById<Button> (Resource.Id.butInvItmBack); 

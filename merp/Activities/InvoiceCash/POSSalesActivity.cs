@@ -910,6 +910,7 @@ namespace wincom.mobile.erp
 			dialog.InvNo = txtInvNo.Text;
 			dialog.Remark = string.IsNullOrEmpty (inv.remark) ? "" : inv.remark;
 			dialog.Show(FragmentManager, "dialogPaid");
+
 		}
 
 		void CancelReceipt()
