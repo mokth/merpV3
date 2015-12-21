@@ -23,6 +23,8 @@ namespace wincom.mobile.erp
 		public string GNTA = "Customer By Agent";
 		public string GNLO = "Print Company Logo";
 		public string GNLC = "User Login Control";
+		public string GNUC = "Upload Control";
+
 
 		public string SO = "Sales Order";
 		public string DO = "Delivery Order";
@@ -77,6 +79,7 @@ namespace wincom.mobile.erp
 		public string GNTA = "IsCustByAgent";
 		public string GNLO = "IsPrintCompLogo";
 		public string GNLC = "IsLoginControl";
+		public string GNUC = "IsUploadControl";
 
 		public string DO = "IsDOModule";
 		public string SO = "IsSOModule";
@@ -129,6 +132,8 @@ namespace wincom.mobile.erp
 		public bool IsCustByAgent { get; set; }
 		public bool IsPrintCompLogo { get; set; }
 		public bool IsLoginControl { get; set; }
+		public bool IsUploadControl { get; set; }
+
 		public bool IsSOModule { get; set; }
 		public bool IsDOModule { get; set; }
 		public bool IsCNModule { get; set; }

@@ -85,6 +85,9 @@
     <string name="but_login">LOGIN</string>
     <string name="but_save">SAVE</string>
 
+    <string name="button_bills">BILLS</string>
+    <string name="button_paid">PAID</string>
+    <string name="button_paidprint">PAID/PRINT</string>
      <string name="title_cash">CASH BILL</string>
     <string name="title_cashnew">NEW CASH BILL</string>
     <string name="title_cashedit">EDIT CASH BILL</string>
@@ -114,6 +117,18 @@
     <string name="title_doitems">DELIVERY ORDER ITEMS</string>
     <string name="title_donew">NEW DELIVERY ORDER</string>
     <string name="title_doitementry">DELIVERY ORDER ITEM ENTRY</string>
+
+     <string name="paid_billamount">BILL AMOUNT</string>
+     <string name="paid_roundadj">ROUND ADJ</string>
+     <string name="paid_totaldue">TOTAL DUE</string>
+     <string name="paid_paying">PAYING</string>
+     <string name="paid_change">CHANGE</string>
+    <string name="list_itemcode">ITEM CODE</string>
+	<string name="list_qty">QTY</string>
+	<string name="list_price">PRICE</string>
+	<string name="list_taxamt">TAX AMT</string>
+	<string name="list_amount">AMOUNT</string>
+
 
     <string name="msg_plswait">Please wait...</string>
     <string name="msg_faillogin">Failed to login...</string>
@@ -154,6 +169,7 @@
        <string name="form_custpono">CUSTOMER PO NO</string>
        <string name="form_billto">BILL TO</string>
        <string name="form_remark">REMARK</string>
+        <string name="msg_mustupload">Please upload the transaction before proceeding..</string> 
 
       <string name="submenu_pos">CASH BILL</string>
     <string name="button_Paid">PAID</string>

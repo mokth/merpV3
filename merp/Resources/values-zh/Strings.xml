@@ -120,6 +120,19 @@
     <string name="title_donew">新发货单据</string>
     <string name="title_doitementry">发货单据货单输入Y</string>
 
+    <string name="paid_billamount">票據金額</string>
+     <string name="paid_roundadj">舍入調整</string>
+     <string name="paid_totaldue">總金額</string>
+     <string name="paid_paying">付款</string>
+     <string name="paid_change">余额</string>
+    <string name="button_bills">票據</string>
+    <string name="button_paid">付款</string>
+    <string name="button_paidprint">付款/打印</string>
+    <string name="list_itemcode">产品目录</string>
+	<string name="list_qty">數量</string>
+	<string name="list_price">價格</string>
+	<string name="list_taxamt">稅額</string>
+	<string name="list_amount">总额</string>
 
 
     <string name="msg_plswait">请稍候...</string>
@@ -157,6 +170,7 @@
       <string name="msg_bluetoothnofound">无法找到蓝牙设备,请再试一次.</string> 
     <string name="msg_bluetoothfound">成功发现设备 </string> 
      <string name="msg_bluetootherror">蓝牙设备时出错. 请再试一次..</string> 
+      <string name="msg_mustupload">請在繼續之前上傳票据..</string> 
       <string name="submenu_pos">CASH BILL</string>
     <string name="button_Paid">PAID</string>
    </resources>

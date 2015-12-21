@@ -11,7 +11,7 @@
         android:paddingBottom="1dp"
         android:paddingLeft="10dp">
         <Button
-            android:text="@string/submenu_pos"
+            android:text="@string/submenu_cash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"

@@ -73,7 +73,7 @@
             android:background="@color/action_bar_title_color"
             android:id="@+id/linearLayoutTitle">
             <TextView
-                android:text="ITEM CODE"
+                android:text="@string/list_itemcode"
                 android:textSize="15sp"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
@@ -83,7 +83,6 @@
                 android:typeface="sans" />
             <TextView
                 android:textSize="15sp"
-                android:text="QTY"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
@@ -91,10 +90,11 @@
                 android:textColor="#ffffff"
                 android:gravity="right"
                 android:textAlignment="gravity"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:text="@string/list_qty" />
             <TextView
                 android:textSize="15sp"
-                android:text="PRICE"
+                android:text="@string/list_price"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -116,7 +116,7 @@
                 android:typeface="sans" />
             <TextView
                 android:textSize="15sp"
-                android:text="TAX AMT"
+                android:text="@string/list_taxamt"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
@@ -127,7 +127,7 @@
                 android:typeface="sans" />
             <TextView
                 android:textSize="15sp"
-                android:text="AMOUNT"
+                android:text="@string/list_amount"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.3"

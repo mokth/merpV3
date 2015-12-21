@@ -105,9 +105,9 @@ namespace wincom.mobile.erp
 				butInvBack.Visibility = ViewStates.Gone;
 			
 				builder.SetView (view);
-				builder.SetPositiveButton ("PAID/PRINT", HandlePositiveButtonClick);
-				builder.SetNegativeButton ("CANCEL",HandleNegativeButtonClick );
-				builder.SetNeutralButton ("PAID", HandlePaidOnlyButtonClick );
+				builder.SetPositiveButton (Resources.GetString(Resource.String.button_paidprint) , HandlePositiveButtonClick);
+				builder.SetNegativeButton (Resources.GetString(Resource.String.button_cancel),HandleNegativeButtonClick );
+				builder.SetNeutralButton (Resources.GetString(Resource.String.button_paid), HandlePaidOnlyButtonClick );
 			
 
 				txtCash.RequestFocus ();

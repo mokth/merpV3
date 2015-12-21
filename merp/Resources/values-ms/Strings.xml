@@ -115,6 +115,20 @@
     <string name="title_donew">PESANAN PENGHANTARAN BARU</string>
     <string name="title_doitementry">BORANG ITEM P/PENGHANTARAN</string>
 
+     <string name="paid_billamount">BILL AMOUNT</string>
+     <string name="paid_roundadj">ROUND ADJ</string>
+     <string name="paid_totaldue">TOTAL DUE</string>
+     <string name="paid_paying">PAYING</string>
+     <string name="paid_change">CHANGE</string>
+    <string name="button_bills">BILLS</string>
+    <string name="button_paid">PAID</string>
+    <string name="button_paidprint">PAID/PRINT</string>
+     <string name="list_itemcode">KOD ITEM</string>
+	<string name="list_qty">QTY</string>
+	<string name="list_price">HARGA</string>
+	<string name="list_taxamt">TAX AMT</string>
+	<string name="list_amount">AMOUNT</string>
+
       <string name="msg_plswait">Sila tunggu...</string>
     <string name="msg_faillogin">Gagal untuk log masuk...</string>
     <string name="msg_uploading">Sedang dimuat naik, sila tunggu...</string>
@@ -148,7 +162,7 @@
       <string name="msg_bluetoothnofound">Peranti Bluetooth gagal ditemui. Sila cuba lagi.</string> 
     <string name="msg_bluetoothfound">Peranti ditemui</string> 
      <string name="msg_bluetootherror">Ralat didalam peranti Bluetooth. Sila cuba lagi.</string>
-
+      <string name="msg_mustupload">Sila muat naik transaksi dahulu ...</string> 
 
 
        <string name="form_sono">NO PESANAN JUALAN</string>

@@ -167,7 +167,7 @@
                     <TableRow
                         android:id="@+id/tableRow1">
                         <TextView
-                            android:text="QTY"
+                            android:text="@string/list_qty"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#fff6092b"
@@ -188,7 +188,7 @@
                             android:hint="@string/invform_qty"
                             android:textColorHint="@color/xam_gray" />
                         <TextView
-                            android:text="PRICE"
+                            android:text="@string/list_price"
                             android:textSize="18sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

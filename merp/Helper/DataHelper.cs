@@ -415,6 +415,23 @@ namespace wincom.mobile.erp
 			return inv;
 		}
 
+		public static DateTime GetLastUploadDate(string pathToDatabase)
+		{
+			Invoice inv=null;
+			DateTime last = DateTime.Now;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				var list2 = db.Table<Invoice> ()
+					.Where(x=>x.isUploaded==true)
+					.OrderByDescending(x=>x.uploaded)
+					.ToList();
+				
+				if (list2.Count > 0) {
+					last = list2 [0].uploaded;
+				}
+			}
+			return last;
+		}
+
 		public static CNNote GetCNNote(string pathToDatabase,string cnno)
 		{
 			CNNote inv=null;
@@ -487,28 +504,38 @@ namespace wincom.mobile.erp
 			return userfunction;
 		}
 
-		public static int GetExpiryDay(string pathToDatabase)
+		static int GetExpiry (string pathToDatabase,string sPattern)
 		{
 			int expiry = 5;
-			CompanyInfo compInfo = GetCompany(pathToDatabase);
-			if (compInfo== null) {
+			CompanyInfo compInfo = GetCompany (pathToDatabase);
+			if (compInfo == null) {
 				return expiry;
 			}
-
-			string sPattern = "EXPD:";
-			string[] ss = compInfo.WCFUrl.Split(new char[] { ',' });
-			foreach (string s1 in ss)
-			{
-				if (System.Text.RegularExpressions.Regex.IsMatch(s1, sPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
-				{
-					string[] para= s1.Split(new char[] { ':' });
+			//string sPattern = "EXPD:";
+			string[] ss = compInfo.WCFUrl.Split (new char[] {
+				','
+			});
+			foreach (string s1 in ss) {
+				if (System.Text.RegularExpressions.Regex.IsMatch (s1, sPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase)) {
+					string[] para = s1.Split (new char[] {
+						':'
+					});
 					if (para.Length > 1)
-						expiry = Convert.ToInt32(para [1]);
+						expiry = Convert.ToInt32 (para [1]);
 				}
-
 			}
-
 			return expiry;
+		}
+
+		public static int GetExpiryDay(string pathToDatabase)
+		{
+			return GetExpiry (pathToDatabase,"EXPD:");
+
+		}
+
+		public static int GetUploadExpiryDays(string pathToDatabase)
+		{
+			return GetExpiry (pathToDatabase,"UPLD:");
 		}
 
 		public static Invoice[] GetInvoices (DateTime printdate1, DateTime printdate2)
@@ -545,6 +572,20 @@ namespace wincom.mobile.erp
 				list.CopyTo (items);
 			}
 			return items;
+		}
+
+		public static bool IsUploadExpired(AccessRights rights,string pathToDatabase){
+
+			bool isExpired = false;
+			if (!rights.IsUploadControl)
+				return  isExpired;
+
+			int Expiry = DataHelper.GetUploadExpiryDays(pathToDatabase);
+			DateTime lastupload = DataHelper.GetLastUploadDate(pathToDatabase);
+			double day = (DateTime.Now - lastupload).TotalDays;
+			isExpired = (day > Expiry);
+
+			return  isExpired;
 		}
 	}
 }
