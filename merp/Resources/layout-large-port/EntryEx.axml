@@ -185,7 +185,6 @@
                             android:width="90dp"
                             android:textColor="#ff140000"
                             android:background="@drawable/bluethem_edit_text_holo_light"
-                            android:hint="@string/invform_qty"
                             android:textColorHint="@color/xam_gray" />
                         <TextView
                             android:text="@string/list_price"

@@ -101,7 +101,7 @@ namespace wincom.mobile.erp
 				txtTotal.Text = ttlAmt.ToString ("n2");
 				txtCash.EditorAction += HandleEditorAction;
 				txtCash.AfterTextChanged += TxtCash_AfterTextChanged;
-				txtCash.Text = "0";
+				txtCash.Text = "";
 				butInvBack.Visibility = ViewStates.Gone;
 			
 				builder.SetView (view);
