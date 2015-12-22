@@ -55,7 +55,7 @@ namespace wincom.mobile.erp
 			listView.ItemLongClick += OnListItemLongClick;
 			//listView.Adapter = new CusotmListAdapter(this, listData);
 			SetViewDlg viewdlg = SetViewDelegate;
-			listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRow, viewdlg);
+			listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRowCN, viewdlg);
 
 		}
 
@@ -75,7 +75,7 @@ namespace wincom.mobile.erp
 				  trxtype = "INV";
 			else trxtype = "CN";
 			
-			view.FindViewById<TextView> (Resource.Id.trxtype).Visibility = ViewStates.Gone;
+			//view.FindViewById<TextView> (Resource.Id.trxtype).Visibility = ViewStates.Gone;
 			view.FindViewById<TextView>(Resource.Id.invcust).Text = item.description;
 			//view.FindViewById<TextView> (Resource.Id.Amount).Text = item.amount.ToString("n2");
 			view.FindViewById<TextView> (Resource.Id.TaxAmount).Text = item.taxamt.ToString("n2");
@@ -83,7 +83,7 @@ namespace wincom.mobile.erp
 			view.FindViewById<TextView> (Resource.Id.TtlAmount).Text =ttl.ToString("n2");
 			ImageView img = view.FindViewById<ImageView> (Resource.Id.printed);
 			if (!item.isPrinted)
-				img.Visibility = ViewStates.Invisible;
+				img.SetImageDrawable (null);  //.Visibility = ViewStates.Invisible;;
 		}
 
 		protected override void OnResume()

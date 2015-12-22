@@ -151,7 +151,7 @@
                             android:paddingLeft="5dp"
                             android:textColor="#ff140000"
                             android:background="@drawable/bluethem_edit_text_holo_light"
-                            android:hint="BARCODE"
+                            android:hint="@string/title_barcode"
                             android:textColorHint="@color/xam_gray" />
                     </LinearLayout>
                     <LinearLayout

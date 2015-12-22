@@ -27,6 +27,7 @@ namespace wincom.mobile.erp
 		DateTime sdate;
 		DateTime edate;
 		AccessRights rights;
+		EditText txtSearch;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -37,19 +38,21 @@ namespace wincom.mobile.erp
 			SetTitle (Resource.String.submenu_cnlist);
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
 			// Create your application here
-			SetContentView (Resource.Layout.ListView);
+			//SetContentView (Resource.Layout.ListView);
+			SetContentView (Resource.Layout.ListCustView);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			rights = Utility.GetAccessRights (pathToDatabase);
 
 			Utility.GetDateRange (ref sdate,ref edate);
 			populate (listData);
 			apara =  DataHelper.GetAdPara (pathToDatabase);
-			listView = FindViewById<ListView> (Resource.Id.feedList);
+			listView = FindViewById<ListView> (Resource.Id.CustList);
+			txtSearch= FindViewById<EditText > (Resource.Id.txtSearch);
 //			TableLayout tlay = FindViewById<TableLayout> (Resource.Id.tableLayout1);
 //			tlay.Visibility = ViewStates.Invisible;
-			Button butNew= FindViewById<Button> (Resource.Id.butnewInv); 
-			butNew.Visibility = ViewStates.Invisible;
-			Button butInvBack= FindViewById<Button> (Resource.Id.butInvBack); 
+			//Button butNew= FindViewById<Button> (Resource.Id.butCustBack); 
+			//butNew.Visibility = ViewStates.Invisible;
+			Button butInvBack= FindViewById<Button> (Resource.Id.butCustBack); 
 			butInvBack.Click+= (object sender, EventArgs e) => {
 				StartActivity(typeof(TransListActivity));
 			};
@@ -58,8 +61,8 @@ namespace wincom.mobile.erp
 			listView.ItemLongClick += OnListItemLongClick;
 			//listView.Adapter = new CusotmListAdapter(this, listData);
 			SetViewDlg viewdlg = SetViewDelegate;
-			listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRow, viewdlg);
-
+			listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRowCN, viewdlg);
+			txtSearch.TextChanged+= TxtSearch_TextChanged;
 		}
 
 		private void SetViewDelegate(View view,object clsobj)
@@ -73,7 +76,7 @@ namespace wincom.mobile.erp
 			else trxtype = "CN";
 			view.FindViewById<TextView> (Resource.Id.invdate).Text = item.invdate.ToString ("dd-MM-yy");
 			view.FindViewById<TextView> (Resource.Id.invno).Text = item.cnno;
-			view.FindViewById<TextView> (Resource.Id.trxtype).Text = trxtype;//item.trxtype;
+			//view.FindViewById<TextView> (Resource.Id.trxtype).Text = trxtype;//item.trxtype;
 			view.FindViewById<TextView>(Resource.Id.invcust).Text = item.description;
 			//view.FindViewById<TextView> (Resource.Id.Amount).Text = item.amount.ToString("n2");
 			view.FindViewById<TextView> (Resource.Id.TaxAmount).Text = item.taxamt.ToString("n2");
@@ -81,18 +84,22 @@ namespace wincom.mobile.erp
 			view.FindViewById<TextView> (Resource.Id.TtlAmount).Text =ttl.ToString("n2");
 			ImageView img = view.FindViewById<ImageView> (Resource.Id.printed);
 			if (!item.isPrinted)
-				img.Visibility = ViewStates.Invisible;
+				img.SetImageDrawable (null);  //.Visibility = ViewStates.Invisible;
 		}
 
 		protected override void OnResume()
 		{
 			base.OnResume();
+			if (txtSearch.Text != "") {
+				FindItemByText ();
+				return;
+			}
 			listData = new List<CNNote> ();
 			populate (listData);
 			apara =  DataHelper.GetAdPara (pathToDatabase);
-			listView = FindViewById<ListView> (Resource.Id.feedList);
+			listView = FindViewById<ListView> (Resource.Id.CustList);
 			SetViewDlg viewdlg = SetViewDelegate;
-			listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRow, viewdlg);
+			listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRowCN, viewdlg);
 		}
 
 		void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e) {
@@ -171,7 +178,7 @@ namespace wincom.mobile.erp
 				if (found.Count > 0) {
 					found [0].isPrinted = true;
 					SetViewDlg viewdlg = SetViewDelegate;
-					listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRow, viewdlg);
+					listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRowCN, viewdlg);
 				}
 			}
 		}
@@ -188,6 +195,51 @@ namespace wincom.mobile.erp
 					}
 				}
 			}
+		}
+		void TxtSearch_TextChanged (object sender, Android.Text.TextChangedEventArgs e)
+		{
+			FindItemByText ();
+		}
+
+		void FindItemByText ()
+		{
+			SetViewDlg viewdlg = SetViewDelegate;
+			List<CNNote> found = PerformSearch (txtSearch.Text);
+			listView.Adapter = new GenericListAdapter<CNNote> (this, found, Resource.Layout.ListItemRowCN, viewdlg);
+		}
+
+		List<CNNote> PerformSearch (string constraint)
+		{
+			List<CNNote>  results = new List<CNNote>();
+			if (constraint != null) {
+				var searchFor = constraint.ToString ().ToUpper();
+
+				foreach(CNNote itm in listData)
+				{
+					if (itm.cnno.ToUpper ().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}else if (itm.invno.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}else if (itm.custcode.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}else if (itm.description.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}else if (itm.remark.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
+					else if (itm.invdate.ToString("dd-MM-yyyy").IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
+
+				}
+			}
+			return results;
 		}
 
 		public event nsEventHandler eventHandler;

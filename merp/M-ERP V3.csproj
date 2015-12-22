@@ -571,6 +571,8 @@
     <AndroidResource Include="Resources\layout\EntryEx.axml" />
     <AndroidResource Include="Resources\layout-large-port\Payment.axml" />
     <AndroidResource Include="Resources\layout-large-port\EntryEx.axml" />
+    <AndroidResource Include="Resources\layout\ListItemRowCN.axml" />
+    <AndroidResource Include="Resources\layout-large-port\ListItemRowCN.axml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

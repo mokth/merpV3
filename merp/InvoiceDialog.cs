@@ -56,17 +56,17 @@ namespace wincom.mobile.erp
 			var view = inflater.Inflate(Resource.Layout.ItemCodeList, null);
 			listView = view.FindViewById<ListView> (Resource.Id.ICodeList);
 			if (listView != null) {
-				adapter = new GenericListAdapter<Invoice> (this.Activity, listData,Resource.Layout.ListItemRow, viewdlg);
+				adapter = new GenericListAdapter<Invoice> (this.Activity, listData,Resource.Layout.ListItemRowCN, viewdlg);
 				listView.Adapter = adapter;
 				listView.ItemClick += ListView_Click;
 				txtSearch= view.FindViewById<EditText > (Resource.Id.txtSearch);
 				butSearch= view.FindViewById<Button> (Resource.Id.butICodeBack); 
-				butSearch.Text = "SEARCH";
+				butSearch.Text = Resources.GetString(Resource.String.button_search);
 				butSearch.SetCompoundDrawables (null, null, null, null);
 				butSearch.Click+= ButSearch_Click;
 				//txtSearch.TextChanged += TxtSearch_TextChanged;
 				builder.SetView (view);
-				builder.SetPositiveButton ("CANCEL", HandlePositiveButtonClick);
+				builder.SetPositiveButton (Resources.GetString(Resource.String.button_cancel), HandlePositiveButtonClick);
 			}
 			var dialog = builder.Create();
 			//Now return the constructed dialog to the calling activity
@@ -91,7 +91,7 @@ namespace wincom.mobile.erp
 		void FindItemByText ()
 		{
 			List<Invoice> found = PerformSearch (txtSearch.Text);
-			adapter = new GenericListAdapter<Invoice> (this.Activity, found,Resource.Layout.ListItemRow, viewdlg);
+			adapter = new GenericListAdapter<Invoice> (this.Activity, found,Resource.Layout.ListItemRowCN, viewdlg);
 			listView.Adapter = adapter;
 		}
 
@@ -119,7 +119,7 @@ namespace wincom.mobile.erp
 			view.FindViewById<TextView> (Resource.Id.invdate).Text = item.invdate.ToString ("dd-MM-yy");
 			view.FindViewById<TextView> (Resource.Id.invno).Text = item.invno;
 			//string trxtype = (item.trxtype == "CASH") ? "COD" : "INV";
-			view.FindViewById<TextView> (Resource.Id.trxtype).Visibility= ViewStates.Gone;//.Text = trxtype;
+			//view.FindViewById<TextView> (Resource.Id.trxtype).Visibility= ViewStates.Gone;//.Text = trxtype;
 			view.FindViewById<TextView>(Resource.Id.invcust).Text = item.description;
 			//view.FindViewById<TextView> (Resource.Id.Amount).Text = item.amount.ToString("n2");
 			view.FindViewById<TextView> (Resource.Id.TaxAmount).Text = item.taxamt.ToString("n2");
@@ -141,7 +141,21 @@ namespace wincom.mobile.erp
 					if (itm.invno.ToUpper().IndexOf (searchFor) >= 0) {
 						results.Add (itm);
 						continue;
+					}else if (itm.custcode.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}else if (itm.description.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}else if (itm.remark.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
 					}
+					else if (itm.invdate.ToString("dd-MM-yyyy").IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
+
 				}
 			}
 			return results;

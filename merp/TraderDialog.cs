@@ -77,12 +77,13 @@ namespace wincom.mobile.erp
 				listView.ItemClick += ListView_Click;
 				txtSearch= view.FindViewById<EditText > (Resource.Id.txtSearch);
 				butSearch= view.FindViewById<Button> (Resource.Id.butCustBack); 
-				butSearch.Text = "SEARCH";
+
+				butSearch.Text = Resources.GetString(Resource.String.button_search);
 				butSearch.SetCompoundDrawables (null, null, null, null);
 				butSearch.Click+= ButSearch_Click;
 				//txtSearch.TextChanged += TxtSearch_TextChanged;
 				builder.SetView (view);
-				builder.SetPositiveButton ("CANCEL", HandlePositiveButtonClick);
+				builder.SetPositiveButton (Resources.GetString(Resource.String.button_cancel), HandlePositiveButtonClick);
 			}
 			var dialog = builder.Create();
 			//Now return the constructed dialog to the calling activity

@@ -30,6 +30,9 @@ namespace wincom.mobile.erp
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			rights = Utility.GetAccessRights (pathToDatabase);
 
+			Button butCashlist = FindViewById<Button> (Resource.Id.butCashlist);
+			butCashlist.Click+= ButCashlist_Click ;
+
 			Button butInvlist = FindViewById<Button> (Resource.Id.butInvlist);
 			butInvlist.Click+= ButInvlist_Click;
 
@@ -67,6 +70,15 @@ namespace wincom.mobile.erp
 		{
 			//var intent = new Intent(this, typeof(InvoiceAllActivity));
 			var intent =ActivityManager.GetActivity<InvoiceAllActivity>(this.ApplicationContext);
+			intent.PutExtra ("trxtype", "INVOICE");
+			StartActivity(intent);
+		}
+
+		void ButCashlist_Click (object sender, EventArgs e)
+		{
+			//var intent = new Intent(this, typeof(InvoiceAllActivity));
+			var intent =ActivityManager.GetActivity<InvoiceAllActivity>(this.ApplicationContext);
+			intent.PutExtra ("trxtype", "CASH");
 			StartActivity(intent);
 		}
 

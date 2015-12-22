@@ -3,16 +3,9 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:paddingRight="10dp"
     android:minWidth="25px"
     android:minHeight="25px">
-    <TextView
-        android:id="@+id/invitemdesc"
-        android:textSize="20sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:textColor="#ffffff"
-        android:typeface="sans" />
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
@@ -22,61 +15,38 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1">
         <TextView
-            android:id="@+id/invitemcode"
-            android:textSize="18sp"
+            android:id="@+id/invdate"
+            android:textSize="15sp"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="2.3"
+            android:layout_weight="1.5"
             android:singleLine="true"
             android:textColor="#ffffff"
             android:typeface="sans" />
         <TextView
-            android:textSize="18sp"
-            android:id="@+id/invitemqty"
+            android:textSize="15sp"
+            android:id="@+id/invno"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6"
+            android:layout_weight="3.5"
             android:singleLine="true"
+            android:paddingLeft="2dp"
             android:textColor="#ffffff"
-            android:gravity="right"
-            android:textAlignment="gravity"
             android:typeface="sans" />
-        <TextView
-            android:textSize="18sp"
-            android:id="@+id/invitemprice"
+        <ImageView
+            android:id="@+id/printed"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:singleLine="true"
-            android:gravity="right"
-            android:textAlignment="gravity"
-            android:textColor="#ffffff"
-            android:typeface="sans" />
+            android:gravity="left"
+            android:src="@drawable/star"
+            android:scaleType="fitStart"
+            android:maxWidth="16dp"
+            android:maxHeight="16dp" />
         <TextView
-            android:textSize="16sp"
-            android:id="@+id/invitemtaxgrp"
-            android:layout_width="0sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:singleLine="true"
-            android:gravity="right"
-            android:textAlignment="gravity"
-            android:textColor="#ffffff"
-            android:typeface="sans" />
-        <TextView
-            android:textSize="18sp"
-            android:id="@+id/invitemtax"
-            android:layout_width="0sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.2"
-            android:singleLine="true"
-            android:textColor="#ffffff"
-            android:gravity="right"
-            android:textAlignment="gravity"
-            android:typeface="sans" />
-        <TextView
-            android:textSize="18sp"
-            android:id="@+id/invitemamt"
+            android:textSize="17sp"
+            android:id="@+id/TtlAmount"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="1.3"
@@ -84,33 +54,32 @@
             android:textColor="#ffffff"
             android:gravity="right"
             android:textAlignment="gravity"
+            android:layout_gravity="right"
             android:typeface="sans" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
-        android:weightSum="3"
+        android:weightSum="7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout2">
         <TextView
-            android:id="@+id/invitemTemp1"
-            android:textSize="20sp"
+            android:id="@+id/invcust"
+            android:textSize="16sp"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="2.3"
+            android:layout_weight="5.7"
             android:singleLine="true"
-            android:textAlignment="gravity"
             android:textColor="#ffffff"
-            android:typeface="sans"
-            android:paddingLeft="150dp" />
+            android:typeface="sans" />
         <TextView
-            android:textSize="20sp"
-            android:id="@+id/invitemTemp2"
+            android:textSize="15sp"
+            android:id="@+id/TaxAmount"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.65"
+            android:layout_weight="1.3"
             android:singleLine="true"
             android:textColor="#ffffff"
             android:gravity="right"

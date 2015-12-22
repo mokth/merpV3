@@ -41,7 +41,8 @@
     <string name="submenu_do">发货单据</string>
     <string name="submenu_so">销售订单</string>
     <string name="submenu_back">返回</string>
-    <string name="submenu_invlist">发票/现金票据目录</string>
+    <string name="submenu_invlist">发票据目录</string>
+    <string name="submenu_invcash">现金票据目录</string>
     <string name="submenu_cnlist">退货单/退款单目录</string>
     <string name="submenu_dolist">发货单据目录</string>
     <string name="submenu_solist">发货单据目录</string>
@@ -86,6 +87,7 @@
     <string name="button_print">打印</string>
     <string name="but_login">登录</string>
     <string name="but_save">保存</string>
+     <string name="button_search">搜索</string>
 
     <string name="login_userid">用户名字</string>
     <string name="login_pass">密码</string>
@@ -133,6 +135,7 @@
 	<string name="list_price">價格</string>
 	<string name="list_taxamt">稅額</string>
 	<string name="list_amount">总额</string>
+	 <string name="title_barcode">条码</string>
 
 
     <string name="msg_plswait">请稍候...</string>

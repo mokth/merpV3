@@ -1101,16 +1101,21 @@ namespace wincom.mobile.erp
 							if (int.TryParse (snum, out num)) {
 								if (adNum.RunNo == num) {
 									adNum.RunNo = num - 1;
+									db.Update(adNum);
 									db.Delete (list2 [0]);
 									if (list.Count>0)
-										db.Delete(list);
-									db.Delete (adNum);
+									{
+										foreach(var itmdtls in list)
+											db.Delete(itmdtls);
+									}
 								}
 							}
 						}
 					}
 				}
-			} catch {
+			} catch (Exception ex)
+			{
+				Toast.MakeText (this,ex.Message , ToastLength.Long).Show ();
 			}
 		}
 
