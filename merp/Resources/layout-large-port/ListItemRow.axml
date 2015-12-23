@@ -95,4 +95,22 @@
             android:textAlignment="gravity"
             android:typeface="sans" />
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/linearLayoutRmark">
+        <TextView
+            android:id="@+id/invremark"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:typeface="sans"
+            android:textStyle="italic" />
+    </LinearLayout>
 </LinearLayout>

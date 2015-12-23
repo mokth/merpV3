@@ -514,7 +514,7 @@ namespace wincom.mobile.erp
 			}
 
 			icodes = new List<string> ();
-			icodes.Add ("");
+			icodes.Add (Resources.GetString(Resource.String.msg_select_item));
 			foreach (Item item in items) {
 				if (item.IDesc.Length > 40) {
 					icodes.Add (item.ICode + " | " + item.IDesc.Substring(0,40)+"...");
@@ -522,7 +522,7 @@ namespace wincom.mobile.erp
 			}
 
 			custcodes = new List<string> ();
-			custcodes.Add ("");
+			custcodes.Add (Resources.GetString(Resource.String.msg_select_cust));
 			foreach (Trader trd in trds) {
 				custcodes.Add (trd.CustCode+" | "+trd.CustName.Trim());
 			}
@@ -1046,6 +1046,7 @@ namespace wincom.mobile.erp
 		void ClearData ()
 		{
 			txtqty.Text = "";
+			spinCust.SetSelection (0);
 		}
 
 		void ClearItemData ()

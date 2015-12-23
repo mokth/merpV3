@@ -38,7 +38,7 @@
             android:id="@+id/trxtype"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:singleLine="true"
             android:textColor="#ffffff"
             android:typeface="sans" />
@@ -46,7 +46,7 @@
             android:id="@+id/printed"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.5"
             android:singleLine="true"
             android:gravity="left"
             android:src="@drawable/star"
@@ -58,7 +58,7 @@
             android:id="@+id/TtlAmount"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.3"
+            android:layout_weight="1.8"
             android:singleLine="true"
             android:textColor="#ffffff"
             android:gravity="right"
@@ -94,5 +94,23 @@
             android:gravity="right"
             android:textAlignment="gravity"
             android:typeface="sans" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/linearLayoutRmark">
+        <TextView
+            android:id="@+id/invremark"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:typeface="sans"
+            android:textStyle="italic" />
     </LinearLayout>
 </LinearLayout>

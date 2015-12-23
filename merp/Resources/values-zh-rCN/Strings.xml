@@ -137,6 +137,8 @@
 	<string name="list_amount">总额</string>
 	<string name="title_barcode">条码</string>
 
+	<string name="msg_select_cust">请选择客户...</string>
+	<string name="msg_select_item">请选择产品...</string>
     <string name="msg_plswait">请稍候...</string>
     <string name="msg_faillogin">无法登录...</string>
     <string name="msg_uploading">上传, 请稍候...</string>

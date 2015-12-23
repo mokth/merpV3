@@ -132,6 +132,8 @@
 	<string name="list_taxamt">TAX AMT</string>
 	<string name="list_amount">AMOUNT</string>
 
+	<string name="msg_select_cust">Pilih PELANGGAN...</string>
+	<string name="msg_select_item">Pilih Kod Item...</string>
       <string name="msg_plswait">Sila tunggu...</string>
     <string name="msg_faillogin">Gagal untuk log masuk...</string>
     <string name="msg_uploading">Sedang dimuat naik, sila tunggu...</string>

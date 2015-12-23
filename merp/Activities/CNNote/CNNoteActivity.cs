@@ -84,6 +84,11 @@ namespace wincom.mobile.erp
 			ImageView img = view.FindViewById<ImageView> (Resource.Id.printed);
 			if (!item.isPrinted)
 				img.SetImageDrawable (null);  //.Visibility = ViewStates.Invisible;;
+
+			if (!string.IsNullOrEmpty (item.remark)) {
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayoutRmark).Visibility = ViewStates.Visible;
+				view.FindViewById<TextView> (Resource.Id.invremark).Text = item.remark.ToUpper ();
+			}
 		}
 
 		protected override void OnResume()
@@ -94,7 +99,7 @@ namespace wincom.mobile.erp
 			apara =  DataHelper.GetAdPara (pathToDatabase);
 			listView = FindViewById<ListView> (Resource.Id.feedList);
 			SetViewDlg viewdlg = SetViewDelegate;
-			listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRow, viewdlg);
+			listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRowCN, viewdlg);
 		}
 
 		void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e) {
@@ -180,7 +185,7 @@ namespace wincom.mobile.erp
 					if (arrlist.Count > 0) {
 						listData.Remove (arrlist [0]);
 						SetViewDlg viewdlg = SetViewDelegate;
-						listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRow, viewdlg);
+						listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRowCN, viewdlg);
 					}
 				}
 			}
@@ -238,7 +243,7 @@ namespace wincom.mobile.erp
 				if (found.Count > 0) {
 					found [0].isPrinted = true;
 					SetViewDlg viewdlg = SetViewDelegate;
-					listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRow, viewdlg);
+					listView.Adapter = new GenericListAdapter<CNNote> (this, listData, Resource.Layout.ListItemRowCN, viewdlg);
 				}
 			}
 

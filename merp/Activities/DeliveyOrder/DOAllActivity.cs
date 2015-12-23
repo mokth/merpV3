@@ -68,6 +68,10 @@ namespace wincom.mobile.erp
 			view.FindViewById<TextView> (Resource.Id.TaxAmount).Text = "";
 
 			view.FindViewById<TextView> (Resource.Id.TtlAmount).Text ="";
+			if (!string.IsNullOrEmpty (item.remark)) {
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayoutRmark).Visibility = ViewStates.Visible;
+				view.FindViewById<TextView> (Resource.Id.invremark).Text = item.remark.ToUpper ();
+			}
 		}
 
 		protected override void OnResume()

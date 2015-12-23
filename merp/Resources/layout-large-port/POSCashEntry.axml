@@ -306,7 +306,7 @@
                     android:gravity="right"
                     android:textAlignment="gravity"
                     android:typeface="sans"
-                    android:paddingRight="3dp" />
+                    android:paddingRight="8dp" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

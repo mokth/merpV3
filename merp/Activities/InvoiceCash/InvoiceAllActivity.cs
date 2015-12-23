@@ -90,6 +90,11 @@ namespace wincom.mobile.erp
 			ImageView img = view.FindViewById<ImageView> (Resource.Id.printed);
 			if (!item.isPrinted)
 				img.Visibility = ViewStates.Invisible;
+
+			if (!string.IsNullOrEmpty (item.remark)) {
+				view.FindViewById<LinearLayout> (Resource.Id.linearLayoutRmark).Visibility = ViewStates.Visible;
+				view.FindViewById<TextView> (Resource.Id.invremark).Text = item.remark.ToUpper ();
+			}
 		}
 
 		protected override void OnResume()

@@ -132,7 +132,8 @@
 	<string name="list_taxamt">TAX AMT</string>
 	<string name="list_amount">AMOUNT</string>
 
-
+	<string name="msg_select_cust">Select Customer...</string>
+	<string name="msg_select_item">Select Item Code...</string>
     <string name="msg_plswait">Please wait...</string>
     <string name="msg_faillogin">Failed to login...</string>
     <string name="msg_uploading">Uploading, please wait...</string>
