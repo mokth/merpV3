@@ -4,6 +4,8 @@
            android:title="下载设置" />    
    <item android:id="@+id/mmenu_downdb"
            android:title="下载资料库" />   
+  <item android:id="@+id/mmenu_downtmp"
+           android:title="下载报告模板" />    
     <item android:id="@+id/mmenu_downlogo"
            android:title="下载标志图片" /> 
    <item android:id="@+id/mmenu_back"

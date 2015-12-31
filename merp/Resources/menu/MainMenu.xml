@@ -4,6 +4,8 @@
            android:title="Download Settings" />    
    <item android:id="@+id/mmenu_downdb"
            android:title="Download Database" />    
+   <item android:id="@+id/mmenu_downtmp"
+           android:title="Download Templates" />    
    <item android:id="@+id/mmenu_back"
            android:title="Backup Database" />    
      <item android:id="@+id/mmenu_downlogo"

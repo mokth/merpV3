@@ -16,6 +16,7 @@ using Android.Accounts;
 using Android.Text;
 using System.Net;
 using Android.Content.PM;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace wincom.mobile.erp
 {
@@ -213,6 +214,9 @@ namespace wincom.mobile.erp
 				builderd.SetNegativeButton("Cancel", (s, e) => { /* do something on Cancel click */ });
 				builderd.Create().Show();
 				return true;
+			case Resource.Id.mmenu_downtmp:
+				RunOnUiThread(() =>DownlooadTemplate()) ;
+				return true; 
 			case Resource.Id.mmenu_downlogo:
 				RunOnUiThread(() =>DownlooadLogo()) ;
 				return true;
@@ -281,6 +285,29 @@ namespace wincom.mobile.erp
 			}
 		}
 
+		void DownlooadTemplate()
+		{
+			try {
+
+				WebClient myWebClient = new WebClient ();
+				var sdcard = Path.Combine (Android.OS.Environment.ExternalStorageDirectory.Path, "erpdata");
+				string filename = COMPCODE + "_template.zip";
+				string url = WCFHelper.GetDownloadTemplateUrl () + filename;
+				string localfilename = Path.Combine (sdcard, filename);
+				if (File.Exists(localfilename))
+					File.Delete(localfilename);
+
+				myWebClient.DownloadFile (url, localfilename);  
+				string pathname= Path.GetDirectoryName(pathToDatabase);
+				ZipHelper.DecompressFiles(localfilename,pathname);
+
+				Toast.MakeText (this, Resources.GetString(Resource.String.msg_successdowntmp), ToastLength.Long).Show ();	
+			} catch (Exception ex)
+			{
+				Toast.MakeText (this, Resources.GetString(Resource.String.msg_faildowntmp), ToastLength.Long).Show ();	
+			}
+		}
+
 		void DownlooadLogo()
 		{
 			try {
@@ -306,7 +333,7 @@ namespace wincom.mobile.erp
 				myWebClient.DownloadFile (url, logopath);  
 				//File.Copy (localfilename, logopath, true);
 
-				Toast.MakeText (this, Resources.GetString (Resource.String.msg_successdownlogo), ToastLength.Long).Show ();	
+//				Toast.MakeText (this, Resources.GetString (Resource.String.msg_successdownlogo), ToastLength.Long).Show ();	
 			} catch (Exception ex) {
 				Toast.MakeText (this, Resources.GetString (Resource.String.msg_faildowndb), ToastLength.Long).Show ();	
 			}
@@ -338,22 +365,30 @@ namespace wincom.mobile.erp
 			string filename = Path.Combine (sdcard,"erplite"+ DateTime.Now.ToString("yyMMddHHmm") +".db");
 			if (File.Exists (pathToDatabase)) {
 				File.Copy (pathToDatabase, filename, true);
+				filename = ZipHelper.GetZipFileName(filename);
 				UploadToErpHostForSupport (filename);
 			}
 		}
+			
 
 		private void UploadToErpHostForSupport(string filename)
 		{
-			WebClient myWebClient = new WebClient();
-			try{
+			WebClient myWebClient = new WebClient ();
+			try {
 				
-			myWebClient.QueryString["COMP"] = COMPCODE;
-			myWebClient.QueryString["BRAN"] = BRANCODE;
-			myWebClient.QueryString["USER"] = USERID;
-				byte[] responseArray = myWebClient.UploadFile(@"http://www.wincomcloud.com/UploadDb/uploadDb.aspx",filename);
-			//Console.WriteLine("\nResponse Received.The contents of the file uploaded are:\n{0}",
-			//	System.Text.Encoding.ASCII.GetString(responseArray));
-			}catch {
+				myWebClient.QueryString ["COMP"] = COMPCODE;
+				myWebClient.QueryString ["BRAN"] = BRANCODE;
+				myWebClient.QueryString ["USER"] = USERID;
+				if (filename.ToLower().Contains(".zip"))
+				{
+					//upload zip db file and extract
+					byte[] responseArray = myWebClient.UploadFile (@"http://www.wincomcloud.com/UploadDb/uploadDbEx.aspx", filename);
+				}else{
+					//upload db file
+					byte[] responseArray = myWebClient.UploadFile (@"http://www.wincomcloud.com/UploadDb/uploadDb.aspx", filename);
+				}
+			
+			} catch {
 			
 			}
 		}

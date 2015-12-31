@@ -1,5 +1,13 @@
 ﻿using System;
 using Android.App;
+using System.IO;
+using System.Text;
+using System.Data;
+using System.Linq;
+using System.Linq.Expressions;
+using NVelocity;
+using NVelocity.App;
+using System.Collections.Generic;
 
 namespace wincom.mobile.erp
 {
@@ -49,10 +57,16 @@ namespace wincom.mobile.erp
 
 		private bool Print()
 		{
+			string pathToDatabase = ((GlobalvarsApp)Application.Context).DATABASE_PATH;
+			string userID = ((GlobalvarsApp)Application.Context).USERID_CODE;
 			text = "";
 			errMsg = "";
 			bool isPrinted = false;
-			GetInvoiceText (inv, list);
+			text =GetInvoiceText_Template("invoice.vm",pathToDatabase,userID, inv, list); //Get from template
+			if (string.IsNullOrEmpty (text)) {
+				GetInvoiceText (inv, list); //take defaul is template is null
+			}
+
 			IPrintToDevice device = PrintDeviceManager.GetPrintingDevice<BlueToothDeviceHelper> ();
 			device.SetCallingActivity (callingActivity);
 			device.SetIsPrintCompLogo (iSPrintCompLogo ());

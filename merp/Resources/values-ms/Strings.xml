@@ -153,6 +153,8 @@
     <string name="msg_successdownprofile">Profil syarikat telah berjaya dimuat turun.</string>
     <string name="msg_successdowndb">Fail pangkalan data telah berjaya dimuat turun!</string>
     <string name="msg_faildowndb">Ralat, fail pangkalan data tidak berjaya dimuat turun!</string>
+    <string name="msg_successdowntmp">Template telah berjaya dimuat turun</string>
+    <string name="msg_faildowntmp">Ralat, tempate tidak berjaya dimuat turun!</string>
     <string name="msg_accessdenied">"Akses dihalang..."</string>
     <string name="msg_trxclear">"Transaksi dijelaskan..."</string>
     <string name="msg_invaliddate">Format Tarikh Transaksi tidak sah...</string>

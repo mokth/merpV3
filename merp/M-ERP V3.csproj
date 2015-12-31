@@ -66,6 +66,12 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="NVelocity">
+      <HintPath>..\merpextlib\NVelocity.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib.Portable">
+      <HintPath>..\merpextlib\ICSharpCode.SharpZipLib.Portable.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -214,6 +220,9 @@
     <Compile Include="Activities\CashBill\PaymentActivity.cs" />
     <Compile Include="GenericAdapter.cs" />
     <Compile Include="Activities\CashBill\CashItemActivity.cs" />
+    <Compile Include="Entity\MyModel,cs.cs" />
+    <Compile Include="Helper\CustomTools.cs" />
+    <Compile Include="Helper\ZipHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

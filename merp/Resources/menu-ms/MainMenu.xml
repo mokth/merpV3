@@ -4,6 +4,8 @@
            android:title="Muat Turun Tetapan" />    
    <item android:id="@+id/mmenu_downdb"
            android:title="Muat Turun Pangkalan Data" />    
+  <item android:id="@+id/mmenu_downtmp"
+           android:title="Muat Turun Templates" />    
    <item android:id="@+id/mmenu_back"
            android:title="Penyandaran Pangkalan Data" />    
      <item android:id="@+id/mmenu_downlogo"

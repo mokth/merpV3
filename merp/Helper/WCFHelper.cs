@@ -32,6 +32,20 @@ namespace wincom.mobile.erp
 			return "http://www.wincomcloud.com/UploadDb/";
 		}
 
+		public static string GeUploadZipDBUrl()
+		{
+			return "http://www.wincomcloud.com/UploadDbEx/";
+		}
+
+
+		public static string GetDownloadTemplateUrl()
+		{
+			//production -live version
+			return "http://www.wincomcloud.com/wfcv3Live/templates/";
+
+			//Demo/testing -test version
+			//return "http://www.wincomcloud.com/wfcv3/dbfiles/";
+		}
 
 		public  Service1Client GetServiceClient()
 		{
