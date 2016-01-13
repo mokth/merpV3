@@ -62,6 +62,7 @@
      <string name="submenu_upall">UPLOAD ALL</string>
     <string name="invform_trxdate">TRANSACTION DATE</string>
     <string name="invform_invno">INVOICE NO</string>
+    <string name="invform_cashbillno">CASH BILL NO</string>
     <string name="invform_sono">SALES ORDER NO</string>
     <string name="invform_dono">DELIVERY ORDER NO</string>
     <string name="invform_cnno">CREDIT NOTE NO</string>

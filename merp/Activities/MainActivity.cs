@@ -18,6 +18,7 @@ using System.Net;
 using Android.Content.PM;
 using ICSharpCode.SharpZipLib.Zip;
 
+
 namespace wincom.mobile.erp
 {
 	[Activity (Label = "WINCOM M-ERP V4",Icon = "@drawable/icon")]
@@ -80,6 +81,7 @@ namespace wincom.mobile.erp
 			if (!rights.IsDOModule) {
 				butDO.Visibility = ViewStates.Gone;
 			}
+
 		}
 		
 

@@ -76,8 +76,8 @@ namespace wincom.mobile.erp
 			if (!((GlobalvarsApp)this.Application).ISLOGON) {
 				Finish ();
 			}
-
-			this.RequestWindowFeature(WindowFeatures.NoTitle);
+			SetTitle (Resource.String.submenu_cash);
+		//	this.RequestWindowFeature(WindowFeatures.NoTitle);
 			INVOICENO = Intent.GetStringExtra ("invoiceno") ?? "";
 			INVACTION = Intent.GetStringExtra ("action") ?? "";
 			_date = DateTime.Today;
@@ -461,7 +461,10 @@ namespace wincom.mobile.erp
 		{
 			list.Clear ();
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				var list2 = db.Table<InvoiceDtls> ().Where (x => x.invno == inv.invno).ToList<InvoiceDtls> ();
+				var list2 = db.Table<InvoiceDtls> ()
+					.Where (x => x.invno == inv.invno)
+					.OrderByDescending(x=>x.ID)
+					.ToList<InvoiceDtls> ();
 		
 				ttlamt = 0;
 				ttltax = 0;
@@ -802,7 +805,7 @@ namespace wincom.mobile.erp
 			populate (listData);
 			SetViewDlg viewdlg = SetViewDelegate;
 			listView.Adapter = new GenericListAdapterEx<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
-			listView.SetSelection (listView.Count - 1);
+			listView.SetSelection (0);
 		}
 
 		private void butAddClick(object sender,EventArgs e)

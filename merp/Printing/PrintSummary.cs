@@ -60,10 +60,15 @@ namespace wincom.mobile.erp
 
 		internal virtual bool Print()
 		{
+			string pathToDatabase = ((GlobalvarsApp)Application.Context).DATABASE_PATH;
+			string userID = ((GlobalvarsApp)Application.Context).USERID_CODE;
 			text = "";
 			errMsg = "";
 			bool isPrinted = false;
-			text = GetInvoiceSumm (printDate1, printDate2);
+			text =InvoiceSummary.GetInvoiceSumm_Template("invsumm.vm",pathToDatabase,userID, printDate1, printDate2); //Get from template
+			if (string.IsNullOrEmpty (text)) {
+				text = GetInvoiceSumm (printDate1, printDate2);
+			}
 
 //			if (para.PaperSize == "8.5Inch") {
 //				if (para.PrinterType == "Network Laserjet Printer")

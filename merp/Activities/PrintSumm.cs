@@ -9,6 +9,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Collections;
+using Android.Views.InputMethods;
 
 namespace wincom.mobile.erp
 {
@@ -20,7 +21,7 @@ namespace wincom.mobile.erp
 		const int DATE_DIALOG_ID1 = 0;
 		const int DATE_DIALOG_ID2 = 1;
 		DateTime date;
-
+		private InputMethodManager imm;
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -35,20 +36,24 @@ namespace wincom.mobile.erp
 			Button butInvBack= FindViewById<Button> (Resource.Id.printsumm_cancel); 
 			EditText frd = FindViewById<EditText> (Resource.Id.trxdatefr);
 			EditText tod = FindViewById<EditText> (Resource.Id.trxdateto);
+			imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
 			frd.Text = DateTime.Today.ToString ("dd-MM-yyyy");
 			frd.Click += delegate(object sender, EventArgs e) {
+				imm.HideSoftInputFromWindow(frd.WindowToken, 0);
 				ShowDialog (DATE_DIALOG_ID1);
 			};
 			tod.Text = DateTime.Today.ToString ("dd-MM-yyyy");
 			date =  DateTime.Today;
 			tod.Click += delegate(object sender, EventArgs e) {
-				
+				imm.HideSoftInputFromWindow(tod.WindowToken, 0);
 				ShowDialog (DATE_DIALOG_ID2);
 			};
 			butInvBack.Click += (object sender, EventArgs e) => {
 				StartActivity(typeof(TransListActivity));
 			};
 			butPrint.Click+= ButPrint_Click;
+
+
 		}
 		protected override Dialog OnCreateDialog (int id)
 		{

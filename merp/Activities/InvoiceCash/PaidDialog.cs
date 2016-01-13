@@ -13,6 +13,8 @@ using System.IO;
 using Android.Graphics.Drawables;
 using System.Collections;
 using Android.Views.InputMethods;
+using System.Drawing;
+
 
 namespace wincom.mobile.erp
 {
@@ -68,14 +70,29 @@ namespace wincom.mobile.erp
 		public override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
-
-			// Create your fragment here
+				// Create youfragment here
 		}
+
+		public override void OnResume ()
+		{
+			// Auto size the dialog based on it's contents
+			Dialog.Window.SetLayout(LinearLayout.LayoutParams.FillParent, LinearLayout.LayoutParams.FillParent);
+
+			// Make sure there is no background behind our view
+			Dialog.Window.SetBackgroundDrawable(new ColorDrawable(Android.Graphics.Color.Transparent));
+
+			// Disable standard dialog styling/frame/theme: our custom view should create full UI
+			SetStyle(DialogFragmentStyle.Normal,Android.Resource.Style.ThemeDialog); 
+
+			base.OnResume();
+		}
+
 		public override Dialog OnCreateDialog(Bundle savedInstanceState)
 		{ 
 			base.OnCreate(savedInstanceState);
 			// Begin building a new dialog.
-			var builder = new AlertDialog.Builder(Activity);
+			this.SetStyle(DialogFragmentStyle.Normal,Android.Resource.Style.ThemeDialog); 
+			var builder = new AlertDialog.Builder (this.Activity);
 			//Get the layout inflater
 			var inflater = Activity.LayoutInflater;
 
@@ -108,7 +125,7 @@ namespace wincom.mobile.erp
 				builder.SetPositiveButton (Resources.GetString(Resource.String.button_paidprint) , HandlePositiveButtonClick);
 				builder.SetNegativeButton (Resources.GetString(Resource.String.button_cancel),HandleNegativeButtonClick );
 				builder.SetNeutralButton (Resources.GetString(Resource.String.button_paid), HandlePaidOnlyButtonClick );
-			
+				builder.SetCancelable (false);
 
 				txtCash.RequestFocus ();
 				ShowKeyBoard (view);

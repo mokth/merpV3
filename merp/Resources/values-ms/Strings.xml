@@ -40,7 +40,7 @@
     <string name="submenu_cn">NOTA KREDIT</string>
     <string name="submenu_do">PESANAN PENGHANTARAN</string>
     <string name="submenu_so">PESANAN JUALAN</string>
-    <string name="submenu_back">MENU UTAMA</string>
+    <string name="submenu_back">MENU</string>
     <string name="submenu_invlist">SENARAI INVOIS</string>
     <string name="submenu_invcash">SENARAI BIL TUNAI</string>
      
@@ -63,6 +63,7 @@
      <string name="submenu_upall">MUAT NAIK SEMUA</string>
     <string name="invform_trxdate">TARIKH URUS NIAGA</string>
     <string name="invform_invno">NO INVOIS</string>
+    <string name="invform_cashbillno">NO BIL TUNAIL</string>
     <string name="invform_sono">NO PESANAN JUALAN</string>
     <string name="invform_dono">NO PESANAN PENGHANTARAN</string>
     <string name="invform_cnno">NO NOTA KREDIT</string>
@@ -124,8 +125,8 @@
      <string name="paid_paying">PAYING</string>
      <string name="paid_change">CHANGE</string>
     <string name="button_bills">BILLS</string>
-    <string name="button_paid">PAID</string>
-    <string name="button_paidprint">PAID/PRINT</string>
+    <string name="button_paid">BAYAR</string>
+    <string name="button_paidprint">BAYAR/CETAK</string>
      <string name="list_itemcode">KOD ITEM</string>
 	<string name="list_qty">QTY</string>
 	<string name="list_price">HARGA</string>

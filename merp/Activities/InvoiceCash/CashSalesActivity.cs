@@ -301,7 +301,9 @@ namespace wincom.mobile.erp
 			list.Clear();
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{
-				var list2 = db.Table<InvoiceDtls>().Where(x=>x.invno==inv.invno).ToList<InvoiceDtls>();
+				var list2 = db.Table<InvoiceDtls>().Where(x=>x.invno==inv.invno)
+					.OrderByDescending(x=>x.ID)
+					.ToList<InvoiceDtls>();
 		
 				ttlamt = 0;
 				ttltax = 0;
@@ -597,7 +599,7 @@ namespace wincom.mobile.erp
 			populate (listData);
 			SetViewDlg viewdlg = SetViewDelegate;
 			listView.Adapter = new GenericListAdapter<InvoiceDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
-			listView.SetSelection (listView.Count - 1);
+			listView.SetSelection (0);
 		}
 
 		private void butAddClick(object sender,EventArgs e)
@@ -675,7 +677,9 @@ namespace wincom.mobile.erp
 		{
 			var dialog = CashDialog.NewInstance();
 			dialog.Amount =ttlamt+ttltax;
-			dialog.Show(FragmentManager, "dialogPaid");
+			dialog.ShowsDialog = true;
+			dialog.SetStyle(DialogFragmentStyle.Normal,Android.Resource.Style.ThemeDialog);
+			dialog.Show(FragmentManager, "dialog");
 		}
 
 		void CancelReceipt()

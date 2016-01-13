@@ -43,7 +43,8 @@
                             android:textColor="#ff093bf6"
                             android:paddingLeft="5dp"
                             android:background="@drawable/bluethem_textfield_disabled_holo_light"
-                            android:hint="@string/invform_invno" />
+                            android:hint="@string/invform_cashbillno"
+                            android:textColorHint="@color/xam_gray" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
@@ -144,7 +145,7 @@
                         android:paddingLeft="5dip"
                         android:id="@+id/linearLayout6">
                         <EditText
-                            android:textSize="16sp"
+                            android:textSize="13dp"
                             android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -330,39 +331,39 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     android:id="@+id/Save"
-                    android:text="@string/button_add"
-                    android:width="80dp"
-                    android:drawableLeft="@drawable/add"
+                    android:width="90dp"
                     android:textAllCaps="false"
-                    android:linksClickable="false" />
+                    android:linksClickable="false"
+                    android:drawableLeft="@drawable/add"
+                    android:text="@string/button_add" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     android:text="@string/button_paid"
                     android:id="@+id/Paid"
                     android:drawableLeft="@drawable/shop"
-                    android:width="85dp" />
+                    android:width="90dp" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     android:id="@+id/NewBill"
                     android:text="@string/button_new"
                     android:drawableLeft="@drawable/bill"
-                    android:width="85dp" />
+                    android:width="90dp" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     android:text="@string/button_cancel"
                     android:id="@+id/Cancel"
                     android:drawableLeft="@android:drawable/ic_delete"
@@ -373,7 +374,7 @@
                     android:textColor="#ffffff"
                     android:typeface="sans"
                     android:id="@+id/List"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     android:text="@string/button_bills"
                     android:drawableLeft="@drawable/shoplist"
                     android:width="95dp" />
@@ -383,7 +384,7 @@
                     android:textColor="#ffffff"
                     android:typeface="sans"
                     android:id="@+id/Print"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     android:text="@string/button_print"
                     android:drawableLeft="@drawable/print"
                     android:width="95dp" />
@@ -392,7 +393,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     android:text="@string/submenu_back"
                     android:id="@+id/Home"
                     android:drawableLeft="@drawable/home"

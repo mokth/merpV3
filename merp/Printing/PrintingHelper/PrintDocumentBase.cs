@@ -95,6 +95,22 @@ namespace wincom.mobile.erp
 			return text;
 		}
 
+		internal string GetCreditNoteText_Template(string templatefilename,string pathToDatabase,string userID,CNNote cn, CNNoteDtls[] list){
+			//yet to implement
+			return "";
+		}
+
+		internal string GetDelOrderText_Template(string templatefilename,string pathToDatabase, string userID, DelOrder delOrder, DelOrderDtls[] list){
+			//yet to implement
+			return "";
+		}
+
+		internal string GetSaleOrderText_Template(string templatefilename,string pathToDatabase,string userID, SaleOrder so, SaleOrderDtls[] list){
+			//yet to implement
+			return "";
+		}
+
+
 		internal string GetTemplateFile(string templateFilename,string pathToDatabase){
 			string content = "";
 

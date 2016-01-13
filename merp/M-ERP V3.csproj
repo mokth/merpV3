@@ -39,6 +39,7 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <DebugSymbols>true</DebugSymbols>
     <AndroidSupportedAbis>armeabi;x86</AndroidSupportedAbis>
+    <AndroidKeyStore>True</AndroidKeyStore>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -72,6 +73,7 @@
     <Reference Include="ICSharpCode.SharpZipLib.Portable">
       <HintPath>..\merpextlib\ICSharpCode.SharpZipLib.Portable.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -223,6 +225,7 @@
     <Compile Include="Entity\MyModel,cs.cs" />
     <Compile Include="Helper\CustomTools.cs" />
     <Compile Include="Helper\ZipHelper.cs" />
+    <Compile Include="Printing\PrintingHelper\InvoiceSummary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

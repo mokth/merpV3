@@ -299,7 +299,9 @@ namespace wincom.mobile.erp
 		{
 			list.Clear ();
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
-				var list2 = db.Table<CNNoteDtls> ().Where (x => x.cnno == inv.cnno).ToList<CNNoteDtls> ();
+				var list2 = db.Table<CNNoteDtls> ().Where (x => x.cnno == inv.cnno)
+					.OrderByDescending(x=>x.ID)
+					.ToList<CNNoteDtls> ();
 
 				ttlamt = 0;
 				ttltax = 0;
@@ -594,7 +596,7 @@ namespace wincom.mobile.erp
 			populate (listData);
 			SetViewDlg viewdlg = SetViewDelegate;
 			listView.Adapter = new GenericListAdapter<CNNoteDtls> (this, listData, Resource.Layout.InvDtlItemViewCS, viewdlg);
-			listView.SetSelection (listView.Count - 1);
+			listView.SetSelection (0);
 		}
 
 		private void butAddClick(object sender,EventArgs e)

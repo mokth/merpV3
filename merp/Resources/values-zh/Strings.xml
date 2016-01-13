@@ -62,6 +62,7 @@
         <string name="submenu_upall">全部上传</string>
      <string name="invform_trxdate">交易日期</string>
     <string name="invform_invno">发票/现金票据编号</string>
+      <string name="invform_cashbillno">现金票据编号</string>
     <string name="invform_cnno">退货单/退款单编号</string>
      <string name="invform_sono">销售订单编号</string>
     <string name="invform_dono">发货单据编号</string>

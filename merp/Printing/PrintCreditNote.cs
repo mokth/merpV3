@@ -49,10 +49,16 @@ namespace wincom.mobile.erp
 
 		private bool Print()
 		{
+			string pathToDatabase = ((GlobalvarsApp)Application.Context).DATABASE_PATH;
+			string userID = ((GlobalvarsApp)Application.Context).USERID_CODE;
 			text = "";
 			errMsg = "";
 			bool isPrinted = false;
-			GetCreditNoteText (cn, list);
+			text =GetCreditNoteText_Template("creditnote.vm",pathToDatabase,userID, cn, list); //Get from template
+			if (string.IsNullOrEmpty (text)) {
+				GetCreditNoteText (cn, list);
+			}
+
 			IPrintToDevice device = PrintDeviceManager.GetPrintingDevice<BlueToothDeviceHelper> ();
 			device.SetCallingActivity (callingActivity);
 			device.SetIsPrintCompLogo (iSPrintCompLogo ());

@@ -105,7 +105,7 @@
             android:textAlignment="gravity"
             android:textColor="#ffffff"
             android:typeface="sans"
-            android:paddingLeft="150dp" />
+            android:paddingLeft="100dp" />
         <TextView
             android:textSize="16sp"
             android:id="@+id/invitemTemp2"
