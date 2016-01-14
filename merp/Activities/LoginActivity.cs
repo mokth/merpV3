@@ -17,7 +17,7 @@ using SQLite;
 
 namespace wincom.mobile.erp
 {
-	[Activity (Label = "M-ERP V4", MainLauncher = true,NoHistory=true, Theme="@style/android:Theme.Holo.Light.NoActionBar" )]			
+	[Activity (Label = "M-ERP V5", MainLauncher = true,NoHistory=true, Theme="@style/android:Theme.Holo.Light.NoActionBar" )]			
 	public class LoginActivity : Activity,IEventListener
 	{
 		private Service1Client _client;
@@ -56,13 +56,13 @@ namespace wincom.mobile.erp
 				createTable (pathToDatabase);
 			} else
 			{
-				if (pInfo.VersionCode >= 15) {
-					if (!CheckIfColumnExists ()) {
-						UpdateDatbase ();
-						UpdateItem ();
-						UpdateTrader ();
-					}
-				}
+//				if (pInfo.VersionCode >= 15) {
+//					if (!CheckIfColumnExists ()) {
+//						UpdateDatbase ();
+//						UpdateItem ();
+//						UpdateTrader ();
+//					}
+//				}
 			}
 			//else {
 //				user = DataHelper.GetUser (pathToDatabase);
@@ -140,6 +140,11 @@ namespace wincom.mobile.erp
 			PackageInfo pInfo = PackageManager.GetPackageInfo (PackageName, 0);
 			double webver = Convert.ToDouble (version);
 			double locver = Convert.ToDouble (pInfo.VersionName);
+//			double predefineVer = 0;
+//			if (rights.IsVersionControl) {
+//				predefineVer = DataHelper.GetPreDefineVersion (pathToDatabase, "VER:");
+//			}
+
 			if (webver > locver) {
 
 				var builderd = new AlertDialog.Builder(this);

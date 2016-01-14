@@ -419,8 +419,14 @@ namespace wincom.mobile.erp
 		{
 			Invoice inv=null;
 			DateTime last = DateTime.Now;
+			DateTime last2 = DateTime.Now;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 				var list2 = db.Table<Invoice> ()
+					.Where(x=>x.isUploaded==true)
+					.OrderByDescending(x=>x.uploaded)
+					.ToList();
+
+				var list3 = db.Table<CNNote> ()
 					.Where(x=>x.isUploaded==true)
 					.OrderByDescending(x=>x.uploaded)
 					.ToList();
@@ -428,6 +434,16 @@ namespace wincom.mobile.erp
 				if (list2.Count > 0) {
 					last = list2 [0].uploaded;
 				}
+
+				if (list3.Count > 0) {
+					last2 = list3 [0].uploaded;
+				} else
+					last2 = last;
+
+				int result = DateTime.Compare(last, last2);
+				if (result < 0)
+					last = last2;
+		
 			}
 			return last;
 		}
@@ -525,6 +541,29 @@ namespace wincom.mobile.erp
 				}
 			}
 			return expiry;
+		}
+
+		public static double GetPreDefineVersion (string pathToDatabase,string sPattern)
+		{
+			double ver = 0;
+			CompanyInfo compInfo = GetCompany (pathToDatabase);
+			if (compInfo == null) {
+				return ver;
+			}
+			//string sPattern = "EXPD:";
+			string[] ss = compInfo.WCFUrl.Split (new char[] {
+				','
+			});
+			foreach (string s1 in ss) {
+				if (System.Text.RegularExpressions.Regex.IsMatch (s1, sPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase)) {
+					string[] para = s1.Split (new char[] {
+						':'
+					});
+					if (para.Length > 1)
+						ver = Convert.ToDouble (para [1]);
+				}
+			}
+			return ver;
 		}
 
 		public static int GetExpiryDay(string pathToDatabase)

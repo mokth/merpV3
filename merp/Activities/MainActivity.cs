@@ -21,7 +21,7 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace wincom.mobile.erp
 {
-	[Activity (Label = "WINCOM M-ERP V4",Icon = "@drawable/icon")]
+	[Activity (Label = "WINCOM M-ERP V5",Icon = "@drawable/icon")]
 	public class MainActivity :Activity
 	{
 		//List<Item> items = null;

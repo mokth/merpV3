@@ -115,6 +115,10 @@ namespace wincom.mobile.erp
 
 		private void butSaveClick(object sender,EventArgs e)
 		{
+			if (DataHelper.IsUploadExpired (rights, pathToDatabase)) {
+				Toast.MakeText (this,Resources.GetString(Resource.String.msg_mustupload), ToastLength.Long).Show ();	
+				return;
+			}
 			int count1 = 0;
 			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
 				count1 = db.Table<Item>().Count ();

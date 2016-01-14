@@ -1074,6 +1074,11 @@ namespace wincom.mobile.erp
 
 		private void NewBill()
 		{
+			if (DataHelper.IsUploadExpired (rights, pathToDatabase)) {
+				Toast.MakeText (this,Resources.GetString(Resource.String.msg_mustupload), ToastLength.Long).Show ();	
+				return;
+			}
+
 			ClearData ();
 			CreateCashBill ();
 			IsCashPay = false;

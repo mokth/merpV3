@@ -79,7 +79,7 @@ namespace wincom.mobile.erp
 			Dialog.Window.SetLayout(LinearLayout.LayoutParams.FillParent, LinearLayout.LayoutParams.FillParent);
 
 			// Make sure there is no background behind our view
-			Dialog.Window.SetBackgroundDrawable(new ColorDrawable(Android.Graphics.Color.Transparent));
+			//Dialog.Window.SetBackgroundDrawable(new ColorDrawable(Android.Graphics.Color.Transparent));
 
 			// Disable standard dialog styling/frame/theme: our custom view should create full UI
 			SetStyle(DialogFragmentStyle.Normal,Android.Resource.Style.ThemeDialog); 
