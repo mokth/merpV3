@@ -74,6 +74,7 @@
       <HintPath>..\merpextlib\ICSharpCode.SharpZipLib.Portable.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -226,6 +227,8 @@
     <Compile Include="Helper\CustomTools.cs" />
     <Compile Include="Helper\ZipHelper.cs" />
     <Compile Include="Printing\PrintingHelper\InvoiceSummary.cs" />
+    <Compile Include="Helper\DownloadFileHelper.cs" />
+    <Compile Include="Helper\Upload\UploadDbHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

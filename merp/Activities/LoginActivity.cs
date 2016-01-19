@@ -14,6 +14,8 @@ using WcfServiceItem;
 using Android.Util;
 using Android.Content.PM;
 using SQLite;
+using System.Net;
+
 
 namespace wincom.mobile.erp
 {
@@ -24,6 +26,7 @@ namespace wincom.mobile.erp
 		string pathToDatabase;
 		static volatile bool _donwloadPro = false;
 		AccessRights rights;
+
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -140,24 +143,32 @@ namespace wincom.mobile.erp
 			PackageInfo pInfo = PackageManager.GetPackageInfo (PackageName, 0);
 			double webver = Convert.ToDouble (version);
 			double locver = Convert.ToDouble (pInfo.VersionName);
-//			double predefineVer = 0;
-//			if (rights.IsVersionControl) {
-//				predefineVer = DataHelper.GetPreDefineVersion (pathToDatabase, "VER:");
-//			}
+			double predefineVer = 0;
+			rights = Utility.GetAccessRights (pathToDatabase);
+			if (rights != null) {
+				if (rights.IsVersionControl) {
+					predefineVer = DataHelper.GetPreDefineVersion (pathToDatabase, "VER:");
+					if (predefineVer == webver) {
+						//download form google play
+					} else {
+						if (predefineVer > locver) {
+							DownlooadAPK (predefineVer.ToString ().Trim ());
+						}
+						return;// is version contral. no need to check latest version control on google play
+					}
+				}
+			}
 
 			if (webver > locver) {
-
 				var builderd = new AlertDialog.Builder(this);
-
 				builderd.SetMessage("New Version "+version+ " is available, ready to update?" );
 				//builderd.SetMessage("Confirm to download database from server ? All local data will be overwritten by the downloaded data.");
 				builderd.SetPositiveButton("OK", (s, e) => { UpdateSysem ();;});
 				builderd.SetNegativeButton("Cancel", (s, e) => { /* do something on Cancel click */ });
 				builderd.Create().Show();
-
 			}
 		}
-
+			
 		void UpdateSysem ()
 		{
 			PackageInfo pInfo = PackageManager.GetPackageInfo (PackageName, 0);
@@ -168,6 +179,48 @@ namespace wincom.mobile.erp
 			marketIntent.AddFlags (ActivityFlags.NoHistory | ActivityFlags.ClearWhenTaskReset | ActivityFlags.MultipleTask | ActivityFlags.NewTask);
 			StartActivity (marketIntent);
 		}
+
+		void DownlooadAPK(string ver)
+		{
+			try {
+
+				WebClient myWebClient = new WebClient ();
+				var sdcard = Path.Combine (Android.OS.Environment.ExternalStorageDirectory.Path, "erpdata");
+				string filename ="com.wincom.merpv5_@@.zip".Replace("@@",ver);
+				string url = WCFHelper.GeUploadApkUrl () + filename;
+				string localfilename = Path.Combine (sdcard, "com.wincom.merpv5.zip");
+				if (File.Exists(localfilename))
+					File.Delete(localfilename);
+
+				DownloadFileHelper downfile = new DownloadFileHelper(this);
+				downfile.OnFinishDownloadHandle += Downfile_OnFinishDownloadDBHandle;
+				downfile.StartDownload(url,localfilename);
+
+			} catch (Exception ex)
+			{
+				Toast.MakeText (this, Resources.GetString(Resource.String.msg_faildowndb), ToastLength.Long).Show ();	
+			}
+		}
+
+		void Downfile_OnFinishDownloadDBHandle (string filename)
+		{
+			string apkfile = filename.Replace ("zip", "apk");
+			var sdcard = Path.Combine (Android.OS.Environment.ExternalStorageDirectory.Path, "erpdata");
+			if (File.Exists(apkfile))
+				File.Delete(apkfile);
+			try {
+				ZipHelper.DecompressFiles (filename, sdcard);
+				Java.IO.File file = new Java.IO.File (apkfile);
+				file.SetReadable (true, false);
+				Intent intent = new Intent(Intent.ActionInstallPackage);
+				intent.SetDataAndType (Android.Net.Uri.FromFile (file), "application/vnd.android.package-archive");
+				StartActivity (intent);
+			} catch (Exception ex)
+			{
+			   Console.WriteLine(ex);
+			}
+		}
+
 
 		void AlertShow(string text)
 		{
@@ -196,64 +249,64 @@ namespace wincom.mobile.erp
 			return isfound;
 		}
 
-		private void UpdateDatbase()
-		{
-			try {
-				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
-
-					string sql = @"ALTER TABLE AdPara RENAME TO sqlitestudio_temp_table;
-								   CREATE TABLE AdPara (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, PrinterName varchar, Prefix varchar, PaperSize varchar, Warehouse varchar, ReceiptTitle varchar, RunNo integer, CNRunNo integer, SORunNo integer, DORunNo integer, CNPrefix varchar, DOPrefix varchar, SOPrefix varchar, PrinterIP varchar, PrinterType varchar,FooterNote varchar,FooterCNNote varchar,FooterDONote,FooterSONote varchar);
-								   INSERT INTO AdPara (ID, PrinterName, Prefix, PaperSize, Warehouse, ReceiptTitle, RunNo, CNRunNo, SORunNo, DORunNo, CNPrefix, DOPrefix, SOPrefix) SELECT ID, PrinterName, Prefix, PaperSize, Warehouse, ReceiptTitle, RunNo, CNRunNo, SORunNo, DORunNo, CNPrefix, DOPrefix, SOPrefix FROM sqlitestudio_temp_table;
-								   DROP TABLE sqlitestudio_temp_table";
-					string[] sqls = sql.Split (new char[]{ ';' });
-					foreach (string ssql in sqls) {
-						conn.Execute (ssql, new object[]{ });
-					}
-				}
-			} catch (Exception ex) {
-				Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
-			}
-		}
-
-		private void UpdateItem()
-		{
-			try {
-				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
-
-					string sql = @"ALTER TABLE Item RENAME TO sqlitestudio_temp_table2;
-									CREATE TABLE Item (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, ICode varchar, IDesc varchar, Price float, tax float, taxgrp varchar, isincludesive integer, VIPPrice float, RetailPrice float, WholeSalePrice float, Barcode varchar, StdUom VARCHAR);
-									INSERT INTO Item (ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode) SELECT ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode FROM sqlitestudio_temp_table2;
-									DROP TABLE sqlitestudio_temp_table2";
-					string[] sqls = sql.Split (new char[]{ ';' });
-					foreach (string ssql in sqls) {
-						conn.Execute (ssql, new object[]{ });
-					}
-				}
-			} catch (Exception ex) {
-				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
-				AlertShow("UpdateItem() "+ex.Message);
-			}
-		}
-
-		private void UpdateTrader()
-		{
-			try {
-				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
-
-					string sql = @"ALTER TABLE Trader RENAME TO sqlitestudio_temp_table3;
-								   CREATE TABLE Trader (CustCode varchar PRIMARY KEY NOT NULL, CustName varchar, Addr1 varchar, Addr2 varchar, Addr3 varchar, Addr4 varchar, Tel varchar, Fax varchar, gst varchar, PayCode varchar, CustType varchar, AgentCode VARCHAR);
-							       INSERT INTO Trader (CustCode, CustName, Addr1, Addr2, Addr3, Addr4, Tel, Fax, gst, PayCode, CustType) SELECT CustCode, CustName, Addr1, Addr2, Addr3, Addr4, Tel, Fax, gst, PayCode, CustType FROM sqlitestudio_temp_table3;
-								   DROP TABLE sqlitestudio_temp_table3";
-					string[] sqls = sql.Split (new char[]{ ';' });
-					foreach (string ssql in sqls) {
-						conn.Execute (ssql, new object[]{ });
-					}
-				}
-			} catch (Exception ex) {
-				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
-				AlertShow("UpdateTrader() "+ex.Message);
-			}
-		}
+//		private void UpdateDatbase()
+//		{
+//			try {
+//				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
+//
+//					string sql = @"ALTER TABLE AdPara RENAME TO sqlitestudio_temp_table;
+//								   CREATE TABLE AdPara (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, PrinterName varchar, Prefix varchar, PaperSize varchar, Warehouse varchar, ReceiptTitle varchar, RunNo integer, CNRunNo integer, SORunNo integer, DORunNo integer, CNPrefix varchar, DOPrefix varchar, SOPrefix varchar, PrinterIP varchar, PrinterType varchar,FooterNote varchar,FooterCNNote varchar,FooterDONote,FooterSONote varchar);
+//								   INSERT INTO AdPara (ID, PrinterName, Prefix, PaperSize, Warehouse, ReceiptTitle, RunNo, CNRunNo, SORunNo, DORunNo, CNPrefix, DOPrefix, SOPrefix) SELECT ID, PrinterName, Prefix, PaperSize, Warehouse, ReceiptTitle, RunNo, CNRunNo, SORunNo, DORunNo, CNPrefix, DOPrefix, SOPrefix FROM sqlitestudio_temp_table;
+//								   DROP TABLE sqlitestudio_temp_table";
+//					string[] sqls = sql.Split (new char[]{ ';' });
+//					foreach (string ssql in sqls) {
+//						conn.Execute (ssql, new object[]{ });
+//					}
+//				}
+//			} catch (Exception ex) {
+//				Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
+//			}
+//		}
+//
+//		private void UpdateItem()
+//		{
+//			try {
+//				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
+//
+//					string sql = @"ALTER TABLE Item RENAME TO sqlitestudio_temp_table2;
+//									CREATE TABLE Item (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, ICode varchar, IDesc varchar, Price float, tax float, taxgrp varchar, isincludesive integer, VIPPrice float, RetailPrice float, WholeSalePrice float, Barcode varchar, StdUom VARCHAR);
+//									INSERT INTO Item (ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode) SELECT ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode FROM sqlitestudio_temp_table2;
+//									DROP TABLE sqlitestudio_temp_table2";
+//					string[] sqls = sql.Split (new char[]{ ';' });
+//					foreach (string ssql in sqls) {
+//						conn.Execute (ssql, new object[]{ });
+//					}
+//				}
+//			} catch (Exception ex) {
+//				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
+//				AlertShow("UpdateItem() "+ex.Message);
+//			}
+//		}
+//
+//		private void UpdateTrader()
+//		{
+//			try {
+//				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
+//
+//					string sql = @"ALTER TABLE Trader RENAME TO sqlitestudio_temp_table3;
+//								   CREATE TABLE Trader (CustCode varchar PRIMARY KEY NOT NULL, CustName varchar, Addr1 varchar, Addr2 varchar, Addr3 varchar, Addr4 varchar, Tel varchar, Fax varchar, gst varchar, PayCode varchar, CustType varchar, AgentCode VARCHAR);
+//							       INSERT INTO Trader (CustCode, CustName, Addr1, Addr2, Addr3, Addr4, Tel, Fax, gst, PayCode, CustType) SELECT CustCode, CustName, Addr1, Addr2, Addr3, Addr4, Tel, Fax, gst, PayCode, CustType FROM sqlitestudio_temp_table3;
+//								   DROP TABLE sqlitestudio_temp_table3";
+//					string[] sqls = sql.Split (new char[]{ ';' });
+//					foreach (string ssql in sqls) {
+//						conn.Execute (ssql, new object[]{ });
+//					}
+//				}
+//			} catch (Exception ex) {
+//				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
+//				AlertShow("UpdateTrader() "+ex.Message);
+//			}
+//		}
 
 
 		void ImportDatabase ()

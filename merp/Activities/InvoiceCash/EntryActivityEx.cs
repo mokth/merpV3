@@ -67,7 +67,7 @@ namespace wincom.mobile.erp
 				Finish ();
 			}
 
-			this.RequestWindowFeature(WindowFeatures.NoTitle);
+			//this.RequestWindowFeature(WindowFeatures.NoTitle);
 			TRXTYPE= Intent.GetStringExtra ("trxtype") ?? "CASH";
 			INVOICENO = Intent.GetStringExtra ("invoiceno") ?? "AUTO";
 			ITEMUID = Intent.GetStringExtra ("itemuid") ?? "AUTO";

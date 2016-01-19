@@ -32,6 +32,11 @@ namespace wincom.mobile.erp
 			return "http://www.wincomcloud.com/UploadDb/";
 		}
 
+		public static string GeUploadApkUrl()
+		{
+			return "http://www.wincomcloud.com/wfcv3Live/apks/";
+		}
+
 		public static string GeUploadZipDBUrl()
 		{
 			return "http://www.wincomcloud.com/UploadDbEx/";
