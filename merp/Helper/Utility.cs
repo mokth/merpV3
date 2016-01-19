@@ -93,7 +93,10 @@ namespace wincom.mobile.erp
 //					}
 //				}
 //			}
-
+			if (info == null) {
+				info = new CompanyInfo ();
+				info.WCFUrl = "";
+			}
 			return GetAccessRightsByString (info.WCFUrl);
 			//return right;
 
