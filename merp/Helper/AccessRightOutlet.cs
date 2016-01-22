@@ -22,54 +22,68 @@ namespace wincom.mobile.erp
 		public string GNCH = "Clear Posted Transactions";
 		public string GNTA = "Customer By Agent";
 		public string GNLO = "Print Company Logo";
-		public string GNLC = "User Login Control";
-		public string GNUC = "Upload Control (New Version Only)";
-		public string GNVC = "Version Control (New Version Only)";
-
+		public string GNLC = "Mobile App Shutdown Control";
+		public string GNUC = "Force Upload Bill (Ver 5)";
+		public string GNVC = "Mobile App Version Control (Ver 5)";
+		public string GNVG = "GPS Tracking (Beta Version)";
 
 		public string SO = "Sales Order";
 		public string DO = "Delivery Order";
 		public string CN = "Credit Note";
 		public string INV = "Invoice";
+		public string CS = "CASH BILL";
 		//invouice
-		public string INA = "Invoice Allow Add";
-		public string INE = "Invoice Allow Edit";
-		public string IND = "Invoice Allow Delete";
-		public string INP = "Invoice Allow Print";
-		public string INUP = "Invoice Allow Edit Unit Price";
-		public string INEP = "Invoice No Edit After Print";
-		public string INTX = "Invoice Edit TrxType";
-		public string INTD = "Invoice Edit TrxDate";
-		public string INUU = "Upload Invoice";
+		public string INA = "Allow Add New Trx";
+		public string INE = "Allow Edit Items";
+		public string IND = "Allow Delete Items";
+		public string INP = "Allow Print Invoice";
+		public string INUP = "Allow Edit Unit Price";
+		public string INEP = "Not Edit After Print";
+		public string INTX = "Allow Edit Trx Type";
+		public string INTD = "Allow Edit Trx Date";
+		public string INTM = "Allow Multi Issue Type";
+		public string INUU = "Allow Upload Invoice";
+
+		//invouice
+		public string CSA = "Allow Add New Trx";
+		public string CSE = "Allow Edit Items";
+		public string CSD = "Allow Delete Items";
+		public string CSP = "Allow Print Invoice";
+		public string CSUP = "Allow Edit Unit Price";
+		public string CSEP = "Not Edit After Print";
+		public string CSTX = "Allow Edit Trx Type";
+		public string CSTD = "Allow Edit Trx Date";
+		public string CSTM = "Allow Multi Issue Type";
+		public string CSUU = "Allow Upload Invoice";
 
 		//CN
-		public string CNA = "C/NOTE Allow Add";
-		public string CNE = "C/NOTE Allow Edit";
-		public string CND = "C/NOTE Allow Delete";
-		public string CNP = "C/NOTE Allow Print";
-		public string CNEP = "C/NOTE No Edit After Print";
-		public string CNUP = "C/NOTE Allow Edit Unit Price";
-		public string CNTD = "C/NOTE Edit TrxDate";
-		public string CNUU = "Upload C/NOTE";
+		public string CNA = "Allow Add New Trx";
+		public string CNE = "Allow Edit Items";
+		public string CND = "Allow Delete Items";
+		public string CNP = "Allow Print C/Note";
+		public string CNEP = "Not Edit After Print";
+		public string CNUP = "Allow Edit Unit Price";
+		public string CNTD = "Allow Edit Trx Date";
+		public string CNUU = "Allow Upload C/NOTE";
 
 		//DO
-		public string DOA = "Delivery Order Allow Add";
-		public string DOE = "Delivery Order Allow Edit";
-		public string DOD = "Delivery Order Allow Delete";
-		public string DOP = "Delivery Order Allow Print";
-		public string DOEP = "Delivery Order No Edit After Print";
-		public string DOTD = "Delivery Order Edit TrxDate";
-		public string DOUP = "Upload Delivery Order";
+		public string DOA = "Allow Add New Trx";
+		public string DOE = "Allow Edit Items";
+		public string DOD = "Allow Delete Items";
+		public string DOP = "Allow Print Delivery Order";
+		public string DOEP = "Not Edit After Print";
+		public string DOTD = "Allow Edit Trx Date";
+		public string DOUP = "Allow Upload Delivery Order";
 
 		//SO
-		public string SOA = "Sales Order Allow Add";
-		public string SOE = "Sales Order Allow Edit";
-		public string SOD = "Sales Order Allow Delete";
-		public string SOP = "Sales Order Allow Print";
-		public string SOEP = "Sales Order No Edit After Print";
-		public string SOUP = "Sales Order Allow Edit Unit Price";
-		public string SOTD = "Sales Order Edit TrxDate";
-		public string SOUU = "Upload Sales Order";
+		public string SOA = "Allow Add New Trx";
+		public string SOE = "Allow Edit Items";
+		public string SOD = "Allow Delete Items";
+		public string SOP = "Allow Print Sales Order";
+		public string SOEP = "Not Edit After Print";
+		public string SOUP = "Allow Edit Unit Price";
+		public string SOTD = "Allow Edit Trx Date";
+		public string SOUU = "Allow Upload Sales Order";
 	}
 
 	public class AccessRightField
@@ -82,6 +96,7 @@ namespace wincom.mobile.erp
 		public string GNLC = "IsLoginControl";
 		public string GNUC = "IsUploadControl";
 		public string GNVC = "IsVersionControl";
+		public string GNVG = "IsGPSTracking";
 
 		public string DO = "IsDOModule";
 		public string SO = "IsSOModule";
@@ -96,7 +111,20 @@ namespace wincom.mobile.erp
 		public string INEP = "InvNotEditAftPrint";
 		public string INTX = "InvEditTrxType";
 		public string INTD = "InvEditTrxDate";
+		public string INTM = "InvMultiType";
 		public string INUU = "InvUpload";
+
+		//invouice
+		public string CSA = "CSAllowAdd";
+		public string CSE = "CSAllowEdit";
+		public string CSD = "CSAllowDelete";
+		public string CSP = "CSAllowPrint";
+		public string CSUP = "CSEditUPrice";
+		public string CSEP = "CSNotEditAftPrint";
+		public string CSTX = "CSEditTrxType";
+		public string CSTD = "CSEditTrxDate";
+		public string CSTM = "CSMultiType";
+		public string CSUU = "CSUpload";
 
 		//invouice
 		public string CNA = "CNAllowAdd";
@@ -136,6 +164,7 @@ namespace wincom.mobile.erp
 		public bool IsLoginControl { get; set; }
 		public bool IsUploadControl { get; set; }
 		public bool IsVersionControl { get; set; }
+		public bool IsGPSTracking { get; set; }
 
 		public bool IsSOModule { get; set; }
 		public bool IsDOModule { get; set; }
@@ -150,7 +179,20 @@ namespace wincom.mobile.erp
 		public bool InvNotEditAftPrint { get; set; }
 		public bool InvEditTrxType { get; set; }
 		public bool InvEditTrxDate { get; set; }
+		public bool InvMultiType { get; set; }
 		public bool InvUpload { get; set; }
+
+		public bool CSAllowAdd { get; set; }
+		public bool CSAllowEdit { get; set; }
+		public bool CSAllowDelete { get; set; }
+		public bool CSAllowPrint { get; set; }
+		public bool CSEditUPrice { get; set; }
+		public bool CSNotEditAftPrint { get; set; }
+		public bool CSEditTrxType { get; set; }
+		public bool CSEditTrxDate { get; set; }
+		public bool CSMultiType { get; set; }
+		public bool CSUpload { get; set; }
+
 		//CN
 		public bool CNAllowAdd { get; set; }
 		public bool CNAllowEdit { get; set; }

@@ -181,15 +181,12 @@
                     android:id="@+id/tableLayout1">
                     <TableRow
                         android:id="@+id/tableRow1">
-                        <TextView
-                            android:text="@string/list_qty"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="#fff6092b"
+                        <Spinner
+                            android:textSize="16sp"
+                            android:width="90dp"
+                            android:id="@+id/qty_type"
                             android:paddingLeft="5dp"
-                            android:id="@+id/textView4"
-                            android:textSize="18sp"
-                            android:width="50dp" />
+                            android:background="@drawable/bluethem_spinner_background_holo_light" />
                         <EditText
                             android:textSize="18sp"
                             android:inputType="numberDecimal|numberSigned"

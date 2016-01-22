@@ -1714,6 +1714,103 @@ namespace WcfServiceItem
             }
         }
     }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MapLocation", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceItem")]
+    public partial class MapLocation : object
+    {
+        
+        private double AltitudeField;
+        
+        private System.DateTime DateField;
+        
+        private double HeadingField;
+        
+        private double LatField;
+        
+        private double LngField;
+        
+        private int UIDField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Altitude
+        {
+            get
+            {
+                return this.AltitudeField;
+            }
+            set
+            {
+                this.AltitudeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Date
+        {
+            get
+            {
+                return this.DateField;
+            }
+            set
+            {
+                this.DateField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Heading
+        {
+            get
+            {
+                return this.HeadingField;
+            }
+            set
+            {
+                this.HeadingField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Lat
+        {
+            get
+            {
+                return this.LatField;
+            }
+            set
+            {
+                this.LatField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Lng
+        {
+            get
+            {
+                return this.LngField;
+            }
+            set
+            {
+                this.LngField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UID
+        {
+            get
+            {
+                return this.UIDField;
+            }
+            set
+            {
+                this.UIDField = value;
+            }
+        }
+    }
 }
 
 
@@ -1786,6 +1883,11 @@ public interface IService1
     System.IAsyncResult BeginGetVersion(System.AsyncCallback callback, object asyncState);
     
     string EndGetVersion(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/UpdateLocation", ReplyAction="http://tempuri.org/IService1/UpdateLocationResponse")]
+    System.IAsyncResult BeginUpdateLocation(WcfServiceItem.MapLocation[] bills, string comp, string brn, string userid, System.AsyncCallback callback, object asyncState);
+    
+    string EndUpdateLocation(System.IAsyncResult result);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2094,6 +2196,29 @@ public partial class GetVersionCompletedEventArgs : System.ComponentModel.AsyncC
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class UpdateLocationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public UpdateLocationCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public string Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((string)(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 public partial class Service1Client : System.ServiceModel.ClientBase<IService1>, IService1
 {
     
@@ -2174,6 +2299,12 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     private EndOperationDelegate onEndGetVersionDelegate;
     
     private System.Threading.SendOrPostCallback onGetVersionCompletedDelegate;
+    
+    private BeginOperationDelegate onBeginUpdateLocationDelegate;
+    
+    private EndOperationDelegate onEndUpdateLocationDelegate;
+    
+    private System.Threading.SendOrPostCallback onUpdateLocationCompletedDelegate;
     
     private BeginOperationDelegate onBeginOpenDelegate;
     
@@ -2265,6 +2396,8 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     public event System.EventHandler<GetRunnoCompletedEventArgs> GetRunnoCompleted;
     
     public event System.EventHandler<GetVersionCompletedEventArgs> GetVersionCompleted;
+    
+    public event System.EventHandler<UpdateLocationCompletedEventArgs> UpdateLocationCompleted;
     
     public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
     
@@ -3063,6 +3196,69 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
         base.InvokeAsync(this.onBeginGetVersionDelegate, null, this.onEndGetVersionDelegate, this.onGetVersionCompletedDelegate, userState);
     }
     
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult IService1.BeginUpdateLocation(WcfServiceItem.MapLocation[] bills, string comp, string brn, string userid, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginUpdateLocation(bills, comp, brn, userid, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    string IService1.EndUpdateLocation(System.IAsyncResult result)
+    {
+        return base.Channel.EndUpdateLocation(result);
+    }
+    
+    private System.IAsyncResult OnBeginUpdateLocation(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        WcfServiceItem.MapLocation[] bills = ((WcfServiceItem.MapLocation[])(inValues[0]));
+        string comp = ((string)(inValues[1]));
+        string brn = ((string)(inValues[2]));
+        string userid = ((string)(inValues[3]));
+        return ((IService1)(this)).BeginUpdateLocation(bills, comp, brn, userid, callback, asyncState);
+    }
+    
+    private object[] OnEndUpdateLocation(System.IAsyncResult result)
+    {
+        string retVal = ((IService1)(this)).EndUpdateLocation(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnUpdateLocationCompleted(object state)
+    {
+        if ((this.UpdateLocationCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.UpdateLocationCompleted(this, new UpdateLocationCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void UpdateLocationAsync(WcfServiceItem.MapLocation[] bills, string comp, string brn, string userid)
+    {
+        this.UpdateLocationAsync(bills, comp, brn, userid, null);
+    }
+    
+    public void UpdateLocationAsync(WcfServiceItem.MapLocation[] bills, string comp, string brn, string userid, object userState)
+    {
+        if ((this.onBeginUpdateLocationDelegate == null))
+        {
+            this.onBeginUpdateLocationDelegate = new BeginOperationDelegate(this.OnBeginUpdateLocation);
+        }
+        if ((this.onEndUpdateLocationDelegate == null))
+        {
+            this.onEndUpdateLocationDelegate = new EndOperationDelegate(this.OnEndUpdateLocation);
+        }
+        if ((this.onUpdateLocationCompletedDelegate == null))
+        {
+            this.onUpdateLocationCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUpdateLocationCompleted);
+        }
+        base.InvokeAsync(this.onBeginUpdateLocationDelegate, new object[] {
+                    bills,
+                    comp,
+                    brn,
+                    userid}, this.onEndUpdateLocationDelegate, this.onUpdateLocationCompletedDelegate, userState);
+    }
+    
     private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState)
     {
         return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
@@ -3378,6 +3574,24 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
         {
             object[] _args = new object[0];
             string _result = ((string)(base.EndInvoke("GetVersion", _args, result)));
+            return _result;
+        }
+        
+        public System.IAsyncResult BeginUpdateLocation(WcfServiceItem.MapLocation[] bills, string comp, string brn, string userid, System.AsyncCallback callback, object asyncState)
+        {
+            object[] _args = new object[4];
+            _args[0] = bills;
+            _args[1] = comp;
+            _args[2] = brn;
+            _args[3] = userid;
+            System.IAsyncResult _result = base.BeginInvoke("UpdateLocation", _args, callback, asyncState);
+            return _result;
+        }
+        
+        public string EndUpdateLocation(System.IAsyncResult result)
+        {
+            object[] _args = new object[0];
+            string _result = ((string)(base.EndInvoke("UpdateLocation", _args, result)));
             return _result;
         }
     }

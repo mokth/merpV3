@@ -40,5 +40,21 @@ namespace wincom.mobile.erp
 		public string TrxType{ get; set;}
 
 	}
+
+	public class GeoLocation
+	{
+		[PrimaryKey, AutoIncrement]
+		public int ID { get; set; }
+		public string UserID{ get; set;}
+		public string CompCode{ get; set;}
+		public string BranchCode{ get; set;}
+		public DateTime Date{ get; set;}
+		public double lat{ get; set;}
+		public double lng { get; set;}
+		public double Altitude { get; set;}
+		public double Heading { get; set;}
+		public bool isUploaded  { get; set; }
+
+	}
 }
 

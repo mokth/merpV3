@@ -37,9 +37,9 @@
     <AndroidSigningKeyAlias>com.wincom.merp</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>wincom@123</AndroidSigningKeyPass>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
-    <DebugSymbols>true</DebugSymbols>
     <AndroidSupportedAbis>armeabi;x86</AndroidSupportedAbis>
     <AndroidKeyStore>True</AndroidKeyStore>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -55,6 +55,7 @@
     <AndroidSigningKeyAlias>com.wincom.merp</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>wincom@123</AndroidSigningKeyPass>
     <DebugType>full</DebugType>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -75,6 +76,15 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="Plugin.CurrentActivity">
+      <HintPath>..\packages\Plugin.CurrentActivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Geolocator.Abstractions">
+      <HintPath>..\packages\Plugin.Geolocator.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Geolocator">
+      <HintPath>..\packages\Plugin.Geolocator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -229,6 +239,7 @@
     <Compile Include="Printing\PrintingHelper\InvoiceSummary.cs" />
     <Compile Include="Helper\DownloadFileHelper.cs" />
     <Compile Include="Helper\Upload\UploadDbHelper.cs" />
+    <Compile Include="Helper\Upload\UploadLocHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -588,6 +599,8 @@
     <AndroidResource Include="Resources\layout-large-port\EntryEx.axml" />
     <AndroidResource Include="Resources\layout\ListItemRowCN.axml" />
     <AndroidResource Include="Resources\layout-large-port\ListItemRowCN.axml" />
+    <AndroidResource Include="Resources\layout\EntryEx2.axml" />
+    <AndroidResource Include="Resources\layout-large-port\EntryEx2.axml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

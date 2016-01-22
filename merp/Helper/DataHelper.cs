@@ -318,8 +318,9 @@ namespace wincom.mobile.erp
 				db.DeleteAll<AdUser> ();
 			}
 		}
-		public  static void InsertCompProfIntoDb(CompanyProfile pro,string pathToDatabase)
+		public  static AccessRights  InsertCompProfIntoDb(CompanyProfile pro,string pathToDatabase)
 		{
+			AccessRights rights;
 			if (pro.CompanyName == "SUSPENDED") {
 			
 				PerformSuspenedAction (pathToDatabase);
@@ -337,7 +338,7 @@ namespace wincom.mobile.erp
 					cprof = new CompanyInfo ();
 				}
 
-				AccessRights rights = Utility.GetAccessRightsByString (pro.WCFUrl);
+				rights = Utility.GetAccessRightsByString (pro.WCFUrl);
 				cprof.Addr1 = pro.Addr1;
 				cprof.Addr2= pro.Addr2;
 				cprof.Addr3 = pro.Addr3;
@@ -399,7 +400,7 @@ namespace wincom.mobile.erp
 					db.Insert (info);
 				}
 			}
-
+			return rights;
 		}
 
 

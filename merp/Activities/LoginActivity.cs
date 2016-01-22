@@ -15,6 +15,8 @@ using Android.Util;
 using Android.Content.PM;
 using SQLite;
 using System.Net;
+using Plugin.Geolocator.Abstractions;
+using Plugin.Geolocator;
 
 
 namespace wincom.mobile.erp
@@ -26,7 +28,7 @@ namespace wincom.mobile.erp
 		string pathToDatabase;
 		static volatile bool _donwloadPro = false;
 		AccessRights rights;
-
+		IGeolocator locator;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -342,6 +344,7 @@ namespace wincom.mobile.erp
 				conn.CreateTable<SaleOrderDtls>();
 				conn.CreateTable<DelOrder>();
 				conn.CreateTable<DelOrderDtls>();
+				conn.CreateTable<GeoLocation>();
 
 			}
 		}

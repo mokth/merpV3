@@ -152,7 +152,7 @@ namespace wincom.mobile.erp
 			//            "         1         2         3         4         5         6         7         8         9         0         1         2\n"
 			//            "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
 			text = text + "----------------------------------------------------------------------------------------------\n";
-			text = text + "No. ITEM CODE       ITEM DESCRIPTION                  UNIT  QTY  UINT      GST    TAX   AMOUNT\n";
+			text = text + "No. ITEM CODE       ITEM DESCRIPTION                  UNIT  QTY  UNIT      GST    TAX   AMOUNT\n";
 			text = text + "                                                     PRICE                 AMT   CODE         \n";
 			text = text + "----------------------------------------------------------------------------------------------\n";
 

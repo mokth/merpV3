@@ -35,37 +35,35 @@
                         android:padding="2dip"
                         android:id="@+id/linearLayout2">
                         <TextView
-                            android:textSize="14sp"
+                            android:textSize="15sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/txtInvno"
                             android:editable="false"
                             android:textColor="#ff093bf6"
                             android:paddingLeft="5dp"
-                            android:background="@drawable/bluethem_textfield_disabled_holo_light"
-                            android:hint="@string/invform_cashbillno"
-                            android:textColorHint="@color/xam_gray" />
+                            android:background="@drawable/bluethem_textfield_disabled_holo_light" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
+                        android:layout_weight="1.6"
                         android:padding="2dip"
                         android:id="@+id/linearLayout2">
-                        <EditText
+                        <TextView
                             android:textSize="14sp"
-                            android:inputType="date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:background="@drawable/bluethem_edit_text_holo_light"
+                            android:textColor="#ff093bf6"
                             android:id="@+id/txtInvdate"
-                            android:textColor="#ff093bf6" />
+                            android:editable="false"
+                            android:paddingLeft="5dp"
+                            android:background="@drawable/bluethem_textfield_disabled_holo_light" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.0"
+                        android:layout_weight="1.4"
                         android:padding="2dip"
                         android:id="@+id/linearLayout2">
                         <TextView
@@ -85,34 +83,42 @@
                     android:layout_alignParentBottom="true"
                     android:orientation="horizontal"
                     android:weightSum="3"
-                    android:id="@+id/linearLayout1">
+                    android:id="@+id/linearLayout4">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2.7"
+                        android:layout_weight="1.5"
                         android:padding="2dip"
-                        android:id="@+id/linearLayout2">
-                        <Spinner
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_width="fill_parent"
+                        android:id="@+id/linearLayout5">
+                        <TextView
+                            android:text="@string/invform_item"
+                            android:textSize="16sp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/custcode"
+                            android:textColor="#ff093bf6"
                             android:paddingLeft="5dp"
-                            android:background="@drawable/bluethem_spinner_background_holo_light" />
+                            android:id="@+id/textView1"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
-                        android:layout_weight="0.3"
+                        android:layout_weight="1.5"
                         android:gravity="center"
                         android:paddingLeft="5dip"
-                        android:id="@+id/linearLayout3">
-                        <Button
-                            android:layout_width="wrap_content"
+                        android:id="@+id/linearLayout6">
+                        <EditText
+                            android:textSize="16sp"
+                            android:inputType="text"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#ffffff"
-                            android:id="@+id/bfindCust"
-                            android:background="@android:drawable/ic_search_category_default" />
+                            android:id="@+id/txtbarcode"
+                            android:paddingLeft="5dp"
+                            android:textColor="#ff140000"
+                            android:background="@drawable/bluethem_edit_text_holo_light"
+                            android:hint="@string/title_barcode"
+                            android:textColorHint="@color/xam_gray" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -121,13 +127,13 @@
                     android:layout_alignParentBottom="true"
                     android:orientation="horizontal"
                     android:weightSum="3"
-                    android:id="@+id/linearLayout4">
+                    android:id="@+id/linearLayout7">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        android:layout_weight="2.5"
                         android:padding="2dip"
-                        android:id="@+id/linearLayout5">
+                        android:id="@+id/linearLayout8">
                         <Spinner
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:layout_width="fill_parent"
@@ -140,29 +146,10 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
-                        android:layout_weight=".7"
+                        android:layout_weight="0.5"
                         android:gravity="center"
                         android:paddingLeft="5dip"
-                        android:id="@+id/linearLayout6">
-                        <EditText
-                            android:textSize="13dp"
-                            android:inputType="text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/txtbarcode"
-                            android:paddingLeft="5dp"
-                            android:textColor="#ff140000"
-                            android:background="@drawable/bluethem_edit_text_holo_light"
-                            android:hint="@string/title_barcode"
-                            android:textColorHint="@color/xam_gray" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="0.3"
-                        android:gravity="center"
-                        android:paddingLeft="5dip"
-                        android:id="@+id/linearLayout6">
+                        android:id="@+id/linearLayout9">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -179,12 +166,15 @@
                     android:id="@+id/tableLayout1">
                     <TableRow
                         android:id="@+id/tableRow1">
-                        <Spinner
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:width="70dp"
-                            android:id="@+id/qty_type"
+                        <TextView
+                            android:text="@string/list_qty"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff6092b"
                             android:paddingLeft="5dp"
-                            android:background="@drawable/bluethem_spinner_background_holo_light" />
+                            android:id="@+id/textView4"
+                            android:textSize="16sp"
+                            android:width="50dp" />
                         <EditText
                             android:textSize="16sp"
                             android:inputType="numberDecimal|numberSigned"
@@ -204,7 +194,7 @@
                             android:textColor="#ff093bf6"
                             android:paddingLeft="5dp"
                             android:id="@+id/textView5"
-                            android:width="60dp" />
+                            android:width="70dp" />
                         <EditText
                             android:textSize="16sp"
                             android:inputType="numberDecimal|numberSigned"
@@ -213,7 +203,7 @@
                             android:id="@+id/txtprice"
                             android:textColor="#ff140000"
                             android:paddingLeft="5dp"
-                            android:width="90dp"
+                            android:width="100dp"
                             android:background="@drawable/bluethem_edit_text_holo_light"
                             android:editable="false"
                             android:enabled="true" />
@@ -328,73 +318,29 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="11sp"
                     android:id="@+id/Save"
-                    android:width="90dp"
-                    android:textAllCaps="false"
-                    android:linksClickable="false"
+                    android:text="@string/button_add"
                     android:drawableLeft="@drawable/add"
-                    android:text="@string/button_add" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:typeface="sans"
-                    android:textSize="11sp"
-                    android:text="@string/button_paid"
-                    android:id="@+id/Paid"
-                    android:drawableLeft="@drawable/shop"
-                    android:width="90dp" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:typeface="sans"
-                    android:textSize="11sp"
-                    android:id="@+id/NewBill"
-                    android:text="@string/button_new"
-                    android:drawableLeft="@drawable/bill"
-                    android:width="90dp" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:typeface="sans"
-                    android:textSize="11sp"
-                    android:text="@string/button_cancel"
-                    android:id="@+id/Cancel"
-                    android:drawableLeft="@android:drawable/ic_delete"
-                    android:width="110dp" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:typeface="sans"
-                    android:id="@+id/List"
-                    android:textSize="11sp"
-                    android:text="@string/button_bills"
-                    android:drawableLeft="@drawable/shoplist"
-                    android:width="95dp" />
+                    android:width="120dp" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
                     android:id="@+id/Print"
-                    android:textSize="11sp"
+                    android:visibility="gone"
                     android:text="@string/button_print"
                     android:drawableLeft="@drawable/print"
-                    android:width="95dp" />
+                    android:width="120dp" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:typeface="sans"
-                    android:textSize="11sp"
-                    android:text="@string/submenu_back"
-                    android:id="@+id/Home"
-                    android:drawableLeft="@drawable/home"
-                    android:width="95dp" />
+                    android:drawableLeft="@drawable/left"
+                    android:id="@+id/Cancel"
+                    android:text="@string/button_back"
+                    android:width="130dp" />
             </TableRow>
         </TableLayout>
     </RelativeLayout>

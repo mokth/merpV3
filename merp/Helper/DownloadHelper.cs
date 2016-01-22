@@ -333,19 +333,14 @@ namespace wincom.mobile.erp
 				return;
 			
 			try{
-				DataHelper.InsertCompProfIntoDb (pro, pathToDatabase);
+			  AccessRights rights= DataHelper.InsertCompProfIntoDb (pro, pathToDatabase);
+				((GlobalvarsApp)CallingActivity.Application).EnableGPSTracking(rights);
 			}
 			catch(Exception ex) {
 				AlertShow (ex.Message + ex.StackTrace);
 			}
 			//DownloadAllhandle.Invoke(CallingActivity,0,"Successfully downloaded Profile.");
 			startDownloadRunNoInfo ();
-
-			//			if (_downloadAll) {
-			//				DownloadAllhandle.Invoke(CallingActivity,0,"Successfully downloaded Profile.");
-			//				FireEvent (EventID.DOWNLOADED_PROFILE);
-			//
-			//			}else Downloadhandle.Invoke(CallingActivity,0,"Successfully downloaded Profile.");
 		}
 
 		private void InsertItemIntoDb(List<ItemCode> list)

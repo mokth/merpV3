@@ -27,6 +27,7 @@ namespace wincom.mobile.erp
 		List<Item> items = null;
 		List<string> icodes;
 		ArrayAdapter<String> dAdapterItem;
+		ArrayAdapter dAdapterQty;
 		AccessRights rights;
 		Trader trd;
 		double taxper;
@@ -43,6 +44,7 @@ namespace wincom.mobile.erp
 		volatile bool IsFirePaid;
 
 		Spinner spinItem;
+		Spinner spinQty;
 		EditText txtqty ;
 		EditText txtprice ;
 		TextView txtInvNo;
@@ -108,10 +110,12 @@ namespace wincom.mobile.erp
 
 		void SpinnerHandling ()
 		{
+			dAdapterQty  = ArrayAdapter.CreateFromResource (this, Resource.Array.qtytype, Resource.Layout.spinner_item);
 			dAdapterItem = new ArrayAdapter<String> (this, Resource.Layout.spinner_item, icodes);
 			dAdapterItem.SetDropDownViewResource (Resource.Layout.SimpleSpinnerDropDownItemEx);
 			spinItem.Adapter = dAdapterItem;
 			spinItem.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinnerItem_ItemSelected);
+			spinQty.Adapter = dAdapterQty;
 		}
 
 		void ControlHandling ()
@@ -167,6 +171,7 @@ namespace wincom.mobile.erp
 		#region Control stuff
 		void GetControls ()
 		{
+			spinQty = FindViewById<Spinner> (Resource.Id.qty_type);
 			spinItem = FindViewById<Spinner> (Resource.Id.txtcode);
 			butFindItem = FindViewById<Button> (Resource.Id.bfindItem);
 			txtqty = FindViewById<EditText> (Resource.Id.txtqty);
@@ -262,6 +267,12 @@ namespace wincom.mobile.erp
 					IsEdit = true;
 					IDdtls = list [0].ID;
 					txtInvMode.Text = "EDIT";
+					spinQty.SetSelection (0);
+					if (list [0].qty < 0)
+						spinQty.SetSelection (1);
+
+					if (list [0].price == 0)
+						spinQty.SetSelection (2);
 				}
 			}
 		}
@@ -407,7 +418,9 @@ namespace wincom.mobile.erp
 			EditText qty = FindViewById<EditText> (Resource.Id.txtqty);
 
 			double uprice= Utility.GetUnitPrice (trd, item);
-			price.Text = uprice.ToString ();
+			if (txtInvMode.Text!="EDIT")
+				txtprice.Text = uprice.ToString ();
+			//price.Text = uprice.ToString ();
 			tax.Text = item.taxgrp;
 			taxper = item.tax;
 			isInclusive = item.isincludesive;
@@ -616,8 +629,14 @@ namespace wincom.mobile.erp
 			}
 			Item ItemCode = itemlist [0];
 
+			int qtytye = spinQty.SelectedItemPosition;
 			double stqQty = Convert.ToDouble(txtqty.Text);
+			if (qtytye == 1) //return
+				stqQty = stqQty * -1;
+			
 			double uprice = Convert.ToDouble(txtprice.Text);
+			if (qtytye == 2) //FOC
+				uprice = 0;
 			double taxval = taxper;//Convert.ToDouble(taxper.Text);
 			double amount = Math.Round((stqQty * uprice),2);
 			double netamount = amount;

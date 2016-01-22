@@ -8,8 +8,6 @@ using Android.Widget;
 
 namespace wincom.mobile.erp
 {
-	
-
 	public class UploadInvHelper:Activity,IUploadHelper
 	{
 		Service1Client _client;

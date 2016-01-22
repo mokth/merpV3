@@ -80,7 +80,7 @@ namespace wincom.mobile.erp
 			EventManagerFacade.Instance.GetEventManager().AddListener(this);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			rights = Utility.GetAccessRights (pathToDatabase);
-			SetContentView (Resource.Layout.EntryEx);
+			SetContentView (Resource.Layout.EntryEx2);
 			_layoutParamsPortrait = new RelativeLayout.LayoutParams (ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);
 			_layoutParamsLandscape = new RelativeLayout.LayoutParams (ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);
 
