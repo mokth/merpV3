@@ -56,5 +56,17 @@ namespace wincom.mobile.erp
 		public bool isUploaded  { get; set; }
 
 	}
+
+	public class GeoLocationModel
+	{
+		public string Desc{ get; set;}
+		public string Date{ get; set;}
+		public double lat{ get; set;}
+		public double lng { get; set;}
+		public double Altitude { get; set;}
+		public double Heading { get; set;}
+
+
+	}
 }
 

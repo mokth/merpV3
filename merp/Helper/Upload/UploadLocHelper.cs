@@ -51,7 +51,7 @@ namespace wincom.mobile.erp
 			
 			string comp =user.CompCode;
 			string brn = user.BranchCode;
-			string userid = user.CompCode;
+			string userid = user.UserID;
 
 			locs = Getlocs();
 

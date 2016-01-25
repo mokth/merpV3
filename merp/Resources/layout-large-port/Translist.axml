@@ -62,6 +62,15 @@
             android:drawableLeft="@drawable/summary"
             android:id="@+id/butInvsumm" />
         <Button
+            android:text="SHOW LOCATION"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:drawableLeft="@drawable/ic_location"
+            android:height="80dp"
+            android:textSize="24sp"
+            android:id="@+id/butMap" />
+        <Button
             android:text="@string/submenu_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

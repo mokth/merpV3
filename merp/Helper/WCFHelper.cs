@@ -14,7 +14,7 @@ namespace wincom.mobile.erp
 			EndPoint = new EndpointAddress("http://www.wincomcloud.com/WfcV3/Service1.svc");
 		
 			//production -live version
-			//EndPoint = new EndpointAddress("http://www.wincomcloud.com/WfcV3Live/Service1.svc");
+			//EndPoint = new EndpointAddress ("http://www.wincomcloud.com/WfcV5Live/Service1.svc");
 
 		}
 

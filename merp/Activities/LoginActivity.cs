@@ -61,13 +61,11 @@ namespace wincom.mobile.erp
 				createTable (pathToDatabase);
 			} else
 			{
-//				if (pInfo.VersionCode >= 15) {
-//					if (!CheckIfColumnExists ()) {
-//						UpdateDatbase ();
-//						UpdateItem ();
-//						UpdateTrader ();
-//					}
-//				}
+				if (pInfo.VersionCode >= 53) {
+					if (!CheckIfColumnExists ()) {
+						createNewTable (pathToDatabase);	
+					}
+				}
 			}
 			//else {
 //				user = DataHelper.GetUser (pathToDatabase);
@@ -241,8 +239,8 @@ namespace wincom.mobile.erp
 			try{
 				using (SQLite.SQLiteConnection Conn = new SQLiteConnection(pathToDatabase))
 				{
-					var col =Conn.GetTableInfo("AdPara");
-					isfound=(col.Count >13);
+					var col =Conn.GetTableInfo("GeoLocation");
+					isfound=(col.Count >2);
 				
 				}
 			}catch {
@@ -344,6 +342,15 @@ namespace wincom.mobile.erp
 				conn.CreateTable<SaleOrderDtls>();
 				conn.CreateTable<DelOrder>();
 				conn.CreateTable<DelOrderDtls>();
+				conn.CreateTable<GeoLocation>();
+		
+			}
+		}
+
+		void createNewTable(string pathToDatabase)
+		{
+			using (var conn= new SQLite.SQLiteConnection(pathToDatabase))
+			{
 				conn.CreateTable<GeoLocation>();
 
 			}

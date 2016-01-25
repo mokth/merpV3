@@ -113,7 +113,7 @@ namespace wincom.mobile.erp
 			if (!locator.IsGeolocationEnabled) {
 				enableGPS ();
 			}
-			locator.DesiredAccuracy = 50;
+			locator.DesiredAccuracy = 20;
 			locator.AllowsBackgroundUpdates = true;
 			locator.PositionChanged+= Locator_PositionChanged;
 			locator.PositionError+= Locator_PositionError;

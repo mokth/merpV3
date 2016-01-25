@@ -89,6 +89,7 @@ namespace wincom.mobile.erp
 		{
 			var intent =ActivityManager.GetActivity<InvoiceActivity>(this.ApplicationContext);
 			StartActivity(intent);
+
 		}
 
 		private void butCashClick(object sender,EventArgs e)
