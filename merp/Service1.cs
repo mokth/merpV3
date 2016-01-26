@@ -1811,6 +1811,88 @@ namespace WcfServiceItem
             }
         }
     }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ItemGR", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceItem")]
+    public partial class ItemGR : object
+    {
+        
+        private string ICodeField;
+        
+        private double QtyField;
+        
+        private System.DateTime TrxDateField;
+        
+        private string UOMField;
+        
+        private string WHField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ICode
+        {
+            get
+            {
+                return this.ICodeField;
+            }
+            set
+            {
+                this.ICodeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Qty
+        {
+            get
+            {
+                return this.QtyField;
+            }
+            set
+            {
+                this.QtyField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime TrxDate
+        {
+            get
+            {
+                return this.TrxDateField;
+            }
+            set
+            {
+                this.TrxDateField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UOM
+        {
+            get
+            {
+                return this.UOMField;
+            }
+            set
+            {
+                this.UOMField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WH
+        {
+            get
+            {
+                return this.WHField;
+            }
+            set
+            {
+                this.WHField = value;
+            }
+        }
+    }
 }
 
 
@@ -1888,6 +1970,11 @@ public interface IService1
     System.IAsyncResult BeginUpdateLocation(WcfServiceItem.MapLocation[] bills, string comp, string brn, string userid, System.AsyncCallback callback, object asyncState);
     
     string EndUpdateLocation(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/GetItemReceive", ReplyAction="http://tempuri.org/IService1/GetItemReceiveResponse")]
+    System.IAsyncResult BeginGetItemReceive(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState);
+    
+    WcfServiceItem.ItemGR[] EndGetItemReceive(System.IAsyncResult result);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2219,6 +2306,29 @@ public partial class UpdateLocationCompletedEventArgs : System.ComponentModel.As
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class GetItemReceiveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public GetItemReceiveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public WcfServiceItem.ItemGR[] Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((WcfServiceItem.ItemGR[])(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 public partial class Service1Client : System.ServiceModel.ClientBase<IService1>, IService1
 {
     
@@ -2305,6 +2415,12 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     private EndOperationDelegate onEndUpdateLocationDelegate;
     
     private System.Threading.SendOrPostCallback onUpdateLocationCompletedDelegate;
+    
+    private BeginOperationDelegate onBeginGetItemReceiveDelegate;
+    
+    private EndOperationDelegate onEndGetItemReceiveDelegate;
+    
+    private System.Threading.SendOrPostCallback onGetItemReceiveCompletedDelegate;
     
     private BeginOperationDelegate onBeginOpenDelegate;
     
@@ -2398,6 +2514,8 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     public event System.EventHandler<GetVersionCompletedEventArgs> GetVersionCompleted;
     
     public event System.EventHandler<UpdateLocationCompletedEventArgs> UpdateLocationCompleted;
+    
+    public event System.EventHandler<GetItemReceiveCompletedEventArgs> GetItemReceiveCompleted;
     
     public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
     
@@ -3259,6 +3377,67 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
                     userid}, this.onEndUpdateLocationDelegate, this.onUpdateLocationCompletedDelegate, userState);
     }
     
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult IService1.BeginGetItemReceive(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginGetItemReceive(comp, brn, userid, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    WcfServiceItem.ItemGR[] IService1.EndGetItemReceive(System.IAsyncResult result)
+    {
+        return base.Channel.EndGetItemReceive(result);
+    }
+    
+    private System.IAsyncResult OnBeginGetItemReceive(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        string comp = ((string)(inValues[0]));
+        string brn = ((string)(inValues[1]));
+        string userid = ((string)(inValues[2]));
+        return ((IService1)(this)).BeginGetItemReceive(comp, brn, userid, callback, asyncState);
+    }
+    
+    private object[] OnEndGetItemReceive(System.IAsyncResult result)
+    {
+        WcfServiceItem.ItemGR[] retVal = ((IService1)(this)).EndGetItemReceive(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnGetItemReceiveCompleted(object state)
+    {
+        if ((this.GetItemReceiveCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.GetItemReceiveCompleted(this, new GetItemReceiveCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void GetItemReceiveAsync(string comp, string brn, string userid)
+    {
+        this.GetItemReceiveAsync(comp, brn, userid, null);
+    }
+    
+    public void GetItemReceiveAsync(string comp, string brn, string userid, object userState)
+    {
+        if ((this.onBeginGetItemReceiveDelegate == null))
+        {
+            this.onBeginGetItemReceiveDelegate = new BeginOperationDelegate(this.OnBeginGetItemReceive);
+        }
+        if ((this.onEndGetItemReceiveDelegate == null))
+        {
+            this.onEndGetItemReceiveDelegate = new EndOperationDelegate(this.OnEndGetItemReceive);
+        }
+        if ((this.onGetItemReceiveCompletedDelegate == null))
+        {
+            this.onGetItemReceiveCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetItemReceiveCompleted);
+        }
+        base.InvokeAsync(this.onBeginGetItemReceiveDelegate, new object[] {
+                    comp,
+                    brn,
+                    userid}, this.onEndGetItemReceiveDelegate, this.onGetItemReceiveCompletedDelegate, userState);
+    }
+    
     private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState)
     {
         return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
@@ -3592,6 +3771,23 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
         {
             object[] _args = new object[0];
             string _result = ((string)(base.EndInvoke("UpdateLocation", _args, result)));
+            return _result;
+        }
+        
+        public System.IAsyncResult BeginGetItemReceive(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState)
+        {
+            object[] _args = new object[3];
+            _args[0] = comp;
+            _args[1] = brn;
+            _args[2] = userid;
+            System.IAsyncResult _result = base.BeginInvoke("GetItemReceive", _args, callback, asyncState);
+            return _result;
+        }
+        
+        public WcfServiceItem.ItemGR[] EndGetItemReceive(System.IAsyncResult result)
+        {
+            object[] _args = new object[0];
+            WcfServiceItem.ItemGR[] _result = ((WcfServiceItem.ItemGR[])(base.EndInvoke("GetItemReceive", _args, result)));
             return _result;
         }
     }

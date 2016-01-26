@@ -35,6 +35,15 @@
             android:id="@+id/butDownSetting"
             android:drawableRight="@drawable/settings" />
         <Button
+            android:text="DOWNLOAD STOCK QTY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:drawableLeft="@drawable/download"
+            android:height="53dp"
+            android:id="@+id/butDownStock"
+            android:drawableRight="@drawable/settings" />
+        <Button
             android:text="@string/submenu_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

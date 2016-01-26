@@ -354,17 +354,17 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a0029
 			public const int Cancel = 2131361833;
 			
-			// aapt resource value: 0x7f0a0079
-			public const int CustList = 2131361913;
+			// aapt resource value: 0x7f0a0083
+			public const int CustList = 2131361923;
 			
 			// aapt resource value: 0x7f0a002d
 			public const int Home = 2131361837;
 			
-			// aapt resource value: 0x7f0a006d
-			public const int ICodeList = 2131361901;
+			// aapt resource value: 0x7f0a006e
+			public const int ICodeList = 2131361902;
 			
-			// aapt resource value: 0x7f0a009a
-			public const int List = 2131361946;
+			// aapt resource value: 0x7f0a00a4
+			public const int List = 2131361956;
 			
 			// aapt resource value: 0x7f0a002c
 			public const int NewBill = 2131361836;
@@ -378,11 +378,11 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a0028
 			public const int Save = 2131361832;
 			
-			// aapt resource value: 0x7f0a0080
-			public const int TaxAmount = 2131361920;
+			// aapt resource value: 0x7f0a008a
+			public const int TaxAmount = 2131361930;
 			
-			// aapt resource value: 0x7f0a007e
-			public const int TtlAmount = 2131361918;
+			// aapt resource value: 0x7f0a0088
+			public const int TtlAmount = 2131361928;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int about_credits = 2131361792;
@@ -399,8 +399,8 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a0017
 			public const int ad_bSave = 2131361815;
 			
-			// aapt resource value: 0x7f0a00cb
-			public const int add = 2131361995;
+			// aapt resource value: 0x7f0a00da
+			public const int add = 2131362010;
 			
 			// aapt resource value: 0x7f0a001b
 			public const int bfindCust = 2131361819;
@@ -408,35 +408,38 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a0020
 			public const int bfindItem = 2131361824;
 			
-			// aapt resource value: 0x7f0a0074
-			public const int btnItem_OK = 2131361908;
+			// aapt resource value: 0x7f0a0075
+			public const int btnItem_OK = 2131361909;
 			
-			// aapt resource value: 0x7f0a00b7
-			public const int btnTrd_OK = 2131361975;
+			// aapt resource value: 0x7f0a00c5
+			public const int btnTrd_OK = 2131361989;
 			
-			// aapt resource value: 0x7f0a00a2
-			public const int butAbout = 2131361954;
+			// aapt resource value: 0x7f0a00ac
+			public const int butAbout = 2131361964;
 			
-			// aapt resource value: 0x7f0a00a3
-			public const int butBack = 2131361955;
+			// aapt resource value: 0x7f0a00ad
+			public const int butBack = 2131361965;
 			
-			// aapt resource value: 0x7f0a00b9
-			public const int butCNlist = 2131361977;
-			
-			// aapt resource value: 0x7f0a0087
-			public const int butCash = 2131361927;
-			
-			// aapt resource value: 0x7f0a00b8
-			public const int butCashlist = 2131361976;
-			
-			// aapt resource value: 0x7f0a0078
-			public const int butCustBack = 2131361912;
+			// aapt resource value: 0x7f0a00c7
+			public const int butCNlist = 2131361991;
 			
 			// aapt resource value: 0x7f0a0091
-			public const int butCustProf = 2131361937;
+			public const int butCash = 2131361937;
 			
-			// aapt resource value: 0x7f0a00ba
-			public const int butDOlist = 2131361978;
+			// aapt resource value: 0x7f0a00c6
+			public const int butCashlist = 2131361990;
+			
+			// aapt resource value: 0x7f0a0082
+			public const int butCustBack = 2131361922;
+			
+			// aapt resource value: 0x7f0a009b
+			public const int butCustProf = 2131361947;
+			
+			// aapt resource value: 0x7f0a00c8
+			public const int butDOlist = 2131361992;
+			
+			// aapt resource value: 0x7f0a007e
+			public const int butDate = 2131361918;
 			
 			// aapt resource value: 0x7f0a0049
 			public const int butDown = 2131361865;
@@ -447,149 +450,158 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a004b
 			public const int butDownSetting = 2131361867;
 			
-			// aapt resource value: 0x7f0a006b
-			public const int butICodeBack = 2131361899;
-			
-			// aapt resource value: 0x7f0a0083
-			public const int butInvBack = 2131361923;
-			
-			// aapt resource value: 0x7f0a0061
-			public const int butInvItmBack = 2131361889;
-			
-			// aapt resource value: 0x7f0a008c
-			public const int butInvlist = 2131361932;
-			
-			// aapt resource value: 0x7f0a00bc
-			public const int butInvsumm = 2131361980;
-			
-			// aapt resource value: 0x7f0a00a4
-			public const int butMaP = 2131361956;
-			
 			// aapt resource value: 0x7f0a004c
-			public const int butMain = 2131361868;
+			public const int butDownStock = 2131361868;
 			
-			// aapt resource value: 0x7f0a00bd
-			public const int butMap = 2131361981;
+			// aapt resource value: 0x7f0a006c
+			public const int butICodeBack = 2131361900;
 			
 			// aapt resource value: 0x7f0a008d
-			public const int butMaster = 2131361933;
-			
-			// aapt resource value: 0x7f0a0090
-			public const int butOut = 2131361936;
-			
-			// aapt resource value: 0x7f0a0086
-			public const int butPOS = 2131361926;
-			
-			// aapt resource value: 0x7f0a00bb
-			public const int butSOlist = 2131361979;
-			
-			// aapt resource value: 0x7f0a0088
-			public const int butSecond = 2131361928;
-			
-			// aapt resource value: 0x7f0a0089
-			public const int butcnnote = 2131361929;
-			
-			// aapt resource value: 0x7f0a008a
-			public const int butdo = 2131361930;
-			
-			// aapt resource value: 0x7f0a0084
-			public const int butnewInv = 2131361924;
+			public const int butInvBack = 2131361933;
 			
 			// aapt resource value: 0x7f0a0062
-			public const int butnewItem = 2131361890;
+			public const int butInvItmBack = 2131361890;
+			
+			// aapt resource value: 0x7f0a0096
+			public const int butInvlist = 2131361942;
+			
+			// aapt resource value: 0x7f0a00ca
+			public const int butInvsumm = 2131361994;
+			
+			// aapt resource value: 0x7f0a00ae
+			public const int butMaP = 2131361966;
+			
+			// aapt resource value: 0x7f0a004d
+			public const int butMain = 2131361869;
+			
+			// aapt resource value: 0x7f0a00cc
+			public const int butMap = 2131361996;
+			
+			// aapt resource value: 0x7f0a0097
+			public const int butMaster = 2131361943;
+			
+			// aapt resource value: 0x7f0a009a
+			public const int butOut = 2131361946;
+			
+			// aapt resource value: 0x7f0a0090
+			public const int butPOS = 2131361936;
+			
+			// aapt resource value: 0x7f0a00c9
+			public const int butSOlist = 2131361993;
+			
+			// aapt resource value: 0x7f0a0092
+			public const int butSecond = 2131361938;
+			
+			// aapt resource value: 0x7f0a00cb
+			public const int butStksumm = 2131361995;
+			
+			// aapt resource value: 0x7f0a0093
+			public const int butcnnote = 2131361939;
+			
+			// aapt resource value: 0x7f0a0094
+			public const int butdo = 2131361940;
+			
+			// aapt resource value: 0x7f0a008e
+			public const int butnewInv = 2131361934;
+			
+			// aapt resource value: 0x7f0a0063
+			public const int butnewItem = 2131361891;
 			
 			// aapt resource value: 0x7f0a0046
 			public const int butok = 2131361862;
 			
-			// aapt resource value: 0x7f0a008f
-			public const int butsetting = 2131361935;
+			// aapt resource value: 0x7f0a0099
+			public const int butsetting = 2131361945;
 			
-			// aapt resource value: 0x7f0a008b
-			public const int butso = 2131361931;
+			// aapt resource value: 0x7f0a0095
+			public const int butso = 2131361941;
 			
-			// aapt resource value: 0x7f0a00a1
-			public const int buttestprint = 2131361953;
+			// aapt resource value: 0x7f0a00ab
+			public const int buttestprint = 2131361963;
 			
-			// aapt resource value: 0x7f0a00a0
-			public const int button1 = 2131361952;
+			// aapt resource value: 0x7f0a00aa
+			public const int button1 = 2131361962;
 			
-			// aapt resource value: 0x7f0a008e
-			public const int butupload = 2131361934;
+			// aapt resource value: 0x7f0a0098
+			public const int butupload = 2131361944;
 			
-			// aapt resource value: 0x7f0a00c1
-			public const int butuploadAll = 2131361985;
+			// aapt resource value: 0x7f0a00d0
+			public const int butuploadAll = 2131362000;
 			
-			// aapt resource value: 0x7f0a00be
-			public const int butuploadcn = 2131361982;
+			// aapt resource value: 0x7f0a00cd
+			public const int butuploadcn = 2131361997;
 			
-			// aapt resource value: 0x7f0a00c0
-			public const int butuploaddo = 2131361984;
-			
-			// aapt resource value: 0x7f0a00bf
-			public const int butuploadso = 2131361983;
+			// aapt resource value: 0x7f0a00cf
+			public const int butuploaddo = 2131361999;
 			
 			// aapt resource value: 0x7f0a00ce
-			public const int call = 2131361998;
+			public const int butuploadso = 2131361998;
 			
-			// aapt resource value: 0x7f0a005d
-			public const int content = 2131361885;
+			// aapt resource value: 0x7f0a00dd
+			public const int call = 2131362013;
+			
+			// aapt resource value: 0x7f0a005e
+			public const int content = 2131361886;
 			
 			// aapt resource value: 0x7f0a001a
 			public const int custcode = 2131361818;
 			
-			// aapt resource value: 0x7f0a0075
-			public const int custname = 2131361909;
+			// aapt resource value: 0x7f0a007f
+			public const int custname = 2131361919;
 			
-			// aapt resource value: 0x7f0a00a5
-			public const int date = 2131361957;
+			// aapt resource value: 0x7f0a0076
+			public const int date = 2131361910;
 			
-			// aapt resource value: 0x7f0a009d
-			public const int editText1 = 2131361949;
+			// aapt resource value: 0x7f0a00a7
+			public const int editText1 = 2131361959;
 			
-			// aapt resource value: 0x7f0a00ab
-			public const int exit = 2131361963;
+			// aapt resource value: 0x7f0a00b4
+			public const int exit = 2131361972;
 			
-			// aapt resource value: 0x7f0a0085
-			public const int feedList = 2131361925;
+			// aapt resource value: 0x7f0a008f
+			public const int feedList = 2131361935;
 			
-			// aapt resource value: 0x7f0a005c
-			public const int footer = 2131361884;
+			// aapt resource value: 0x7f0a005d
+			public const int footer = 2131361885;
 			
-			// aapt resource value: 0x7f0a004d
-			public const int header = 2131361869;
+			// aapt resource value: 0x7f0a004e
+			public const int header = 2131361870;
 			
-			// aapt resource value: 0x7f0a0065
-			public const int icodecode = 2131361893;
-			
-			// aapt resource value: 0x7f0a0064
-			public const int icodedesc = 2131361892;
-			
-			// aapt resource value: 0x7f0a0069
-			public const int icodeinclusive = 2131361897;
+			// aapt resource value: 0x7f0a0077
+			public const int icode = 2131361911;
 			
 			// aapt resource value: 0x7f0a0066
-			public const int icodeprice = 2131361894;
+			public const int icodecode = 2131361894;
+			
+			// aapt resource value: 0x7f0a0065
+			public const int icodedesc = 2131361893;
+			
+			// aapt resource value: 0x7f0a006a
+			public const int icodeinclusive = 2131361898;
 			
 			// aapt resource value: 0x7f0a0067
-			public const int icodetax = 2131361895;
+			public const int icodeprice = 2131361895;
 			
 			// aapt resource value: 0x7f0a0068
-			public const int icodetaxper = 2131361896;
+			public const int icodetax = 2131361896;
 			
-			// aapt resource value: 0x7f0a007f
-			public const int invcust = 2131361919;
+			// aapt resource value: 0x7f0a0069
+			public const int icodetaxper = 2131361897;
 			
-			// aapt resource value: 0x7f0a007a
-			public const int invdate = 2131361914;
+			// aapt resource value: 0x7f0a0089
+			public const int invcust = 2131361929;
+			
+			// aapt resource value: 0x7f0a0084
+			public const int invdate = 2131361924;
 			
 			// aapt resource value: 0x7f0a0034
 			public const int invitemList = 2131361844;
 			
-			// aapt resource value: 0x7f0a005f
-			public const int invitemTemp1 = 2131361887;
-			
 			// aapt resource value: 0x7f0a0060
-			public const int invitemTemp2 = 2131361888;
+			public const int invitemTemp1 = 2131361888;
+			
+			// aapt resource value: 0x7f0a0061
+			public const int invitemTemp2 = 2131361889;
 			
 			// aapt resource value: 0x7f0a0033
 			public const int invitemamt = 2131361843;
@@ -597,8 +609,8 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a002e
 			public const int invitemcode = 2131361838;
 			
-			// aapt resource value: 0x7f0a005e
-			public const int invitemdesc = 2131361886;
+			// aapt resource value: 0x7f0a005f
+			public const int invitemdesc = 2131361887;
 			
 			// aapt resource value: 0x7f0a0030
 			public const int invitemprice = 2131361840;
@@ -612,11 +624,11 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a0031
 			public const int invitemtaxgrp = 2131361841;
 			
-			// aapt resource value: 0x7f0a007b
-			public const int invno = 2131361915;
+			// aapt resource value: 0x7f0a0085
+			public const int invno = 2131361925;
 			
-			// aapt resource value: 0x7f0a0082
-			public const int invremark = 2131361922;
+			// aapt resource value: 0x7f0a008c
+			public const int invremark = 2131361932;
 			
 			// aapt resource value: 0x7f0a000f
 			public const int lbCNPrefix = 2131361807;
@@ -648,86 +660,86 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a0003
 			public const int lbprinter = 2131361795;
 			
-			// aapt resource value: 0x7f0a005b
-			public const int linearLayout1 = 2131361883;
-			
-			// aapt resource value: 0x7f0a004e
-			public const int linearLayout10 = 2131361870;
-			
-			// aapt resource value: 0x7f0a0050
-			public const int linearLayout2 = 2131361872;
-			
-			// aapt resource value: 0x7f0a0099
-			public const int linearLayout3 = 2131361945;
-			
-			// aapt resource value: 0x7f0a0054
-			public const int linearLayout4 = 2131361876;
-			
-			// aapt resource value: 0x7f0a0055
-			public const int linearLayout5 = 2131361877;
-			
-			// aapt resource value: 0x7f0a0056
-			public const int linearLayout6 = 2131361878;
-			
-			// aapt resource value: 0x7f0a0057
-			public const int linearLayout7 = 2131361879;
-			
-			// aapt resource value: 0x7f0a0058
-			public const int linearLayout8 = 2131361880;
-			
-			// aapt resource value: 0x7f0a0059
-			public const int linearLayout9 = 2131361881;
+			// aapt resource value: 0x7f0a005c
+			public const int linearLayout1 = 2131361884;
 			
 			// aapt resource value: 0x7f0a004f
-			public const int linearLayoutCS = 2131361871;
+			public const int linearLayout10 = 2131361871;
 			
-			// aapt resource value: 0x7f0a0081
-			public const int linearLayoutRmark = 2131361921;
+			// aapt resource value: 0x7f0a0051
+			public const int linearLayout2 = 2131361873;
 			
-			// aapt resource value: 0x7f0a0063
-			public const int linearLayoutTitle = 2131361891;
+			// aapt resource value: 0x7f0a00a3
+			public const int linearLayout3 = 2131361955;
 			
-			// aapt resource value: 0x7f0a00ad
-			public const int logimport = 2131361965;
+			// aapt resource value: 0x7f0a0055
+			public const int linearLayout4 = 2131361877;
 			
-			// aapt resource value: 0x7f0a00aa
-			public const int login = 2131361962;
+			// aapt resource value: 0x7f0a0056
+			public const int linearLayout5 = 2131361878;
 			
-			// aapt resource value: 0x7f0a00a9
-			public const int login_code = 2131361961;
+			// aapt resource value: 0x7f0a0057
+			public const int linearLayout6 = 2131361879;
 			
-			// aapt resource value: 0x7f0a00a8
-			public const int login_password = 2131361960;
+			// aapt resource value: 0x7f0a0058
+			public const int linearLayout7 = 2131361880;
 			
-			// aapt resource value: 0x7f0a00a7
-			public const int login_userName = 2131361959;
+			// aapt resource value: 0x7f0a0059
+			public const int linearLayout8 = 2131361881;
 			
-			// aapt resource value: 0x7f0a00ca
-			public const int mainMenu = 2131361994;
+			// aapt resource value: 0x7f0a005a
+			public const int linearLayout9 = 2131361882;
 			
-			// aapt resource value: 0x7f0a00c5
-			public const int mmenu_back = 2131361989;
+			// aapt resource value: 0x7f0a0050
+			public const int linearLayoutCS = 2131361872;
 			
-			// aapt resource value: 0x7f0a00c7
-			public const int mmenu_clear = 2131361991;
+			// aapt resource value: 0x7f0a008b
+			public const int linearLayoutRmark = 2131361931;
 			
-			// aapt resource value: 0x7f0a00c2
-			public const int mmenu_downcompinfo = 2131361986;
+			// aapt resource value: 0x7f0a0064
+			public const int linearLayoutTitle = 2131361892;
 			
-			// aapt resource value: 0x7f0a00c3
-			public const int mmenu_downdb = 2131361987;
+			// aapt resource value: 0x7f0a00b6
+			public const int logimport = 2131361974;
 			
-			// aapt resource value: 0x7f0a00c6
-			public const int mmenu_downlogo = 2131361990;
+			// aapt resource value: 0x7f0a00b3
+			public const int login = 2131361971;
 			
-			// aapt resource value: 0x7f0a00c4
-			public const int mmenu_downtmp = 2131361988;
+			// aapt resource value: 0x7f0a00b2
+			public const int login_code = 2131361970;
 			
-			// aapt resource value: 0x7f0a00c9
-			public const int mmenu_logoff = 2131361993;
+			// aapt resource value: 0x7f0a00b1
+			public const int login_password = 2131361969;
 			
-			// aapt resource value: 0x7f0a00c8
-			public const int mmenu_setting = 2131361992;
+			// aapt resource value: 0x7f0a00b0
+			public const int login_userName = 2131361968;
+			
+			// aapt resource value: 0x7f0a00d9
+			public const int mainMenu = 2131362009;
+			
+			// aapt resource value: 0x7f0a00d4
+			public const int mmenu_back = 2131362004;
+			
+			// aapt resource value: 0x7f0a00d6
+			public const int mmenu_clear = 2131362006;
+			
+			// aapt resource value: 0x7f0a00d1
+			public const int mmenu_downcompinfo = 2131362001;
+			
+			// aapt resource value: 0x7f0a00d2
+			public const int mmenu_downdb = 2131362002;
+			
+			// aapt resource value: 0x7f0a00d5
+			public const int mmenu_downlogo = 2131362005;
+			
+			// aapt resource value: 0x7f0a00d3
+			public const int mmenu_downtmp = 2131362003;
+			
+			// aapt resource value: 0x7f0a00d8
+			public const int mmenu_logoff = 2131362008;
+			
+			// aapt resource value: 0x7f0a00d7
+			public const int mmenu_setting = 2131362007;
 			
 			// aapt resource value: 0x7f0a0037
 			public const int newcninv_no = 2131361847;
@@ -771,107 +783,131 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a003e
 			public const int newinv_type = 2131361854;
 			
-			// aapt resource value: 0x7f0a0092
-			public const int newinvno = 2131361938;
+			// aapt resource value: 0x7f0a009c
+			public const int newinvno = 2131361948;
+			
+			// aapt resource value: 0x7f0a00a9
+			public const int numberPicker1 = 2131361961;
+			
+			// aapt resource value: 0x7f0a009d
+			public const int payamt = 2131361949;
+			
+			// aapt resource value: 0x7f0a00a0
+			public const int paycash = 2131361952;
+			
+			// aapt resource value: 0x7f0a00a1
+			public const int paychange = 2131361953;
+			
+			// aapt resource value: 0x7f0a00a2
+			public const int payok = 2131361954;
+			
+			// aapt resource value: 0x7f0a009e
+			public const int payround = 2131361950;
 			
 			// aapt resource value: 0x7f0a009f
-			public const int numberPicker1 = 2131361951;
+			public const int paytotal = 2131361951;
 			
-			// aapt resource value: 0x7f0a0093
-			public const int payamt = 2131361939;
+			// aapt resource value: 0x7f0a00db
+			public const int phone = 2131362011;
 			
-			// aapt resource value: 0x7f0a0096
-			public const int paycash = 2131361942;
+			// aapt resource value: 0x7f0a00e2
+			public const int popInvadd = 2131362018;
 			
-			// aapt resource value: 0x7f0a0097
-			public const int paychange = 2131361943;
+			// aapt resource value: 0x7f0a00e4
+			public const int popInvdelete = 2131362020;
 			
-			// aapt resource value: 0x7f0a0098
-			public const int payok = 2131361944;
+			// aapt resource value: 0x7f0a00e3
+			public const int popInvedit = 2131362019;
 			
-			// aapt resource value: 0x7f0a0094
-			public const int payround = 2131361940;
+			// aapt resource value: 0x7f0a00df
+			public const int popInvfilter = 2131362015;
 			
-			// aapt resource value: 0x7f0a0095
-			public const int paytotal = 2131361941;
+			// aapt resource value: 0x7f0a00e0
+			public const int popInvprint = 2131362016;
 			
-			// aapt resource value: 0x7f0a00cc
-			public const int phone = 2131361996;
+			// aapt resource value: 0x7f0a00e1
+			public const int popInvprint2 = 2131362017;
 			
-			// aapt resource value: 0x7f0a00d3
-			public const int popInvadd = 2131362003;
+			// aapt resource value: 0x7f0a00e6
+			public const int popadd = 2131362022;
 			
-			// aapt resource value: 0x7f0a00d5
-			public const int popInvdelete = 2131362005;
+			// aapt resource value: 0x7f0a00e8
+			public const int popdelete = 2131362024;
 			
-			// aapt resource value: 0x7f0a00d4
-			public const int popInvedit = 2131362004;
+			// aapt resource value: 0x7f0a00e7
+			public const int popedit = 2131362023;
 			
-			// aapt resource value: 0x7f0a00d0
-			public const int popInvfilter = 2131362000;
+			// aapt resource value: 0x7f0a00e5
+			public const int poppay = 2131362021;
 			
-			// aapt resource value: 0x7f0a00d1
-			public const int popInvprint = 2131362001;
+			// aapt resource value: 0x7f0a0087
+			public const int printed = 2131361927;
 			
-			// aapt resource value: 0x7f0a00d2
-			public const int popInvprint2 = 2131362002;
+			// aapt resource value: 0x7f0a00a5
+			public const int printsumm = 2131361957;
 			
-			// aapt resource value: 0x7f0a00d7
-			public const int popadd = 2131362007;
+			// aapt resource value: 0x7f0a00a6
+			public const int printsumm_cancel = 2131361958;
 			
-			// aapt resource value: 0x7f0a00d9
-			public const int popdelete = 2131362009;
+			// aapt resource value: 0x7f0a005b
+			public const int qty_type = 2131361883;
 			
-			// aapt resource value: 0x7f0a00d8
-			public const int popedit = 2131362008;
+			// aapt resource value: 0x7f0a00bb
+			public const int qtyact = 2131361979;
 			
-			// aapt resource value: 0x7f0a00d6
-			public const int poppay = 2131362006;
+			// aapt resource value: 0x7f0a0079
+			public const int qtyactual = 2131361913;
+			
+			// aapt resource value: 0x7f0a007b
+			public const int qtybrf = 2131361915;
 			
 			// aapt resource value: 0x7f0a007d
-			public const int printed = 2131361917;
+			public const int qtycrf = 2131361917;
 			
-			// aapt resource value: 0x7f0a009b
-			public const int printsumm = 2131361947;
+			// aapt resource value: 0x7f0a00ba
+			public const int qtygr = 2131361978;
 			
-			// aapt resource value: 0x7f0a009c
-			public const int printsumm_cancel = 2131361948;
+			// aapt resource value: 0x7f0a0078
+			public const int qtyrec = 2131361912;
 			
-			// aapt resource value: 0x7f0a005a
-			public const int qty_type = 2131361882;
+			// aapt resource value: 0x7f0a007c
+			public const int qtyrtn = 2131361916;
 			
-			// aapt resource value: 0x7f0a00cf
-			public const int refresh = 2131361999;
+			// aapt resource value: 0x7f0a007a
+			public const int qtysales = 2131361914;
 			
-			// aapt resource value: 0x7f0a00cd
-			public const int submenu = 2131361997;
+			// aapt resource value: 0x7f0a00de
+			public const int refresh = 2131362014;
+			
+			// aapt resource value: 0x7f0a00dc
+			public const int submenu = 2131362012;
 			
 			// aapt resource value: 0x7f0a0015
 			public const int tableLayout1 = 2131361813;
 			
-			// aapt resource value: 0x7f0a006a
-			public const int tableLayoutItem = 2131361898;
+			// aapt resource value: 0x7f0a006b
+			public const int tableLayoutItem = 2131361899;
 			
-			// aapt resource value: 0x7f0a0076
-			public const int tableLayoutItemc = 2131361910;
+			// aapt resource value: 0x7f0a0080
+			public const int tableLayoutItemc = 2131361920;
 			
 			// aapt resource value: 0x7f0a0016
 			public const int tableRow1 = 2131361814;
 			
-			// aapt resource value: 0x7f0a0077
-			public const int tableRow1c = 2131361911;
+			// aapt resource value: 0x7f0a0081
+			public const int tableRow1c = 2131361921;
 			
 			// aapt resource value: 0x7f0a0019
 			public const int tableRow2 = 2131361817;
 			
-			// aapt resource value: 0x7f0a00ac
-			public const int textVer = 2131361964;
+			// aapt resource value: 0x7f0a00b5
+			public const int textVer = 2131361973;
 			
 			// aapt resource value: 0x7f0a001d
 			public const int textView1 = 2131361821;
 			
-			// aapt resource value: 0x7f0a009e
-			public const int textView2 = 2131361950;
+			// aapt resource value: 0x7f0a00a8
+			public const int textView2 = 2131361960;
 			
 			// aapt resource value: 0x7f0a0021
 			public const int textView4 = 2131361825;
@@ -885,8 +921,8 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a0045
 			public const int trxdateto = 2131361861;
 			
-			// aapt resource value: 0x7f0a007c
-			public const int trxtype = 2131361916;
+			// aapt resource value: 0x7f0a0086
+			public const int trxtype = 2131361926;
 			
 			// aapt resource value: 0x7f0a0010
 			public const int txtCNPrefix = 2131361808;
@@ -903,14 +939,14 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a0048
 			public const int txtInvcust = 2131361864;
 			
-			// aapt resource value: 0x7f0a0052
-			public const int txtInvdate = 2131361874;
-			
 			// aapt resource value: 0x7f0a0053
-			public const int txtInvmode = 2131361875;
+			public const int txtInvdate = 2131361875;
 			
-			// aapt resource value: 0x7f0a0051
-			public const int txtInvno = 2131361873;
+			// aapt resource value: 0x7f0a0054
+			public const int txtInvmode = 2131361876;
+			
+			// aapt resource value: 0x7f0a0052
+			public const int txtInvno = 2131361874;
 			
 			// aapt resource value: 0x7f0a0047
 			public const int txtInvnp = 2131361863;
@@ -918,8 +954,8 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a0012
 			public const int txtSOPrefix = 2131361810;
 			
-			// aapt resource value: 0x7f0a006c
-			public const int txtSearch = 2131361900;
+			// aapt resource value: 0x7f0a006d
+			public const int txtSearch = 2131361901;
 			
 			// aapt resource value: 0x7f0a0009
 			public const int txtSize = 2131361801;
@@ -936,50 +972,59 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a001f
 			public const int txtcode = 2131361823;
 			
-			// aapt resource value: 0x7f0a00b0
-			public const int txtcust_addr1 = 2131361968;
+			// aapt resource value: 0x7f0a00be
+			public const int txtcust_addr1 = 2131361982;
 			
-			// aapt resource value: 0x7f0a00b1
-			public const int txtcust_addr2 = 2131361969;
+			// aapt resource value: 0x7f0a00bf
+			public const int txtcust_addr2 = 2131361983;
 			
-			// aapt resource value: 0x7f0a00b2
-			public const int txtcust_addr3 = 2131361970;
+			// aapt resource value: 0x7f0a00c0
+			public const int txtcust_addr3 = 2131361984;
 			
-			// aapt resource value: 0x7f0a00b3
-			public const int txtcust_addr4 = 2131361971;
+			// aapt resource value: 0x7f0a00c1
+			public const int txtcust_addr4 = 2131361985;
 			
-			// aapt resource value: 0x7f0a00ae
-			public const int txtcust_code = 2131361966;
+			// aapt resource value: 0x7f0a00bc
+			public const int txtcust_code = 2131361980;
 			
-			// aapt resource value: 0x7f0a00b5
-			public const int txtcust_fax = 2131361973;
+			// aapt resource value: 0x7f0a00c3
+			public const int txtcust_fax = 2131361987;
 			
-			// aapt resource value: 0x7f0a00b6
-			public const int txtcust_gst = 2131361974;
+			// aapt resource value: 0x7f0a00c4
+			public const int txtcust_gst = 2131361988;
 			
-			// aapt resource value: 0x7f0a00af
-			public const int txtcust_name = 2131361967;
+			// aapt resource value: 0x7f0a00bd
+			public const int txtcust_name = 2131361981;
 			
-			// aapt resource value: 0x7f0a00b4
-			public const int txtcust_tel = 2131361972;
+			// aapt resource value: 0x7f0a00c2
+			public const int txtcust_tel = 2131361986;
 			
-			// aapt resource value: 0x7f0a006f
-			public const int txtitem_code = 2131361903;
+			// aapt resource value: 0x7f0a00b9
+			public const int txtdate = 2131361977;
 			
-			// aapt resource value: 0x7f0a006e
-			public const int txtitem_desc = 2131361902;
+			// aapt resource value: 0x7f0a00b7
+			public const int txtdesc = 2131361975;
 			
-			// aapt resource value: 0x7f0a0073
-			public const int txtitem_incl = 2131361907;
+			// aapt resource value: 0x7f0a00b8
+			public const int txticode = 2131361976;
 			
 			// aapt resource value: 0x7f0a0070
-			public const int txtitem_price = 2131361904;
+			public const int txtitem_code = 2131361904;
 			
-			// aapt resource value: 0x7f0a0072
-			public const int txtitem_tax = 2131361906;
+			// aapt resource value: 0x7f0a006f
+			public const int txtitem_desc = 2131361903;
+			
+			// aapt resource value: 0x7f0a0074
+			public const int txtitem_incl = 2131361908;
 			
 			// aapt resource value: 0x7f0a0071
-			public const int txtitem_taxgrop = 2131361905;
+			public const int txtitem_price = 2131361905;
+			
+			// aapt resource value: 0x7f0a0073
+			public const int txtitem_tax = 2131361907;
+			
+			// aapt resource value: 0x7f0a0072
+			public const int txtitem_taxgrop = 2131361906;
 			
 			// aapt resource value: 0x7f0a0024
 			public const int txtprice = 2131361828;
@@ -1002,8 +1047,8 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f0a0027
 			public const int txttaxamt = 2131361831;
 			
-			// aapt resource value: 0x7f0a00a6
-			public const int webView1 = 2131361958;
+			// aapt resource value: 0x7f0a00af
+			public const int webView1 = 2131361967;
 			
 			static Id()
 			{
@@ -1079,64 +1124,73 @@ namespace wincom.mobile.erp
 			public const int ItemInfo = 2130903059;
 			
 			// aapt resource value: 0x7f030014
-			public const int ListCustDtlView = 2130903060;
+			public const int ItemStockDtls = 2130903060;
 			
 			// aapt resource value: 0x7f030015
-			public const int ListCustView = 2130903061;
+			public const int ItemStockList = 2130903061;
 			
 			// aapt resource value: 0x7f030016
-			public const int ListItemRow = 2130903062;
+			public const int ListCustDtlView = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int ListItemRowCN = 2130903063;
+			public const int ListCustView = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int ListView = 2130903064;
+			public const int ListItemRow = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int Main = 2130903065;
+			public const int ListItemRowCN = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int MasterRef = 2130903066;
+			public const int ListView = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int Payment = 2130903067;
+			public const int Main = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int POSCashEntry = 2130903068;
+			public const int MasterRef = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int PrintInvSumm = 2130903069;
+			public const int Payment = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int Second = 2130903070;
+			public const int POSCashEntry = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int Settings = 2130903071;
+			public const int PrintInvSumm = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int ShowLocation = 2130903072;
+			public const int Second = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public const int SignIn = 2130903073;
+			public const int Settings = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public const int SimpleSpinnerDropDownItemEx = 2130903074;
+			public const int ShowLocation = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public const int SOEntry = 2130903075;
+			public const int SignIn = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public const int spinner_item = 2130903076;
+			public const int SimpleSpinnerDropDownItemEx = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int TraderInfo = 2130903077;
+			public const int SOEntry = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int Translist = 2130903078;
+			public const int spinner_item = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int Upload = 2130903079;
+			public const int StockEntry = 2130903079;
+			
+			// aapt resource value: 0x7f030028
+			public const int TraderInfo = 2130903080;
+			
+			// aapt resource value: 0x7f030029
+			public const int Translist = 2130903081;
+			
+			// aapt resource value: 0x7f03002a
+			public const int Upload = 2130903082;
 			
 			static Layout()
 			{

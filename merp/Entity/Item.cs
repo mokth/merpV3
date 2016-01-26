@@ -64,5 +64,21 @@ namespace wincom.mobile.erp
 
 	}
 
+	public class ItemStock
+	{
+		[PrimaryKey, AutoIncrement]
+		public int ID { get; set; }
+		public string ICode{ get; set; }
+		public DateTime DateTrx{ get; set; }
+		public string IDesc { get; set; }
+		public string StdUom { get; set; }
+		public string Wh { get; set; }
+		public double QtyGR { get; set; }
+		public double QtyAct { get; set; }
+		public double QtySales { get; set; }
+		public double QtyBrf { get; set; }
+		public double QtyRtr { get; set; }
+		public double QtyCrf { get; set; }
+	}
 
 }

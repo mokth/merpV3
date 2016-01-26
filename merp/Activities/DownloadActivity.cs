@@ -32,6 +32,9 @@ namespace wincom.mobile.erp
 			Button butdownSetting = FindViewById<Button> (Resource.Id.butDownSetting);
 			butdownSetting.Click+= ButdownSetting_Click;
 
+			Button butdownStock = FindViewById<Button> (Resource.Id.butDownStock);
+			butdownStock.Click+= ButdownStock_Click;
+
 			Button butback = FindViewById<Button> (Resource.Id.butMain);
 			butback.Click+= (object sender, EventArgs e) => {
 				base.OnBackPressed();
@@ -57,6 +60,17 @@ namespace wincom.mobile.erp
 			download.CallingActivity = this;
 			download.NotDownloadAll ();
 			download.startDownloadItem ();
+		}
+
+		void ButdownStock_Click(object sender,EventArgs e)
+		{
+			Button butDown =  FindViewById<Button> (Resource.Id.butDown);
+			butDown.Enabled = false;
+			DownloadHelper download= new DownloadHelper();
+			download.Downloadhandle = DownItemsDoneDlg; 
+			download.CallingActivity = this;
+			download.NotDownloadAll ();
+			download.startDownloadItemGR ();
 		}
 
 		void butDownloadCusts(object sender,EventArgs e)

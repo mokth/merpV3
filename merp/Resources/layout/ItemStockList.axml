@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
+    <TableLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableLayoutItem">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:id="@+id/tableRow1">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:typeface="sans"
+                android:id="@+id/butICodeBack"
+                android:drawableLeft="@drawable/left"
+                android:width="120dp"
+                android:text="@string/button_back" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:typeface="sans"
+                android:id="@+id/butDate"
+                android:width="100dp"
+                android:text="DATE" />
+            <EditText
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtSearch"
+                android:paddingLeft="5dp"
+                android:textColor="#ff140000"
+                android:background="@android:drawable/edit_text"
+                android:hint="@android:string/search_go" />
+        </TableRow>
+    </TableLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:weightSum="6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:background="@color/action_bar_title_color">
+        <TextView
+            android:id="@+id/qtyrec"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="ISSUE"
+            android:typeface="sans"
+            android:gravity="right" />
+        <TextView
+            android:id="@+id/qtyactual"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="ACTUAL"
+            android:gravity="right"
+            android:typeface="sans" />
+        <TextView
+            android:id="@+id/qtysales"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="SALES"
+            android:gravity="right"
+            android:typeface="sans" />
+        <TextView
+            android:id="@+id/qtybrf"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="BRF"
+            android:gravity="right"
+            android:typeface="sans" />
+        <TextView
+            android:id="@+id/qtyrtn"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RTN"
+            android:singleLine="true"
+            android:gravity="right"
+            android:typeface="sans" />
+        <TextView
+            android:id="@+id/qtycrf"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="CRF"
+            android:gravity="right"
+            android:typeface="sans"
+            android:textAlignment="viewEnd" />
+    </LinearLayout>
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ICodeList" />
+</LinearLayout>

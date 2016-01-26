@@ -52,6 +52,20 @@ namespace wincom.mobile.erp
 			}
 		}
 
+		public void startDownloadItemGR()
+		{
+			string comp =((GlobalvarsApp)CallingActivity.Application).COMPANY_CODE;
+			string brn =((GlobalvarsApp)CallingActivity.Application).BRANCH_CODE;
+			string userid = ((GlobalvarsApp)CallingActivity.Application).USERID_CODE;
+
+			_client = _wfc.GetServiceClient ();	
+			if (_client != null) {
+				_client.GetItemReceiveCompleted += _client_GetItemReceiveCompleted;
+				_client.GetItemReceiveAsync (comp, brn,userid );
+			}
+		}
+
+
 		public void startDownloadCustomer()
 		{
 			string comp =((GlobalvarsApp)CallingActivity.Application).COMPANY_CODE;
@@ -63,6 +77,31 @@ namespace wincom.mobile.erp
 				_client.GetCustomersExCompleted += ClientOnGetCustomerCompleted;
 				_client.GetCustomersExAsync (comp, brn, userid);
 			}
+		}
+
+		void _client_GetItemReceiveCompleted (object sender, GetItemReceiveCompletedEventArgs e)
+		{
+			List<ItemGR> list = new List<ItemGR> ();
+			string msg = null;
+
+			if ( e.Error != null)
+			{
+				msg =  e.Error.Message;
+			}
+			else if ( e.Cancelled)
+			{
+				msg = CallingActivity.Resources.GetString(Resource.String.msg_reqcancel);
+			}
+			else
+			{
+				list =  e.Result.ToList<ItemGR>();
+				RunOnUiThread (() => InsertItemGRIntoDb(list));
+			}
+
+			if (msg != null) {
+				RunOnUiThread (() => Downloadhandle.Invoke (CallingActivity, 0, msg));
+			}
+
 		}
 
 		public  void startDownloadCompInfoex()
@@ -375,6 +414,80 @@ namespace wincom.mobile.erp
 				FireEvent (EventID.DOWNLOADED_ITEM);
 			}
 			else Downloadhandle.Invoke(CallingActivity,list.Count,dmsg);
+		}
+
+		private void InsertItemGRIntoDb(List<ItemGR> list)
+		{
+			string pathToDatabase = ((GlobalvarsApp)CallingActivity.Application).DATABASE_PATH;
+			string userid = ((GlobalvarsApp)CallingActivity.Application).USERID_CODE;
+			DateTime today = new DateTime(DateTime.Today.Year,DateTime.Today.Month,DateTime.Today.Day,00,00,00);
+			DateTime tempdate = today.AddDays (-4);
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				//var list2 = db.Table<Item>().ToList<Item>();
+				var itemcode= db.Table<Item>().ToList();
+				var stock= db.Table<ItemStock>().Where(x=>x.DateTrx>tempdate).OrderByDescending(x=>x.DateTrx).ToList();
+
+				string desc = "";
+				foreach (ItemGR item in list) {
+					desc = "";
+					var founditm = itemcode.Where (x => x.ICode == item.ICode).ToList ();
+					if (founditm.Count > 0)
+						desc = founditm [0].IDesc.Trim();
+					
+					var found = stock.Where (x => x.ICode == item.ICode && x.DateTrx == item.TrxDate).ToList ();
+					if (found.Count > 0) {
+						found [0].QtyGR = item.Qty;
+						found [0].IDesc = desc;
+						db.Update (found[0]);
+					} else {
+						ItemStock itm = new ItemStock ();
+						itm.ICode = item.ICode;
+						itm.IDesc = desc;
+						itm.DateTrx = item.TrxDate;
+						itm.QtyGR = item.Qty;
+						itm.QtyAct = 0;
+						itm.QtyBrf = 0;
+						itm.QtyCrf = 0;
+						itm.QtyRtr = 0;
+						itm.QtySales = 0;
+						itm.StdUom = item.UOM;
+						itm.Wh = item.WH;
+						db.Insert (itm);
+					}
+				}
+
+				for ( int i=0;i<3;i++)
+				{
+					int nday = i * -1;
+					tempdate =today.AddDays (nday);
+					var stock2= db.Table<ItemStock>().Where(x=>x.DateTrx==tempdate).ToList();
+					foreach (var itmc in itemcode) {
+						var found =stock2.Where(x=>x.DateTrx==tempdate&&x.ICode==itmc.ICode).ToList();
+						if (found.Count == 0) {
+							ItemStock itm = new ItemStock ();
+							itm.ICode = itmc.ICode;
+							itm.IDesc = itmc.IDesc;
+							itm.DateTrx = tempdate;
+							itm.QtyGR = 0;
+							itm.QtyAct = 0;
+							itm.QtyBrf = 0;
+							itm.QtyCrf = 0;
+							itm.QtyRtr = 0;
+							itm.QtySales = 0;
+							itm.StdUom = itmc.StdUom;
+							itm.Wh = userid;
+							db.Insert (itm);
+						}
+					}
+
+				}
+
+			}
+
+			string dmsg = CallingActivity.Resources.GetString (Resource.String.msg_successdownitems);
+			dmsg = dmsg.Replace ("nn", list.Count.ToString ());
+			Downloadhandle.Invoke(CallingActivity,list.Count,dmsg);
+
 		}
 
 		private void InsertCustomerIntoDb(List<Customer> list)

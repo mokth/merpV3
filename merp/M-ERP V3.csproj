@@ -246,6 +246,8 @@
     <Compile Include="Helper\Upload\UploadLocHelper.cs" />
     <Compile Include="Helper\MyWebView.cs" />
     <Compile Include="Activities\ShowMapActivity.cs" />
+    <Compile Include="Activities\ItemStockActivity.cs" />
+    <Compile Include="Activities\StockEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -614,6 +616,9 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_location.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_location.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_location.png" />
+    <AndroidResource Include="Resources\layout\ItemStockDtls.axml" />
+    <AndroidResource Include="Resources\layout\ItemStockList.axml" />
+    <AndroidResource Include="Resources\layout\StockEntry.axml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

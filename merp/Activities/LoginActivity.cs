@@ -343,6 +343,7 @@ namespace wincom.mobile.erp
 				conn.CreateTable<DelOrder>();
 				conn.CreateTable<DelOrderDtls>();
 				conn.CreateTable<GeoLocation>();
+				conn.CreateTable<ItemStock>();
 		
 			}
 		}
@@ -352,7 +353,7 @@ namespace wincom.mobile.erp
 			using (var conn= new SQLite.SQLiteConnection(pathToDatabase))
 			{
 				conn.CreateTable<GeoLocation>();
-
+				conn.CreateTable<ItemStock>();
 			}
 		}
 

@@ -50,9 +50,15 @@ namespace wincom.mobile.erp
 				StartActivity(typeof(PrintSumm));
 			};
 
+			Button butStksumm = FindViewById<Button> (Resource.Id.butStksumm);
+			butStksumm.Click+= (object sender, EventArgs e) => {
+				StartActivity(typeof(ItemStockActivity));
+			};
+
 			Button butMap = FindViewById<Button> (Resource.Id.butMap);
 			butMap.Click+= (object sender, EventArgs e) => {
 				StartActivity(typeof(ShowMapActivity));
+
 			};
 
 			Button butback = FindViewById<Button> (Resource.Id.butMain);
