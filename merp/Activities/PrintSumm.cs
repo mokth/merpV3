@@ -88,12 +88,12 @@ namespace wincom.mobile.erp
 			} else
 				sdate = DateTime.Today;
 
-			if (tod.Text != "") {
-				edate =Utility.ConvertToDate (tod.Text);
-			}
-			if (edate == null)
-				edate = sdate;
-			PrintInvSumm (sdate.Value, edate.Value);
+//			if (tod.Text != "") {
+//				edate =Utility.ConvertToDate (tod.Text);
+//			}
+//			if (edate == null)
+//				edate = sdate;
+			PrintInvSumm (sdate.Value, sdate.Value);
 		}
 
 

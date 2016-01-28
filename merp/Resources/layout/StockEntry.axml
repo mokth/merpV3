@@ -187,7 +187,7 @@
             android:layout_weight="1.5"
             android:padding="2dip">
             <TextView
-                android:text="QTY SALES"
+                android:text="ACTUAL BALANCE"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

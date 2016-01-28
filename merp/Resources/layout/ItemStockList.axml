@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:singleLine="true"
-            android:text="ACTUAL"
+            android:text="RECV"
             android:gravity="right"
             android:typeface="sans" />
         <TextView
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:singleLine="true"
-            android:text="SALES"
+            android:text="ACT BAL"
             android:gravity="right"
             android:typeface="sans" />
         <TextView

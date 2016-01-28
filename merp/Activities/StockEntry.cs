@@ -60,7 +60,7 @@ namespace wincom.mobile.erp
 			txtICode.Focusable = false;
 			txtDate.Focusable = false;
 			qtyGr.Focusable = false;
-			qtySales.Focusable = false;
+
 
 		}
 
@@ -90,18 +90,18 @@ namespace wincom.mobile.erp
 					qtyRtn.Text = list [0].QtyRtr.ToString ();
 					qtyCrf.Text = list [0].QtyCrf.ToString ();
 					qtyBrf.Text = list [0].QtyBrf.ToString ();
-					qtySales.Text = list [0].QtySales.ToString ();
+					qtySales.Text = list [0].QtyBal.ToString ();
 				}
 
-				var listinv =db.Table<Invoice> ().Where (x =>x.invdate == date).ToList();
-				var list2 = db.Table<InvoiceDtls> ().ToList<InvoiceDtls> ();
-
-				double ttlsales = 0;
-				foreach (Invoice inv in listinv) {
-					ttlsales = ttlsales + list2.Where (x => x.invno == inv.invno && x.icode == ICODE).Sum (x => x.qty);
-				}
-
-				qtySales.Text = ttlsales.ToString ();
+//				var listinv =db.Table<Invoice> ().Where (x =>x.invdate == date).ToList();
+//				var list2 = db.Table<InvoiceDtls> ().ToList<InvoiceDtls> ();
+//
+//				double ttlsales = 0;
+//				foreach (Invoice inv in listinv) {
+//					ttlsales = ttlsales + list2.Where (x => x.invno == inv.invno && x.icode == ICODE).Sum (x => x.qty);
+//				}
+//
+//				qtySales.Text = ttlsales.ToString ();
 			}
 		}
 
@@ -117,6 +117,7 @@ namespace wincom.mobile.erp
 					list [0].QtyRtr = Convert2NumTool<double>.ConvertVal (qtyRtn.Text);
 					list [0].QtyCrf = Convert2NumTool<double>.ConvertVal (qtyCrf.Text);
 					list [0].QtyBrf = Convert2NumTool<double>.ConvertVal (qtyBrf.Text);
+					list [0].QtyBal = Convert2NumTool<double>.ConvertVal (qtySales.Text);
 					db.Update (list [0]);
 				} 
 			}

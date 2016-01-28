@@ -35,6 +35,7 @@ namespace wincom.mobile.erp
 		public double TotalCNCash { get; set; }
 		public double TotalCNCollect { get; set; }
 		public List<ModelGrpPrice> GrpPrices { get; set; }
+		public List<ItemStkSummary> ItemsSumm { get; set; }
 	}
 
 	public class ModelGrpPrice

@@ -11,7 +11,7 @@ namespace wincom.mobile.erp
 
 		public static string RoundFormatPadLeft(double val, int decplace)
 		{
-			return Math.Round(val, decplace).ToString("n2");
+			return Math.Round(val, decplace).ToString("n"+decplace.ToString().Trim());
 		}
 
 		public static string PadLeft2Decplace(string val, int len)

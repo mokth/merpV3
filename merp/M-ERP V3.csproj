@@ -248,6 +248,7 @@
     <Compile Include="Activities\ShowMapActivity.cs" />
     <Compile Include="Activities\ItemStockActivity.cs" />
     <Compile Include="Activities\StockEntry.cs" />
+    <Compile Include="Helper\SummHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -20,6 +20,7 @@ namespace wincom.mobile.erp
 			string text = "";
 			try {
 				ModelSumm model = GetInvoiceSummModel (pathToDatabase, userID, printDate1, printDate2);
+				model.ItemsSumm = SummHelper.GetItemsSummary(pathToDatabase, printDate1);
 				VelocityEngine fileEngine = new VelocityEngine ();
 				fileEngine.Init ();
 				string content = GetTemplateFile (template, pathToDatabase);

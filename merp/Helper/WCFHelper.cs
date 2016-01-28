@@ -21,7 +21,7 @@ namespace wincom.mobile.erp
 		public static string GetDownloadDBUrl()
 		{
 			//production -live version
-			return "http://www.wincomcloud.com/wfcv3Live/dbfiles/";
+			return "http://www.wincomcloud.com/WfcV5Live/dbfiles/";
 
 			//Demo/testing -test version
 			//return "http://www.wincomcloud.com/wfcv3/dbfiles/";
@@ -34,7 +34,7 @@ namespace wincom.mobile.erp
 
 		public static string GeUploadApkUrl()
 		{
-			return "http://www.wincomcloud.com/wfcv3Live/apks/";
+			return "http://www.wincomcloud.com/WfcV5Live/apks/";
 		}
 
 		public static string GeUploadZipDBUrl()
@@ -46,7 +46,7 @@ namespace wincom.mobile.erp
 		public static string GetDownloadTemplateUrl()
 		{
 			//production -live version
-			return "http://www.wincomcloud.com/wfcv3Live/templates/";
+			return "http://www.wincomcloud.com/WfcV5Live/templates/";
 
 			//Demo/testing -test version
 			//return "http://www.wincomcloud.com/wfcv3/dbfiles/";

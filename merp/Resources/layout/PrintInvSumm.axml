@@ -32,7 +32,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/lbinvno"
             android:textColor="#ff1131f0"
-            android:paddingLeft="5dp" />
+            android:paddingLeft="5dp"
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:visibility="gone" />
         <EditText
             android:inputType="date"
             android:layout_width="match_parent"
@@ -41,7 +43,9 @@
             android:background="@android:drawable/edit_text"
             android:id="@+id/trxdateto"
             android:drawableRight="@android:drawable/ic_menu_today"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:visibility="gone" />
     </LinearLayout>
     <TableLayout
         android:minWidth="25px"

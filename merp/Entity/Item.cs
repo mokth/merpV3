@@ -79,6 +79,30 @@ namespace wincom.mobile.erp
 		public double QtyBrf { get; set; }
 		public double QtyRtr { get; set; }
 		public double QtyCrf { get; set; }
+		public double QtyBal { get; set; }
 	}
+
+	public class ItemStkSummary
+	{
+		public string ICODE { get; set; }
+		public string DESC { get; set; }
+		public double BF {get;set;}    //Stock from Yesterday
+		public double NSTK { get; set; }  //New Stock Received by Actual Qty
+		public double SSTK { get; set; }  //Latest Online receive qty
+		public double DSTK { get; set; }  //BF - NSTK
+		public double DSL { get; set; }   //SSL -ASL
+		public double SAMT { get; set; }  //SSL * Unit price
+		public double SSL { get; set; }  //Sales qty base on invoice
+		public double SRT { get; set; }  //Return qty base on invoice (EXCH) and CN
+		public double SBL { get; set; }  //SSTK - SSL - SRT
+		public double AAMT { get; set; }  //ASL * UnitPrice
+		public double ASL { get; set; }  //BF +NSTK -ART - ABL
+		public double ART { get; set; }  //Return Qty base on actual count
+		public double ABL { get; set; } //Balance qty base on actual count
+		public double DAMT { get; set; } //SAMT - AAMT
+
+	}
+
+
 
 }
