@@ -1233,6 +1233,57 @@ namespace wincom.mobile.erp
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f060097
+			public const int ACTBAL = 2131099799;
+			
+			// aapt resource value: 0x7f06009e
+			public const int ACTUALBALANCE = 2131099806;
+			
+			// aapt resource value: 0x7f06009d
+			public const int ACTUALRECEIVED = 2131099805;
+			
+			// aapt resource value: 0x7f060098
+			public const int BRF = 2131099800;
+			
+			// aapt resource value: 0x7f0600a0
+			public const int BRINGFORWARD = 2131099808;
+			
+			// aapt resource value: 0x7f0600a1
+			public const int CARRYFORWARD = 2131099809;
+			
+			// aapt resource value: 0x7f06009a
+			public const int CRF = 2131099802;
+			
+			// aapt resource value: 0x7f0600a5
+			public const int DOWNLOADSTOCK = 2131099813;
+			
+			// aapt resource value: 0x7f060095
+			public const int ISSUE = 2131099797;
+			
+			// aapt resource value: 0x7f06009c
+			public const int QTYISSUED = 2131099804;
+			
+			// aapt resource value: 0x7f06009f
+			public const int QTYRETURN = 2131099807;
+			
+			// aapt resource value: 0x7f060096
+			public const int RECV = 2131099798;
+			
+			// aapt resource value: 0x7f060099
+			public const int RTN = 2131099801;
+			
+			// aapt resource value: 0x7f0600a2
+			public const int SHOWLOCATION = 2131099810;
+			
+			// aapt resource value: 0x7f0600a3
+			public const int SHOWMAP = 2131099811;
+			
+			// aapt resource value: 0x7f0600a4
+			public const int STOCKSUMMARY = 2131099812;
+			
+			// aapt resource value: 0x7f06009b
+			public const int TRXDATE = 2131099803;
+			
 			// aapt resource value: 0x7f060002
 			public const int app_credits = 2131099650;
 			
@@ -1263,6 +1314,9 @@ namespace wincom.mobile.erp
 			// aapt resource value: 0x7f060033
 			public const int button_cancel = 2131099699;
 			
+			// aapt resource value: 0x7f060093
+			public const int button_date = 2131099795;
+			
 			// aapt resource value: 0x7f060034
 			public const int button_new = 2131099700;
 			
@@ -1280,6 +1334,9 @@ namespace wincom.mobile.erp
 			
 			// aapt resource value: 0x7f060036
 			public const int button_print = 2131099702;
+			
+			// aapt resource value: 0x7f060094
+			public const int button_save = 2131099796;
 			
 			// aapt resource value: 0x7f06003c
 			public const int button_search = 2131099708;
@@ -1484,6 +1541,9 @@ namespace wincom.mobile.erp
 			
 			// aapt resource value: 0x7f06007a
 			public const int msg_successdowntmp = 2131099770;
+			
+			// aapt resource value: 0x7f0600a6
+			public const int msg_successsave = 2131099814;
 			
 			// aapt resource value: 0x7f06007f
 			public const int msg_trxclear = 2131099775;

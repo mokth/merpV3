@@ -35,6 +35,10 @@ namespace wincom.mobile.erp
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
+			if (!((GlobalvarsApp)this.Application).ISLOGON) {
+				Finish ();
+			}
+			SetTitle (Resource.String.SHOWLOCATION);
 			SetContentView (Resource.Layout.ShowLocation);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			latlng= Intent.GetStringExtra ("location") ?? "";

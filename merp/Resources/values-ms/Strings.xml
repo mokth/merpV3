@@ -183,4 +183,24 @@
              <string name="form_billto">DIBILKAN KEPADA</string>
        <string name="form_remark">CATATAN</string> 
 
+       <string name="button_date">DATE</string>
+<string name="button_save">SAVE</string>
+<string name="ISSUE">ISSUE</string>
+<string name="RECV">RECV</string>
+<string name="ACTBAL">ACT BAL</string>
+<string name="BRF">BRF</string>
+<string name="RTN">RTN</string>
+<string name="CRF">CRF</string>
+<string name="TRXDATE">TRX DATE</string>
+<string name="QTYISSUED">QTY ISU</string>
+<string name="ACTUALRECEIVED">QTY TERIMA</string>
+<string name="ACTUALBALANCE">BAKI SEBENAR</string>
+<string name="QTYRETURN">QTY PULANG</string>
+<string name="BRINGFORWARD">BRING FORWARD</string>
+<string name="CARRYFORWARD">CARRY FORWARD</string>
+<string name="SHOWLOCATION">PAPAR LOKASI</string>
+<string name="SHOWMAP">PATA</string>
+<string name="STOCKSUMMARY">RINGKASAN STOK</string>
+<string name="DOWNLOADSTOCK">MUAT TURUN STOK</string>
+<string name="msg_successsave">Berjaya menyimpan data.</string>
    </resources>

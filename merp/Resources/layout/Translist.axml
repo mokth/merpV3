@@ -56,7 +56,7 @@
             android:height="53dp"
             android:id="@+id/butInvsumm" />
         <Button
-            android:text="STOCK SUMMARY"
+            android:text="@string/STOCKSUMMARY"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -64,7 +64,7 @@
             android:height="53dp"
             android:id="@+id/butStksumm" />
         <Button
-            android:text="SHOW LOCATION"
+            android:text="@string/SHOWLOCATION"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"

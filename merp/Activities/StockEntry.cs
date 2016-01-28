@@ -34,6 +34,10 @@ namespace wincom.mobile.erp
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
+			if (!((GlobalvarsApp)this.Application).ISLOGON) {
+				Finish ();
+			}
+			SetTitle (Resource.String.STOCKSUMMARY);
 			SetContentView (Resource.Layout.StockEntry);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			ICODE= Intent.GetStringExtra ("icode") ?? "";
@@ -85,12 +89,28 @@ namespace wincom.mobile.erp
 					txtIDesc.Text = list [0].IDesc;
 					txtICode.Text = list [0].ICode;
 					txtDate.Text = TRXDATE;
-					qtyAct.Text = list [0].QtyAct.ToString ();
+					if (list [0].QtyAct > 0)
+						qtyAct.Text = list [0].QtyAct.ToString ();
+					else
+						qtyAct.Text = "";
+					
 					qtyGr.Text = list [0].QtyGR.ToString ();
-					qtyRtn.Text = list [0].QtyRtr.ToString ();
-					qtyCrf.Text = list [0].QtyCrf.ToString ();
-					qtyBrf.Text = list [0].QtyBrf.ToString ();
-					qtySales.Text = list [0].QtyBal.ToString ();
+					if (list [0].QtyRtr > 0)
+						qtyRtn.Text = list [0].QtyRtr.ToString ();
+					else
+						qtyRtn.Text = "";
+					if (list [0].QtyCrf > 0)
+						qtyCrf.Text = list [0].QtyCrf.ToString ();
+					else
+						qtyCrf.Text = "";
+					if (list [0].QtyBrf > 0)
+						qtyBrf.Text = list [0].QtyBrf.ToString ();
+					else
+						qtyBrf.Text = "";
+					if (list [0].QtyBal > 0)
+						qtySales.Text = list [0].QtyBal.ToString ();
+					else
+						qtySales.Text = "";
 				}
 
 //				var listinv =db.Table<Invoice> ().Where (x =>x.invdate == date).ToList();
@@ -121,7 +141,7 @@ namespace wincom.mobile.erp
 					db.Update (list [0]);
 				} 
 			}
-			Toast.MakeText (this,"Successfully save...", ToastLength.Long).Show ();
+			Toast.MakeText (this, Resources.GetString(Resource.String.msg_successsave), ToastLength.Long).Show ();
 			base.OnBackPressed();
 		}
 	}

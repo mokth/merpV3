@@ -28,7 +28,7 @@
             android:layout_weight="1.5"
             android:padding="2dip">
             <TextView
-                android:text="ITEM CODE"
+                android:text="@string/invform_item"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:layout_weight="1.5"
             android:padding="2dip">
             <TextView
-                android:text="TRX DATE"
+                android:text="@string/TRXDATE"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
             android:layout_weight="1.5"
             android:padding="2dip">
             <TextView
-                android:text="QTY ISSUED"
+                android:text="@string/QTYISSUED"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
             android:layout_weight="1.5"
             android:padding="2dip">
             <TextView
-                android:text="ACTUAL RECEIVED"
+                android:text="@string/ACTUALRECEIVED"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
             android:layout_weight="1.5"
             android:padding="2dip">
             <TextView
-                android:text="ACTUAL BALANCE"
+                android:text="@string/ACTUALBALANCE"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -234,7 +234,7 @@
                 android:id="@+id/textView1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="QTY RETURN" />
+                android:text="@string/QTYRETURN" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -266,7 +266,7 @@
             android:layout_weight="1.5"
             android:padding="2dip">
             <TextView
-                android:text="BRING FORWARD"
+                android:text="@string/BRINGFORWARD"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -305,7 +305,7 @@
             android:layout_weight="1.5"
             android:padding="2dip">
             <TextView
-                android:text="CARRY FORWARD"
+                android:text="@string/CARRYFORWARD"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -347,7 +347,7 @@
                 android:textColor="#ffffff"
                 android:typeface="sans"
                 android:id="@+id/Save"
-                android:text="@string/but_save"
+                android:text="@string/button_save"
                 android:drawableLeft="@drawable/add"
                 android:width="130dp" />
             <Button

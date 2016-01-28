@@ -62,7 +62,7 @@
             android:drawableLeft="@drawable/summary"
             android:id="@+id/butInvsumm" />
         <Button
-            android:text="STOCK SUMMARY"
+            android:text="@string/STOCKSUMMARY"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/summary"
@@ -71,7 +71,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/butStksumm" />
         <Button
-            android:text="SHOW LOCATION"
+            android:text="@string/SHOWLOCATION"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"

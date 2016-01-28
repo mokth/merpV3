@@ -33,7 +33,7 @@ namespace wincom.mobile.erp
 			if (!((GlobalvarsApp)this.Application).ISLOGON) {
 				Finish ();
 			}
-			SetTitle (Resource.String.submenu_item);
+			SetTitle (Resource.String.STOCKSUMMARY);
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			SetContentView (Resource.Layout.ItemStockList);
 			imm = (InputMethodManager)GetSystemService(Context.InputMethodService);

@@ -185,4 +185,24 @@
 
       <string name="submenu_pos">CASH BILL</string>
     <string name="button_Paid">PAID</string>
+    <string name="button_date">DATE</string>
+<string name="button_save">SAVE</string>
+<string name="ISSUE">ISSUE</string>
+<string name="RECV">RECV</string>
+<string name="ACTBAL">ACT BAL</string>
+<string name="BRF">BRF</string>
+<string name="RTN">RTN</string>
+<string name="CRF">CRF</string>
+<string name="TRXDATE">TRX DATE</string>
+<string name="QTYISSUED">QTY ISSUED</string>
+<string name="ACTUALRECEIVED">ACTUAL RECEIVED</string>
+<string name="ACTUALBALANCE">ACTUAL BALANCE</string>
+<string name="QTYRETURN">QTY RETURN</string>
+<string name="BRINGFORWARD">BRING FORWARD</string>
+<string name="CARRYFORWARD">CARRY FORWARD</string>
+<string name="SHOWLOCATION">SHOWLOCATION</string>
+<string name="SHOWMAP">MAP</string>
+<string name="STOCKSUMMARY">STOCK SUMMARY</string>
+<string name="DOWNLOADSTOCK">DOWNLOAD STOCK QTY</string>
+ <string name="msg_successsave">Successfully save data.</string>
    </resources>

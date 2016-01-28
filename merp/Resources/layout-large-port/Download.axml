@@ -38,7 +38,7 @@
             android:id="@+id/butDownSetting"
             android:drawableRight="@drawable/settings" />
         <Button
-            android:text="DOWNLOAD STOCK QTY"
+            android:text="@string/DOWNLOADSTOCK"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"

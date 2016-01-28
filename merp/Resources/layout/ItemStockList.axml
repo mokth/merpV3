@@ -30,7 +30,7 @@
                 android:typeface="sans"
                 android:id="@+id/butDate"
                 android:width="100dp"
-                android:text="DATE" />
+                android:text="@string/button_date" />
             <EditText
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="0dp"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:singleLine="true"
-            android:text="ISSUE"
+            android:text="@string/ISSUE"
             android:typeface="sans"
             android:gravity="right" />
         <TextView
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:singleLine="true"
-            android:text="RECV"
+            android:text="@string/RECV"
             android:gravity="right"
             android:typeface="sans" />
         <TextView
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:singleLine="true"
-            android:text="ACT BAL"
+            android:text="@string/ACTBAL"
             android:gravity="right"
             android:typeface="sans" />
         <TextView
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:singleLine="true"
-            android:text="BRF"
+            android:text="@string/BRF"
             android:gravity="right"
             android:typeface="sans" />
         <TextView
@@ -93,7 +93,7 @@
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RTN"
+            android:text="@string/RTN"
             android:singleLine="true"
             android:gravity="right"
             android:typeface="sans" />
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:singleLine="true"
-            android:text="CRF"
+            android:text="@string/CRF"
             android:gravity="right"
             android:typeface="sans"
             android:textAlignment="viewEnd" />

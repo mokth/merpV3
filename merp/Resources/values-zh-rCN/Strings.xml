@@ -183,4 +183,25 @@
       <string name="msg_mustupload">請在繼續之前上傳票据..</string> 
     <string name="msg_bluetoothfound">成功发现设备 </string> 
      <string name="msg_bluetootherror">蓝牙设备时出错. 请再试一次..</string> 
+
+    <string name="button_date">日期</string>
+<string name="button_save">保存</string>
+<string name="ISSUE">發行</string>
+<string name="RECV">接收</string>
+<string name="ACTBAL">餘額</string>
+<string name="BRF">BRF</string>
+<string name="RTN">返回</string>
+<string name="CRF">CRF</string>
+<string name="TRXDATE">交易日期</string>
+<string name="QTYISSUED">發行數量</string>
+<string name="ACTUALRECEIVED">實際接收</string>
+<string name="ACTUALBALANCE">實際餘額</string>
+<string name="QTYRETURN">數量返回</string>
+<string name="BRINGFORWARD">提前數量</string>
+<string name="CARRYFORWARD">往前數量</string>
+<string name="SHOWLOCATION">顯示地點</string>
+<string name="SHOWMAP">地點</string>
+<string name="STOCKSUMMARY">庫存數量匯總</string>
+<string name="DOWNLOADSTOCK">下載庫存數量</string>
+<string name="msg_successsave">成功保存數據.</string>
    </resources>
