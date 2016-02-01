@@ -139,18 +139,18 @@ namespace wincom.mobile.erp
 			menu.Menu.RemoveItem (Resource.Id.popInvdelete);
 			menu.Menu.RemoveItem (Resource.Id.popInvadd);
 			menu.Menu.RemoveItem (Resource.Id.poppay);
-			bool  isNotAllowEditAfterPrinted  = DataHelper.GetInvoicePrintStatus (pathToDatabase,item.invno,rights);
+			bool  isNotAllowEditAfterPrinted  = DataHelper.GetCashBillPrintStatus (pathToDatabase,item.invno,rights);
 
 			if (isNotAllowEditAfterPrinted) {
 				menu.Menu.RemoveItem (Resource.Id.popInvedit);
 			}
 
-			if (!rights.InvAllowPrint) {
+			if (!rights.CSAllowPrint) {
 				menu.Menu.RemoveItem (Resource.Id.popInvprint);
 				menu.Menu.RemoveItem (Resource.Id.popInvprint2);
 			}
 
-			if (DataHelper.GetInvoicePrintStatus(pathToDatabase, item.invno,rights)) {
+			if (DataHelper.GetCashBillPrintStatus(pathToDatabase, item.invno,rights)) {
 				menu.Menu.RemoveItem (Resource.Id.popInvdelete);
 				menu.Menu.RemoveItem (Resource.Id.popInvedit);
 			}

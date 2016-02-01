@@ -186,6 +186,22 @@ namespace wincom.mobile.erp
 			return iSPrinted;
 		}
 
+
+		public static bool GetCashBillPrintStatus(string pathToDatabase,string invno,AccessRights rights)
+		{
+			bool iSPrinted = false;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+
+				if (rights.CSNotEditAftPrint) {
+					var list = db.Table<Invoice> ().Where (x => x.invno == invno).ToList ();
+					if (list.Count > 0) {
+						iSPrinted = list [0].isPrinted; 				
+					}
+				}
+			}
+			return iSPrinted;
+		}
+
 		public static bool GetDelOderPrintStatus(string pathToDatabase,string dono,AccessRights rights)
 		{
 			bool iSPrinted = false;

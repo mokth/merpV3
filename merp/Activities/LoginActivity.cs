@@ -61,7 +61,7 @@ namespace wincom.mobile.erp
 				createTable (pathToDatabase);
 			} else
 			{
-				if (pInfo.VersionCode >= 53) {
+				if (pInfo.VersionCode >= 54) {
 					if (!CheckIfColumnExists ()) {
 						createNewTable (pathToDatabase);	
 					}

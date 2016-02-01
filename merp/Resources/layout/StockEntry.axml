@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
-    android:paddingTop="5dp">
+    android:paddingTop="5dp"
+    android:background="@android:drawable/editbox_dropdown_light_frame">
     <TextView
         android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -13,9 +14,11 @@
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
         android:id="@+id/txtdesc"
+        android:background="@drawable/bluethem_edit_text_holo_light"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:editable="false" />
+        android:editable="false"
+        android:textColor="@android:color/black" />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -33,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:textColor="#ff093bf6"
                 android:id="@+id/textView1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp" />
@@ -50,10 +54,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txticode"
                 android:paddingLeft="5dp"
-                android:textColor="#ff140000"
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:textColorHint="@color/xam_gray"
-                android:editable="false" />
+                android:editable="false"
+                style="@style/BlueThem" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -73,6 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:textColor="#ff093bf6"
                 android:id="@+id/textView1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp" />
@@ -90,7 +95,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtdate"
                 android:paddingLeft="5dp"
-                android:textColor="#ff140000"
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:textColorHint="@color/xam_gray"
                 android:editable="false" />
@@ -113,6 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:textColor="#ff093bf6"
                 android:id="@+id/textView1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp" />
@@ -130,7 +135,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/qtygr"
                 android:paddingLeft="5dp"
-                android:textColor="#ff140000"
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:textColorHint="@color/xam_gray"
                 android:editable="false" />
@@ -153,6 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:textColor="#ff093bf6"
                 android:id="@+id/textView1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp" />
@@ -170,7 +175,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/qtyact"
                 android:paddingLeft="5dp"
-                android:textColor="#ff140000"
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:textColorHint="@color/xam_gray" />
         </LinearLayout>
@@ -192,6 +196,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:textColor="#ff093bf6"
                 android:id="@+id/textView1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp" />
@@ -209,7 +214,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/qtysales"
                 android:paddingLeft="5dp"
-                android:textColor="#ff140000"
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:textColorHint="@color/xam_gray"
                 android:editable="false" />
@@ -231,6 +235,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:textColor="#ff093bf6"
                 android:id="@+id/textView1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
@@ -249,7 +254,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/qtyrtn"
                 android:paddingLeft="5dp"
-                android:textColor="#ff140000"
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:textColorHint="@color/xam_gray" />
         </LinearLayout>
@@ -271,6 +275,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:textColor="#ff093bf6"
                 android:id="@+id/textView1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp" />
@@ -288,7 +293,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/qtybrf"
                 android:paddingLeft="5dp"
-                android:textColor="#ff140000"
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:textColorHint="@color/xam_gray" />
         </LinearLayout>
@@ -310,6 +314,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:textColor="#ff093bf6"
                 android:id="@+id/textView1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp" />
@@ -327,7 +332,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/qtycrf"
                 android:paddingLeft="5dp"
-                android:textColor="#ff140000"
                 android:background="@drawable/bluethem_edit_text_holo_light"
                 android:textColorHint="@color/xam_gray" />
         </LinearLayout>

@@ -137,7 +137,8 @@ namespace wincom.mobile.erp
 
 		void SpinnerHandling ()
 		{
-			dAdapterQty  = ArrayAdapter.CreateFromResource (this, Resource.Array.qtytype, Resource.Layout.spinner_item);
+			dAdapterQty  = ArrayAdapter.CreateFromResource (this, Resource.Array.qtytype,Resource.Layout.spinner_item);
+			dAdapterQty.SetDropDownViewResource (Resource.Layout.SimpleSpinnerDropDownItemEx);
 			dAdapterItem = new ArrayAdapter<String> (this, Resource.Layout.spinner_item, icodes);
 			dAdapterItem.SetDropDownViewResource (Resource.Layout.SimpleSpinnerDropDownItemEx);
 			dAdapterCust = new ArrayAdapter<String> (this, Resource.Layout.spinner_item, custcodes);
@@ -154,7 +155,7 @@ namespace wincom.mobile.erp
 		{
 			txtqty.EditorAction += HandleEditorAction;
 			txtqty.AfterTextChanged += Qty_AfterTextChanged;
-			txtprice.Enabled = rights.InvEditUPrice;
+			txtprice.Enabled = rights.CSEditUPrice;
 			txtbarcode.SetOnKeyListener (this);
 			butFindItem.Click += (object sender, EventArgs e) => {
 				ShowItemLookUp ();
@@ -304,7 +305,7 @@ namespace wincom.mobile.erp
 			butHome= FindViewById<Button> (Resource.Id.Home);
 			listView = FindViewById<ListView> (Resource.Id.invitemList);
 			txtInvDate.Text = DateTime.Today.ToString("dd-MM-yyyy");
-			if (rights.InvEditTrxDate) {
+			if (rights.CSEditTrxDate) {
 				txtInvDate.Click += delegate(object sender, EventArgs e) {
 					ShowDialog (0);
 				};
@@ -337,7 +338,7 @@ namespace wincom.mobile.erp
 			butFindItem.Enabled = lAdd;
 			txtInvDate.Enabled = lNew;
 
-			if (!rights.InvAllowAdd)
+			if (!rights.CSAllowAdd)
 				butAdd.Visibility = ViewStates.Gone;
 		}
 

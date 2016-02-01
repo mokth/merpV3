@@ -184,6 +184,8 @@
                             android:width="70dp"
                             android:id="@+id/qty_type"
                             android:paddingLeft="5dp"
+                            android:textColor="#ff140000"
+                            android:fitsSystemWindows="false"
                             android:background="@drawable/bluethem_spinner_background_holo_light" />
                         <EditText
                             android:textSize="16sp"

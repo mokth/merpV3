@@ -111,6 +111,7 @@ namespace wincom.mobile.erp
 		void SpinnerHandling ()
 		{
 			dAdapterQty  = ArrayAdapter.CreateFromResource (this, Resource.Array.qtytype, Resource.Layout.spinner_item);
+			dAdapterQty.SetDropDownViewResource (Resource.Layout.SimpleSpinnerDropDownItemEx);
 			dAdapterItem = new ArrayAdapter<String> (this, Resource.Layout.spinner_item, icodes);
 			dAdapterItem.SetDropDownViewResource (Resource.Layout.SimpleSpinnerDropDownItemEx);
 			spinItem.Adapter = dAdapterItem;

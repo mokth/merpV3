@@ -169,8 +169,11 @@
                         <Spinner
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:width="70dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/qty_type"
                             android:paddingLeft="5dp"
+                            android:fitsSystemWindows="false"
                             android:background="@drawable/bluethem_spinner_background_holo_light" />
                         <EditText
                             android:textSize="16sp"
