@@ -249,6 +249,8 @@
     <Compile Include="Activities\ItemStockActivity.cs" />
     <Compile Include="Activities\StockEntry.cs" />
     <Compile Include="Helper\SummHelper.cs" />
+    <Compile Include="Activities\InvoiceCash\InvoiceActivityEx.cs" />
+    <Compile Include="Activities\InvoiceCash\InvoiceListingEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -620,6 +622,8 @@
     <AndroidResource Include="Resources\layout\ItemStockDtls.axml" />
     <AndroidResource Include="Resources\layout\ItemStockList.axml" />
     <AndroidResource Include="Resources\layout\StockEntry.axml" />
+    <AndroidResource Include="Resources\layout\InvoiceEntry.axml" />
+    <AndroidResource Include="Resources\layout-large-port\InvoiceEntry.axml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
