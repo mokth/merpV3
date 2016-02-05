@@ -51,6 +51,7 @@ namespace wincom.mobile.erp
 		TextView txtcust;
 		TextView txtInvNo;
 		EditText txtInvDate;
+		EditText txtRemark;
 		TextView txtInvMode;
 		TextView txttax;
 		Button butFindCust;
@@ -122,6 +123,7 @@ namespace wincom.mobile.erp
 				txtInvMode.Text = "EDIT";
 				txtInvNo.Text = inv.invno;
 				txtInvDate.Text = inv.invdate.ToString ("dd-MM-yyyy");
+				txtRemark.Text = inv.remark.ToUpper();
 				int pos1= dAdapterCust.GetPosition (inv.custcode+" | "+inv.description.Trim());
 				if (pos1>0)
 					 spinCust.SetSelection (pos1);
@@ -296,6 +298,7 @@ namespace wincom.mobile.erp
 			txtInvMode = FindViewById<TextView> (Resource.Id.txtInvmode);
 			txtcust = FindViewById<TextView> (Resource.Id.txtInvcust);
 			txtbarcode = FindViewById<EditText> (Resource.Id.txtbarcode);
+			txtRemark = FindViewById<EditText> (Resource.Id.newinv_remark);
 			butAdd = FindViewById<Button> (Resource.Id.Save);
 			butCancel = FindViewById<Button> (Resource.Id.Cancel);
 	        butPaid = FindViewById<Button> (Resource.Id.Paid);
@@ -1020,7 +1023,7 @@ namespace wincom.mobile.erp
 				Toast.MakeText (this, Resources.GetString (Resource.String.msg_invalidcust), ToastLength.Long).Show ();
 				return;
 			}
-			string remark = "";
+			string remark = txtRemark.Text.ToUpper();
 			bool needPrint = false;
 
 
