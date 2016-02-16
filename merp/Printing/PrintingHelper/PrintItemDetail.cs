@@ -8,7 +8,7 @@ namespace wincom.mobile.erp
 		{
 			string test = "";
 			string desc = itm.description;
-			string pline2 = desc.ToUpper().Trim()+ "\n";
+			string pline2 =itm.icode.ToUpper()+"\n"+desc.ToUpper().Trim()+ "\n";
 			pline2 = pline2 + count.ToString ().PadRight (3, ' ');
 			if (itm.qty < 0) {
 				string sqty = "(EX)"+itm.qty.ToString ().Trim ()  ;

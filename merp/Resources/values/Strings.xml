@@ -51,7 +51,7 @@
     <string name="submenu_cnlist">CREDIT NOTE LIST</string>
     <string name="submenu_dolist">DELIVERY ORDER LIST</string>
     <string name="submenu_solist">SALES ORDER LIST</string>
-    <string name="submenu_summary">INVOICE SUMMARY</string>
+    <string name="submenu_summary">DAY END SUMMARY</string>
 
     <string name="submenu_item">MASTER ITEM</string>
     <string name="submenu_cust">CUSTOMER PROFILE</string>

@@ -52,7 +52,7 @@
     <string name="submenu_cnlist">SENARAI NOTA KREDIT</string>
     <string name="submenu_dolist">SENEARAI P/PENGHANTARAN</string>
     <string name="submenu_solist">SENARAI P/JUALAN</string>
-    <string name="submenu_summary">RINGKASAN INVOIS</string>
+    <string name="submenu_summary">RINGKASAN JUALAN</string>
 
     <string name="submenu_item">MASTER ITEM</string>
     <string name="submenu_cust">PROFIL PELANGGAN</string>

@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/lbinvno"
             android:textSize="24sp"
+            android:visibility="gone"
             android:textColor="#ff1131f0"
             android:paddingLeft="5dp" />
         <EditText
@@ -44,6 +45,7 @@
             android:background="@android:drawable/edit_text"
             android:id="@+id/trxdateto"
             android:textSize="24sp"
+            android:visibility="gone"
             android:drawableRight="@android:drawable/ic_menu_today"
             android:textColor="@android:color/black" />
     </LinearLayout>

@@ -265,7 +265,7 @@ namespace wincom.mobile.erp
 
 			text += "USER ID  : " + USERID + "\n";
 			text += "PRINT ON : " + DateTime.Now.ToString ("dd-MM-yyyy hh:mm tt") + "\n";
-			text += "END DAY REPORT ON " + printdate1.ToString ("yy-MM-yyyy")+"-"+ printdate2.ToString ("yy-MM-yyyy") + "\n";
+			text += "END DAY REPORT ON " + printdate1.ToString ("dd-MM-yyyy")+"-"+ printdate2.ToString ("dd-MM-yyyy") + "\n";
 		    
 			text += "------------------------------------------\n";
 			text += "NO  INVOICE NO         \n";

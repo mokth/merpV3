@@ -36,14 +36,27 @@ namespace wincom.mobile.erp
 		public double TotalCNCollect { get; set; }
 		public List<ModelGrpPrice> GrpPrices { get; set; }
 		public List<ItemStkSummary> ItemsSumm { get; set; }
+		public List<TaxSumm> InvTaxSumm { get; set; }
+		public List<TaxSumm> CSTaxSumm { get; set; }
+		public List<TaxSumm> CNInvTaxSumm { get; set; }
+		public List<TaxSumm> CNCSTaxSumm { get; set; }
+		public List<TaxSumm> TtlTaxSumm { get; set; }
 	}
 
 	public class ModelGrpPrice
 	{
 		public String ICode { get; set; }
 		public String IDesc { get; set; }
+		public List<GrpPriceList> PriceList { get; set; }
+
+	}
+
+	public class GrpPriceList
+	{
 		public double Price { get; set; }
 		public double Qty { get; set; }
+		public double TaxAmt { get; set; }
+		public double Amount { get; set; }
 	}
 
 	public class ModelSummDate
@@ -51,7 +64,18 @@ namespace wincom.mobile.erp
 		public DateTime Date { get; set; }
 		public List<Invoice> CashList { get; set; }
 		public List<Invoice> InvList { get; set; }
+		public List<CNNote> CashCNList { get; set; }
+		public List<CNNote> InvCNList { get; set; }
 
+	}
+
+
+	public class TaxSumm
+	{
+		public String TaxGrp { get; set; }
+		public String TaxDesc { get; set; }
+		public double Amount { get; set; }
+		public double TaxAmt { get; set; }
 	}
 }
 

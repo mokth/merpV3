@@ -329,7 +329,7 @@ namespace wincom.mobile.erp
 			else {
 				
 				File.Copy (filename, pathToDatabase, true);
-				string urldel = WCFHelper.GeUploadDBUrl()+"/afterdownload.aspx?ver=3&ID="+dbfilename;
+				string urldel = WCFHelper.GeUploadDBUrl()+"/afterdownload.aspx?ver=5&ID="+dbfilename;
 				WebRequest request = HttpWebRequest.Create(urldel);
 				request.GetResponse();
 				Toast.MakeText (this, Resources.GetString (Resource.String.msg_successdowndb), ToastLength.Long).Show ();
