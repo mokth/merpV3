@@ -639,9 +639,73 @@ namespace wincom.mobile.erp
 			int Expiry = DataHelper.GetUploadExpiryDays(pathToDatabase);
 			DateTime lastupload = DataHelper.GetLastUploadDate(pathToDatabase);
 			double day = (DateTime.Now - lastupload).TotalDays;
-			isExpired = (day > Expiry);
+			//isExpired = (day > Expiry);
+			//change on 22/feb/2016 - by Mok
+			isExpired = (Expiry > day );
 
 			return  isExpired;
+		}
+
+		public static int GetTotalUnUpLoadInv(string pathToDatabase,bool isUploaded=false )
+		{
+			int ttl =0;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				ttl = db.Table<Invoice> ().Where (x => x.isUploaded == isUploaded).Count ();
+			}
+			return ttl;
+		}
+
+		public static int GetTotalUnUpLoadInv(string pathToDatabase,string trxtype,bool isUploaded=false )
+		{
+			int ttl =0;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				ttl = db.Table<Invoice> ().Where (x => x.trxtype==trxtype && x.isUploaded == isUploaded).Count ();
+			}
+			return ttl;
+		}
+
+		public static int GetTotalUnUpLoadCN(string pathToDatabase ,bool isUploaded=false )
+		{
+			int ttl =0;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				ttl = db.Table<CNNote> ().Where (x => x.isUploaded == isUploaded).Count ();
+			}
+			return ttl;
+		}
+
+		public static int GetTotalUnUpLoadDO(string pathToDatabase ,bool isUploaded=false )
+		{
+			int ttl =0;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				ttl = db.Table<DelOrder> ().Where (x => x.isUploaded == isUploaded).Count ();
+			}
+			return ttl;
+		}
+
+		public static int GetTotalUnUpLoadSO(string pathToDatabase ,bool isUploaded=false )
+		{
+			int ttl =0;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				ttl = db.Table<SaleOrder> ().Where (x => x.isUploaded == isUploaded).Count ();
+			}
+			return ttl;
+		}
+
+		public static int GetTotalItems(string pathToDatabase )
+		{
+			int ttl =0;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				ttl = db.Table<Item> ().Count ();
+			}
+			return ttl;
+		}
+		public static int GetTotalCusts(string pathToDatabase )
+		{
+			int ttl =0;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				ttl = db.Table<Trader>().Count ();
+			}
+			return ttl;
 		}
 	}
 }

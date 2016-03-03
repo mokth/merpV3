@@ -34,6 +34,12 @@ namespace wincom.mobile.erp
 		string USERID;
 		AccessRights rights;
 		ProgressDialog progress;
+		Button butInv;
+		Button butPOS;
+		Button butSO;
+		Button butDO;
+		Button butCNNote;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -41,20 +47,29 @@ namespace wincom.mobile.erp
 				Finish ();
 				return;
 			}
+			Xamarin.Insights.Initialize("68d05db99c4aabb291a593343f0f7cfea961ea3a", this);
+			//Insight key
+			//68d05db99c4aabb291a593343f0f7cfea961ea3a
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 			GetDBPath ();
 			rights = Utility.GetAccessRights (pathToDatabase);
 			AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
-			Button but = FindViewById<Button> (Resource.Id.butSecond);
-			but.Click += butClick;
-			Button butCash = FindViewById<Button> (Resource.Id.butCash);
-			butCash.Click += butCashClick;
+			butPOS = FindViewById<Button> (Resource.Id.butPOS);
+			butPOS.Click += ButPOS_Click;
+			butInv = FindViewById<Button> (Resource.Id.butSecond);
+				butInv.Click += butClick;
+//			butCash = FindViewById<Button> (Resource.Id.butCash);
+//				butCash.Click += butCashClick;
+			butCNNote = FindViewById<Button> (Resource.Id.butcnnote);
+				butCNNote.Click += ButCNNote_Click;
+			butSO = FindViewById<Button> (Resource.Id.butso);
+				butSO.Click += ButSO_Click;
+			butDO = FindViewById<Button> (Resource.Id.butdo);
+				butDO.Click += ButDO_Click;
+
 			Button butTrxList = FindViewById<Button> (Resource.Id.butInvlist);
 			butTrxList.Click += ButInvlist_Click;
-			Button butPOS = FindViewById<Button> (Resource.Id.butPOS);
-			//butPOS.Visibility = ViewStates.Gone;
-			butPOS.Click += ButPOS_Click;
 			Button butdown = FindViewById<Button> (Resource.Id.butDown);
 			butdown.Click += butDownloadItems;
 			Button butup = FindViewById<Button> (Resource.Id.butupload);
@@ -67,12 +82,7 @@ namespace wincom.mobile.erp
 			butlogOff.Click += ButlogOff_Click;
 			//Button butAbt = FindViewById<Button> (Resource.Id.butAbout);
 			//butAbt.Click+= ButAbt_Click;
-			Button butCNNote = FindViewById<Button> (Resource.Id.butcnnote);
-			butCNNote.Click += ButCNNote_Click;
-			Button butSO = FindViewById<Button> (Resource.Id.butso);
-			butSO.Click += ButSO_Click;
-			Button butDO = FindViewById<Button> (Resource.Id.butdo);
-			butDO.Click += ButDO_Click;
+
 			if (!rights.IsSOModule) {
 				butSO.Visibility = ViewStates.Gone;
 			}
@@ -82,8 +92,30 @@ namespace wincom.mobile.erp
 			if (!rights.IsDOModule) {
 				butDO.Visibility = ViewStates.Gone;
 			}
+			GetTotalNumber();
 		}
 	
+		void GetTotalNumber()
+		{   
+			int invnum =DataHelper.GetTotalUnUpLoadInv(pathToDatabase,"INVOICE",false);
+			int csnum =DataHelper.GetTotalUnUpLoadInv(pathToDatabase,"CASH",false);
+			butInv.Text = Resources.GetString (Resource.String.submenu_inv)+((invnum>0)?" ("+invnum.ToString()+")":"");
+			butPOS.Text = Resources.GetString (Resource.String.submenu_cash)+((csnum>0)?" ("+csnum.ToString()+")":"");
+
+			if (rights.IsSOModule) {
+				int invSO =DataHelper.GetTotalUnUpLoadSO (pathToDatabase);
+				butSO.Text = Resources.GetString (Resource.String.submenu_so)+((invSO>0)?" ("+invSO.ToString()+")":"");
+			}
+			if (rights.IsCNModule) {
+				int invCN =DataHelper.GetTotalUnUpLoadCN (pathToDatabase);
+				butCNNote.Text = Resources.GetString (Resource.String.submenu_cn)+((invCN>0)?" ("+invCN.ToString()+")":"");
+			}
+			if (rights.IsDOModule) {
+				int invDO =DataHelper.GetTotalUnUpLoadDO (pathToDatabase);
+				butDO.Text = Resources.GetString (Resource.String.submenu_do)+((invDO>0)?" ("+invDO.ToString()+")":"");
+			}
+
+		}
 
 		private void butClick(object sender,EventArgs e)
 		{
@@ -92,12 +124,12 @@ namespace wincom.mobile.erp
 
 		}
 
-		private void butCashClick(object sender,EventArgs e)
-		{
-			var intent =ActivityManager.GetActivity<CashActivity>(this.ApplicationContext);
-			StartActivity(intent);
-		}
-
+//		private void butCashClick(object sender,EventArgs e)
+//		{
+//			var intent =ActivityManager.GetActivity<CashActivity>(this.ApplicationContext);
+//			StartActivity(intent);
+//		}
+//
 
 		void ButPOS_Click (object sender, EventArgs e)
 		{
@@ -256,6 +288,7 @@ namespace wincom.mobile.erp
 		{
 			base.OnResume();
 			GetDBPath ();
+			GetTotalNumber ();
 		}
 
 		void UploaddDb()

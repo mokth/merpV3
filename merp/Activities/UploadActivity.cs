@@ -18,6 +18,11 @@ namespace wincom.mobile.erp
 	{
 		AccessRights rights;
 		string pathToDatabase;
+		Button butupload;
+		Button butuploadso;
+		Button butuploadcn;
+		Button butuploaddo;
+		Button butuploadall;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -27,19 +32,19 @@ namespace wincom.mobile.erp
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
 			rights = Utility.GetAccessRights (pathToDatabase);
 
-			Button butupload = FindViewById<Button> (Resource.Id.butupload);
+			butupload = FindViewById<Button> (Resource.Id.butupload);
 			butupload.Click += butUploadBills;
 
-			Button butuploadso = FindViewById<Button> (Resource.Id.butuploadso);
+			butuploadso = FindViewById<Button> (Resource.Id.butuploadso);
 			butuploadso.Click += butUploadSO;
 
-			Button butuploadcn = FindViewById<Button> (Resource.Id.butuploadcn);
+			butuploadcn = FindViewById<Button> (Resource.Id.butuploadcn);
 			butuploadcn.Click += butUploadCN;
 
-			Button butuploaddo = FindViewById<Button> (Resource.Id.butuploaddo);
+			butuploaddo = FindViewById<Button> (Resource.Id.butuploaddo);
 			butuploaddo.Click += butUploadDO;
 
-			Button butuploadall = FindViewById<Button> (Resource.Id.butuploadAll);
+			butuploadall = FindViewById<Button> (Resource.Id.butuploadAll);
 			butuploadall.Click += butUploadAll;
 
 			Button butback = FindViewById<Button> (Resource.Id.butMain);
@@ -56,6 +61,32 @@ namespace wincom.mobile.erp
 			if (!rights.IsDOModule) {
 				butuploaddo.Visibility = ViewStates.Gone;
 			}
+			GetUnLoadNumber ();
+		}
+
+		void GetUnLoadNumber()
+		{   
+			int ttlNum = 0;
+			int invnum =DataHelper.GetTotalUnUpLoadInv (pathToDatabase);
+			ttlNum = ttlNum + invnum;
+			butupload.Text = Resources.GetString (Resource.String.submenu_upinv)+" ("+invnum.ToString()+")";
+			if (rights.IsSOModule) {
+			   int invSO =DataHelper.GetTotalUnUpLoadSO (pathToDatabase);
+				ttlNum = ttlNum + invSO;
+				butuploadso.Text = Resources.GetString (Resource.String.submenu_upso)+" ("+invSO.ToString()+")";
+			}
+			if (rights.IsCNModule) {
+				int invCN =DataHelper.GetTotalUnUpLoadCN (pathToDatabase);
+				ttlNum = ttlNum + invCN;
+				butuploadcn.Text = Resources.GetString (Resource.String.submenu_upcn)+" ("+invCN.ToString()+")";
+			}
+			if (rights.IsDOModule) {
+				int invDO =DataHelper.GetTotalUnUpLoadDO (pathToDatabase);
+				ttlNum = ttlNum + invDO;
+				butuploaddo.Text = Resources.GetString (Resource.String.submenu_updo)+" ("+invDO.ToString()+")";
+			}
+
+			butuploadall.Text = Resources.GetString (Resource.String.submenu_upall)+" ("+ttlNum.ToString()+")";
 		}
 
 		void butUploadAll(object sender,EventArgs e)
@@ -125,6 +156,7 @@ namespace wincom.mobile.erp
 			Button butupload = callingAct.FindViewById<Button> (Resource.Id.butuploadAll);
 			butupload.Text =  Resources.GetString(Resource.String.submenu_upall);// "UPLOAD INVOICE";
 			butupload.Enabled = true;
+			GetUnLoadNumber ();
 			if (count > 0) {
 				//string dispmsg = "Total " + count.ToString () + " invoices uploaded.";
 				string dispmsg =Resources.GetString(Resource.String.msg_upload);
@@ -140,6 +172,7 @@ namespace wincom.mobile.erp
 			Button butupload = callingAct.FindViewById<Button> (Resource.Id.butupload);
 			butupload.Text =  Resources.GetString(Resource.String.submenu_upinv);// "UPLOAD INVOICE";
 			butupload.Enabled = true;
+			GetUnLoadNumber ();
 			if (count > 0) {
 				//string dispmsg = "Total " + count.ToString () + " invoices uploaded.";
 				string dispmsg =Resources.GetString(Resource.String.msg_uploadinv);
@@ -174,6 +207,7 @@ namespace wincom.mobile.erp
 			Button butupload = callingAct.FindViewById<Button> (Resource.Id.butuploadso);
 			butupload.Text =  Resources.GetString(Resource.String.submenu_upso);// "UPLOAD INVOICE";
 			butupload.Enabled = true;
+			GetUnLoadNumber ();
 			if (count > 0) {
 				//string dispmsg = "Total " + count.ToString () + " invoices uploaded.";
 				string dispmsg =Resources.GetString(Resource.String.msg_uploadso);
@@ -189,6 +223,7 @@ namespace wincom.mobile.erp
 			Button butupload = callingAct.FindViewById<Button> (Resource.Id.butuploaddo);
 			butupload.Text =  Resources.GetString(Resource.String.submenu_updo);// "UPLOAD INVOICE";
 			butupload.Enabled = true;
+			GetUnLoadNumber ();
 			if (count > 0) {
 				//string dispmsg = "Total " + count.ToString () + " invoices uploaded.";
 				string dispmsg =Resources.GetString(Resource.String.msg_uploaddo);
@@ -204,6 +239,7 @@ namespace wincom.mobile.erp
 			Button butupload = callingAct.FindViewById<Button> (Resource.Id.butuploadcn);
 			butupload.Text =  Resources.GetString(Resource.String.submenu_upcn);// "UPLOAD INVOICE";
 			butupload.Enabled = true;
+			GetUnLoadNumber ();
 			if (count > 0) {
 				//string dispmsg = "Total " + count.ToString () + " invoices uploaded.";
 				string dispmsg =Resources.GetString(Resource.String.msg_uploadcn);
