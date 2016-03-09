@@ -16,7 +16,7 @@ using Android.Views.InputMethods;
 namespace wincom.mobile.erp
 {
 	[Activity (Label = "SALES ORDER ITEM ENTRY",Icon="@drawable/sales")]			
-	public class SOEntryActivity : Activity,IEventListener
+	public class SOEntryActivity_OLD : Activity,IEventListener
 	{
 		string pathToDatabase;
 		List<Item> items = null;

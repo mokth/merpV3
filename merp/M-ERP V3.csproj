@@ -254,6 +254,7 @@
     <Compile Include="Activities\InvoiceCash\InvoiceActivityEx.cs" />
     <Compile Include="Activities\InvoiceCash\InvoiceListingEx.cs" />
     <Compile Include="Entity\MyModel.cs" />
+    <Compile Include="Activities\SalesOrder\SOEntryActivityEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

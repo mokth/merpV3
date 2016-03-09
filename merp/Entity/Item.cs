@@ -61,7 +61,8 @@ namespace wincom.mobile.erp
 		public string Barcode { get; set; }
 
 		public string StdUom { get; set; }
-
+		public string Class { get; set; }
+		public string ImageFilename { get; set; }
 	}
 
 	public class ItemStock

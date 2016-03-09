@@ -154,7 +154,7 @@ namespace wincom.mobile.erp
 		void ShowItemEntry (SaleOrder so, string[] codes)
 		{
 			//var intent = new Intent (this, typeof(SOEntryActivity));
-			var intent =ActivityManager.GetActivity<SOEntryActivity>(this.ApplicationContext);
+			var intent =ActivityManager.GetActivity<SOEntryActivityEx>(this.ApplicationContext);
 			intent.PutExtra ("invoiceno", so.sono);
 			intent.PutExtra ("customer", codes [1].Trim ());
 			intent.PutExtra ("custcode",codes [0].Trim ());

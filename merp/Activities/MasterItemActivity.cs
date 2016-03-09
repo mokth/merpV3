@@ -21,6 +21,9 @@ namespace wincom.mobile.erp
 		GenericListAdapter<Item> adapter; 
 		EditText  txtSearch;
 		SetViewDlg viewdlg;
+		Spinner spinItem;
+		ArrayAdapter<String> dAdapterItem;
+		List<string> classcodes = new List<string> ();
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -38,6 +41,7 @@ namespace wincom.mobile.erp
 			butInvBack.Click += (object sender, EventArgs e) => {
 				base.OnBackPressed();
 			};
+			SetupClassSpinner ();
 			viewdlg = SetViewDelegate;
 			//PerformFilteringDlg filterDlg=PerformFiltering;
 			//listView.Adapter = new CusotmMasterItemListAdapter(this, listData);
@@ -48,16 +52,40 @@ namespace wincom.mobile.erp
 			txtSearch.TextChanged+= TxtSearch_TextChanged;
 		}
 
-		void FindItemByText ()
+		void SetupClassSpinner ()
 		{
-			List<Item> found = PerformSearch (txtSearch.Text);
+			spinItem = FindViewById<Spinner> (Resource.Id.txtClass);
+			dAdapterItem = new ArrayAdapter<String> (this, Resource.Layout.spinner_item, classcodes);
+			dAdapterItem.SetDropDownViewResource (Resource.Layout.SimpleSpinnerDropDownItemEx);
+			spinItem.Adapter = dAdapterItem;
+			spinItem.ItemSelected+= SpinItem_ItemSelected;
+		}
+
+		void SpinItem_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
+		{
+			Spinner spinner = (Spinner)sender;
+
+			string selectclass = spinner.GetItemAtPosition (e.Position).ToString();
+			if (string.IsNullOrEmpty(selectclass))
+				return;
+			FindItemByText (selectclass);
+		}
+
+		void FindItemByText (string classcode)
+		{
+			List<Item> found = new List<Item> ();
+			if (string.IsNullOrEmpty(classcode))
+				found = PerformSearch (txtSearch.Text);
+			else found = PerformSearch (classcode);
+
+			//List<Item> found = PerformSearch (txtSearch.Text);
 			adapter = new GenericListAdapter<Item> (this, found, Resource.Layout.ItemCodeDtlList, viewdlg);
 			listView.Adapter = adapter;
 		}
 
 		void TxtSearch_TextChanged (object sender, Android.Text.TextChangedEventArgs e)
 		{
-			FindItemByText ();
+			FindItemByText ("");
 		}
 
 		void ListView_Click (object sender, AdapterView.ItemClickEventArgs e)
@@ -83,7 +111,7 @@ namespace wincom.mobile.erp
 		{
 			base.OnResume();
 			if (txtSearch.Text != "") {
-				FindItemByText ();
+				FindItemByText ("");
 				return;
 			}
 			pathToDatabase = ((GlobalvarsApp)this.Application).DATABASE_PATH;
@@ -95,11 +123,6 @@ namespace wincom.mobile.erp
 		}
 		void populate(List<Item> list)
 		{
-
-//			var documents = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-//			pathToDatabase = Path.Combine(documents, "db_adonet.db");
-
-			//SqliteConnection.CreateFile(pathToDatabase);
 			using (var db = new SQLite.SQLiteConnection(pathToDatabase))
 			{
 
@@ -107,6 +130,10 @@ namespace wincom.mobile.erp
 				foreach(var item in list2)
 				{
 					list.Add(item);
+				}
+				var grpclass = list2.GroupBy (x => x.Class);
+				foreach (var grp in grpclass) {
+					classcodes.Add(grp.Key);
 				}
 			}
 		}
@@ -126,6 +153,11 @@ namespace wincom.mobile.erp
 					}
 
 					if (itm.IDesc.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
+
+					if (itm.Class.ToUpper().IndexOf (searchFor) >= 0) {
 						results.Add (itm);
 						continue;
 					}

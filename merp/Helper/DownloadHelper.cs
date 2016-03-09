@@ -47,8 +47,8 @@ namespace wincom.mobile.erp
 
 			_client = _wfc.GetServiceClient ();	
 			if (_client != null) {
-				_client.GetItemCodesExCompleted += ClientOnGetItemCompleted;
-				_client.GetItemCodesExAsync (comp, brn,userid );
+				_client.GetItemCodesNewCompleted += ClientOnGetItemCompleted;
+				_client.GetItemCodesNewAsync (comp, brn,userid );
 			}
 		}
 
@@ -157,7 +157,7 @@ namespace wincom.mobile.erp
 			}
 		}
 
-		private void ClientOnGetItemCompleted(object sender, GetItemCodesExCompletedEventArgs e)
+		private void ClientOnGetItemCompleted(object sender, GetItemCodesNewCompletedEventArgs e)
 		{
 			List<ItemCode> list = new List<ItemCode> ();
 			string msg = null;
@@ -401,6 +401,8 @@ namespace wincom.mobile.erp
 					itm.WholeSalePrice = item.WholesalePrice;
 					itm.Barcode = item.Barcode;
 					itm.StdUom = item.UOM;
+					itm.Class = item.IClass;
+					itm.ImageFilename = item.ImageName;
 					db.Insert (itm);
 				}
 			}

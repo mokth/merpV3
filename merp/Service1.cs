@@ -76,9 +76,13 @@ namespace WcfServiceItem
         
         private string BarcodeField;
         
+        private string IClassField;
+        
         private string ICodeField;
         
         private string IDescField;
+        
+        private string ImageNameField;
         
         private double PriceField;
         
@@ -110,6 +114,19 @@ namespace WcfServiceItem
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IClass
+        {
+            get
+            {
+                return this.IClassField;
+            }
+            set
+            {
+                this.IClassField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string ICode
         {
             get
@@ -132,6 +149,19 @@ namespace WcfServiceItem
             set
             {
                 this.IDescField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ImageName
+        {
+            get
+            {
+                return this.ImageNameField;
+            }
+            set
+            {
+                this.ImageNameField = value;
             }
         }
         
@@ -1916,6 +1946,11 @@ public interface IService1
     
     WcfServiceItem.ItemCode[] EndGetItemCodesEx(System.IAsyncResult result);
     
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/GetItemCodesNew", ReplyAction="http://tempuri.org/IService1/GetItemCodesNewResponse")]
+    System.IAsyncResult BeginGetItemCodesNew(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState);
+    
+    WcfServiceItem.ItemCode[] EndGetItemCodesNew(System.IAsyncResult result);
+    
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/GetCustomers", ReplyAction="http://tempuri.org/IService1/GetCustomersResponse")]
     System.IAsyncResult BeginGetCustomers(string comp, string brn, System.AsyncCallback callback, object asyncState);
     
@@ -2036,6 +2071,29 @@ public partial class GetItemCodesExCompletedEventArgs : System.ComponentModel.As
     private object[] results;
     
     public GetItemCodesExCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public WcfServiceItem.ItemCode[] Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((WcfServiceItem.ItemCode[])(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class GetItemCodesNewCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public GetItemCodesNewCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
             base(exception, cancelled, userState)
     {
         this.results = results;
@@ -2350,6 +2408,12 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     
     private System.Threading.SendOrPostCallback onGetItemCodesExCompletedDelegate;
     
+    private BeginOperationDelegate onBeginGetItemCodesNewDelegate;
+    
+    private EndOperationDelegate onEndGetItemCodesNewDelegate;
+    
+    private System.Threading.SendOrPostCallback onGetItemCodesNewCompletedDelegate;
+    
     private BeginOperationDelegate onBeginGetCustomersDelegate;
     
     private EndOperationDelegate onEndGetCustomersDelegate;
@@ -2492,6 +2556,8 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     public event System.EventHandler<GetItemCodesCompletedEventArgs> GetItemCodesCompleted;
     
     public event System.EventHandler<GetItemCodesExCompletedEventArgs> GetItemCodesExCompleted;
+    
+    public event System.EventHandler<GetItemCodesNewCompletedEventArgs> GetItemCodesNewCompleted;
     
     public event System.EventHandler<GetCustomersCompletedEventArgs> GetCustomersCompleted;
     
@@ -2698,6 +2764,67 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
                     comp,
                     brn,
                     userid}, this.onEndGetItemCodesExDelegate, this.onGetItemCodesExCompletedDelegate, userState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult IService1.BeginGetItemCodesNew(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginGetItemCodesNew(comp, brn, userid, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    WcfServiceItem.ItemCode[] IService1.EndGetItemCodesNew(System.IAsyncResult result)
+    {
+        return base.Channel.EndGetItemCodesNew(result);
+    }
+    
+    private System.IAsyncResult OnBeginGetItemCodesNew(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        string comp = ((string)(inValues[0]));
+        string brn = ((string)(inValues[1]));
+        string userid = ((string)(inValues[2]));
+        return ((IService1)(this)).BeginGetItemCodesNew(comp, brn, userid, callback, asyncState);
+    }
+    
+    private object[] OnEndGetItemCodesNew(System.IAsyncResult result)
+    {
+        WcfServiceItem.ItemCode[] retVal = ((IService1)(this)).EndGetItemCodesNew(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnGetItemCodesNewCompleted(object state)
+    {
+        if ((this.GetItemCodesNewCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.GetItemCodesNewCompleted(this, new GetItemCodesNewCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void GetItemCodesNewAsync(string comp, string brn, string userid)
+    {
+        this.GetItemCodesNewAsync(comp, brn, userid, null);
+    }
+    
+    public void GetItemCodesNewAsync(string comp, string brn, string userid, object userState)
+    {
+        if ((this.onBeginGetItemCodesNewDelegate == null))
+        {
+            this.onBeginGetItemCodesNewDelegate = new BeginOperationDelegate(this.OnBeginGetItemCodesNew);
+        }
+        if ((this.onEndGetItemCodesNewDelegate == null))
+        {
+            this.onEndGetItemCodesNewDelegate = new EndOperationDelegate(this.OnEndGetItemCodesNew);
+        }
+        if ((this.onGetItemCodesNewCompletedDelegate == null))
+        {
+            this.onGetItemCodesNewCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetItemCodesNewCompleted);
+        }
+        base.InvokeAsync(this.onBeginGetItemCodesNewDelegate, new object[] {
+                    comp,
+                    brn,
+                    userid}, this.onEndGetItemCodesNewDelegate, this.onGetItemCodesNewCompletedDelegate, userState);
     }
     
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -3581,6 +3708,23 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
         {
             object[] _args = new object[0];
             WcfServiceItem.ItemCode[] _result = ((WcfServiceItem.ItemCode[])(base.EndInvoke("GetItemCodesEx", _args, result)));
+            return _result;
+        }
+        
+        public System.IAsyncResult BeginGetItemCodesNew(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState)
+        {
+            object[] _args = new object[3];
+            _args[0] = comp;
+            _args[1] = brn;
+            _args[2] = userid;
+            System.IAsyncResult _result = base.BeginInvoke("GetItemCodesNew", _args, callback, asyncState);
+            return _result;
+        }
+        
+        public WcfServiceItem.ItemCode[] EndGetItemCodesNew(System.IAsyncResult result)
+        {
+            object[] _args = new object[0];
+            WcfServiceItem.ItemCode[] _result = ((WcfServiceItem.ItemCode[])(base.EndInvoke("GetItemCodesNew", _args, result)));
             return _result;
         }
         

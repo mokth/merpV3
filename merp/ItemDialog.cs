@@ -20,11 +20,14 @@ namespace wincom.mobile.erp
 	{
 		ListView listView ;
 		List<Item> listData = new List<Item> ();
+		List<string> classcodes = new List<string> ();
 		string pathToDatabase;
 		GenericListAdapter<Item> adapter; 
 		EditText  txtSearch;
 		Button butSearch;
+		Spinner spinItem;
 		SetViewDlg viewdlg;
+		ArrayAdapter<String> dAdapterItem;
 		string _selectedItem;
 
 		public static ItemDialog NewInstance()
@@ -61,10 +64,12 @@ namespace wincom.mobile.erp
 				listView.ItemClick += ListView_Click;
 				txtSearch= view.FindViewById<EditText > (Resource.Id.txtSearch);
 				butSearch= view.FindViewById<Button> (Resource.Id.butICodeBack); 
+				SetupClassSpinner (view);
+
 				butSearch.Text = Resources.GetString(Resource.String.button_search);
 				butSearch.SetCompoundDrawables (null, null, null, null);
 				butSearch.Click+= ButSearch_Click;
-				//txtSearch.TextChanged += TxtSearch_TextChanged;
+				txtSearch.TextChanged += TxtSearch_TextChanged;
 				builder.SetView (view);
 				builder.SetPositiveButton (Resources.GetString(Resource.String.button_cancel), HandlePositiveButtonClick);
 			}
@@ -73,9 +78,28 @@ namespace wincom.mobile.erp
 			return dialog;
 		}
 
+		void SetupClassSpinner (View view)
+		{
+			spinItem = view.FindViewById<Spinner> (Resource.Id.txtClass);
+			dAdapterItem = new ArrayAdapter<String> (this.Activity, Resource.Layout.spinner_item, classcodes);
+			dAdapterItem.SetDropDownViewResource (Resource.Layout.SimpleSpinnerDropDownItemEx);
+			spinItem.Adapter = dAdapterItem;
+			spinItem.ItemSelected+= SpinItem_ItemSelected;
+		}
+
+		void SpinItem_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
+		{
+			Spinner spinner = (Spinner)sender;
+
+			string selectclass = spinner.GetItemAtPosition (e.Position).ToString();
+			if (string.IsNullOrEmpty(selectclass))
+				return;
+			FindItemByText (selectclass);
+		}
+
 		void ButSearch_Click (object sender, EventArgs e)
 		{
-			FindItemByText ();
+			FindItemByText ("");
 		}
 
 		private void HandlePositiveButtonClick(object sender, DialogClickEventArgs e)
@@ -88,16 +112,20 @@ namespace wincom.mobile.erp
 			var dialog = (AlertDialog) sender;
 			dialog.Dismiss();
 		}
-		void FindItemByText ()
+		void FindItemByText (string classcode)
 		{
-			List<Item> found = PerformSearch (txtSearch.Text);
+			List<Item> found = new List<Item> ();
+			if (string.IsNullOrEmpty(classcode))
+			     found = PerformSearch (txtSearch.Text);
+			else found = PerformSearch (classcode);
+			
 			adapter = new GenericListAdapter<Item> (this.Activity, found,Resource.Layout.ItemCodeDtlList, viewdlg);
 			listView.Adapter = adapter;
 		}
 
 		void TxtSearch_TextChanged (object sender, Android.Text.TextChangedEventArgs e)
 		{
-			FindItemByText ();
+			FindItemByText ("");
 		}
 
 		void ListView_Click (object sender, AdapterView.ItemClickEventArgs e)
@@ -141,6 +169,10 @@ namespace wincom.mobile.erp
 						results.Add (itm);
 						continue;
 					}
+					if (itm.Class.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
 				}
 			}
 			return results;
@@ -160,6 +192,10 @@ namespace wincom.mobile.erp
 				foreach(var item in list2)
 				{
 					list.Add(item);
+				}
+				var grpclass = list2.GroupBy (x => x.Class);
+				foreach (var grp in grpclass) {
+					classcodes.Add(grp.Key);
 				}
 			}
 		}

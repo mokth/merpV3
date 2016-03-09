@@ -63,7 +63,7 @@ namespace wincom.mobile.erp
 			{
 				if (pInfo.VersionCode >= 54) {
 					if (!CheckIfColumnExists ()) {
-						createNewTable (pathToDatabase);	
+						UpdateItem ();
 					}
 				}
 			}
@@ -236,14 +236,13 @@ namespace wincom.mobile.erp
 		private bool CheckIfColumnExists()
 		{
 			bool isfound = true;
-			try{
-				using (SQLite.SQLiteConnection Conn = new SQLiteConnection(pathToDatabase))
-				{
-					var col =Conn.GetTableInfo("GeoLocation");
-					isfound=(col.Count >2);
-				
+			try {
+				using (SQLite.SQLiteConnection Conn = new SQLiteConnection (pathToDatabase)) {
+					//var col =Conn.GetTableInfo("GeoLocation");
+					//	isfound=(col.Count >2);
+					var tmp = Conn.Table<Item> ().Where (x =>x.Class == "X"); 
 				}
-			}catch {
+			} catch {
 				isfound = false;
 			}
 			return isfound;
@@ -288,25 +287,25 @@ namespace wincom.mobile.erp
 //			}
 //		}
 //
-//		private void UpdateTrader()
-//		{
-//			try {
-//				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
-//
-//					string sql = @"ALTER TABLE Trader RENAME TO sqlitestudio_temp_table3;
-//								   CREATE TABLE Trader (CustCode varchar PRIMARY KEY NOT NULL, CustName varchar, Addr1 varchar, Addr2 varchar, Addr3 varchar, Addr4 varchar, Tel varchar, Fax varchar, gst varchar, PayCode varchar, CustType varchar, AgentCode VARCHAR);
-//							       INSERT INTO Trader (CustCode, CustName, Addr1, Addr2, Addr3, Addr4, Tel, Fax, gst, PayCode, CustType) SELECT CustCode, CustName, Addr1, Addr2, Addr3, Addr4, Tel, Fax, gst, PayCode, CustType FROM sqlitestudio_temp_table3;
-//								   DROP TABLE sqlitestudio_temp_table3";
-//					string[] sqls = sql.Split (new char[]{ ';' });
-//					foreach (string ssql in sqls) {
-//						conn.Execute (ssql, new object[]{ });
-//					}
-//				}
-//			} catch (Exception ex) {
-//				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
-//				AlertShow("UpdateTrader() "+ex.Message);
-//			}
-//		}
+		private void UpdateItem()
+		{
+			try {
+				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
+
+					string sql = @"ALTER TABLE Item RENAME TO sqlitestudio_temp_table;
+								   CREATE TABLE Item (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, ICode varchar, IDesc varchar, Price float, tax float, taxgrp varchar, isincludesive integer, VIPPrice float, RetailPrice float, WholeSalePrice float, Barcode varchar, StdUom varchar, Class VARCHAR, ImageFilename VARCHAR);
+		   		  	  			   INSERT INTO Item (ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode, StdUom) SELECT ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode, StdUom FROM sqlitestudio_temp_table;
+								   DROP TABLE sqlitestudio_temp_table;";
+					string[] sqls = sql.Split (new char[]{ ';' });
+					foreach (string ssql in sqls) {
+						conn.Execute (ssql, new object[]{ });
+					}
+				}
+			} catch (Exception ex) {
+				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
+				AlertShow("UpdateItem() "+ex.Message);
+			}
+		}
 
 
 		void ImportDatabase ()

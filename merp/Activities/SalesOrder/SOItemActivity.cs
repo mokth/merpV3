@@ -236,7 +236,7 @@ namespace wincom.mobile.erp
 		void Edit(SaleOrderDtls so)
 		{
 			//var intent = new Intent(this, typeof(SOEntryActivity));
-			var intent =ActivityManager.GetActivity<SOEntryActivity>(this.ApplicationContext);
+			var intent =ActivityManager.GetActivity<SOEntryActivityEx>(this.ApplicationContext);
 			intent.PutExtra ("invoiceno",so.sono );
 			intent.PutExtra ("itemuid",so.ID.ToString() );
 			intent.PutExtra ("editmode","EDIT" );
@@ -247,7 +247,7 @@ namespace wincom.mobile.erp
 
 		private void NewItem(string sono)
 		{
-			var intent =ActivityManager.GetActivity<SOEntryActivity>(this.ApplicationContext);
+			var intent =ActivityManager.GetActivity<SOEntryActivityEx>(this.ApplicationContext);
 			intent.PutExtra ("invoiceno",sono );
 			intent.PutExtra ("itemuid","-1");
 			intent.PutExtra ("editmode","NEW" );

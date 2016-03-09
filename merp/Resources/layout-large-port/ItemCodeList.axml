@@ -21,10 +21,17 @@
                 android:drawableLeft="@drawable/left"
                 android:width="120dp"
                 android:text="@string/button_back" />
+            <Spinner
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtClass"
+                android:width="100dp"
+                android:background="@drawable/bluethem_spinner_background_holo_light" />
             <EditText
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="0dp"
-                android:layout_weight="0.8"
+                android:layout_weight="0.6"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtSearch"
                 android:paddingLeft="5dp"
