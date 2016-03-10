@@ -18,6 +18,7 @@ namespace wincom.mobile.erp
 	{
 		Button butCustProf;
 		Button butMItem;
+		Button butPrice;
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -30,12 +31,20 @@ namespace wincom.mobile.erp
 			butMItem = FindViewById<Button> (Resource.Id.butMaster);
 			butMItem.Click += butMasterClick;
 
+			butPrice = FindViewById<Button> (Resource.Id.butPrices);
+			butPrice.Click+= ButPrice_Click;
 			Button butback = FindViewById<Button> (Resource.Id.butMain);
-			butback.Click+= (object sender, EventArgs e) => {
-				base.OnBackPressed();
+			butback.Click += (object sender, EventArgs e) => {
+				base.OnBackPressed ();
 			};
 
 			GetTotalNumber ();
+		}
+
+		void ButPrice_Click (object sender, EventArgs e)
+		{
+			var intent = new Intent(this, typeof(ItemPricesActivity));
+			StartActivity(intent);
 		}
 
 		void GetTotalNumber()
@@ -44,21 +53,21 @@ namespace wincom.mobile.erp
 			int ttlNum = 0;
 			int numitm =DataHelper.GetTotalItems (pathToDatabase);
 			int numcust =DataHelper.GetTotalCusts (pathToDatabase);
+			int numprices =DataHelper.GetTotalItemPrice (pathToDatabase);
+
 
 			butMItem.Text = Resources.GetString (Resource.String.submenu_item)+" ("+numitm.ToString()+")";
 			butCustProf.Text = Resources.GetString (Resource.String.submenu_cust)+" ("+numcust.ToString()+")";
-
+			butPrice.Text= Resources.GetString (Resource.String.submenu_itemprice)+" ("+numprices.ToString()+")";
 		}
 		private void butMasterClick(object sender,EventArgs e)
 		{
 			var intent = new Intent(this, typeof(MasterItemActivity));
-
 			StartActivity(intent);
 		}
 		private void butCustomerClick(object sender,EventArgs e)
 		{
 			var intent = new Intent(this, typeof(CustomerActivity));
-
 			StartActivity(intent);
 		}
 	}

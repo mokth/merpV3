@@ -104,6 +104,18 @@ namespace wincom.mobile.erp
 
 	}
 
+	public class ItemPrices
+	{
+		[PrimaryKey, AutoIncrement]
+		public int ID { get; set; }
+		public string CustCode { get; set; }
+		public string CustName { get; set; }
+		public string ICode { get; set; }
+		public string IDesc { get; set; }
+		public string IClass { get; set; }
+		public double Price { get; set; }
+		public DateTime InvDate { get; set; }
 
+	}
 
 }

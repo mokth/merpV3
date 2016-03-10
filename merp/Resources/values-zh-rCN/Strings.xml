@@ -204,4 +204,6 @@
 <string name="STOCKSUMMARY">庫存數量匯總</string>
 <string name="DOWNLOADSTOCK">下載庫存數量</string>
 <string name="msg_successsave">成功保存數據.</string>
+ <string name="submenu_itemprice">产品新價格</string>
+  <string name="DOWNLOADPRICE">下載产品新價格</string>
    </resources>

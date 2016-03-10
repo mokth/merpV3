@@ -116,8 +116,8 @@ namespace wincom.mobile.erp
 		{
 			List<Item> found = new List<Item> ();
 			if (string.IsNullOrEmpty(classcode))
-			     found = PerformSearch (txtSearch.Text);
-			else found = PerformSearch (classcode);
+			     found = PerformSearch (txtSearch.Text,false);
+			else found = PerformSearch (classcode,true);
 			
 			adapter = new GenericListAdapter<Item> (this.Activity, found,Resource.Layout.ItemCodeDtlList, viewdlg);
 			listView.Adapter = adapter;
@@ -152,7 +152,7 @@ namespace wincom.mobile.erp
 			view.FindViewById<TextView> (Resource.Id.icodeinclusive).Text = (item.isincludesive)?"INC":"EXC";
 		}
 
-		List<Item> PerformSearch (string constraint)
+		List<Item> PerformSearch (string constraint,bool isIClass)
 		{
 			List<Item>  results = new List<Item>();
 			if (constraint != null) {
@@ -161,6 +161,13 @@ namespace wincom.mobile.erp
 
 				foreach(Item itm in listData)
 				{
+					if (itm.Class.ToUpper().IndexOf (searchFor) >= 0) {
+						results.Add (itm);
+						continue;
+					}
+					if (isIClass)
+						continue;
+						
 					if (itm.ICode.ToUpper().IndexOf (searchFor) >= 0) {
 						results.Add (itm);
 						continue;
@@ -169,10 +176,7 @@ namespace wincom.mobile.erp
 						results.Add (itm);
 						continue;
 					}
-					if (itm.Class.ToUpper().IndexOf (searchFor) >= 0) {
-						results.Add (itm);
-						continue;
-					}
+
 				}
 			}
 			return results;

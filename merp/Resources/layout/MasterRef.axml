@@ -15,6 +15,13 @@
             android:drawableLeft="@drawable/item"
             android:id="@+id/butMaster" />
         <Button
+            android:text="@string/submenu_itemprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:drawableLeft="@drawable/item"
+            android:id="@+id/butPrices" />
+        <Button
             android:text="@string/submenu_cust"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

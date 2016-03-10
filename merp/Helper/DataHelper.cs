@@ -699,6 +699,15 @@ namespace wincom.mobile.erp
 			}
 			return ttl;
 		}
+		public static int GetTotalItemPrice(string pathToDatabase )
+		{
+			int ttl =0;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				ttl = db.Table<ItemPrices> ().Count ();
+			}
+			return ttl;
+		}
+
 		public static int GetTotalCusts(string pathToDatabase )
 		{
 			int ttl =0;

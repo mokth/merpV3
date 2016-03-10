@@ -343,7 +343,7 @@ namespace wincom.mobile.erp
 				conn.CreateTable<DelOrderDtls>();
 				conn.CreateTable<GeoLocation>();
 				conn.CreateTable<ItemStock>();
-		
+				conn.CreateTable<ItemPrices>();
 			}
 		}
 

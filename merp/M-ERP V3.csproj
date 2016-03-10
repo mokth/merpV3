@@ -86,11 +86,11 @@
     <Reference Include="Plugin.Geolocator">
       <HintPath>..\packages\Plugin.Geolocator.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.23.1.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Insights">
       <HintPath>..\packages\Xamarin.Insights.1.11.4\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +255,7 @@
     <Compile Include="Activities\InvoiceCash\InvoiceListingEx.cs" />
     <Compile Include="Entity\MyModel.cs" />
     <Compile Include="Activities\SalesOrder\SOEntryActivityEx.cs" />
+    <Compile Include="Activities\ItemPricesActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -628,6 +629,7 @@
     <AndroidResource Include="Resources\layout\StockEntry.axml" />
     <AndroidResource Include="Resources\layout\InvoiceEntry.axml" />
     <AndroidResource Include="Resources\layout-large-port\InvoiceEntry.axml" />
+    <AndroidResource Include="Resources\layout\ItemPriceList.axml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

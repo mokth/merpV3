@@ -35,10 +35,24 @@ namespace wincom.mobile.erp
 			Button butdownStock = FindViewById<Button> (Resource.Id.butDownStock);
 			butdownStock.Click+= ButdownStock_Click;
 
+			Button butdownPrice = FindViewById<Button> (Resource.Id.butDownPrice);
+			butdownPrice.Click+= ButdownPrice_Click;
+
 			Button butback = FindViewById<Button> (Resource.Id.butMain);
 			butback.Click+= (object sender, EventArgs e) => {
 				base.OnBackPressed();
 			};
+		}
+
+		void ButdownPrice_Click (object sender, EventArgs e)
+		{
+			Button butDown =  FindViewById<Button> (Resource.Id.butDownPrice);
+			butDown.Enabled = false;
+			DownloadHelper download= new DownloadHelper();
+			download.Downloadhandle = DownItemPricesDoneDlg; 
+			download.CallingActivity = this;
+			download.NotDownloadAll ();
+			download.startDownloadItemPrices();
 		}
 
 		void ButdownSetting_Click (object sender, EventArgs e)
@@ -64,7 +78,7 @@ namespace wincom.mobile.erp
 
 		void ButdownStock_Click(object sender,EventArgs e)
 		{
-			Button butDown =  FindViewById<Button> (Resource.Id.butDown);
+			Button butDown =  FindViewById<Button> (Resource.Id.butDownStock);
 			butDown.Enabled = false;
 			DownloadHelper download= new DownloadHelper();
 			download.Downloadhandle = DownItemsDoneDlg; 
@@ -116,6 +130,20 @@ namespace wincom.mobile.erp
 		private void DownItemsDoneDlg(Activity callingAct,int count,string msg)
 		{
 			Button butdown = FindViewById<Button> (Resource.Id.butDown);
+			butdown.Enabled = true;
+			if (count > 0) {
+				string dispmsg =Resources.GetString(Resource.String.msg_downitem);
+				dispmsg = dispmsg.Replace ("xx", count.ToString ());
+				//string dispmsg = "Total " + count.ToString () + " Items downloaded.";
+				Toast.MakeText (this, dispmsg, ToastLength.Long).Show ();	
+			} else {
+				Toast.MakeText (this, msg, ToastLength.Long).Show ();	
+			}
+		}
+
+		private void DownItemPricesDoneDlg(Activity callingAct,int count,string msg)
+		{
+			Button butdown = FindViewById<Button> (Resource.Id.butDownPrice);
 			butdown.Enabled = true;
 			if (count > 0) {
 				string dispmsg =Resources.GetString(Resource.String.msg_downitem);

@@ -1923,6 +1923,118 @@ namespace WcfServiceItem
             }
         }
     }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ItemLastPrice", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceItem")]
+    public partial class ItemLastPrice : object
+    {
+        
+        private string CustCodeField;
+        
+        private string CustNameField;
+        
+        private string IClassField;
+        
+        private string ICodeField;
+        
+        private string IDescField;
+        
+        private System.DateTime InvDateField;
+        
+        private double PriceField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CustCode
+        {
+            get
+            {
+                return this.CustCodeField;
+            }
+            set
+            {
+                this.CustCodeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CustName
+        {
+            get
+            {
+                return this.CustNameField;
+            }
+            set
+            {
+                this.CustNameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IClass
+        {
+            get
+            {
+                return this.IClassField;
+            }
+            set
+            {
+                this.IClassField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ICode
+        {
+            get
+            {
+                return this.ICodeField;
+            }
+            set
+            {
+                this.ICodeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IDesc
+        {
+            get
+            {
+                return this.IDescField;
+            }
+            set
+            {
+                this.IDescField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime InvDate
+        {
+            get
+            {
+                return this.InvDateField;
+            }
+            set
+            {
+                this.InvDateField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Price
+        {
+            get
+            {
+                return this.PriceField;
+            }
+            set
+            {
+                this.PriceField = value;
+            }
+        }
+    }
 }
 
 
@@ -2010,6 +2122,11 @@ public interface IService1
     System.IAsyncResult BeginGetItemReceive(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState);
     
     WcfServiceItem.ItemGR[] EndGetItemReceive(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/GetItemLastPrices", ReplyAction="http://tempuri.org/IService1/GetItemLastPricesResponse")]
+    System.IAsyncResult BeginGetItemLastPrices(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState);
+    
+    WcfServiceItem.ItemLastPrice[] EndGetItemLastPrices(System.IAsyncResult result);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2387,6 +2504,29 @@ public partial class GetItemReceiveCompletedEventArgs : System.ComponentModel.As
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class GetItemLastPricesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public GetItemLastPricesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public WcfServiceItem.ItemLastPrice[] Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((WcfServiceItem.ItemLastPrice[])(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 public partial class Service1Client : System.ServiceModel.ClientBase<IService1>, IService1
 {
     
@@ -2486,6 +2626,12 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     
     private System.Threading.SendOrPostCallback onGetItemReceiveCompletedDelegate;
     
+    private BeginOperationDelegate onBeginGetItemLastPricesDelegate;
+    
+    private EndOperationDelegate onEndGetItemLastPricesDelegate;
+    
+    private System.Threading.SendOrPostCallback onGetItemLastPricesCompletedDelegate;
+    
     private BeginOperationDelegate onBeginOpenDelegate;
     
     private EndOperationDelegate onEndOpenDelegate;
@@ -2582,6 +2728,8 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     public event System.EventHandler<UpdateLocationCompletedEventArgs> UpdateLocationCompleted;
     
     public event System.EventHandler<GetItemReceiveCompletedEventArgs> GetItemReceiveCompleted;
+    
+    public event System.EventHandler<GetItemLastPricesCompletedEventArgs> GetItemLastPricesCompleted;
     
     public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
     
@@ -3565,6 +3713,67 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
                     userid}, this.onEndGetItemReceiveDelegate, this.onGetItemReceiveCompletedDelegate, userState);
     }
     
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult IService1.BeginGetItemLastPrices(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginGetItemLastPrices(comp, brn, userid, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    WcfServiceItem.ItemLastPrice[] IService1.EndGetItemLastPrices(System.IAsyncResult result)
+    {
+        return base.Channel.EndGetItemLastPrices(result);
+    }
+    
+    private System.IAsyncResult OnBeginGetItemLastPrices(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        string comp = ((string)(inValues[0]));
+        string brn = ((string)(inValues[1]));
+        string userid = ((string)(inValues[2]));
+        return ((IService1)(this)).BeginGetItemLastPrices(comp, brn, userid, callback, asyncState);
+    }
+    
+    private object[] OnEndGetItemLastPrices(System.IAsyncResult result)
+    {
+        WcfServiceItem.ItemLastPrice[] retVal = ((IService1)(this)).EndGetItemLastPrices(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnGetItemLastPricesCompleted(object state)
+    {
+        if ((this.GetItemLastPricesCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.GetItemLastPricesCompleted(this, new GetItemLastPricesCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void GetItemLastPricesAsync(string comp, string brn, string userid)
+    {
+        this.GetItemLastPricesAsync(comp, brn, userid, null);
+    }
+    
+    public void GetItemLastPricesAsync(string comp, string brn, string userid, object userState)
+    {
+        if ((this.onBeginGetItemLastPricesDelegate == null))
+        {
+            this.onBeginGetItemLastPricesDelegate = new BeginOperationDelegate(this.OnBeginGetItemLastPrices);
+        }
+        if ((this.onEndGetItemLastPricesDelegate == null))
+        {
+            this.onEndGetItemLastPricesDelegate = new EndOperationDelegate(this.OnEndGetItemLastPrices);
+        }
+        if ((this.onGetItemLastPricesCompletedDelegate == null))
+        {
+            this.onGetItemLastPricesCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetItemLastPricesCompleted);
+        }
+        base.InvokeAsync(this.onBeginGetItemLastPricesDelegate, new object[] {
+                    comp,
+                    brn,
+                    userid}, this.onEndGetItemLastPricesDelegate, this.onGetItemLastPricesCompletedDelegate, userState);
+    }
+    
     private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState)
     {
         return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
@@ -3932,6 +4141,23 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
         {
             object[] _args = new object[0];
             WcfServiceItem.ItemGR[] _result = ((WcfServiceItem.ItemGR[])(base.EndInvoke("GetItemReceive", _args, result)));
+            return _result;
+        }
+        
+        public System.IAsyncResult BeginGetItemLastPrices(string comp, string brn, string userid, System.AsyncCallback callback, object asyncState)
+        {
+            object[] _args = new object[3];
+            _args[0] = comp;
+            _args[1] = brn;
+            _args[2] = userid;
+            System.IAsyncResult _result = base.BeginInvoke("GetItemLastPrices", _args, callback, asyncState);
+            return _result;
+        }
+        
+        public WcfServiceItem.ItemLastPrice[] EndGetItemLastPrices(System.IAsyncResult result)
+        {
+            object[] _args = new object[0];
+            WcfServiceItem.ItemLastPrice[] _result = ((WcfServiceItem.ItemLastPrice[])(base.EndInvoke("GetItemLastPrices", _args, result)));
             return _result;
         }
     }

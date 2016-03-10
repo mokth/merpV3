@@ -53,6 +53,7 @@
     <string name="submenu_solist">SALES ORDER LIST</string>
     <string name="submenu_summary">DAY END SUMMARY</string>
 
+   
     <string name="submenu_item">MASTER ITEM</string>
     <string name="submenu_cust">CUSTOMER PROFILE</string>
     <string name="submenu_testprint">TEST PRINT</string>
@@ -205,4 +206,6 @@
 <string name="STOCKSUMMARY">STOCK SUMMARY</string>
 <string name="DOWNLOADSTOCK">DOWNLOAD STOCK QTY</string>
  <string name="msg_successsave">Successfully save data.</string>
+  <string name="submenu_itemprice">ITEM LATEST PRICES</string>
+  <string name="DOWNLOADPRICE">DOWNLOAD ITEM PRICES</string>
    </resources>

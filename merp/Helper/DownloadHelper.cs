@@ -52,6 +52,7 @@ namespace wincom.mobile.erp
 			}
 		}
 
+		//newly added 2016 Mar
 		public void startDownloadItemGR()
 		{
 			string comp =((GlobalvarsApp)CallingActivity.Application).COMPANY_CODE;
@@ -62,6 +63,19 @@ namespace wincom.mobile.erp
 			if (_client != null) {
 				_client.GetItemReceiveCompleted += _client_GetItemReceiveCompleted;
 				_client.GetItemReceiveAsync (comp, brn,userid );
+			}
+		}
+		//newly added 2016 Mar
+		public void startDownloadItemPrices()
+		{
+			string comp =((GlobalvarsApp)CallingActivity.Application).COMPANY_CODE;
+			string brn =((GlobalvarsApp)CallingActivity.Application).BRANCH_CODE;
+			string userid = ((GlobalvarsApp)CallingActivity.Application).USERID_CODE;
+
+			_client = _wfc.GetServiceClient ();	
+			if (_client != null) {
+				_client.GetItemLastPricesCompleted += _client_GetItemLastPricesCompleted;
+				_client.GetItemLastPricesAsync(comp, brn,userid );
 			}
 		}
 
@@ -76,6 +90,31 @@ namespace wincom.mobile.erp
 			if (_client != null) {
 				_client.GetCustomersExCompleted += ClientOnGetCustomerCompleted;
 				_client.GetCustomersExAsync (comp, brn, userid);
+			}
+		}
+
+		void _client_GetItemLastPricesCompleted (object sender, GetItemLastPricesCompletedEventArgs e)
+		{
+			//InsertItemPriceIntoDb
+			List<ItemLastPrice> list = new List<ItemLastPrice> ();
+			string msg = null;
+
+			if ( e.Error != null)
+			{
+				msg =  e.Error.Message;
+			}
+			else if ( e.Cancelled)
+			{
+				msg = CallingActivity.Resources.GetString(Resource.String.msg_reqcancel);
+			}
+			else
+			{
+				list =  e.Result.ToList<ItemLastPrice>();
+				RunOnUiThread (() => InsertItemPriceIntoDb(list));
+			}
+
+			if (msg != null) {
+				RunOnUiThread (() => Downloadhandle.Invoke (CallingActivity, 0, msg));
 			}
 		}
 
@@ -490,6 +529,38 @@ namespace wincom.mobile.erp
 			dmsg = dmsg.Replace ("nn", list.Count.ToString ());
 			Downloadhandle.Invoke(CallingActivity,list.Count,dmsg);
 
+		}
+
+		private void InsertItemPriceIntoDb(List<ItemLastPrice> list)
+		{
+			string pathToDatabase = ((GlobalvarsApp)CallingActivity.Application).DATABASE_PATH;
+			using (var db = new SQLite.SQLiteConnection (pathToDatabase)) {
+				//var list2 = db.Table<Item>().ToList<Item>();
+				db.DeleteAll<ItemPrices> ();
+				int id = 1;
+				foreach (ItemLastPrice item in list) {
+					ItemPrices itm = new ItemPrices ();
+					itm.ID = id;
+					itm.ICode = item.ICode;
+					itm.IDesc = item.IDesc;
+					itm.Price = item.Price;
+					itm.CustCode = item.CustCode;
+					itm.CustName = item.CustName;
+					itm.InvDate = item.InvDate;
+					if (string.IsNullOrEmpty (item.IClass))
+						itm.IClass = "";
+					else
+						itm.IClass = item.IClass;
+					
+					db.Insert (itm);
+					id = id + 1;
+				}
+			}
+
+			string dmsg = CallingActivity.Resources.GetString (Resource.String.msg_successdownitems);
+			dmsg = dmsg.Replace ("nn", list.Count.ToString ());
+
+			Downloadhandle.Invoke(CallingActivity,list.Count,dmsg);
 		}
 
 		private void InsertCustomerIntoDb(List<Customer> list)

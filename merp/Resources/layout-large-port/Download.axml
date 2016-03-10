@@ -46,7 +46,17 @@
             android:height="80dp"
             android:textSize="24sp"
             android:id="@+id/butDownStock"
-            android:drawableRight="@drawable/settings" />
+            android:drawableRight="@drawable/item" />
+        <Button
+            android:text="@string/DOWNLOADPRICE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:drawableLeft="@drawable/download"
+            android:height="80dp"
+            android:textSize="24sp"
+            android:id="@+id/butDownPrice"
+            android:drawableRight="@drawable/item" />
         <Button
             android:text="@string/submenu_back"
             android:layout_width="match_parent"

@@ -203,4 +203,6 @@
 <string name="STOCKSUMMARY">RINGKASAN STOK</string>
 <string name="DOWNLOADSTOCK">MUAT TURUN STOK</string>
 <string name="msg_successsave">Berjaya menyimpan data.</string>
+  <string name="submenu_itemprice">SENARAI HARGA</string>
+  <string name="DOWNLOADPRICE">MUAT TURUN HARGA TERBARU</string>
    </resources>
