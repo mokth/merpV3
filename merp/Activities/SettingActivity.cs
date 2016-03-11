@@ -111,7 +111,14 @@ namespace wincom.mobile.erp
 
 		void Spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
 		{
-			((TextView)((Spinner)sender).SelectedView).SetTextColor (Color.Black);
+			if (sender == null)
+				return;
+			
+			TextView tview = ((TextView)((Spinner)sender).SelectedView);
+			if (tview == null)
+				return;
+			
+			tview.SetTextColor (Color.Black);
 
 		}
 

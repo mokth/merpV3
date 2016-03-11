@@ -59,11 +59,13 @@ namespace wincom.mobile.erp
 			//SQLiteConnection...CreateFile(pathToDatabase);
 			if (!File.Exists (pathToDatabase)) {
 				createTable (pathToDatabase);
-			} else
-			{
-				if (pInfo.VersionCode >= 54) {
+			} else {
+				if (pInfo.VersionCode >= 57) {
 					if (!CheckIfColumnExists ()) {
 						UpdateItem ();
+					}
+					if (!CheckIfColumnExists2 ()) {
+						UpdateItem2 ();
 					}
 				}
 			}
@@ -240,7 +242,22 @@ namespace wincom.mobile.erp
 				using (SQLite.SQLiteConnection Conn = new SQLiteConnection (pathToDatabase)) {
 					//var col =Conn.GetTableInfo("GeoLocation");
 					//	isfound=(col.Count >2);
-					var tmp = Conn.Table<Item> ().Where (x =>x.Class == "X"); 
+					var col = Conn.GetTableInfo("Item");
+					isfound=(col.Count >12);
+				
+				}
+			} catch {
+				isfound = false;
+			}
+			return isfound;
+		}
+
+		private bool CheckIfColumnExists2()
+		{
+			bool isfound = true;
+			try {
+				using (SQLite.SQLiteConnection Conn = new SQLiteConnection (pathToDatabase)) {
+					var tmp2 = Conn.Table<ItemPrices>().Count();
 				}
 			} catch {
 				isfound = false;
@@ -291,15 +308,28 @@ namespace wincom.mobile.erp
 		{
 			try {
 				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
-
+					
 					string sql = @"ALTER TABLE Item RENAME TO sqlitestudio_temp_table;
 								   CREATE TABLE Item (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, ICode varchar, IDesc varchar, Price float, tax float, taxgrp varchar, isincludesive integer, VIPPrice float, RetailPrice float, WholeSalePrice float, Barcode varchar, StdUom varchar, Class VARCHAR, ImageFilename VARCHAR);
-		   		  	  			   INSERT INTO Item (ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode, StdUom) SELECT ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode, StdUom FROM sqlitestudio_temp_table;
+		   		  	  			   INSERT INTO Item (ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode, StdUom,Class,ImageFilename) SELECT ID, ICode, IDesc, Price, tax, taxgrp, isincludesive, VIPPrice, RetailPrice, WholeSalePrice, Barcode, StdUom,'','' FROM sqlitestudio_temp_table;
 								   DROP TABLE sqlitestudio_temp_table;";
 					string[] sqls = sql.Split (new char[]{ ';' });
 					foreach (string ssql in sqls) {
 						conn.Execute (ssql, new object[]{ });
 					}
+				}
+			} catch (Exception ex) {
+				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
+				AlertShow("UpdateItem() "+ex.Message);
+			}
+		}
+
+		private void UpdateItem2()
+		{
+			try {
+				using (var conn = new SQLite.SQLiteConnection (pathToDatabase)) {
+					conn.CreateTable<ItemPrices>();
+
 				}
 			} catch (Exception ex) {
 				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	

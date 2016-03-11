@@ -119,14 +119,24 @@ namespace wincom.mobile.erp
 			}
 			else {
 				loadInvouce (INVOICENO);
-				txtInvMode.Text = "EDIT";
-				txtInvNo.Text = inv.invno;
-				txtInvDate.Text = inv.invdate.ToString ("dd-MM-yyyy");
-				int pos1= dAdapterCust.GetPosition (inv.custcode+" | "+inv.description.Trim());
-				if (pos1>0)
-					 spinCust.SetSelection (pos1);
-				else spinCust.SetSelection (0);
-				EnableControLs (true, false, true, true, false);
+				if (inv != null) {
+					txtInvMode.Text = "EDIT";
+					txtInvNo.Text = inv.invno;
+					txtInvDate.Text = inv.invdate.ToString ("dd-MM-yyyy");
+					if (!string.IsNullOrEmpty (inv.custcode)) {
+						int pos1 = dAdapterCust.GetPosition (inv.custcode + " | " + inv.description.Trim ());
+						if (pos1 > 0)
+							spinCust.SetSelection (pos1);
+						else
+							spinCust.SetSelection (0);
+					}else spinCust.SetSelection (0);
+
+					EnableControLs (true, false, true, true, false);
+				}else {
+					EnableControLs (false, false, true, false, true);
+					inv = new Invoice ();
+				}
+
 			}
 		}
 
@@ -1013,6 +1023,9 @@ namespace wincom.mobile.erp
 
 		void SaveCashBill(Hashtable param)
 		{
+			if (param == null)
+				return;
+			
 			if (IsSave)
 				return;
 			
