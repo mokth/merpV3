@@ -641,7 +641,8 @@ namespace wincom.mobile.erp
 			double day = (DateTime.Now - lastupload).TotalDays;
 			//isExpired = (day > Expiry);
 			//change on 22/feb/2016 - by Mok
-			isExpired = (Expiry > day );
+			//isExpired = (Expiry > day );
+			isExpired = (day > Expiry  );
 
 			return  isExpired;
 		}

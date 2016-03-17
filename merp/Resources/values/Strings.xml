@@ -61,7 +61,7 @@
     <string name="submenu_downitem">DOWNLOAD MASTER ITEM</string>
     <string name="submenu_downcust">DOWNLOAD CUSTOMERS</string>
     <string name="submenu_downsettings">DOWNLOAD SETTINGS</string>
-    <string name="submenu_upinv">UPLOAD INVOICE/CASH BILL</string>
+    <string name="submenu_upinv">UPLOAD INVOICE/BILL</string>
     <string name="submenu_upcn">UPLOAD CREDIT NOTE</string>
     <string name="submenu_updo">UPLOAD DELIVERY ORDER</string>
     <string name="submenu_upso">UPLOAD SALES ORDER</string>

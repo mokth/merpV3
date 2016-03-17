@@ -320,7 +320,7 @@ namespace wincom.mobile.erp
 				}
 			} catch (Exception ex) {
 				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
-				AlertShow("UpdateItem() "+ex.Message);
+				//AlertShow("UpdateItem() "+ex.Message);
 			}
 		}
 
@@ -333,7 +333,7 @@ namespace wincom.mobile.erp
 				}
 			} catch (Exception ex) {
 				//Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();	
-				AlertShow("UpdateItem() "+ex.Message);
+				//AlertShow("UpdateItem() "+ex.Message);
 			}
 		}
 
