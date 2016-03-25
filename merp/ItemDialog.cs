@@ -85,6 +85,12 @@ namespace wincom.mobile.erp
 			dAdapterItem.SetDropDownViewResource (Resource.Layout.SimpleSpinnerDropDownItemEx);
 			spinItem.Adapter = dAdapterItem;
 			spinItem.ItemSelected+= SpinItem_ItemSelected;
+			string selectclass = ((GlobalvarsApp)Application.Context).ITEMCLASS;
+			if (!string.IsNullOrEmpty (selectclass)) {
+				int pos = dAdapterItem.GetPosition (selectclass);
+				if (pos>-1)
+					spinItem.SetSelection (pos);	
+			}
 		}
 
 		void SpinItem_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
@@ -92,6 +98,9 @@ namespace wincom.mobile.erp
 			Spinner spinner = (Spinner)sender;
 
 			string selectclass = spinner.GetItemAtPosition (e.Position).ToString();
+			//store selected item class in global var
+			((GlobalvarsApp)Application.Context).ITEMCLASS = selectclass;
+
 			if (string.IsNullOrEmpty(selectclass))
 				return;
 			FindItemByText (selectclass);

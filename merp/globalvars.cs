@@ -20,6 +20,7 @@ namespace wincom.mobile.erp
 		public string DATABASE_PATH;
 		public string USERFUNCTION;
 		public string VERSION;
+		public string ITEMCLASS;
 		public bool ISLOGON;
 		IGeolocator locator;
 		AccessRights rights;

@@ -228,6 +228,9 @@ namespace wincom.mobile.erp
 		List<Invoice> PerformSearch (string constraint)
 		{
 			List<Invoice>  results = new List<Invoice>();
+			if (listData == null)
+				return results;
+			
 			if (constraint != null) {
 				var searchFor = constraint.ToString ().ToUpper();
 

@@ -262,6 +262,8 @@ namespace wincom.mobile.erp
 					IsEdit = true;
 					IDdtls = list [0].ID;
 					txtInvMode.Text = "EDIT";
+					txtqty.RequestFocus ();
+					txtqty.SelectAll ();
 				}
 			}
 		}

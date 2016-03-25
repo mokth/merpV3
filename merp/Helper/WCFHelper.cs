@@ -27,6 +27,15 @@ namespace wincom.mobile.erp
 			//return "http://www.wincomcloud.com/wfcv3/dbfiles/";
 		}
 
+		public static string GetDownloadLogoUrl()
+		{
+			//production -live version
+			//return "http://www.wincomcloud.com/WfcV5Live/dbfiles/";
+
+			//Demo/testing -test version
+			return "http://www.wincomcloud.com/WfcV3Live/dbfiles/";
+		}
+
 		public static string GeUploadDBUrl()
 		{
 			return "http://www.wincomcloud.com/UploadDb/";

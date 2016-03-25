@@ -441,6 +441,8 @@ namespace wincom.mobile.erp
 
 					if (list [0].price == 0)
 						spinQty.SetSelection (2);
+					txtqty.RequestFocus ();
+					txtqty.SelectAll ();
 				}
 			}
 		}

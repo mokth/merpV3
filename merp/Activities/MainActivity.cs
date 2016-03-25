@@ -409,7 +409,7 @@ namespace wincom.mobile.erp
 					logopath = Path.Combine (document, "logo80.png");
 					filename = COMPCODE + "_" + BRANCODE + "_80_logo.png";
 				}
-				string url = WCFHelper.GetDownloadDBUrl () + filename;
+				string url = WCFHelper.GetDownloadLogoUrl () + filename;
 //				string localfilename = Path.Combine (sdcard, "logo.png");
 				if (File.Exists (logopath))
 					File.Delete (logopath);
